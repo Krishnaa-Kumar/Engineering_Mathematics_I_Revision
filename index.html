@@ -259,13 +259,13 @@
         id: "u1-q2",
         unit: "Unit 1",
         marks: "2 Marks Each",
-        title: "U1-Q2: Check Convergence of All 4 Sequences Using Limits",
-        problem: "Test the convergence of the sequences: (i) $\\{a_n\\} = \\left\\{\\frac{2n}{n+1}\\right\\}$, (ii) $\\{a_n\\} = \\{n^2 + 3n\\}$, (iii) $\\{a_n\\} = \\left\\{\\frac{n+1}{n}\\right\\}$, (iv) $\\{a_n\\} = \\{(-1)^n\\}$.",
-        intuition: "Divide numerator and denominator by the highest power of $n$. If the limit is a single finite number, it converges; if $\\pm\\infty$, it diverges; if two distinct subsequential limits exist, it oscillates.",
+        title: "U1-Q2: Check Convergence of Sequences Using Limits (Exponential, Polynomial, Rational, Oscillatory & Trig)",
+        problem: "Test the convergence of the sequences: (i) $\\{a_n\\} = \\left\\{\\frac{2^n}{n+1}\\right\\}$, (ii) $\\{a_n\\} = \\{n^2 + 3n\\}$, (iii) $\\{a_n\\} = \\left\\{\\frac{n+1}{n}\\right\\}$, (iv) $\\{a_n\\} = \\{(-1)^n\\}$, and (v) standard trigonometric variants $\\left\\{\\cos\\left(\\frac{1}{n}\\right)\\right\\}$ & $\\left\\{\\cos\\left(\\frac{n\\pi}{2}\\right)\\right\\}$.",
+        intuition: "Always show the L'Hôpital or binomial comparison step for $\\frac{2^n}{n+1}$ and the even/odd subsequence split for $(-1)^n$—writing just 'Divergent' or 'Oscillatory' without the limit step costs 1 out of 2 marks.",
         steps: [
           {
-            label: "(i) Sequence a_n = 2n / (n + 1)",
-            math: "$$\\lim_{n\\to\\infty} a_n = \\lim_{n\\to\\infty} \\frac{2n}{n(1 + 1/n)} = \\frac{2}{1 + 0} = 2 \\quad (\\text{Finite & unique} \\implies \\mathbf{\\text{Convergent}})$$"
+            label: "(i) Sequence a_n = 2ⁿ / (n + 1) — Indeterminate Form ∞/∞",
+            math: "Applying L'Hôpital's Rule (treating $n$ as continuous variable $x$):<br>$$\\lim_{n\\to\\infty} a_n = \\lim_{n\\to\\infty} \\frac{2^n}{n+1} = \\lim_{n\\to\\infty} \\frac{2^n \\ln 2}{1} = \\infty$$<br>*(By binomial lower bound: $2^n > 1 + n + \\frac{n(n-1)}{2} \\implies \\frac{2^n}{n+1} > \\frac{n(n-1)}{2(n+1)} \\to \\infty$.)* $\\implies$ <b>Divergent</b>."
           },
           {
             label: "(ii) Sequence a_n = n² + 3n",
@@ -273,11 +273,15 @@
           },
           {
             label: "(iii) Sequence a_n = (n + 1) / n",
-            math: "$$\\lim_{n\\to\\infty} a_n = \\lim_{n\\to\\infty} \\left(1 + \\frac{1}{n}\\right) = 1 + 0 = 1 \\quad (\\text{Finite & unique} \\implies \\mathbf{\\text{Convergent}})$$"
+            math: "Divide numerator and denominator by $n$:<br>$$\\lim_{n\\to\\infty} a_n = \\lim_{n\\to\\infty} \\frac{n+1}{n} = \\lim_{n\\to\\infty} \\frac{\\frac{n}{n} + \\frac{1}{n}}{\\frac{n}{n}} = \\lim_{n\\to\\infty} \\frac{1 + \\frac{1}{n}}{1} = \\frac{1 + 0}{1} = 1 \\quad (\\text{Finite \\& unique} \\implies \\mathbf{\\text{Convergent, converges to } 1})$$"
           },
           {
-            label: "(iv) Sequence a_n = (-1)^n",
-            math: "For even $n$, $\\lim a_{2k} = +1$; for odd $n$, $\\lim a_{2k+1} = -1$. Since the limit is not unique, the sequence <b>Oscillates finitely</b> between $-1$ and $+1$."
+            label: "(iv) Sequence a_n = (-1)ⁿ — Even & Odd Subsequence Split",
+            math: "• For even $n = 2k$: $\\lim_{k\\to\\infty} a_{2k} = \\lim_{k\\to\\infty} (-1)^{2k} = +1$<br>• For odd $n = 2k+1$: $\\lim_{k\\to\\infty} a_{2k+1} = \\lim_{k\\to\\infty} (-1)^{2k+1} = -1$<br>Since even and odd subsequences approach two distinct finite limits, the sequence is <b>Finitely Oscillatory</b> (hence <b>Not Convergent</b>)."
+          },
+          {
+            label: "(v) Trigonometric Sequence Variants",
+            math: "• For $a_n = \\cos\\left(\\frac{1}{n}\\right)$: $\\lim_{n\\to\\infty} \\cos\\left(\\frac{1}{n}\\right) = \\cos(0) = 1 \\implies$ <b>Convergent</b>.<br>• For $a_n = \\cos\\left(\\frac{n\\pi}{2}\\right)$: terms cycle through $\\{0, -1, 0, 1, \\dots\\} \\implies$ <b>Finitely Oscillatory</b>."
           }
         ]
       },
