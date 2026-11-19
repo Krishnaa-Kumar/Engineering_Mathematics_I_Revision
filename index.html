@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BTAM101-18 | Engineering Mathematics-I Exam Revision Whiteboard</title>
+  <title>CalcVault M-1 | IKG-PTU BTAM101-18 Interactive Exam Vault by Krishna Kumar</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -42,6 +42,9 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- QRious for crisp, scannable dynamic UPI QR Code generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
   <style>
     /* Custom scrollbar and smooth animations */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -71,6 +74,15 @@
       margin: 0.45rem 0 !important;
     }
 
+    @keyframes pulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.45)); }
+      50% { filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.55)); }
+    }
+
+    .logo-glow {
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
     /* Print / Cheat-Sheet PDF Export Styles */
     @media print {
       body { background: white !important; color: black !important; }
@@ -82,29 +94,167 @@
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-[#0f172a] dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
 
+  <!-- UPI Contribution / Access Gate Overlay -->
+  <div id="upi-gate-overlay" class="no-print fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
+    <div class="relative w-full max-w-lg rounded-3xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-cyan-500/30 shadow-2xl shadow-cyan-950/50 p-6 sm:p-8 my-auto step-animate">
+      
+      <!-- Brand Header inside Gate -->
+      <div class="flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-lg logo-glow mb-3">
+          <svg viewBox="0 0 64 64" class="w-12 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="shieldGradGate" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4f46e5"/>
+                <stop offset="50%" stop-color="#06b6d4"/>
+                <stop offset="100%" stop-color="#f59e0b"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 4L54 13V30C54 45.2 44.6 56.8 32 60C19.4 56.8 10 45.2 10 30V13L32 4Z" fill="#0f172a" stroke="url(#shieldGradGate)" stroke-width="3"/>
+            <path d="M36 16C33.5 16 32.2 18.2 31.8 22L29.2 42C28.8 45.8 27.5 48 25 48" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="38" cy="16" r="2.2" fill="#f59e0b"/>
+            <circle cx="23" cy="48" r="2.2" fill="#f59e0b"/>
+            <path d="M18 26H27M21 26V35M25 26V35" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 mb-2">
+          <span>CGC CEC Landran • Peer Study Vault</span>
+        </div>
+
+        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-cyan-400 to-amber-400 bg-clip-text text-transparent">
+          CalcVault M-1
+        </h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+          IKG-PTU BTAM101-18 • Interactive Exam Vault by <span class="font-semibold text-slate-800 dark:text-slate-200">Krishna Kumar</span>
+        </p>
+
+        <p class="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-100 dark:bg-[#0f172a] p-3 rounded-xl border border-slate-200 dark:border-slate-700/80">
+          Unlock <strong>All 26 Step-by-Step Derivations</strong>, Interactive Animated Whiteboard &amp; <strong>Printable PDF Cheat-Sheet</strong> for BTAM101-18 with a small student peer contribution.
+        </p>
+      </div>
+
+      <!-- Quick-Select Amount Chips -->
+      <div class="mt-5">
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 text-center">
+          Select Contribution Amount (INR)
+        </label>
+        <div class="grid grid-cols-4 gap-2">
+          <button type="button" onclick="selectAmount(9)" id="amt-chip-9" class="amt-chip py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition">
+            ₹9
+          </button>
+          <button type="button" onclick="selectAmount(19)" id="amt-chip-19" class="amt-chip py-2 rounded-xl text-xs font-bold border-2 border-cyan-500 bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 transition">
+            ₹19 ★
+          </button>
+          <button type="button" onclick="selectAmount(29)" id="amt-chip-29" class="amt-chip py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition">
+            ₹29
+          </button>
+          <div class="relative">
+            <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">₹</span>
+            <input type="number" id="custom-amount-input" min="1" placeholder="Other" oninput="selectCustomAmount(this.value)"
+              class="w-full h-full pl-6 pr-2 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 focus:outline-none focus:border-cyan-500" />
+          </div>
+        </div>
+      </div>
+
+      <!-- QR Code & UPI Details Card -->
+      <div class="mt-5 p-4 rounded-2xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-4">
+        <div class="shrink-0 flex flex-col items-center">
+          <div class="p-2.5 bg-white rounded-2xl shadow-md border border-slate-200 flex items-center justify-center">
+            <canvas id="gate-qr-canvas" class="w-32 h-32 rounded-lg"></canvas>
+          </div>
+          <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-1.5">Scan via GPay / PhonePe / Paytm</span>
+          <button type="button" onclick="markPaymentInitiated('qr')" class="mt-1 text-[11px] font-bold text-cyan-600 dark:text-cyan-400 hover:underline">
+            I've Scanned &amp; Paid via QR
+          </button>
+        </div>
+
+        <div class="flex-1 w-full flex flex-col gap-2.5">
+          <div class="p-2.5 rounded-xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <div class="text-[10px] font-bold uppercase text-slate-400">UPI ID (Krishna Kumar)</div>
+              <div class="text-xs sm:text-sm font-mono font-bold text-cyan-600 dark:text-cyan-400 truncate" id="gate-upi-text">7888690390@upi</div>
+            </div>
+            <button type="button" onclick="copyUpiId('gate-copy-badge')" class="shrink-0 flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-cyan-500/20 text-slate-700 dark:text-slate-200 transition">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+              <span id="gate-copy-badge">Copy UPI ID</span>
+            </button>
+          </div>
+
+          <a id="upi-deeplink-btn" href="upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=19&cu=INR&tn=CalcVault%20M1%20Study%20Guide"
+             onclick="markPaymentInitiated('app')"
+             class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-500/25 transition active:scale-95">
+            <i data-lucide="smartphone" class="w-4 h-4"></i>
+            <span id="upi-deeplink-label">Pay ₹19 via UPI App</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Verification & Unlock Section -->
+      <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700/80 space-y-3">
+        <div>
+          <label for="utr-input" class="block text-[11px] font-semibold text-slate-500 dark:text-slate-400 mb-1">
+            Optional: Enter 12-Digit UPI UTR / Reference ID for Instant Receipt Log
+          </label>
+          <input type="text" id="utr-input" maxlength="20" placeholder="e.g., 632418904512 (or leave blank after paying)"
+                 class="w-full px-3.5 py-2 text-xs sm:text-sm font-mono rounded-xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+        </div>
+
+        <button type="button" id="unlock-vault-btn" onclick="unlockVault()" disabled
+                class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-extrabold bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed transition">
+          <i data-lucide="lock" id="unlock-btn-icon" class="w-4 h-4"></i>
+          <span id="unlock-btn-label">Click "Pay via UPI App" or Scan QR First</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Top Navigation Header -->
   <header class="no-print sticky top-0 z-30 bg-white/90 dark:bg-[#1e293b]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700/80 px-4 py-3">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-cyan-600 text-white flex items-center justify-center shadow-lg shadow-cyan-500/30 font-bold text-lg">
-          ∫dx
+        <!-- Custom CalcVault M-1 Geometric Shield + Integral SVG Emblem -->
+        <div class="w-11 h-11 rounded-xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-lg shadow-cyan-500/20 shrink-0">
+          <svg viewBox="0 0 64 64" class="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="shieldGradHeader" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4f46e5"/>
+                <stop offset="50%" stop-color="#06b6d4"/>
+                <stop offset="100%" stop-color="#f59e0b"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 4L54 13V30C54 45.2 44.6 56.8 32 60C19.4 56.8 10 45.2 10 30V13L32 4Z" fill="#0f172a" stroke="url(#shieldGradHeader)" stroke-width="3.2"/>
+            <path d="M36 16C33.5 16 32.2 18.2 31.8 22L29.2 42C28.8 45.8 27.5 48 25 48" stroke="#22d3ee" stroke-width="3.6" stroke-linecap="round"/>
+            <circle cx="38" cy="16" r="2.3" fill="#f59e0b"/>
+            <circle cx="23" cy="48" r="2.3" fill="#f59e0b"/>
+            <path d="M18 26H27M21 26V35M25 26V35" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+          </svg>
         </div>
+
         <div>
-          <div class="flex items-center gap-2">
-            <h1 class="font-bold text-base sm:text-lg tracking-tight">Engineering Mathematics-I (BTAM101-18)</h1>
-            <span class="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-300 border border-cyan-500/30">
-              CGC CEC Landran • IKG-PTU Complete 26-Topic Edition
+          <div class="flex flex-wrap items-center gap-2">
+            <h1 class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-indigo-500 via-cyan-500 to-amber-500 dark:from-indigo-400 dark:via-cyan-400 dark:to-amber-400 bg-clip-text text-transparent">
+              CalcVault M-1
+            </h1>
+            <span id="verified-access-badge" class="hidden inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+              <span>Verified Access</span>
             </span>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400">100% Coverage of PDF + Handwritten Notes • Interactive Step-by-Step Whiteboard</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">IKG-PTU BTAM101-18 • Interactive Exam Vault by Krishna Kumar</p>
         </div>
       </div>
 
       <!-- Action Toolbar -->
       <div class="flex items-center gap-2">
+        <button onclick="openCreditsModal()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition" title="Author Credits & UPI Support">
+          <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-500"></i>
+          <span>Credits &amp; Support</span>
+        </button>
+
         <button onclick="openCheatSheetPrint()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-600 text-slate-950 shadow-sm transition active:scale-95" title="Generate Printable Revision Sheet / Save as PDF">
           <i data-lucide="printer" class="w-4 h-4"></i>
-          <span>Print / Save as PDF Cheat-Sheet</span>
+          <span class="hidden sm:inline">Print / PDF Cheat-Sheet</span>
+          <span class="sm:hidden">PDF</span>
         </button>
 
         <button onclick="toggleTheme()" id="theme-btn" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition" title="Toggle Dark/Light Mode">
@@ -216,13 +366,78 @@
     </section>
   </main>
 
+  <!-- Dedicated Author Credits & Demo Lock Footer -->
+  <footer class="no-print border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#1e293b]/80 px-4 py-3.5 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
+      <div class="flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
+        <span>Crafted with ❤️ for CGC CEC Landran peers by</span>
+        <strong class="text-slate-800 dark:text-slate-200">Krishna Kumar</strong>
+        <span>(B.Tech Cybersecurity • IKG-PTU BTAM101-18)</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="openCreditsModal()" class="font-semibold text-cyan-600 dark:text-cyan-400 hover:underline">
+          Support via UPI (7888690390@upi)
+        </button>
+        <span class="text-slate-300 dark:text-slate-700">|</span>
+        <button onclick="lockGateForDemo()" class="inline-flex items-center gap-1 font-semibold text-amber-600 dark:text-amber-400 hover:underline" title="Re-open Payment Gate for Testing/Demo">
+          <i data-lucide="lock" class="w-3 h-3"></i>
+          <span>Lock / View Gate</span>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Credits & Support Modal -->
+  <div id="credits-modal" class="no-print hidden fixed inset-0 z-40 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 shadow-2xl p-6 step-animate">
+      <button onclick="closeCreditsModal()" class="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-600 via-cyan-500 to-amber-500 text-white font-extrabold flex items-center justify-center shadow-md">
+          KK
+        </div>
+        <div>
+          <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">Credits &amp; Student Support</h3>
+          <p class="text-xs text-cyan-600 dark:text-cyan-400 font-semibold">Author: Krishna Kumar • B.Tech Cybersecurity</p>
+        </div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+        <strong>CalcVault M-1</strong> was designed and compiled by <strong>Krishna Kumar</strong> (CGC CEC Landran) to help 1st-semester engineering students master every 2, 5, and 10-mark derivation for the IKG-PTU BTAM101-18 exam. If these step-by-step notes helped you revise faster tonight, feel free to support future semester vaults!
+      </p>
+
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 flex flex-col items-center text-center">
+        <div class="p-2.5 bg-white rounded-2xl shadow-sm border border-slate-200 mb-2 flex items-center justify-center">
+          <canvas id="modal-qr-canvas" class="w-36 h-36 rounded-xl"></canvas>
+        </div>
+        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Scan via GPay / PhonePe / Paytm</div>
+        <div class="mt-2 flex items-center gap-2 bg-white dark:bg-[#1e293b] px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+          <span class="font-mono font-bold text-xs text-cyan-600 dark:text-cyan-400">7888690390@upi</span>
+          <button type="button" onclick="copyUpiId('modal-copy-badge')" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
+            <span id="modal-copy-badge">Copy</span>
+          </button>
+        </div>
+      </div>
+
+      <button onclick="closeCreditsModal()" class="mt-5 w-full py-2.5 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white transition">
+        Back to Revision Whiteboard
+      </button>
+    </div>
+  </div>
+
   <!-- Hidden Printable Cheat-Sheet Container (Visible only when printing / exporting PDF) -->
   <div id="print-container" class="hidden p-6 max-w-4xl mx-auto">
     <div class="border-b-2 border-slate-800 pb-4 mb-6">
-      <h1 class="text-2xl font-bold">BTAM101-18: Engineering Mathematics-I Complete 26-Topic Exam Cheat-Sheet</h1>
-      <p class="text-sm text-slate-600">B.Tech 1st Semester (CGC CEC Landran • IKG-PTU Syllabus) — 100% Coverage of PDF & Handwritten Notes</p>
+      <h1 class="text-2xl font-bold">CalcVault M-1 • BTAM101-18 Complete 26-Topic Exam Cheat-Sheet</h1>
+      <p class="text-sm text-slate-600">Author: Krishna Kumar (B.Tech Cybersecurity, CGC CEC Landran • IKG-PTU Syllabus) — 100% Coverage</p>
     </div>
     <div id="print-content" class="space-y-4"></div>
+    <div class="mt-6 pt-4 border-t border-slate-300 text-xs text-slate-600 flex items-center justify-between">
+      <span>Compiled by <strong>Krishna Kumar</strong> • CGC CEC Landran</span>
+      <span>Support UPI: <strong>7888690390@upi</strong></span>
+    </div>
   </div>
 
   <script>
@@ -872,16 +1087,181 @@
     let currentQuestionId = QUESTIONS_DB[0].id;
     let revealedCount = 1;
     let masteredIds = new Set(JSON.parse(localStorage.getItem('btam101_mastered') || '[]'));
+    let selectedContribution = 19;
+    let paymentInitiated = false;
 
     const UNITS = ["All", "Unit 1", "Unit 2", "Unit 3", "Unit 4", "Unit 5"];
 
+    // Render live scannable UPI QR codes on both the Gate and Credits modal
+    function renderUpiQrCodes(amount) {
+      const upiUri = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${amount}&cu=INR&tn=CalcVault%20M1%20Study%20Guide`;
+      if (typeof QRious !== 'undefined') {
+        const gateCanvas = document.getElementById('gate-qr-canvas');
+        if (gateCanvas) {
+          new QRious({
+            element: gateCanvas,
+            value: upiUri,
+            size: 220,
+            level: 'H',
+            background: '#ffffff',
+            foreground: '#0f172a'
+          });
+        }
+        const modalCanvas = document.getElementById('modal-qr-canvas');
+        if (modalCanvas) {
+          new QRious({
+            element: modalCanvas,
+            value: 'upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&cu=INR&tn=CalcVault%20M1%20Support',
+            size: 220,
+            level: 'H',
+            background: '#ffffff',
+            foreground: '#0f172a'
+          });
+        }
+      }
+    }
+
     // Initialize Application
     function init() {
+      renderUpiQrCodes(selectedContribution);
+      checkVaultAccess();
       renderUnitTabs();
       renderQuestionList();
       loadSlide(currentQuestionId);
       buildPrintableCheatSheet();
       lucide.createIcons();
+    }
+
+    // Enable the "I've Paid" button only after user presses Pay or confirms QR scan
+    function markPaymentInitiated(source) {
+      paymentInitiated = true;
+      const unlockBtn = document.getElementById('unlock-vault-btn');
+      const unlockLabel = document.getElementById('unlock-btn-label');
+      const unlockIcon = document.getElementById('unlock-btn-icon');
+      if (unlockBtn) {
+        unlockBtn.disabled = false;
+        unlockBtn.className = "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-extrabold bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-400 hover:to-cyan-500 text-white shadow-lg shadow-emerald-500/25 transition active:scale-95 cursor-pointer";
+      }
+      if (unlockLabel) {
+        unlockLabel.textContent = source === 'qr'
+          ? "QR Scanned — Click to Unlock Full Access"
+          : "I've Paid — Unlock Full Access";
+      }
+      if (unlockIcon) {
+        unlockIcon.setAttribute('data-lucide', 'unlock');
+      }
+      lucide.createIcons();
+    }
+
+    function resetUnlockButtonState() {
+      paymentInitiated = false;
+      const unlockBtn = document.getElementById('unlock-vault-btn');
+      const unlockLabel = document.getElementById('unlock-btn-label');
+      const unlockIcon = document.getElementById('unlock-btn-icon');
+      if (unlockBtn) {
+        unlockBtn.disabled = true;
+        unlockBtn.className = "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-extrabold bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed transition";
+      }
+      if (unlockLabel) {
+        unlockLabel.textContent = 'Click "Pay via UPI App" or Scan QR First';
+      }
+      if (unlockIcon) {
+        unlockIcon.setAttribute('data-lucide', 'lock');
+      }
+    }
+
+    // UPI Payment Gate Controls
+    function checkVaultAccess() {
+      const isUnlocked = localStorage.getItem('calcvault_m1_unlocked') === 'true';
+      const overlay = document.getElementById('upi-gate-overlay');
+      const badge = document.getElementById('verified-access-badge');
+      if (isUnlocked) {
+        overlay.classList.add('hidden');
+        badge.classList.remove('hidden');
+      } else {
+        resetUnlockButtonState();
+        overlay.classList.remove('hidden');
+        badge.classList.add('hidden');
+      }
+    }
+
+    function selectAmount(amount) {
+      selectedContribution = amount;
+      document.getElementById('custom-amount-input').value = '';
+      document.querySelectorAll('.amt-chip').forEach(btn => {
+        btn.className = "amt-chip py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition";
+      });
+      const activeChip = document.getElementById(`amt-chip-${amount}`);
+      if (activeChip) {
+        activeChip.className = "amt-chip py-2 rounded-xl text-xs font-bold border-2 border-cyan-500 bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 transition";
+      }
+      updateUpiDeepLink(amount);
+    }
+
+    function selectCustomAmount(val) {
+      const num = parseInt(val, 10);
+      if (!isNaN(num) && num > 0) {
+        selectedContribution = num;
+        document.querySelectorAll('.amt-chip').forEach(btn => {
+          btn.className = "amt-chip py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition";
+        });
+        updateUpiDeepLink(num);
+      }
+    }
+
+    function updateUpiDeepLink(amount) {
+      const linkEl = document.getElementById('upi-deeplink-btn');
+      const labelEl = document.getElementById('upi-deeplink-label');
+      linkEl.href = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${amount}&cu=INR&tn=CalcVault%20M1%20Study%20Guide`;
+      labelEl.textContent = `Pay ₹${amount} via UPI App`;
+      renderUpiQrCodes(amount);
+      buildPrintableCheatSheet();
+    }
+
+    function unlockVault() {
+      if (!paymentInitiated) return;
+      const utr = document.getElementById('utr-input').value.trim();
+      localStorage.setItem('calcvault_m1_unlocked', 'true');
+      if (utr) {
+        localStorage.setItem('calcvault_m1_utr', utr);
+      }
+      checkVaultAccess();
+      lucide.createIcons();
+    }
+
+    function lockGateForDemo() {
+      localStorage.removeItem('calcvault_m1_unlocked');
+      checkVaultAccess();
+      lucide.createIcons();
+    }
+
+    // Copy UPI ID using execCommand fallback for iFrame compatibility
+    function copyUpiId(badgeId) {
+      const tempInput = document.createElement('input');
+      tempInput.value = '7888690390@upi';
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      const badge = document.getElementById(badgeId);
+      if (badge) {
+        const originalText = badge.textContent;
+        badge.textContent = 'Copied!';
+        setTimeout(() => {
+          badge.textContent = originalText;
+        }, 2000);
+      }
+    }
+
+    // Credits Modal Controls
+    function openCreditsModal() {
+      document.getElementById('credits-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeCreditsModal() {
+      document.getElementById('credits-modal').classList.add('hidden');
     }
 
     // Theme Toggle
@@ -1092,8 +1472,10 @@
 
     // Build Complete Printable Cheat-Sheet for PDF Export
     function buildPrintableCheatSheet() {
+      const gateCanvas = document.getElementById('gate-qr-canvas');
+      const qrDataUrl = gateCanvas ? gateCanvas.toDataURL('image/png') : '';
       const printContent = document.getElementById('print-content');
-      printContent.innerHTML = QUESTIONS_DB.map((q, index) => `
+      const cardsHtml = QUESTIONS_DB.map((q, index) => `
         <div class="print-card">
           <div class="text-xs font-bold uppercase text-indigo-700">${q.unit} • ${q.marks}</div>
           <h3 class="text-base font-bold mt-0.5">${index + 1}. ${q.title}</h3>
@@ -1104,6 +1486,24 @@
           </div>
         </div>
       `).join('');
+
+      const creditCardHtml = `
+        <div class="print-card bg-slate-50 border-2 border-slate-300 mt-6">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <div class="text-xs font-bold uppercase text-cyan-800">Credits &amp; Peer Support</div>
+              <h3 class="text-base font-bold mt-0.5">Created &amp; Curated by Krishna Kumar</h3>
+              <p class="text-xs text-slate-600">B.Tech Cybersecurity, CGC College of Engineering, Landran — IKG-PTU 1st Semester</p>
+              <p class="text-xs text-slate-700 mt-2">
+                Thank you to all fellow students for studying together! For doubt-solving, peer collaboration, or voluntary support to keep open student study resources running, scan the QR code or use UPI ID: <b>7888690390@upi</b>.
+              </p>
+            </div>
+            ${qrDataUrl ? `<img src="${qrDataUrl}" alt="UPI QR Code" class="w-24 h-24 border border-slate-300 rounded-lg shrink-0" />` : ''}
+          </div>
+        </div>
+      `;
+
+      printContent.innerHTML = cardsHtml + creditCardHtml;
     }
 
     function openCheatSheetPrint() {
