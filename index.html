@@ -427,6 +427,90 @@
     </div>
   </div>
 
+  <!-- UPI PDF Print Payment Modal -->
+  <div id="pdf-print-modal" class="no-print hidden fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div class="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#1e293b] border border-amber-500/40 shadow-2xl p-6 my-auto step-animate">
+      <button type="button" onclick="closePdfPrintModal()" class="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-11 h-11 rounded-xl bg-amber-500 text-slate-950 font-extrabold flex items-center justify-center shadow-md shrink-0">
+          <i data-lucide="file-down" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">PDF Cheat-Sheet Export</span>
+          <h3 class="text-lg font-extrabold text-slate-900 dark:text-white leading-tight">Unlock Complete 26-Topic PDF</h3>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4 bg-slate-100 dark:bg-[#0f172a] p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+        Support author <strong>Krishna Kumar</strong> (CGC CEC Landran) with a quick UPI contribution to export &amp; print the complete <strong>BTAM101-18 26-Topic Exam Cheat-Sheet</strong> as PDF.
+      </p>
+
+      <!-- Amount Selector Chips for PDF -->
+      <div class="mb-4">
+        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+          Select PDF Contribution (INR)
+        </label>
+        <div class="grid grid-cols-4 gap-2">
+          <button type="button" onclick="selectPdfAmount(9)" id="pdf-amt-chip-9" class="pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-amber-500 transition">₹9</button>
+          <button type="button" onclick="selectPdfAmount(19)" id="pdf-amt-chip-19" class="pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border-2 border-amber-500 bg-amber-500/15 text-amber-700 dark:text-amber-300 transition">₹19 ★</button>
+          <button type="button" onclick="selectPdfAmount(29)" id="pdf-amt-chip-29" class="pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-amber-500 transition">₹29</button>
+          <div class="relative">
+            <span class="absolute left-2 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">₹</span>
+            <input type="number" id="pdf-custom-amount" min="1" placeholder="Other" oninput="selectPdfCustomAmount(this.value)"
+              class="w-full h-full pl-5 pr-1.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 focus:outline-none focus:border-amber-500" />
+          </div>
+        </div>
+      </div>
+
+      <!-- QR + UPI Box -->
+      <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-3.5 mb-4">
+        <div class="shrink-0 flex flex-col items-center">
+          <div class="p-2 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center">
+            <canvas id="pdf-qr-canvas" class="w-28 h-28 rounded-lg"></canvas>
+          </div>
+          <button type="button" onclick="markPdfPaymentInitiated('qr')" class="mt-1.5 text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:underline">
+            I've Scanned &amp; Paid via QR
+          </button>
+        </div>
+
+        <div class="flex-1 w-full flex flex-col gap-2">
+          <div class="p-2 rounded-xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <div class="text-[10px] font-bold uppercase text-slate-400">UPI ID</div>
+              <div class="text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 truncate">7888690390@upi</div>
+            </div>
+            <button type="button" onclick="copyUpiId('pdf-copy-badge')" class="shrink-0 flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold bg-slate-100 dark:bg-slate-800 hover:bg-cyan-500/20 transition">
+              <i data-lucide="copy" class="w-3 h-3"></i>
+              <span id="pdf-copy-badge">Copy</span>
+            </button>
+          </div>
+
+          <a id="pdf-upi-deeplink" href="upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=19&cu=INR&tn=CalcVault%20M1%20PDF%20CheatSheet"
+             onclick="markPdfPaymentInitiated('app')"
+             class="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm transition active:scale-95">
+            <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+            <span id="pdf-upi-label">Pay ₹19 via UPI App</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Optional UTR + Locked Print Button -->
+      <div class="space-y-2.5">
+        <input type="text" id="pdf-utr-input" maxlength="20" placeholder="Optional: Enter 12-Digit UPI UTR / Ref ID"
+               class="w-full px-3 py-2 text-xs font-mono rounded-xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500" />
+
+        <button type="button" id="confirm-pdf-print-btn" onclick="executePaidPdfPrint()" disabled
+                class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed transition">
+          <i data-lucide="lock" id="pdf-print-btn-icon" class="w-4 h-4"></i>
+          <span id="pdf-print-btn-label">Click "Pay via UPI App" or Scan QR First</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Hidden Printable Cheat-Sheet Container (Visible only when printing / exporting PDF) -->
   <div id="print-container" class="hidden p-6 max-w-4xl mx-auto">
     <div class="border-b-2 border-slate-800 pb-4 mb-6">
@@ -1088,19 +1172,33 @@
     let revealedCount = 1;
     let masteredIds = new Set(JSON.parse(localStorage.getItem('btam101_mastered') || '[]'));
     let selectedContribution = 19;
+    let selectedPdfContribution = 19;
     let paymentInitiated = false;
+    let pdfPaymentInitiated = false;
 
     const UNITS = ["All", "Unit 1", "Unit 2", "Unit 3", "Unit 4", "Unit 5"];
 
-    // Render live scannable UPI QR codes on both the Gate and Credits modal
-    function renderUpiQrCodes(amount) {
+    // Render live scannable UPI QR codes on Gate, PDF Print Modal, and Credits modal
+    function renderUpiQrCodes(amount, pdfAmount = selectedPdfContribution) {
       const upiUri = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${amount}&cu=INR&tn=CalcVault%20M1%20Study%20Guide`;
+      const pdfUpiUri = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${pdfAmount}&cu=INR&tn=CalcVault%20M1%20PDF%20CheatSheet`;
       if (typeof QRious !== 'undefined') {
         const gateCanvas = document.getElementById('gate-qr-canvas');
         if (gateCanvas) {
           new QRious({
             element: gateCanvas,
             value: upiUri,
+            size: 220,
+            level: 'H',
+            background: '#ffffff',
+            foreground: '#0f172a'
+          });
+        }
+        const pdfCanvas = document.getElementById('pdf-qr-canvas');
+        if (pdfCanvas) {
+          new QRious({
+            element: pdfCanvas,
+            value: pdfUpiUri,
             size: 220,
             level: 'H',
             background: '#ffffff',
@@ -1262,6 +1360,75 @@
 
     function closeCreditsModal() {
       document.getElementById('credits-modal').classList.add('hidden');
+    }
+
+    // PDF Print Payment Gate Controls
+    function selectPdfAmount(amount) {
+      selectedPdfContribution = amount;
+      const customInput = document.getElementById('pdf-custom-amount');
+      if (customInput) customInput.value = '';
+      document.querySelectorAll('.pdf-amt-chip').forEach(btn => {
+        btn.className = "pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-amber-500 transition";
+      });
+      const activeChip = document.getElementById(`pdf-amt-chip-${amount}`);
+      if (activeChip) {
+        activeChip.className = "pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border-2 border-amber-500 bg-amber-500/15 text-amber-700 dark:text-amber-300 transition";
+      }
+      updatePdfDeepLink(amount);
+    }
+
+    function selectPdfCustomAmount(val) {
+      const num = parseInt(val, 10);
+      if (!isNaN(num) && num > 0) {
+        selectedPdfContribution = num;
+        document.querySelectorAll('.pdf-amt-chip').forEach(btn => {
+          btn.className = "pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-amber-500 transition";
+        });
+        updatePdfDeepLink(num);
+      }
+    }
+
+    function updatePdfDeepLink(amount) {
+      const linkEl = document.getElementById('pdf-upi-deeplink');
+      const labelEl = document.getElementById('pdf-upi-label');
+      if (linkEl) linkEl.href = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${amount}&cu=INR&tn=CalcVault%20M1%20PDF%20CheatSheet`;
+      if (labelEl) labelEl.textContent = `Pay ₹${amount} via UPI App`;
+      renderUpiQrCodes(selectedContribution, amount);
+    }
+
+    function markPdfPaymentInitiated(source) {
+      pdfPaymentInitiated = true;
+      const btn = document.getElementById('confirm-pdf-print-btn');
+      const label = document.getElementById('pdf-print-btn-label');
+      const icon = document.getElementById('pdf-print-btn-icon');
+      if (btn) {
+        btn.disabled = false;
+        btn.className = "w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/25 transition active:scale-95 cursor-pointer";
+      }
+      if (label) {
+        label.textContent = source === 'qr'
+          ? "QR Scanned — Print / Save PDF Now"
+          : "I've Paid — Print / Save PDF Now";
+      }
+      if (icon) icon.setAttribute('data-lucide', 'printer');
+      lucide.createIcons();
+    }
+
+    function resetPdfPrintButtonState() {
+      pdfPaymentInitiated = false;
+      const btn = document.getElementById('confirm-pdf-print-btn');
+      const label = document.getElementById('pdf-print-btn-label');
+      const icon = document.getElementById('pdf-print-btn-icon');
+      if (btn) {
+        btn.disabled = true;
+        btn.className = "w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed transition";
+      }
+      if (label) label.textContent = 'Click "Pay via UPI App" or Scan QR First';
+      if (icon) icon.setAttribute('data-lucide', 'lock');
+    }
+
+    function closePdfPrintModal() {
+      document.getElementById('pdf-print-modal').classList.add('hidden');
     }
 
     // Theme Toggle
@@ -1507,6 +1674,27 @@
     }
 
     function openCheatSheetPrint() {
+      if (localStorage.getItem('calcvault_m1_pdf_unlocked') === 'true') {
+        triggerCheatSheetPrint();
+        return;
+      }
+      resetPdfPrintButtonState();
+      renderUpiQrCodes(selectedContribution, selectedPdfContribution);
+      document.getElementById('pdf-print-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function executePaidPdfPrint() {
+      if (!pdfPaymentInitiated) return;
+      const utr = document.getElementById('pdf-utr-input').value.trim();
+      localStorage.setItem('calcvault_m1_pdf_unlocked', 'true');
+      if (utr) localStorage.setItem('calcvault_m1_pdf_utr', utr);
+      closePdfPrintModal();
+      triggerCheatSheetPrint();
+    }
+
+    function triggerCheatSheetPrint() {
+      buildPrintableCheatSheet();
       const printContainer = document.getElementById('print-container');
       renderMathInElement(printContainer, {
         delimiters: [
@@ -1515,7 +1703,9 @@
         ],
         throwOnError: false
       });
-      window.print();
+      setTimeout(() => {
+        window.print();
+      }, 150);
     }
 
     window.onload = init;
