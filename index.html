@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CalcVault M-1 | IKG-PTU BTAM101-18 Interactive Exam Vault by Krishna Kumar</title>
-  
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -42,9 +42,6 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- QRious for crisp, scannable dynamic UPI QR Code generation -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-
   <style>
     /* Custom scrollbar and smooth animations */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -53,30 +50,24 @@
     ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.5); }
 
     @keyframes slideFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .step-animate {
-      animation: slideFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: slideFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     .katex-display {
       overflow-x: auto;
       overflow-y: hidden;
-      padding: 0.45rem 0;
-      margin: 0.45rem 0 !important;
+      padding: 0.4rem 0;
+      margin: 0.4rem 0 !important;
     }
 
     @keyframes pulseGlow {
-      0%, 100% { filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.45)); }
-      50% { filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.55)); }
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(6, 182, 212, 0.4)); }
+      50% { filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.5)); }
     }
 
     .logo-glow {
@@ -92,91 +83,105 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-[#0f172a] dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
+<body class="bg-slate-100 text-slate-900 dark:bg-[#0b1120] dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
 
-  <!-- UPI Contribution / Access Gate Overlay -->
-  <div id="upi-gate-overlay" class="no-print fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
-    <div class="relative w-full max-w-lg rounded-3xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-cyan-500/30 shadow-2xl shadow-cyan-950/50 p-6 sm:p-8 my-auto step-animate">
-      
-      <!-- Brand Header inside Gate -->
-      <div class="flex flex-col items-center text-center">
-        <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-lg logo-glow mb-3">
-          <svg viewBox="0 0 64 64" class="w-12 h-12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="shieldGradGate" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#4f46e5"/>
-                <stop offset="50%" stop-color="#06b6d4"/>
-                <stop offset="100%" stop-color="#f59e0b"/>
-              </linearGradient>
-            </defs>
-            <path d="M32 4L54 13V30C54 45.2 44.6 56.8 32 60C19.4 56.8 10 45.2 10 30V13L32 4Z" fill="#0f172a" stroke="url(#shieldGradGate)" stroke-width="3"/>
-            <path d="M36 16C33.5 16 32.2 18.2 31.8 22L29.2 42C28.8 45.8 27.5 48 25 48" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round"/>
-            <circle cx="38" cy="16" r="2.2" fill="#f59e0b"/>
-            <circle cx="23" cy="48" r="2.2" fill="#f59e0b"/>
-            <path d="M18 26H27M21 26V35M25 26V35" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
-          </svg>
+  <!-- UPI Contribution & Timed Access Gate Overlay -->
+  <div id="upi-gate-overlay" class="no-print fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xl flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+    <div class="relative w-full max-w-2xl rounded-3xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-cyan-500/30 shadow-2xl shadow-cyan-950/60 p-5 sm:p-7 my-auto step-animate">
+
+      <!-- Top Compact Brand Header -->
+      <div class="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-700/80">
+        <div class="flex items-center gap-3 text-center sm:text-left">
+          <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-md logo-glow shrink-0">
+            <svg viewBox="0 0 64 64" class="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="shieldGradGate" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#4f46e5"/>
+                  <stop offset="50%" stop-color="#06b6d4"/>
+                  <stop offset="100%" stop-color="#f59e0b"/>
+                </linearGradient>
+              </defs>
+              <path d="M32 4L54 13V30C54 45.2 44.6 56.8 32 60C19.4 56.8 10 45.2 10 30V13L32 4Z" fill="#0f172a" stroke="url(#shieldGradGate)" stroke-width="3"/>
+              <path d="M36 16C33.5 16 32.2 18.2 31.8 22L29.2 42C28.8 45.8 27.5 48 25 48" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round"/>
+              <circle cx="38" cy="16" r="2.2" fill="#f59e0b"/>
+              <circle cx="23" cy="48" r="2.2" fill="#f59e0b"/>
+              <path d="M18 26H27M21 26V35M25 26V35" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+              <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-cyan-400 to-amber-400 bg-clip-text text-transparent">
+                CalcVault M-1
+              </h2>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">
+                CGC CEC Landran
+              </span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              IKG-PTU BTAM101-18 • 26-Topic Exam Vault by <strong class="text-slate-800 dark:text-slate-200">Krishna Kumar</strong>
+            </p>
+          </div>
         </div>
 
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 mb-2">
-          <span>CGC CEC Landran • Peer Study Vault</span>
+        <div class="flex items-center gap-1.5 text-[11px] font-semibold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/20 shrink-0">
+          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+          <span>Timed Study Passes</span>
         </div>
-
-        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-cyan-400 to-amber-400 bg-clip-text text-transparent">
-          CalcVault M-1
-        </h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-          IKG-PTU BTAM101-18 • Interactive Exam Vault by <span class="font-semibold text-slate-800 dark:text-slate-200">Krishna Kumar</span>
-        </p>
-
-        <p class="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-100 dark:bg-[#0f172a] p-3 rounded-xl border border-slate-200 dark:border-slate-700/80">
-          Unlock <strong>All 26 Step-by-Step Derivations</strong>, Interactive Animated Whiteboard &amp; <strong>Printable PDF Cheat-Sheet</strong> for BTAM101-18 with a small student peer contribution.
-        </p>
       </div>
 
-      <!-- Quick-Select Amount Chips -->
-      <div class="mt-5">
-        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2 text-center">
-          Select Contribution Amount (INR)
+      <!-- Timed Access Tiers Selector -->
+      <div class="mt-4">
+        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+          1. Choose Timed Access Pass (Includes +5 Min Final Warning)
         </label>
-        <div class="grid grid-cols-4 gap-2">
-          <button type="button" onclick="selectAmount(9)" id="amt-chip-9" class="amt-chip py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition">
-            ₹9
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <button type="button" onclick="selectAmount(9)" id="amt-chip-9" class="amt-chip py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition flex flex-col items-center">
+            <span class="text-sm font-extrabold">₹9</span>
+            <span class="text-[10px] text-slate-500 dark:text-slate-400">30m + 5m warn</span>
           </button>
-          <button type="button" onclick="selectAmount(19)" id="amt-chip-19" class="amt-chip py-2 rounded-xl text-xs font-bold border-2 border-cyan-500 bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 transition">
-            ₹19 ★
+          <button type="button" onclick="selectAmount(19)" id="amt-chip-19" class="amt-chip py-2 px-2 rounded-xl text-xs font-bold border-2 border-cyan-500 bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 transition flex flex-col items-center">
+            <span class="text-sm font-extrabold">₹19 ★</span>
+            <span class="text-[10px] opacity-85">55m + 5m warn</span>
           </button>
-          <button type="button" onclick="selectAmount(29)" id="amt-chip-29" class="amt-chip py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition">
-            ₹29
+          <button type="button" onclick="selectAmount(29)" id="amt-chip-29" class="amt-chip py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition flex flex-col items-center">
+            <span class="text-sm font-extrabold">₹29</span>
+            <span class="text-[10px] text-slate-500 dark:text-slate-400">115m + 5m warn</span>
           </button>
-          <div class="relative">
+          <div class="relative flex flex-col justify-center">
             <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">₹</span>
-            <input type="number" id="custom-amount-input" min="1" placeholder="Other" oninput="selectCustomAmount(this.value)"
+            <input type="number" id="custom-amount-input" min="1" placeholder="Custom" oninput="selectCustomAmount(this.value)"
               class="w-full h-full pl-6 pr-2 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 focus:outline-none focus:border-cyan-500" />
           </div>
         </div>
+        <div id="tier-duration-hint" class="mt-2 text-[11px] font-semibold text-cyan-700 dark:text-cyan-300 flex items-center gap-1.5">
+          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+          <span>Selected Pass: <strong>55 mins access + 5 mins warning (60 mins total)</strong></span>
+        </div>
       </div>
 
-      <!-- QR Code & UPI Details Card -->
-      <div class="mt-5 p-4 rounded-2xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-4">
-        <div class="shrink-0 flex flex-col items-center">
-          <div class="p-2.5 bg-white rounded-2xl shadow-md border border-slate-200 flex items-center justify-center">
-            <canvas id="gate-qr-canvas" class="w-32 h-32 rounded-lg"></canvas>
+      <!-- Two-Column QR & UPI Payment Action Box -->
+      <div class="mt-4 p-4 rounded-2xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-700/80 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+        <!-- Left QR Column -->
+        <div class="sm:col-span-5 flex flex-col items-center justify-center border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-800 pb-3 sm:pb-0 sm:pr-4">
+          <div class="p-2 bg-white rounded-2xl shadow-md border border-slate-200 flex items-center justify-center">
+            <img id="gate-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=4&data=upi%3A%2F%2Fpay%3Fpa%3D7888690390%40upi%26pn%3DKrishna%2520Kumar%26am%3D19%26cu%3DINR%26tn%3DCalcVault%2520M1%2520Study%2520Guide" alt="Scan UPI QR Code" class="w-32 h-32 rounded-lg object-contain bg-white" />
           </div>
-          <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mt-1.5">Scan via GPay / PhonePe / Paytm</span>
-          <button type="button" onclick="markPaymentInitiated('qr')" class="mt-1 text-[11px] font-bold text-cyan-600 dark:text-cyan-400 hover:underline">
+          <span class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 mt-1.5 text-center">Scan with GPay / PhonePe / Paytm</span>
+          <button type="button" onclick="markPaymentInitiated('qr')" class="mt-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 hover:bg-cyan-500/25 transition">
             I've Scanned &amp; Paid via QR
           </button>
         </div>
 
-        <div class="flex-1 w-full flex flex-col gap-2.5">
-          <div class="p-2.5 rounded-xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2">
+        <!-- Right UPI Details & Verification Column -->
+        <div class="sm:col-span-7 flex flex-col gap-2.5">
+          <div class="p-2.5 rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2">
             <div class="min-w-0">
               <div class="text-[10px] font-bold uppercase text-slate-400">UPI ID (Krishna Kumar)</div>
               <div class="text-xs sm:text-sm font-mono font-bold text-cyan-600 dark:text-cyan-400 truncate" id="gate-upi-text">7888690390@upi</div>
             </div>
             <button type="button" onclick="copyUpiId('gate-copy-badge')" class="shrink-0 flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-cyan-500/20 text-slate-700 dark:text-slate-200 transition">
               <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-              <span id="gate-copy-badge">Copy UPI ID</span>
+              <span id="gate-copy-badge">Copy UPI</span>
             </button>
           </div>
 
@@ -186,35 +191,43 @@
             <i data-lucide="smartphone" class="w-4 h-4"></i>
             <span id="upi-deeplink-label">Pay ₹19 via UPI App</span>
           </a>
+
+          <input type="text" id="utr-input" maxlength="20" placeholder="Optional: 12-digit UPI UTR / Ref ID"
+                 class="w-full px-3 py-2 text-xs font-mono rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
         </div>
       </div>
 
-      <!-- Verification & Unlock Section -->
-      <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-700/80 space-y-3">
-        <div>
-          <label for="utr-input" class="block text-[11px] font-semibold text-slate-500 dark:text-slate-400 mb-1">
-            Optional: Enter 12-Digit UPI UTR / Reference ID for Instant Receipt Log
-          </label>
-          <input type="text" id="utr-input" maxlength="20" placeholder="e.g., 632418904512 (or leave blank after paying)"
-                 class="w-full px-3.5 py-2 text-xs sm:text-sm font-mono rounded-xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
-        </div>
-
+      <!-- Locked Until Payment Action Unlock Button -->
+      <div class="mt-4">
         <button type="button" id="unlock-vault-btn" onclick="unlockVault()" disabled
-                class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-extrabold bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed transition">
+                class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed transition">
           <i data-lucide="lock" id="unlock-btn-icon" class="w-4 h-4"></i>
-          <span id="unlock-btn-label">Click "Pay via UPI App" or Scan QR First</span>
+          <span id="unlock-btn-label">Click "Pay via UPI App" or "Scanned QR" First</span>
         </button>
       </div>
     </div>
   </div>
 
+  <!-- 5-Minute Final Warning Banner -->
+  <div id="time-warning-banner" class="no-print hidden sticky top-0 z-40 bg-amber-500 text-slate-950 px-4 py-2 text-xs sm:text-sm font-bold shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0"></i>
+        <span>Final 5-Minute Warning: Your CalcVault M-1 study pass expires in <span id="warning-countdown-text" class="font-mono underline">05:00</span>!</span>
+      </div>
+      <button type="button" onclick="openExtendSessionGate()" class="px-3 py-1 rounded-lg bg-slate-950 text-amber-400 hover:bg-slate-800 text-xs font-extrabold transition">
+        Extend Session Time (+UPI)
+      </button>
+    </div>
+  </div>
+
   <!-- Top Navigation Header -->
-  <header class="no-print sticky top-0 z-30 bg-white/90 dark:bg-[#1e293b]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700/80 px-4 py-3">
+  <header class="no-print sticky top-0 z-30 bg-white/95 dark:bg-[#151e32]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
         <!-- Custom CalcVault M-1 Geometric Shield + Integral SVG Emblem -->
-        <div class="w-11 h-11 rounded-xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-lg shadow-cyan-500/20 shrink-0">
-          <svg viewBox="0 0 64 64" class="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-md shadow-cyan-500/20 shrink-0">
+          <svg viewBox="0 0 64 64" class="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <linearGradient id="shieldGradHeader" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#4f46e5"/>
@@ -235,9 +248,13 @@
             <h1 class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-indigo-500 via-cyan-500 to-amber-500 dark:from-indigo-400 dark:via-cyan-400 dark:to-amber-400 bg-clip-text text-transparent">
               CalcVault M-1
             </h1>
-            <span id="verified-access-badge" class="hidden inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
-              <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
-              <span>Verified Access</span>
+            <span id="verified-access-badge" class="hidden inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+              <i data-lucide="shield-check" class="w-3 h-3"></i>
+              <span>Active Pass</span>
+            </span>
+            <span id="session-timer-badge" class="hidden inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30" title="Remaining Study Pass Time">
+              <i data-lucide="timer" class="w-3 h-3"></i>
+              <span id="session-timer-text">--:--</span>
             </span>
           </div>
           <p class="text-xs text-slate-500 dark:text-slate-400">IKG-PTU BTAM101-18 • Interactive Exam Vault by Krishna Kumar</p>
@@ -246,18 +263,18 @@
 
       <!-- Action Toolbar -->
       <div class="flex items-center gap-2">
-        <button onclick="openCreditsModal()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition" title="Author Credits & UPI Support">
+        <button type="button" onclick="openCreditsModal()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition" title="Author Credits & UPI Support">
           <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-500"></i>
-          <span>Credits &amp; Support</span>
+          <span>Credits</span>
         </button>
 
-        <button onclick="openCheatSheetPrint()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-600 text-slate-950 shadow-sm transition active:scale-95" title="Generate Printable Revision Sheet / Save as PDF">
+        <button type="button" onclick="openCheatSheetPrint()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm transition active:scale-95" title="Unlock & Export Complete 26-Topic PDF Cheat-Sheet">
           <i data-lucide="printer" class="w-4 h-4"></i>
           <span class="hidden sm:inline">Print / PDF Cheat-Sheet</span>
           <span class="sm:hidden">PDF</span>
         </button>
 
-        <button onclick="toggleTheme()" id="theme-btn" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition" title="Toggle Dark/Light Mode">
+        <button type="button" onclick="toggleTheme()" id="theme-btn" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition" title="Toggle Dark/Light Mode">
           <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
           <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
         </button>
@@ -272,7 +289,7 @@
 
   <!-- Main Workspace -->
   <main class="no-print flex-1 max-w-7xl w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-5">
-    
+
     <!-- Left Sidebar: Question Selector Cards -->
     <aside class="lg:col-span-4 flex flex-col gap-3">
       <div class="flex items-center justify-between px-1">
@@ -280,7 +297,7 @@
           26 Topics Available
         </span>
         <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 px-2.5 py-0.5 rounded-full border border-cyan-500/20" id="progress-badge">
-          0 / 26 Topics Mastered
+          0 / 26 Mastered
         </span>
       </div>
 
@@ -289,26 +306,26 @@
         <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
         <input type="text" id="search-input" placeholder="Search all 26 topics (e.g., Raabe, Cardioid, Jacobian)..."
                oninput="renderQuestionList()"
-               class="w-full pl-9 pr-3 py-2 text-sm rounded-xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+               class="w-full pl-9 pr-3 py-2 text-sm rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
       </div>
 
       <!-- Question Cards Container -->
-      <div id="question-list" class="flex flex-col gap-2 max-h-[calc(100vh-230px)] overflow-y-auto pr-1">
+      <div id="question-list" class="flex flex-col gap-2 max-h-[calc(100vh-235px)] overflow-y-auto pr-1">
         <!-- Populated dynamically -->
       </div>
     </aside>
 
     <!-- Right Main Panel: Interactive Lecture Whiteboard -->
-    <section class="lg:col-span-8 flex flex-col bg-white dark:bg-[#1e293b] rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm overflow-hidden">
-      
+    <section class="lg:col-span-8 flex flex-col bg-white dark:bg-[#151e32] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+
       <!-- Slide Header -->
-      <div class="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-700/80 bg-slate-50/70 dark:bg-slate-900/60">
+      <div class="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/50">
         <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
           <div class="flex items-center gap-2">
             <span id="slide-unit-badge" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-cyan-600 text-white">UNIT 1</span>
             <span id="slide-marks-badge" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/30">10 Marks</span>
           </div>
-          <button onclick="toggleMastered()" id="mastered-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <button type="button" onclick="toggleMastered()" id="mastered-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
             <i data-lucide="check-circle-2" class="w-4 h-4"></i>
             <span>Mark as Mastered</span>
           </button>
@@ -317,7 +334,7 @@
         <h2 id="slide-title" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">
           Select a topic to begin
         </h2>
-        <div id="slide-problem" class="mt-3 p-3.5 rounded-xl bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 text-sm sm:text-base font-medium">
+        <div id="slide-problem" class="mt-3 p-3.5 rounded-xl bg-white dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800 text-sm sm:text-base font-medium">
           <!-- Problem statement rendered here -->
         </div>
       </div>
@@ -326,7 +343,7 @@
       <div id="intuition-box" class="mx-4 sm:mx-6 mt-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
         <i data-lucide="lightbulb" class="w-5 h-5 text-amber-500 shrink-0 mt-0.5"></i>
         <div class="text-xs sm:text-sm text-amber-950 dark:text-amber-200">
-          <span class="font-bold block mb-0.5 text-amber-700 dark:text-amber-400">PTU Evaluator Tip & Exam Trap:</span>
+          <span class="font-bold block mb-0.5 text-amber-700 dark:text-amber-400">PTU Evaluator Tip &amp; Exam Trap:</span>
           <span id="intuition-text">Loading tip...</span>
         </div>
       </div>
@@ -337,12 +354,12 @@
       </div>
 
       <!-- Whiteboard Interactive Controls Footer -->
-      <div class="p-4 border-t border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-900/70 flex flex-wrap items-center justify-between gap-3">
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-2">
-          <button onclick="prevQuestion()" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Previous Topic">
+          <button type="button" onclick="prevQuestion()" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Previous Topic">
             <i data-lucide="chevron-left" class="w-4 h-4"></i>
           </button>
-          <button onclick="nextQuestion()" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Next Topic">
+          <button type="button" onclick="nextQuestion()" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Next Topic">
             <i data-lucide="chevron-right" class="w-4 h-4"></i>
           </button>
           <span id="step-counter" class="text-xs font-semibold text-slate-500 dark:text-slate-400 ml-1">
@@ -351,13 +368,13 @@
         </div>
 
         <div class="flex items-center gap-2">
-          <button onclick="resetSteps()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">
+          <button type="button" onclick="resetSteps()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">
             Reset Board
           </button>
-          <button onclick="revealAllSteps()" id="reveal-all-btn" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 transition">
+          <button type="button" onclick="revealAllSteps()" id="reveal-all-btn" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 transition">
             Reveal All
           </button>
-          <button onclick="revealNextStep()" id="next-step-btn" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-cyan-600 hover:bg-cyan-500 text-white shadow-md shadow-cyan-500/25 transition active:scale-95">
+          <button type="button" onclick="revealNextStep()" id="next-step-btn" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-cyan-600 hover:bg-cyan-500 text-white shadow-md shadow-cyan-500/25 transition active:scale-95">
             <span>Next Step</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
@@ -367,7 +384,7 @@
   </main>
 
   <!-- Dedicated Author Credits & Demo Lock Footer -->
-  <footer class="no-print border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#1e293b]/80 px-4 py-3.5 mt-auto">
+  <footer class="no-print border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#151e32]/80 px-4 py-3 mt-auto">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
       <div class="flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
         <span>Crafted with ❤️ for CGC CEC Landran peers by</span>
@@ -375,11 +392,11 @@
         <span>(B.Tech Cybersecurity • IKG-PTU BTAM101-18)</span>
       </div>
       <div class="flex items-center gap-3">
-        <button onclick="openCreditsModal()" class="font-semibold text-cyan-600 dark:text-cyan-400 hover:underline">
+        <button type="button" onclick="openCreditsModal()" class="font-semibold text-cyan-600 dark:text-cyan-400 hover:underline">
           Support via UPI (7888690390@upi)
         </button>
         <span class="text-slate-300 dark:text-slate-700">|</span>
-        <button onclick="lockGateForDemo()" class="inline-flex items-center gap-1 font-semibold text-amber-600 dark:text-amber-400 hover:underline" title="Re-open Payment Gate for Testing/Demo">
+        <button type="button" onclick="lockGateForDemo()" class="inline-flex items-center gap-1 font-semibold text-amber-600 dark:text-amber-400 hover:underline" title="Re-open Payment Gate for Testing/Demo">
           <i data-lucide="lock" class="w-3 h-3"></i>
           <span>Lock / View Gate</span>
         </button>
@@ -388,9 +405,9 @@
   </footer>
 
   <!-- Credits & Support Modal -->
-  <div id="credits-modal" class="no-print hidden fixed inset-0 z-40 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 shadow-2xl p-6 step-animate">
-      <button onclick="closeCreditsModal()" class="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition">
+  <div id="credits-modal" class="no-print hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700 shadow-2xl p-6 step-animate">
+      <button type="button" onclick="closeCreditsModal()" class="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
 
@@ -408,12 +425,12 @@
         <strong>CalcVault M-1</strong> was designed and compiled by <strong>Krishna Kumar</strong> (CGC CEC Landran) to help 1st-semester engineering students master every 2, 5, and 10-mark derivation for the IKG-PTU BTAM101-18 exam. If these step-by-step notes helped you revise faster tonight, feel free to support future semester vaults!
       </p>
 
-      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 flex flex-col items-center text-center">
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-700 flex flex-col items-center text-center">
         <div class="p-2.5 bg-white rounded-2xl shadow-sm border border-slate-200 mb-2 flex items-center justify-center">
-          <canvas id="modal-qr-canvas" class="w-36 h-36 rounded-xl"></canvas>
+          <img id="modal-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=4&data=upi%3A%2F%2Fpay%3Fpa%3D7888690390%40upi%26pn%3DKrishna%2520Kumar%26cu%3DINR%26tn%3DCalcVault%2520M1%2520Support" alt="Scan UPI QR Code" class="w-36 h-36 rounded-xl object-contain bg-white" />
         </div>
         <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Scan via GPay / PhonePe / Paytm</div>
-        <div class="mt-2 flex items-center gap-2 bg-white dark:bg-[#1e293b] px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+        <div class="mt-2 flex items-center gap-2 bg-white dark:bg-[#151e32] px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
           <span class="font-mono font-bold text-xs text-cyan-600 dark:text-cyan-400">7888690390@upi</span>
           <button type="button" onclick="copyUpiId('modal-copy-badge')" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
             <span id="modal-copy-badge">Copy</span>
@@ -421,7 +438,7 @@
         </div>
       </div>
 
-      <button onclick="closeCreditsModal()" class="mt-5 w-full py-2.5 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white transition">
+      <button type="button" onclick="closeCreditsModal()" class="mt-5 w-full py-2.5 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white transition">
         Back to Revision Whiteboard
       </button>
     </div>
@@ -429,7 +446,7 @@
 
   <!-- UPI PDF Print Payment Modal -->
   <div id="pdf-print-modal" class="no-print hidden fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-    <div class="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#1e293b] border border-amber-500/40 shadow-2xl p-6 my-auto step-animate">
+    <div class="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#151e32] border border-amber-500/40 shadow-2xl p-6 my-auto step-animate">
       <button type="button" onclick="closePdfPrintModal()" class="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
@@ -444,7 +461,7 @@
         </div>
       </div>
 
-      <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4 bg-slate-100 dark:bg-[#0f172a] p-3 rounded-xl border border-slate-200 dark:border-slate-700">
+      <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4 bg-slate-100 dark:bg-[#0b1120] p-3 rounded-xl border border-slate-200 dark:border-slate-700">
         Support author <strong>Krishna Kumar</strong> (CGC CEC Landran) with a quick UPI contribution to export &amp; print the complete <strong>BTAM101-18 26-Topic Exam Cheat-Sheet</strong> as PDF.
       </p>
 
@@ -466,10 +483,10 @@
       </div>
 
       <!-- QR + UPI Box -->
-      <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-3.5 mb-4">
+      <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-3.5 mb-4">
         <div class="shrink-0 flex flex-col items-center">
           <div class="p-2 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center">
-            <canvas id="pdf-qr-canvas" class="w-28 h-28 rounded-lg"></canvas>
+            <img id="pdf-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=4&data=upi%3A%2F%2Fpay%3Fpa%3D7888690390%40upi%26pn%3DKrishna%2520Kumar%26am%3D19%26cu%3DINR%26tn%3DCalcVault%2520M1%2520PDF%2520CheatSheet" alt="Scan UPI QR Code" class="w-28 h-28 rounded-lg object-contain bg-white" />
           </div>
           <button type="button" onclick="markPdfPaymentInitiated('qr')" class="mt-1.5 text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:underline">
             I've Scanned &amp; Paid via QR
@@ -477,7 +494,7 @@
         </div>
 
         <div class="flex-1 w-full flex flex-col gap-2">
-          <div class="p-2 rounded-xl bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2">
+          <div class="p-2 rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2">
             <div class="min-w-0">
               <div class="text-[10px] font-bold uppercase text-slate-400">UPI ID</div>
               <div class="text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 truncate">7888690390@upi</div>
@@ -500,7 +517,7 @@
       <!-- Optional UTR + Locked Print Button -->
       <div class="space-y-2.5">
         <input type="text" id="pdf-utr-input" maxlength="20" placeholder="Optional: Enter 12-Digit UPI UTR / Ref ID"
-               class="w-full px-3 py-2 text-xs font-mono rounded-xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500" />
+               class="w-full px-3 py-2 text-xs font-mono rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500" />
 
         <button type="button" id="confirm-pdf-print-btn" onclick="executePaidPdfPrint()" disabled
                 class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed transition">
@@ -525,6 +542,22 @@
   </div>
 
   <script>
+    // Safe Storage Wrapper (prevents SecurityError in sandboxed preview iframes)
+    const memStore = {};
+    const safeStorage = {
+      get(key) {
+        try { return window.localStorage.getItem(key); } catch (e) { return memStore[key] || null; }
+      },
+      set(key, val) {
+        memStore[key] = String(val);
+        try { window.localStorage.setItem(key, String(val)); } catch (e) {}
+      },
+      remove(key) {
+        delete memStore[key];
+        try { window.localStorage.removeItem(key); } catch (e) {}
+      }
+    };
+
     // Complete 26-Topic Structured Knowledge Base covering 100% of Important Questions M-1.pdf & IMG-20261117-WA0010.jpg
     const QUESTIONS_DB = [
       // ==================== UNIT 1 (4 Cards) ====================
@@ -610,7 +643,7 @@
           },
           {
             label: "(V) ∑ (∛(n³ + 1) - n) (Binomial Expansion + Comparison Test)",
-            math: "$$u_n = n\\left(1 + \\frac{1}{n^3}\\right)^{1/3} - n = n\\left(1 + \\frac{1}{3n^3} - \\frac{1}{9n^6} + \\cdots\\right) - n = \\frac{1}{3n^2} - \\cdots$$<br>Comparing with $v_n = \\frac{1}{n^2}$ ($p = 2 > 1$), $\\lim \\frac{u_n}{v_n} = \\frac{1}{3} \\ne 0 \\implies$ <b>Convergent</b>."
+            math: "$$u_n = n\\left(1 + \\frac{1}{n^3}\\right)^{1/3} - n = n\\left(1 + \\frac{1}{3n^3} - \\frac{1}{9n^6} + \\cdots\\right) - n = \\frac{1}{3n^2} - \\frac{1}{9n^5} + \\cdots$$<br>Comparing with $v_n = \\frac{1}{n^2}$ ($p = 2 > 1$), $\\lim \\frac{u_n}{v_n} = \\frac{1}{3} \\ne 0 \\implies$ <b>Convergent</b>."
           }
         ]
       },
@@ -1170,64 +1203,64 @@
     let selectedUnit = "All";
     let currentQuestionId = QUESTIONS_DB[0].id;
     let revealedCount = 1;
-    let masteredIds = new Set(JSON.parse(localStorage.getItem('btam101_mastered') || '[]'));
+    let masteredIds = new Set(JSON.parse(safeStorage.get('btam101_mastered') || '[]'));
     let selectedContribution = 19;
     let selectedPdfContribution = 19;
     let paymentInitiated = false;
     let pdfPaymentInitiated = false;
+    let sessionTimerInterval = null;
 
     const UNITS = ["All", "Unit 1", "Unit 2", "Unit 3", "Unit 4", "Unit 5"];
 
+    // Calculate Timed Pass Duration (Base Minutes + 5-Minute Final Warning)
+    function getPlanDetails(amount) {
+      if (amount >= 29) {
+        return { baseMins: 115, warnMins: 5, totalMins: 120 };
+      } else if (amount >= 19) {
+        return { baseMins: 55, warnMins: 5, totalMins: 60 };
+      } else {
+        return { baseMins: 30, warnMins: 5, totalMins: 35 };
+      }
+    }
+
+    function formatRemainingTime(totalSeconds) {
+      const hrs = Math.floor(totalSeconds / 3600);
+      const mins = Math.floor((totalSeconds % 3600) / 60);
+      const secs = totalSeconds % 60;
+      const mm = String(mins).padStart(2, '0');
+      const ss = String(secs).padStart(2, '0');
+      return hrs > 0 ? `${hrs}:${mm}:${ss}` : `${mm}:${ss}`;
+    }
+
     // Render live scannable UPI QR codes on Gate, PDF Print Modal, and Credits modal
+    function getQrImageUrl(upiUri) {
+      return `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=4&data=${encodeURIComponent(upiUri)}`;
+    }
+
     function renderUpiQrCodes(amount, pdfAmount = selectedPdfContribution) {
       const upiUri = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${amount}&cu=INR&tn=CalcVault%20M1%20Study%20Guide`;
       const pdfUpiUri = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${pdfAmount}&cu=INR&tn=CalcVault%20M1%20PDF%20CheatSheet`;
-      if (typeof QRious !== 'undefined') {
-        const gateCanvas = document.getElementById('gate-qr-canvas');
-        if (gateCanvas) {
-          new QRious({
-            element: gateCanvas,
-            value: upiUri,
-            size: 220,
-            level: 'H',
-            background: '#ffffff',
-            foreground: '#0f172a'
-          });
-        }
-        const pdfCanvas = document.getElementById('pdf-qr-canvas');
-        if (pdfCanvas) {
-          new QRious({
-            element: pdfCanvas,
-            value: pdfUpiUri,
-            size: 220,
-            level: 'H',
-            background: '#ffffff',
-            foreground: '#0f172a'
-          });
-        }
-        const modalCanvas = document.getElementById('modal-qr-canvas');
-        if (modalCanvas) {
-          new QRious({
-            element: modalCanvas,
-            value: 'upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&cu=INR&tn=CalcVault%20M1%20Support',
-            size: 220,
-            level: 'H',
-            background: '#ffffff',
-            foreground: '#0f172a'
-          });
-        }
-      }
+      const supportUri = 'upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&cu=INR&tn=CalcVault%20M1%20Support';
+
+      const gateImg = document.getElementById('gate-qr-img');
+      if (gateImg) gateImg.src = getQrImageUrl(upiUri);
+
+      const pdfImg = document.getElementById('pdf-qr-img');
+      if (pdfImg) pdfImg.src = getQrImageUrl(pdfUpiUri);
+
+      const modalImg = document.getElementById('modal-qr-img');
+      if (modalImg) modalImg.src = getQrImageUrl(supportUri);
     }
 
     // Initialize Application
     function init() {
-      renderUpiQrCodes(selectedContribution);
+      try { renderUpiQrCodes(selectedContribution); } catch (e) {}
       checkVaultAccess();
       renderUnitTabs();
       renderQuestionList();
       loadSlide(currentQuestionId);
-      buildPrintableCheatSheet();
-      lucide.createIcons();
+      try { buildPrintableCheatSheet(); } catch (e) {}
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     // Enable the "I've Paid" button only after user presses Pay or confirms QR scan
@@ -1236,19 +1269,21 @@
       const unlockBtn = document.getElementById('unlock-vault-btn');
       const unlockLabel = document.getElementById('unlock-btn-label');
       const unlockIcon = document.getElementById('unlock-btn-icon');
+      const plan = getPlanDetails(selectedContribution);
+
       if (unlockBtn) {
         unlockBtn.disabled = false;
-        unlockBtn.className = "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-extrabold bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-400 hover:to-cyan-500 text-white shadow-lg shadow-emerald-500/25 transition active:scale-95 cursor-pointer";
+        unlockBtn.className = "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-400 hover:to-cyan-500 text-white shadow-lg shadow-emerald-500/25 transition active:scale-95 cursor-pointer";
       }
       if (unlockLabel) {
         unlockLabel.textContent = source === 'qr'
-          ? "QR Scanned — Click to Unlock Full Access"
-          : "I've Paid — Unlock Full Access";
+          ? `QR Scanned — Start ${plan.totalMins}-Min Timed Pass`
+          : `I've Paid — Start ${plan.totalMins}-Min Timed Pass`;
       }
       if (unlockIcon) {
         unlockIcon.setAttribute('data-lucide', 'unlock');
       }
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function resetUnlockButtonState() {
@@ -1258,28 +1293,84 @@
       const unlockIcon = document.getElementById('unlock-btn-icon');
       if (unlockBtn) {
         unlockBtn.disabled = true;
-        unlockBtn.className = "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-extrabold bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed transition";
+        unlockBtn.className = "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed transition";
       }
       if (unlockLabel) {
-        unlockLabel.textContent = 'Click "Pay via UPI App" or Scan QR First';
+        unlockLabel.textContent = 'Click "Pay via UPI App" or "Scanned QR" First';
       }
       if (unlockIcon) {
         unlockIcon.setAttribute('data-lucide', 'lock');
       }
     }
 
+    // Live countdown engine for timed access & 5-minute warning banner
+    function startSessionTimer() {
+      if (sessionTimerInterval) clearInterval(sessionTimerInterval);
+
+      const tick = () => {
+        const expiresAt = parseInt(safeStorage.get('calcvault_m1_expires_at') || '0', 10);
+        const now = Date.now();
+        const remainingSecs = Math.max(0, Math.floor((expiresAt - now) / 1000));
+
+        const timerBadge = document.getElementById('session-timer-badge');
+        const timerText = document.getElementById('session-timer-text');
+        const warningBanner = document.getElementById('time-warning-banner');
+        const warningText = document.getElementById('warning-countdown-text');
+
+        if (!expiresAt || remainingSecs <= 0) {
+          clearInterval(sessionTimerInterval);
+          safeStorage.remove('calcvault_m1_unlocked');
+          safeStorage.remove('calcvault_m1_expires_at');
+          if (warningBanner) warningBanner.classList.add('hidden');
+          if (timerBadge) timerBadge.classList.add('hidden');
+          checkVaultAccess();
+          return;
+        }
+
+        const formatted = formatRemainingTime(remainingSecs);
+        if (timerBadge && timerText) {
+          timerBadge.classList.remove('hidden');
+          timerText.textContent = formatted;
+
+          if (remainingSecs <= 300) {
+            // Final 5-minute warning state
+            timerBadge.className = "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/50 animate-pulse";
+            if (warningBanner && warningText) {
+              warningBanner.classList.remove('hidden');
+              warningText.textContent = formatted;
+            }
+          } else {
+            timerBadge.className = "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30";
+            if (warningBanner) warningBanner.classList.add('hidden');
+          }
+        }
+      };
+
+      tick();
+      sessionTimerInterval = setInterval(tick, 1000);
+    }
+
     // UPI Payment Gate Controls
     function checkVaultAccess() {
-      const isUnlocked = localStorage.getItem('calcvault_m1_unlocked') === 'true';
+      const isUnlocked = safeStorage.get('calcvault_m1_unlocked') === 'true';
+      const expiresAt = parseInt(safeStorage.get('calcvault_m1_expires_at') || '0', 10);
       const overlay = document.getElementById('upi-gate-overlay');
       const badge = document.getElementById('verified-access-badge');
-      if (isUnlocked) {
+
+      if (isUnlocked && expiresAt > Date.now()) {
         overlay.classList.add('hidden');
         badge.classList.remove('hidden');
+        startSessionTimer();
       } else {
+        safeStorage.remove('calcvault_m1_unlocked');
+        safeStorage.remove('calcvault_m1_expires_at');
         resetUnlockButtonState();
         overlay.classList.remove('hidden');
         badge.classList.add('hidden');
+        const timerBadge = document.getElementById('session-timer-badge');
+        const warningBanner = document.getElementById('time-warning-banner');
+        if (timerBadge) timerBadge.classList.add('hidden');
+        if (warningBanner) warningBanner.classList.add('hidden');
       }
     }
 
@@ -1287,11 +1378,11 @@
       selectedContribution = amount;
       document.getElementById('custom-amount-input').value = '';
       document.querySelectorAll('.amt-chip').forEach(btn => {
-        btn.className = "amt-chip py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition";
+        btn.className = "amt-chip py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition flex flex-col items-center";
       });
       const activeChip = document.getElementById(`amt-chip-${amount}`);
       if (activeChip) {
-        activeChip.className = "amt-chip py-2 rounded-xl text-xs font-bold border-2 border-cyan-500 bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 transition";
+        activeChip.className = "amt-chip py-2 px-2 rounded-xl text-xs font-bold border-2 border-cyan-500 bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 transition flex flex-col items-center";
       }
       updateUpiDeepLink(amount);
     }
@@ -1301,7 +1392,7 @@
       if (!isNaN(num) && num > 0) {
         selectedContribution = num;
         document.querySelectorAll('.amt-chip').forEach(btn => {
-          btn.className = "amt-chip py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition";
+          btn.className = "amt-chip py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition flex flex-col items-center";
         });
         updateUpiDeepLink(num);
       }
@@ -1310,8 +1401,15 @@
     function updateUpiDeepLink(amount) {
       const linkEl = document.getElementById('upi-deeplink-btn');
       const labelEl = document.getElementById('upi-deeplink-label');
+      const hintEl = document.getElementById('tier-duration-hint');
+      const plan = getPlanDetails(amount);
+
       linkEl.href = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${amount}&cu=INR&tn=CalcVault%20M1%20Study%20Guide`;
       labelEl.textContent = `Pay ₹${amount} via UPI App`;
+      if (hintEl) {
+        hintEl.innerHTML = `<i data-lucide="clock" class="w-3.5 h-3.5"></i><span>Selected Pass: <strong>${plan.baseMins} mins access + ${plan.warnMins} mins warning (${plan.totalMins} mins total)</strong></span>`;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }
       renderUpiQrCodes(amount);
       buildPrintableCheatSheet();
     }
@@ -1319,18 +1417,33 @@
     function unlockVault() {
       if (!paymentInitiated) return;
       const utr = document.getElementById('utr-input').value.trim();
-      localStorage.setItem('calcvault_m1_unlocked', 'true');
+      const plan = getPlanDetails(selectedContribution);
+      const existingExpires = parseInt(safeStorage.get('calcvault_m1_expires_at') || '0', 10);
+      const baseTimestamp = existingExpires > Date.now() ? existingExpires : Date.now();
+      const newExpiresAt = baseTimestamp + plan.totalMins * 60 * 1000;
+
+      safeStorage.set('calcvault_m1_unlocked', 'true');
+      safeStorage.set('calcvault_m1_expires_at', String(newExpiresAt));
       if (utr) {
-        localStorage.setItem('calcvault_m1_utr', utr);
+        safeStorage.set('calcvault_m1_utr', utr);
       }
       checkVaultAccess();
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function openExtendSessionGate() {
+      resetUnlockButtonState();
+      renderUpiQrCodes(selectedContribution);
+      document.getElementById('upi-gate-overlay').classList.remove('hidden');
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function lockGateForDemo() {
-      localStorage.removeItem('calcvault_m1_unlocked');
+      if (sessionTimerInterval) clearInterval(sessionTimerInterval);
+      safeStorage.remove('calcvault_m1_unlocked');
+      safeStorage.remove('calcvault_m1_expires_at');
       checkVaultAccess();
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     // Copy UPI ID using execCommand fallback for iFrame compatibility
@@ -1355,7 +1468,7 @@
     // Credits Modal Controls
     function openCreditsModal() {
       document.getElementById('credits-modal').classList.remove('hidden');
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function closeCreditsModal() {
@@ -1411,7 +1524,7 @@
           : "I've Paid — Print / Save PDF Now";
       }
       if (icon) icon.setAttribute('data-lucide', 'printer');
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function resetPdfPrintButtonState() {
@@ -1443,7 +1556,7 @@
         const active = selectedUnit === unit;
         const label = unit === "All" ? "All Units (26)" : unit;
         return `
-          <button onclick="selectUnit('${unit}')"
+          <button type="button" onclick="selectUnit('${unit}')"
             class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
               active
                 ? 'bg-cyan-600 text-white shadow-sm'
@@ -1469,8 +1582,8 @@
       const query = document.getElementById('search-input').value.toLowerCase().trim();
       return QUESTIONS_DB.filter(q => {
         const matchesUnit = selectedUnit === "All" || q.unit === selectedUnit;
-        const matchesSearch = !query || 
-          q.title.toLowerCase().includes(query) || 
+        const matchesSearch = !query ||
+          q.title.toLowerCase().includes(query) ||
           q.problem.toLowerCase().includes(query) ||
           q.unit.toLowerCase().includes(query);
         return matchesUnit && matchesSearch;
@@ -1483,7 +1596,7 @@
       const filtered = getFilteredQuestions();
 
       document.getElementById('question-count-label').textContent = `${filtered.length} Topics Shown`;
-      document.getElementById('progress-badge').textContent = `${masteredIds.size} / ${QUESTIONS_DB.length} Topics Mastered`;
+      document.getElementById('progress-badge').textContent = `${masteredIds.size} / ${QUESTIONS_DB.length} Mastered`;
 
       if (filtered.length === 0) {
         listEl.innerHTML = `<div class="p-6 text-center text-sm text-slate-400">No matching questions found.</div>`;
@@ -1494,11 +1607,11 @@
         const isSelected = q.id === currentQuestionId;
         const isMastered = masteredIds.has(q.id);
         return `
-          <button onclick="loadSlide('${q.id}')"
+          <button type="button" onclick="loadSlide('${q.id}')"
             class="text-left p-3.5 rounded-xl border transition-all ${
               isSelected
                 ? 'bg-cyan-500/10 border-cyan-500 shadow-sm'
-                : 'bg-white dark:bg-[#1e293b] border-slate-200 dark:border-slate-700/80 hover:border-cyan-400 dark:hover:border-cyan-600'
+                : 'bg-white dark:bg-[#151e32] border-slate-200 dark:border-slate-800 hover:border-cyan-400 dark:hover:border-cyan-600'
             }">
             <div class="flex items-center justify-between gap-2 mb-1">
               <span class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">${q.unit} • ${q.marks}</span>
@@ -1526,13 +1639,15 @@
       updateMasteredButton();
       renderSteps();
       renderQuestionList();
-      renderMathInElement(document.body, {
-        delimiters: [
-          { left: '$$', right: '$$', display: true },
-          { left: '$', right: '$', display: false }
-        ],
-        throwOnError: false
-      });
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false }
+          ],
+          throwOnError: false
+        });
+      }
     }
 
     // Render Revealed Derivation Steps
@@ -1551,7 +1666,7 @@
       }
 
       container.innerHTML = q.steps.slice(0, revealedCount).map((step, idx) => `
-        <div class="step-animate p-4 rounded-xl bg-slate-50 dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700/80">
+        <div class="step-animate p-4 rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800">
           <div class="flex items-center gap-2 mb-1.5">
             <span class="w-6 h-6 rounded-full bg-cyan-600 text-white text-xs font-bold flex items-center justify-center shrink-0">
               ${idx + 1}
@@ -1566,13 +1681,15 @@
         </div>
       `).join('');
 
-      renderMathInElement(container, {
-        delimiters: [
-          { left: '$$', right: '$$', display: true },
-          { left: '$', right: '$', display: false }
-        ],
-        throwOnError: false
-      });
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(container, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false }
+          ],
+          throwOnError: false
+        });
+      }
 
       container.scrollTop = container.scrollHeight;
     }
@@ -1619,7 +1736,7 @@
       } else {
         masteredIds.add(currentQuestionId);
       }
-      localStorage.setItem('btam101_mastered', JSON.stringify([...masteredIds]));
+      safeStorage.set('btam101_mastered', JSON.stringify([...masteredIds]));
       updateMasteredButton();
       renderQuestionList();
     }
@@ -1631,16 +1748,15 @@
         btn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white shadow-sm transition";
         btn.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i><span>Mastered ✓</span>`;
       } else {
-        btn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
+        btn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
         btn.innerHTML = `<i data-lucide="circle" class="w-4 h-4"></i><span>Mark as Mastered</span>`;
       }
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     // Build Complete Printable Cheat-Sheet for PDF Export
     function buildPrintableCheatSheet() {
-      const gateCanvas = document.getElementById('gate-qr-canvas');
-      const qrDataUrl = gateCanvas ? gateCanvas.toDataURL('image/png') : '';
+      const qrDataUrl = getQrImageUrl('upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&cu=INR&tn=CalcVault%20M1%20Support');
       const printContent = document.getElementById('print-content');
       const cardsHtml = QUESTIONS_DB.map((q, index) => `
         <div class="print-card">
@@ -1674,21 +1790,21 @@
     }
 
     function openCheatSheetPrint() {
-      if (localStorage.getItem('calcvault_m1_pdf_unlocked') === 'true') {
+      if (safeStorage.get('calcvault_m1_pdf_unlocked') === 'true') {
         triggerCheatSheetPrint();
         return;
       }
       resetPdfPrintButtonState();
       renderUpiQrCodes(selectedContribution, selectedPdfContribution);
       document.getElementById('pdf-print-modal').classList.remove('hidden');
-      lucide.createIcons();
+      if (typeof lucide !== 'undefined') lucide.createIcons();
     }
 
     function executePaidPdfPrint() {
       if (!pdfPaymentInitiated) return;
       const utr = document.getElementById('pdf-utr-input').value.trim();
-      localStorage.setItem('calcvault_m1_pdf_unlocked', 'true');
-      if (utr) localStorage.setItem('calcvault_m1_pdf_utr', utr);
+      safeStorage.set('calcvault_m1_pdf_unlocked', 'true');
+      if (utr) safeStorage.set('calcvault_m1_pdf_utr', utr);
       closePdfPrintModal();
       triggerCheatSheetPrint();
     }
@@ -1696,19 +1812,25 @@
     function triggerCheatSheetPrint() {
       buildPrintableCheatSheet();
       const printContainer = document.getElementById('print-container');
-      renderMathInElement(printContainer, {
-        delimiters: [
-          { left: '$$', right: '$$', display: true },
-          { left: '$', right: '$', display: false }
-        ],
-        throwOnError: false
-      });
+      if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(printContainer, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false }
+          ],
+          throwOnError: false
+        });
+      }
       setTimeout(() => {
         window.print();
       }, 150);
     }
 
-    window.onload = init;
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   </script>
 </body>
 </html>
