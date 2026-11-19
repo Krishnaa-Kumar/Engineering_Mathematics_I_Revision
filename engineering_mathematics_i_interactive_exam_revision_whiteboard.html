@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BTAM101-18 | Engineering Mathematics-I Exam Revision Whiteboard</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- KaTeX for fast, crisp mathematical typesetting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Custom scrollbar and smooth animations */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.5); }
+
+    @keyframes slideFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .step-animate {
+      animation: slideFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0.5rem 0;
+      margin: 0.5rem 0 !important;
+    }
+
+    /* Print / Cheat-Sheet PDF Export Styles */
+    @media print {
+      body { background: white !important; color: black !important; }
+      .no-print { display: none !important; }
+      #print-container { display: block !important; }
+      .print-card { break-inside: avoid; border: 1px solid #cbd5e1; margin-bottom: 1rem; padding: 1rem; border-radius: 0.5rem; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
+
+  <!-- Top Navigation Header -->
+  <header class="no-print sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30 font-bold text-lg">
+          ∫dx
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-bold text-base sm:text-lg tracking-tight">Engineering Mathematics-I (BTAM101-18)</h1>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300">
+              CGC CEC Landran • IKG-PTU
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Interactive Step-by-Step Lecture Whiteboard & Exam Cheat-Sheet</p>
+        </div>
+      </div>
+
+      <!-- Action Toolbar -->
+      <div class="flex items-center gap-2">
+        <button onclick="openCheatSheetPrint()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition active:scale-95" title="Generate Printable Revision Sheet / Save as PDF">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span>Print / PDF Cheat-Sheet</span>
+        </button>
+
+        <button onclick="toggleTheme()" id="theme-btn" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+          <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Unit Filter Tabs -->
+    <div class="max-w-7xl mx-auto mt-3 flex items-center gap-2 overflow-x-auto pb-1" id="unit-tabs">
+      <!-- Populated dynamically via JS -->
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="no-print flex-1 max-w-7xl w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-5">
+    
+    <!-- Left Sidebar: Question Selector Cards -->
+    <aside class="lg:col-span-4 flex flex-col gap-3">
+      <div class="flex items-center justify-between px-1">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400" id="question-count-label">
+          Syllabus Questions
+        </span>
+        <span class="text-xs text-indigo-600 dark:text-indigo-400 font-medium" id="progress-badge">
+          0 / 0 Mastered
+        </span>
+      </div>
+
+      <!-- Search Input -->
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+        <input type="text" id="search-input" placeholder="Filter topics (e.g., Cycloid, Euler, Jacobian)..."
+               oninput="renderQuestionList()"
+               class="w-full pl-9 pr-3 py-2 text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+
+      <!-- Question Cards Container -->
+      <div id="question-list" class="flex flex-col gap-2.5 max-h-[calc(100vh-230px)] overflow-y-auto pr-1">
+        <!-- Populated dynamically -->
+      </div>
+    </aside>
+
+    <!-- Right Main Panel: Interactive Lecture Whiteboard -->
+    <section class="lg:col-span-8 flex flex-col bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+      
+      <!-- Slide Header -->
+      <div class="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/90">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+          <div class="flex items-center gap-2">
+            <span id="slide-unit-badge" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-600 text-white">UNIT 1</span>
+            <span id="slide-marks-badge" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">10 Marks</span>
+          </div>
+          <button onclick="toggleMastered()" id="mastered-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+            <span>Mark as Revised</span>
+          </button>
+        </div>
+
+        <h2 id="slide-title" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">
+          Select a question to start
+        </h2>
+        <div id="slide-problem" class="mt-3 p-3.5 rounded-xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-sm sm:text-base font-medium">
+          <!-- Problem statement rendered here -->
+        </div>
+      </div>
+
+      <!-- Exam Intuition & Trap Callout -->
+      <div id="intuition-box" class="mx-4 sm:mx-6 mt-4 p-3.5 rounded-xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/60 flex items-start gap-3">
+        <i data-lucide="lightbulb" class="w-5 h-5 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5"></i>
+        <div class="text-xs sm:text-sm text-indigo-950 dark:text-indigo-200">
+          <span class="font-bold block mb-0.5">Exam Intuition & PTU Evaluator Tip:</span>
+          <span id="intuition-text">Loading tip...</span>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Animated Whiteboard Area -->
+      <div class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-3" id="steps-container">
+        <!-- Steps revealed here -->
+      </div>
+
+      <!-- Whiteboard Interactive Controls Footer -->
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/90 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <button onclick="prevQuestion()" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Previous Question">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <button onclick="nextQuestion()" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Next Question">
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+          <span id="step-counter" class="text-xs font-semibold text-slate-500 dark:text-slate-400 ml-1">
+            Step 0 of 0
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="resetSteps()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">
+            Reset Board
+          </button>
+          <button onclick="revealAllSteps()" id="reveal-all-btn" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-indigo-100 dark:bg-indigo-900/50 hover:bg-indigo-200 dark:hover:bg-indigo-900 text-indigo-700 dark:text-indigo-300 transition">
+            Reveal All
+          </button>
+          <button onclick="revealNextStep()" id="next-step-btn" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/25 transition active:scale-95">
+            <span>Next Step</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Hidden Printable Cheat-Sheet Container (Visible only when printing / exporting PDF) -->
+  <div id="print-container" class="hidden p-6 max-w-4xl mx-auto">
+    <div class="border-b-2 border-slate-800 pb-4 mb-6">
+      <h1 class="text-2xl font-bold">BTAM101-18: Engineering Mathematics-I Complete Exam Cheat-Sheet</h1>
+      <p class="text-sm text-slate-600">B.Tech 1st Semester (CGC CEC Landran • IKG-PTU Syllabus) — All 5 Units Step-by-Step Solutions</p>
+    </div>
+    <div id="print-content" class="space-y-4"></div>
+  </div>
+
+  <script>
+    // Complete Structured Knowledge Base covering all 5 Units from Important Questions M-1.pdf
+    const QUESTIONS_DB = [
+      // ==================== UNIT 1 ====================
+      {
+        id: "u1-q1",
+        unit: "Unit 1",
+        marks: "2 & 5 Marks",
+        title: "Convergence Tests & Taylor's Maclaurin Expansions",
+        problem: "State D'Alembert's Ratio Test, Raabe's Test, Leibnitz Alternating Series Test, and Maclaurin's expansions for $\\sin x, \\cos x, e^x$.",
+        intuition: "In PTU exams, always write the exact boundary condition (e.g., 'Test fails at $l=1$'). When Ratio Test gives $l=1$, immediately switch to Raabe's Test.",
+        steps: [
+          {
+            label: "1. D'Alembert's Ratio Test",
+            math: "For a positive-term series $\\sum u_n$, let $\\lim_{n\\to\\infty} \\frac{u_n}{u_{n+1}} = l$.<br>• If $l > 1 \\implies$ <b>Convergent</b><br>• If $l < 1 \\implies$ <b>Divergent</b><br>• If $l = 1 \\implies$ <b>Test Fails</b> (Use Raabe's Test)"
+          },
+          {
+            label: "2. Raabe's Test (Higher Ratio Test)",
+            math: "When Ratio Test fails ($l=1$), compute $\\lim_{n\\to\\infty} n\\left(\\frac{u_n}{u_{n+1}} - 1\\right) = k$.<br>• If $k > 1 \\implies$ <b>Convergent</b>; If $k < 1 \\implies$ <b>Divergent</b>."
+          },
+          {
+            label: "3. Leibnitz Test (Alternating Series)",
+            math: "An alternating series $\\sum (-1)^{n-1} u_n$ ($u_n > 0$) converges if:<br>(i) $u_{n+1} \\le u_n \\; \\forall n$ (monotonically decreasing), and<br>(ii) $\\lim_{n\\to\\infty} u_n = 0$."
+          },
+          {
+            label: "4. Standard Maclaurin's Series (Taylor about x = 0)",
+            math: "$$\\sin x = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\cdots \\quad | \\quad \\cos x = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\cdots$$ $$e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots$$"
+          }
+        ]
+      },
+      {
+        id: "u1-q2",
+        unit: "Unit 1",
+        marks: "5 Marks",
+        title: "Comparison Test with Binomial Expansion",
+        problem: "Test the convergence of the series: $$\\sum_{n=1}^{\\infty} \\left(\\sqrt[3]{n^3 + 1} - n\\right)$$",
+        intuition: "Whenever you see roots like $\\sqrt[3]{n^3+1} - n$ or $\\sqrt{n^2+1} - n$, factor out the highest power of $n$ and apply $(1+x)^m \\approx 1 + mx$ to find the auxiliary $p$-series $v_n$.",
+        steps: [
+          {
+            label: "Step 1: Factor out $n$ from the $n$-th term",
+            math: "$$u_n = (n^3 + 1)^{1/3} - n = n\\left(1 + \\frac{1}{n^3}\\right)^{1/3} - n$$"
+          },
+          {
+            label: "Step 2: Apply Binomial Expansion $(1+x)^m = 1 + mx + \\frac{m(m-1)}{2!}x^2 + \\cdots$",
+            math: "$$u_n = n\\left[1 + \\frac{1}{3n^3} - \\frac{1}{9n^6} + \\cdots\\right] - n = \\frac{1}{3n^2} - \\frac{1}{9n^5} + \\cdots = \\frac{1}{n^2}\\left(\\frac{1}{3} - \\frac{1}{9n^3} + \\cdots\\right)$$"
+          },
+          {
+            label: "Step 3: Apply Limit Comparison Test",
+            math: "Choose auxiliary series $v_n = \\frac{1}{n^2}$. Then:<br>$$\\lim_{n\\to\\infty} \\frac{u_n}{v_n} = \\lim_{n\\to\\infty} \\left(\\frac{1}{3} - \\frac{1}{9n^3} + \\cdots\\right) = \\frac{1}{3} \\quad (\\text{finite and non-zero})$$"
+          },
+          {
+            label: "Step 4: Conclusion via p-Series Test",
+            math: "Since $\\sum v_n = \\sum \\frac{1}{n^2}$ has $p = 2 > 1$, $\\sum v_n$ converges. Hence, by Comparison Test, $\\sum u_n$ is <b>Convergent</b>."
+          }
+        ]
+      },
+      {
+        id: "u1-q3",
+        unit: "Unit 1",
+        marks: "10 Marks",
+        title: "Ratio + Raabe's Test on Factorial/Product Series",
+        problem: "Test the convergence of: $$\\sum \\frac{3 \\cdot 6 \\cdot 9 \\cdots (3n)}{4 \\cdot 7 \\cdot 10 \\cdots (3n+1)} x^n \\quad (x > 0)$$",
+        intuition: "Notice how every factor in $u_n$ cancels with $u_{n+1}$ except the last term! Do not forget to test the boundary case $x = 1$ separately using Raabe's Test—that carries 4 out of 10 marks.",
+        steps: [
+          {
+            label: "Step 1: Write $u_n$ and $u_{n+1}$",
+            math: "$$u_n = \\frac{3 \\cdot 6 \\cdots (3n)}{4 \\cdot 7 \\cdots (3n+1)} x^n, \\quad u_{n+1} = \\frac{3 \\cdot 6 \\cdots (3n)(3n+3)}{4 \\cdot 7 \\cdots (3n+1)(3n+4)} x^{n+1}$$"
+          },
+          {
+            label: "Step 2: Apply D'Alembert's Ratio Test",
+            math: "$$\\lim_{n\\to\\infty} \\frac{u_n}{u_{n+1}} = \\lim_{n\\to\\infty} \\frac{3n+4}{(3n+3)x} = \\lim_{n\\to\\infty} \\frac{3 + 4/n}{(3 + 3/n)x} = \\frac{1}{x}$$"
+          },
+          {
+            label: "Step 3: Interpret Ratio Test Result",
+            math: "• Converges if $\\frac{1}{x} > 1 \\implies x < 1$<br>• Diverges if $\\frac{1}{x} < 1 \\implies x > 1$<br>• Test fails at $x = 1$."
+          },
+          {
+            label: "Step 4: Apply Raabe's Test at x = 1",
+            math: "At $x = 1$, $\\frac{u_n}{u_{n+1}} = \\frac{3n+4}{3n+3}$.<br>$$\\lim_{n\\to\\infty} n\\left(\\frac{u_n}{u_{n+1}} - 1\\right) = \\lim_{n\\to\\infty} n\\left(\\frac{3n+4 - 3n - 3}{3n+3}\\right) = \\lim_{n\\to\\infty} \\frac{n}{3n+3} = \\frac{1}{3} < 1$$<br>Since $\\frac{1}{3} < 1$, the series <b>Diverges at x = 1</b>."
+          }
+        ]
+      },
+      {
+        id: "u1-q4",
+        unit: "Unit 1",
+        marks: "5 Marks",
+        title: "Proof of p-Series Test",
+        problem: "State and prove the $p$-Series Test for the convergence of $\\sum_{n=1}^{\\infty} \\frac{1}{n^p}$.",
+        intuition: "Group terms in dyadic blocks of powers of $2$: $(2,3)$, $(4,5,6,7)$, $(8\\dots 15)$. Each block has $2^k$ terms, making it reduce cleanly to a geometric series!",
+        steps: [
+          {
+            label: "Case 1: When p > 1 (Grouping into blocks of 2^k)",
+            math: "$$S = 1 + \\left(\\frac{1}{2^p} + \\frac{1}{3^p}\\right) + \\left(\\frac{1}{4^p} + \\frac{1}{5^p} + \\frac{1}{6^p} + \\frac{1}{7^p}\\right) + \\cdots$$ $$S < 1 + \\frac{2}{2^p} + \\frac{4}{4^p} + \\frac{8}{8^p} + \\cdots = 1 + \\frac{1}{2^{p-1}} + \\left(\\frac{1}{2^{p-1}}\\right)^2 + \\cdots$$"
+          },
+          {
+            label: "Geometric Series Bound for p > 1",
+            math: "The RHS is a geometric series with common ratio $r = \\frac{1}{2^{p-1}} < 1$ (since $p > 1$). Thus $S$ is bounded above and monotonic, so it <b>Converges</b>."
+          },
+          {
+            label: "Case 2: When p = 1 (Harmonic Series)",
+            math: "$$S = 1 + \\frac{1}{2} + \\left(\\frac{1}{3} + \\frac{1}{4}\\right) + \\left(\\frac{1}{5} + \\cdots + \\frac{1}{8}\\right) + \\cdots > 1 + \\frac{1}{2} + \\frac{2}{4} + \\frac{4}{8} + \\cdots = 1 + \\frac{1}{2} + \\frac{1}{2} + \\cdots \\to \\infty$$"
+          },
+          {
+            label: "Case 3: When p < 1",
+            math: "For $p < 1$, $n^p < n \\implies \\frac{1}{n^p} > \\frac{1}{n}$. By Comparison Test with $\\sum \\frac{1}{n}$, the series <b>Diverges</b>."
+          }
+        ]
+      },
+
+      // ==================== UNIT 2 ====================
+      {
+        id: "u2-q1",
+        unit: "Unit 2",
+        marks: "10 Marks",
+        title: "Surface Area of Cycloid Revolved About x-axis",
+        problem: "Find the surface area of the solid generated by revolving one arch of the cycloid $x = a(\\theta + \\sin\\theta), \\; y = a(1 - \\cos\\theta)$ about the $x$-axis.",
+        intuition: "Memorize the two golden half-angle identities for cycloids: $1 + \\cos\\theta = 2\\cos^2(\\theta/2)$ and $1 - \\cos\\theta = 2\\sin^2(\\theta/2)$. Also remember that if $x = a(\\theta - \\sin\\theta)$, the answer doubles from $\\frac{32}{3}\\pi a^2$ to $\\frac{64}{3}\\pi a^2$!",
+        steps: [
+          {
+            label: "Step 1: Differentiate x and y w.r.t. θ",
+            math: "$$\\frac{dx}{d\\theta} = a(1 + \\cos\\theta), \\quad \\frac{dy}{d\\theta} = a\\sin\\theta$$"
+          },
+          {
+            label: "Step 2: Compute arc length element ds/dθ",
+            math: "$$\\left(\\frac{dx}{d\\theta}\\right)^2 + \\left(\\frac{dy}{d\\theta}\\right)^2 = a^2(1 + 2\\cos\\theta + \\cos^2\\theta + \\sin^2\\theta) = 2a^2(1 + \\cos\\theta) = 4a^2\\cos^2\\left(\\frac{\\theta}{2}\\right)$$ $$\\implies \\frac{ds}{d\\theta} = 2a\\cos\\left(\\frac{\\theta}{2}\\right)$$"
+          },
+          {
+            label: "Step 3: Substitute into Surface Area Formula (θ from 0 to 2π)",
+            math: "$$S = \\int_{0}^{2\\pi} 2\\pi y \\frac{ds}{d\\theta}\\,d\\theta = 2\\int_{0}^{\\pi} 2\\pi \\cdot a(1 - \\cos\\theta) \\cdot 2a\\cos\\left(\\frac{\\theta}{2}\\right) d\\theta$$ $$S = 16\\pi a^2 \\int_{0}^{\\pi} \\sin^2\\left(\\frac{\\theta}{2}\\right)\\cos\\left(\\frac{\\theta}{2}\\right) d\\theta$$"
+          },
+          {
+            label: "Step 4: Substitute sin(θ/2) = t and Evaluate",
+            math: "Put $\\sin(\\theta/2) = t \\implies \\cos(\\theta/2)d\\theta = 2dt$ ($t: 0 \\to 1$):<br>$$S = 32\\pi a^2 \\left[\\frac{t^3}{3}\\right]_{0}^{1} = \\mathbf{\\frac{32}{3}\\pi a^2 \\text{ sq. units}}$$"
+          }
+        ]
+      },
+      {
+        id: "u2-q2",
+        unit: "Unit 2",
+        marks: "10 Marks",
+        title: "Surface Area of Prolate Spheroid (Ellipse About x-axis)",
+        problem: "Find the surface area of the solid generated by revolving the ellipse $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$ ($a > b$) about its major axis ($x$-axis).",
+        intuition: "Introduce eccentricity $e^2 = 1 - \\frac{b^2}{a^2}$ immediately after finding $y\\sqrt{1+(y')^2}$. That turns a messy radical into the standard $\\int \\sqrt{k^2 - x^2}\\,dx$ form!",
+        steps: [
+          {
+            label: "Step 1: Find dy/dx from Ellipse Equation",
+            math: "$$\\frac{2x}{a^2} + \\frac{2y}{b^2}\\frac{dy}{dx} = 0 \\implies \\frac{dy}{dx} = -\\frac{b^2 x}{a^2 y}$$"
+          },
+          {
+            label: "Step 2: Simplify y√(1 + (dy/dx)²)",
+            math: "$$y\\sqrt{1 + \\frac{b^4 x^2}{a^4 y^2}} = \\frac{\\sqrt{a^4 y^2 + b^4 x^2}}{a^2} = \\frac{b}{a^2}\\sqrt{a^4 - (a^2 - b^2)x^2}$$ Using $a^2 - b^2 = a^2 e^2$: $$= \\frac{be}{a}\\sqrt{\\left(\\frac{a}{e}\\right)^2 - x^2}$$"
+          },
+          {
+            label: "Step 3: Integrate from x = 0 to a (Multiply by 2 for symmetry)",
+            math: "$$S = 4\\pi \\frac{be}{a} \\int_{0}^{a} \\sqrt{\\left(\\frac{a}{e}\\right)^2 - x^2}\\,dx = \\frac{4\\pi be}{a} \\left[\\frac{x}{2}\\sqrt{\\frac{a^2}{e^2}-x^2} + \\frac{a^2}{2e^2}\\sin^{-1}\\left(\\frac{ex}{a}\\right)\\right]_{0}^{a}$$"
+          },
+          {
+            label: "Step 4: Apply Limits and Simplify",
+            math: "$$S = \\frac{4\\pi be}{a}\\left[\\frac{ab}{2e} + \\frac{a^2}{2e^2}\\sin^{-1}(e)\\right] = \\mathbf{2\\pi b^2 + \\frac{2\\pi ab}{e}\\sin^{-1}(e)}$$"
+          }
+        ]
+      },
+      {
+        id: "u2-q3",
+        unit: "Unit 2",
+        marks: "10 Marks",
+        title: "Volume & Surface Area of Cardioid r = a(1 - cos θ)",
+        problem: "Find the volume and surface area generated by revolving the cardioid $r = a(1 - \\cos\\theta)$ about the initial line ($\\theta = 0$).",
+        intuition: "Cardioid limits about the initial line are ALWAYS $0$ to $\\pi$ (not $2\\pi$, because revolving the upper half $0 \\to \\pi$ generates the full 3D solid!).",
+        steps: [
+          {
+            label: "Step 1: Polar Volume Formula (0 to π)",
+            math: "$$V = \\int_{0}^{\\pi} \\frac{2}{3}\\pi r^3 \\sin\\theta\\,d\\theta = \\frac{2}{3}\\pi a^3 \\int_{0}^{\\pi} (1 - \\cos\\theta)^3 \\sin\\theta\\,d\\theta$$"
+          },
+          {
+            label: "Step 2: Evaluate Volume via Substitution t = 1 - cos θ",
+            math: "Put $1 - \\cos\\theta = t \\implies \\sin\\theta\\,d\\theta = dt$ ($t: 0 \\to 2$):<br>$$V = \\frac{2}{3}\\pi a^3 \\left[\\frac{t^4}{4}\\right]_{0}^{2} = \\frac{2}{3}\\pi a^3 (4) = \\mathbf{\\frac{8}{3}\\pi a^3}$$"
+          },
+          {
+            label: "Step 3: Compute Polar Arc Element ds/dθ",
+            math: "$$\\frac{ds}{d\\theta} = \\sqrt{r^2 + \\left(\\frac{dr}{d\\theta}\\right)^2} = \\sqrt{a^2(1-\\cos\\theta)^2 + a^2\\sin^2\\theta} = 2a\\sin\\left(\\frac{\\theta}{2}\\right)$$"
+          },
+          {
+            label: "Step 4: Evaluate Surface Area S = ∫ 2π (r sin θ) ds",
+            math: "$$S = \\int_{0}^{\\pi} 2\\pi a(1-\\cos\\theta)\\sin\\theta \\cdot 2a\\sin\\left(\\frac{\\theta}{2}\\right)d\\theta = 16\\pi a^2 \\int_{0}^{\\pi} \\sin^4\\left(\\frac{\\theta}{2}\\right)\\cos\\left(\\frac{\\theta}{2}\\right)d\\theta = \\mathbf{\\frac{32}{5}\\pi a^2}$$"
+          }
+        ]
+      },
+      {
+        id: "u2-q4",
+        unit: "Unit 2",
+        marks: "5 Marks",
+        title: "Arc Length of Parabola Cut Off by Latus Rectum",
+        problem: "Find the length of the arc of the parabola $y^2 = 4ax$ cut off by its latus rectum.",
+        intuition: "The latus rectum is at $x = a$. Find the upper-half length from $x = 0$ to $x = a$, then multiply by $2$. Use $x = a\\tan^2\\theta$ to clear the square root.",
+        steps: [
+          {
+            label: "Step 1: Differentiate Parabola Equation",
+            math: "$$2y\\frac{dy}{dx} = 4a \\implies \\frac{dy}{dx} = \\frac{2a}{y} = \\sqrt{\\frac{a}{x}}$$"
+          },
+          {
+            label: "Step 2: Set up Arc Length Integral",
+            math: "$$s = 2\\int_{0}^{a} \\sqrt{1 + \\frac{a}{x}}\\,dx = 2\\int_{0}^{a} \\sqrt{\\frac{x+a}{x}}\\,dx$$"
+          },
+          {
+            label: "Step 3: Substitute x = a tan² θ",
+            math: "$dx = 2a\\tan\\theta\\sec^2\\theta\\,d\\theta$, limits $\\theta: 0 \\to \\frac{\\pi}{4}$:<br>$$s = 4a\\int_{0}^{\\pi/4} \\sec^3\\theta\\,d\\theta = 2a\\left[\\sec\\theta\\tan\\theta + \\log(\\sec\\theta + \\tan\\theta)\\right]_{0}^{\\pi/4}$$"
+          },
+          {
+            label: "Step 4: Apply Limits",
+            math: "$$s = \\mathbf{2a\\left[\\sqrt{2} + \\log(\\sqrt{2} + 1)\\right]}$$"
+          }
+        ]
+      },
+
+      // ==================== UNIT 3 ====================
+      {
+        id: "u3-q1",
+        unit: "Unit 3",
+        marks: "5 & 10 Marks",
+        title: "Relation Between Beta and Gamma Functions",
+        problem: "Prove that $B(m, n) = \\frac{\\Gamma(m)\\Gamma(n)}{\\Gamma(m+n)}$ and evaluate $\\int_{0}^{\\pi/2} \\sin^4 x \\cos^6 x\\,dx$.",
+        intuition: "Start from the product $\\Gamma(m)\\Gamma(n)$, substitute $x = u^2$ and $y = v^2$, and convert the double integral into polar coordinates ($u = r\\cos\\theta, v = r\\sin\\theta$).",
+        steps: [
+          {
+            label: "Step 1: Write Product of Gamma Functions",
+            math: "$$\\Gamma(m)\\Gamma(n) = \\int_{0}^{\\infty} e^{-x}x^{m-1}\\,dx \\int_{0}^{\\infty} e^{-y}y^{n-1}\\,dy$$"
+          },
+          {
+            label: "Step 2: Substitute x = u² and y = v²",
+            math: "$$\\Gamma(m)\\Gamma(n) = 4\\int_{0}^{\\infty}\\int_{0}^{\\infty} e^{-(u^2+v^2)} u^{2m-1} v^{2n-1}\\,du\\,dv$$"
+          },
+          {
+            label: "Step 3: Convert to Polar Coordinates (u = r cos θ, v = r sin θ)",
+            math: "$$\\Gamma(m)\\Gamma(n) = \\left(2\\int_{0}^{\\infty} e^{-r^2}r^{2(m+n)-1}\\,dr\\right) \\left(2\\int_{0}^{\\pi/2} \\cos^{2m-1}\\theta \\sin^{2n-1}\\theta\\,d\\theta\\right) = \\Gamma(m+n)B(m,n)$$"
+          },
+          {
+            label: "Step 4: Evaluate ∫₀^(π/2) sin⁴x cos⁶x dx",
+            math: "$$\\int_{0}^{\\pi/2} \\sin^4 x \\cos^6 x\\,dx = \\frac{\\Gamma(5/2)\\Gamma(7/2)}{2\\Gamma(6)} = \\frac{(\\frac{3}{4}\\sqrt{\\pi})(\\frac{15}{8}\\sqrt{\\pi})}{2 \\cdot 120} = \\mathbf{\\frac{3\\pi}{512}}$$"
+          }
+        ]
+      },
+      {
+        id: "u3-q2",
+        unit: "Unit 3",
+        marks: "5 Marks",
+        title: "Reduction of Algebraic & Trig Integrals to Beta Form",
+        problem: "Evaluate (i) $\\int_{0}^{1} \\frac{x^2}{\\sqrt{1-x^5}}\\,dx$ and (ii) $\\int_{0}^{\\pi/2} \\sqrt{\\tan x}\\,dx$.",
+        intuition: "To use $B(m,n) = \\int_0^1 t^{m-1}(1-t)^{n-1}\\,dt$, the bracket must ALWAYS be $(1 - t)$. So whatever power of $x$ is inside $(1 - x^k)$, substitute $x^k = t$!",
+        steps: [
+          {
+            label: "(i) Substitute x⁵ = t in ∫₀¹ x² / √(1 - x⁵) dx",
+            math: "$x = t^{1/5} \\implies dx = \\frac{1}{5}t^{-4/5}\\,dt$:<br>$$I_1 = \\frac{1}{5}\\int_{0}^{1} t^{2/5}(1-t)^{-1/2}t^{-4/5}\\,dt = \\frac{1}{5}\\int_{0}^{1} t^{-2/5}(1-t)^{-1/2}\\,dt = \\mathbf{\\frac{1}{5}B\\left(\\frac{3}{5}, \\frac{1}{2}\\right)}$$"
+          },
+          {
+            label: "(ii) Rewrite √(tan x) in sin and cos",
+            math: "$$I_2 = \\int_{0}^{\\pi/2} \\sin^{1/2}x \\cos^{-1/2}x\\,dx = \\frac{\\Gamma(3/4)\\Gamma(1/4)}{2\\Gamma(1)}$$"
+          },
+          {
+            label: "Apply Euler's Reflection Formula Γ(n)Γ(1-n) = π / sin(nπ)",
+            math: "$$I_2 = \\frac{1}{2}\\Gamma\\left(\\frac{1}{4}\\right)\\Gamma\\left(1 - \\frac{1}{4}\\right) = \\frac{\\pi}{2\\sin(\\pi/4)} = \\mathbf{\\frac{\\pi}{\\sqrt{2}}}$$"
+          }
+        ]
+      },
+      {
+        id: "u3-q3",
+        unit: "Unit 3",
+        marks: "5 Marks",
+        title: "Convergence of Improper Integrals (1st & 2nd Kind)",
+        problem: "Test the convergence of (i) $\\int_{0}^{1} \\frac{dx}{\\sqrt{x - x^2}}$ and (ii) $\\int_{0}^{\\infty} \\frac{\\sqrt{x}}{(1+x)^2}\\,dx$.",
+        intuition: "For 2nd Kind (discontinuity at $x=a$), $\\int_a^b \\frac{dx}{(x-a)^p}$ converges iff $p < 1$. For 1st Kind ($\\infty$ limit), $\\int_a^\\infty \\frac{dx}{x^p}$ converges iff $p > 1$.",
+        steps: [
+          {
+            label: "(i) Split at x = 1/2 (Discontinuities at both x = 0 and x = 1)",
+            math: "$$I = \\int_{0}^{1/2} \\frac{dx}{\\sqrt{x}\\sqrt{1-x}} + \\int_{1/2}^{1} \\frac{dx}{\\sqrt{x}\\sqrt{1-x}} = I_1 + I_2$$"
+          },
+          {
+            label: "Compare I₁ near x = 0 and I₂ near x = 1",
+            math: "• Near $x = 0$: integrand $\\sim \\frac{1}{x^{1/2}}$. Since $p = \\frac{1}{2} < 1$, $I_1$ converges.<br>• Near $x = 1$: integrand $\\sim \\frac{1}{(1-x)^{1/2}}$. Since $p = \\frac{1}{2} < 1$, $I_2$ converges.<br>Hence $I$ <b>Converges</b> (exact value $= \\pi$)."
+          },
+          {
+            label: "(ii) Analyze ∫₀^∞ √x / (1+x)² dx as x → ∞",
+            math: "There is no singularity at $x = 0$. As $x \\to \\infty$:<br>$$f(x) = \\frac{x^{1/2}}{(1+x)^2} \\sim \\frac{x^{1/2}}{x^2} = \\frac{1}{x^{3/2}}$$<br>Since $p = \\frac{3}{2} > 1$, the integral <b>Converges</b>."
+          }
+        ]
+      },
+
+      // ==================== UNIT 4 ====================
+      {
+        id: "u4-q1",
+        unit: "Unit 4",
+        marks: "10 Marks",
+        title: "Euler's 2nd-Order Theorem Deduction (Inverse Sine)",
+        problem: "If $u = \\sin^{-1}\\left(\\frac{x+y}{\\sqrt{x}+\\sqrt{y}}\\right)$, prove that $$x^2\\frac{\\partial^2 u}{\\partial x^2} + 2xy\\frac{\\partial^2 u}{\\partial x\\partial y} + y^2\\frac{\\partial^2 u}{\\partial y^2} = -\\frac{\\sin u \\cos 2u}{4\\cos^3 u}$$",
+        intuition: "Never differentiate $u = \\sin^{-1}(\\dots)$ directly! Take $z = \\sin u$, find its degree $n = 1 - \\frac{1}{2} = \\frac{1}{2}$, and plug $\\phi(u) = n\\frac{F(u)}{F'(u)}$ into the 2nd-order Euler corollary $\\phi(u)[\\phi'(u)-1]$.",
+        steps: [
+          {
+            label: "Step 1: Define Homogeneous Function z = sin u",
+            math: "$$z = \\sin u = \\frac{x+y}{\\sqrt{x}+\\sqrt{y}} = \\frac{x(1 + y/x)}{x^{1/2}(1 + \\sqrt{y/x})} = x^{1/2} f(y/x)$$<br>Thus $z$ is homogeneous of degree $n = \\frac{1}{2}$."
+          },
+          {
+            label: "Step 2: Apply Euler's 1st-Order Theorem to z",
+            math: "$$x\\frac{\\partial z}{\\partial x} + y\\frac{\\partial z}{\\partial y} = \\frac{1}{2}z \\implies x\\cos u\\frac{\\partial u}{\\partial x} + y\\cos u\\frac{\\partial u}{\\partial y} = \\frac{1}{2}\\sin u$$ $$\\implies x\\frac{\\partial u}{\\partial x} + y\\frac{\\partial u}{\\partial y} = \\frac{1}{2}\\tan u = \\phi(u)$$"
+          },
+          {
+            label: "Step 3: Apply Euler's 2nd-Order Corollary ϕ(u)[ϕ'(u) - 1]",
+            math: "$$x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = \\phi(u)[\\phi'(u) - 1] = \\frac{1}{2}\\tan u \\left(\\frac{1}{2}\\sec^2 u - 1\\right)$$"
+          },
+          {
+            label: "Step 4: Simplify Using Trigonometric Identities",
+            math: "$$= \\frac{\\sin u}{2\\cos u}\\left(\\frac{1 - 2\\cos^2 u}{2\\cos^2 u}\\right) = \\mathbf{-\\frac{\\sin u \\cos 2u}{4\\cos^3 u}}$$"
+          }
+        ]
+      },
+      {
+        id: "u4-q2",
+        unit: "Unit 4",
+        marks: "5 Marks",
+        title: "Logarithmic Partial Derivative Identity (3 Variables)",
+        problem: "If $u = \\log(x^3 + y^3 + z^3 - 3xyz)$, prove that $$\\left(\\frac{\\partial u}{\\partial x} + \\frac{\\partial u}{\\partial y} + \\frac{\\partial u}{\\partial z}\\right)^2 = \\frac{9}{(x+y+z)^2}$$",
+        intuition: "The secret step is factoring the denominator using $x^3 + y^3 + z^3 - 3xyz = (x+y+z)(x^2+y^2+z^2-xy-yz-zx)$, which cancels the entire numerator!",
+        steps: [
+          {
+            label: "Step 1: Compute Partial Derivatives u_x, u_y, u_z",
+            math: "$$u_x = \\frac{3x^2 - 3yz}{x^3+y^3+z^3-3xyz}, \\quad u_y = \\frac{3y^2 - 3zx}{x^3+y^3+z^3-3xyz}, \\quad u_z = \\frac{3z^2 - 3xy}{x^3+y^3+z^3-3xyz}$$"
+          },
+          {
+            label: "Step 2: Add All Three Derivatives",
+            math: "$$u_x + u_y + u_z = \\frac{3(x^2 + y^2 + z^2 - xy - yz - zx)}{x^3 + y^3 + z^3 - 3xyz}$$"
+          },
+          {
+            label: "Step 3: Factor Denominator and Cancel Common Term",
+            math: "$$u_x + u_y + u_z = \\frac{3(x^2 + y^2 + z^2 - xy - yz - zx)}{(x+y+z)(x^2 + y^2 + z^2 - xy - yz - zx)} = \\frac{3}{x+y+z}$$"
+          },
+          {
+            label: "Step 4: Square Both Sides",
+            math: "$$(u_x + u_y + u_z)^2 = \\mathbf{\\frac{9}{(x+y+z)^2}}$$"
+          }
+        ]
+      },
+      {
+        id: "u4-q3",
+        unit: "Unit 4",
+        marks: "10 Marks",
+        title: "Maxima & Minima of Two-Variable Function",
+        problem: "Find the extreme values of $f(x, y) = x^4 + y^4 - 2x^2 + 4xy - 2y^2$.",
+        intuition: "Add $f_x = 0$ and $f_y = 0$ together first—the quadratic and linear terms cancel out immediately to leave $x^3 + y^3 = 0 \\implies y = -x$!",
+        steps: [
+          {
+            label: "Step 1: Find Stationary Points (f_x = 0 and f_y = 0)",
+            math: "$$f_x = 4x^3 - 4x + 4y = 0 \\implies x^3 - x + y = 0 \\quad (1)$$ $$f_y = 4y^3 + 4x - 4y = 0 \\implies y^3 + x - y = 0 \\quad (2)$$"
+          },
+          {
+            label: "Step 2: Solve Equations (1) and (2)",
+            math: "Adding (1) & (2): $x^3 + y^3 = 0 \\implies y = -x$.<br>Put $y = -x$ in (1): $x^3 - 2x = 0 \\implies x = 0, \\sqrt{2}, -\\sqrt{2}$.<br>Stationary points: $(0,0)$, $(\\sqrt{2}, -\\sqrt{2})$, $(-\\sqrt{2}, \\sqrt{2})$."
+          },
+          {
+            label: "Step 3: Compute r, s, t at (√2, -√2) and (-√2, √2)",
+            math: "$r = 12x^2 - 4 = 20 > 0, \\quad s = 4, \\quad t = 12y^2 - 4 = 20$.<br>$rt - s^2 = 400 - 16 = 384 > 0$ and $r > 0 \\implies$ <b>Minima</b> at both points."
+          },
+          {
+            label: "Step 4: Calculate Minimum Value",
+            math: "$$f(\\sqrt{2}, -\\sqrt{2}) = 4 + 4 - 4 - 8 - 4 = \\mathbf{-8} \\quad (\\text{while } (0,0) \\text{ is a Saddle Point})$$"
+          }
+        ]
+      },
+      {
+        id: "u4-q4",
+        unit: "Unit 4",
+        marks: "10 Marks",
+        title: "Open-Top Rectangular Box Optimization",
+        problem: "A rectangular box, open at the top, has a volume of $32\\text{ m}^3$. Find the dimensions of the box requiring the least material for its construction.",
+        intuition: "'Open at the top' means the surface area has only ONE base ($xy$) instead of $2xy$, plus four side walls ($2yz + 2zx$).",
+        steps: [
+          {
+            label: "Step 1: Express Surface Area S in Two Variables",
+            math: "Volume $xyz = 32 \\implies z = \\frac{32}{xy}$.<br>$$S = xy + 2yz + 2zx = xy + \\frac{64}{x} + \\frac{64}{y}$$"
+          },
+          {
+            label: "Step 2: Set S_x = 0 and S_y = 0",
+            math: "$$S_x = y - \\frac{64}{x^2} = 0 \\implies x^2 y = 64$$ $$S_y = x - \\frac{64}{y^2} = 0 \\implies x y^2 = 64$$"
+          },
+          {
+            label: "Step 3: Solve for x, y, z",
+            math: "Dividing gives $x = y \\implies x^3 = 64 \\implies x = 4, \\; y = 4, \\; z = \\frac{32}{16} = 2$."
+          },
+          {
+            label: "Step 4: Verify Minimum via Second Derivative Test",
+            math: "At $(4,4)$: $r = \\frac{128}{64} = 2 > 0, \\; s = 1, \\; t = 2 \\implies rt - s^2 = 3 > 0$.<br>Dimensions: $\\mathbf{4\\text{ m} \\times 4\\text{ m} \\times 2\\text{ m}}$."
+          }
+        ]
+      },
+
+      // ==================== UNIT 5 ====================
+      {
+        id: "u5-q1",
+        unit: "Unit 5",
+        marks: "10 Marks",
+        title: "Change of Order of Integration (Parabola & Line)",
+        problem: "Evaluate by changing the order of integration: $$I = \\int_{0}^{1} \\int_{x^2}^{2-x} xy\\,dy\\,dx$$",
+        intuition: "Draw $y = x^2$ and $y = 2 - x$: they intersect at $(1, 1)$. When switching from vertical strips ($dy\\,dx$) to horizontal strips ($dx\\,dy$), the right boundary changes at $y = 1$, so you MUST split the integral into two parts ($0 \\to 1$ and $1 \\to 2$)!",
+        steps: [
+          {
+            label: "Step 1: Identify Region & Intersection Point",
+            math: "Original limits: $x^2 \\le y \\le 2 - x$ and $0 \\le x \\le 1$.<br>Curves $y = x^2$ and $y = 2 - x$ intersect at $(1, 1)$."
+          },
+          {
+            label: "Step 2: Split Region Horizontally at y = 1",
+            math: "• For $0 \\le y \\le 1$: $x$ goes from $0$ to $\\sqrt{y}$ (parabola).<br>• For $1 \\le y \\le 2$: $x$ goes from $0$ to $2 - y$ (line)."
+          },
+          {
+            label: "Step 3: Integrate w.r.t. x First",
+            math: "$$I = \\int_{0}^{1} \\int_{0}^{\\sqrt{y}} xy\\,dx\\,dy + \\int_{1}^{2} \\int_{0}^{2-y} xy\\,dx\\,dy$$ $$I = \\int_{0}^{1} y\\left[\\frac{x^2}{2}\\right]_{0}^{\\sqrt{y}} dy + \\int_{1}^{2} y\\left[\\frac{x^2}{2}\\right]_{0}^{2-y} dy = \\frac{1}{2}\\int_{0}^{1} y^2\\,dy + \\frac{1}{2}\\int_{1}^{2} y(4 - 4y + y^2)\\,dy$$"
+          },
+          {
+            label: "Step 4: Evaluate w.r.t. y",
+            math: "$$I = \\frac{1}{6} + \\frac{1}{2}\\left[2y^2 - \\frac{4y^3}{3} + \\frac{y^4}{4}\\right]_{1}^{2} = \\frac{1}{6} + \\frac{5}{24} = \\mathbf{\\frac{3}{8}}$$"
+          }
+        ]
+      },
+      {
+        id: "u5-q2",
+        unit: "Unit 5",
+        marks: "5 Marks",
+        title: "Change of Order of Integration (Exponential)",
+        problem: "Evaluate by changing the order of integration: $$I = \\int_{0}^{1} \\int_{y}^{1} e^{-x^2}\\,dx\\,dy$$",
+        intuition: "$\\int e^{-x^2}\\,dx$ has no elementary antiderivative! Changing order turns $dx\\,dy$ into $dy\\,dx$, generating a factor of $x$ so you can integrate $x e^{-x^2}$ easily.",
+        steps: [
+          {
+            label: "Step 1: Sketch Region & Reverse Limits",
+            math: "Original region: $y \\le x \\le 1$ and $0 \\le y \\le 1$ (triangle bounded by $y = 0, x = 1, y = x$).<br>Reversing order: $0 \\le y \\le x$ and $0 \\le x \\le 1$."
+          },
+          {
+            label: "Step 2: Integrate w.r.t. y First",
+            math: "$$I = \\int_{0}^{1} \\int_{0}^{x} e^{-x^2}\\,dy\\,dx = \\int_{0}^{1} e^{-x^2} [y]_{0}^{x}\\,dx = \\int_{0}^{1} x e^{-x^2}\\,dx$$"
+          },
+          {
+            label: "Step 3: Substitute -x² = t and Evaluate",
+            math: "$$I = \\left[-\\frac{1}{2}e^{-x^2}\\right]_{0}^{1} = -\\frac{1}{2}(e^{-1} - 1) = \\mathbf{\\frac{1 - e^{-1}}{2}}$$"
+          }
+        ]
+      },
+      {
+        id: "u5-q3",
+        unit: "Unit 5",
+        marks: "10 Marks",
+        title: "Volume Common to Sphere and Cylinder",
+        problem: "Find the volume common to the sphere $x^2 + y^2 + z^2 = a^2$ and the cylinder $x^2 + y^2 = ay$.",
+        intuition: "Convert the cylinder $x^2 + y^2 = ay$ into polar coordinates: $r^2 = a r\\sin\\theta \\implies r = a\\sin\\theta$ with $\\theta$ from $0$ to $\\pi$. Multiply by $2$ for $z \\ge 0$ and $z \\le 0$.",
+        steps: [
+          {
+            label: "Step 1: Set Up Height z and Polar Cylinder Base",
+            math: "Height $z = \\pm\\sqrt{a^2 - x^2 - y^2} = \\pm\\sqrt{a^2 - r^2}$.<br>Cylinder in polar form: $r = a\\sin\\theta$ for $0 \\le \\theta \\le \\pi$."
+          },
+          {
+            label: "Step 2: Write Polar Volume Integral",
+            math: "$$V = 2\\int_{0}^{\\pi} \\int_{0}^{a\\sin\\theta} \\sqrt{a^2 - r^2}\\,r\\,dr\\,d\\theta = 4\\int_{0}^{\\pi/2} \\left[-\\frac{1}{3}(a^2 - r^2)^{3/2}\\right]_{0}^{a\\sin\\theta} d\\theta$$"
+          },
+          {
+            label: "Step 3: Apply r Limits (1 - sin² θ = cos² θ)",
+            math: "$$V = \\frac{4a^3}{3}\\int_{0}^{\\pi/2} (1 - \\cos^3\\theta)\\,d\\theta$$"
+          },
+          {
+            label: "Step 4: Evaluate Using Wallis' Formula",
+            math: "$$V = \\frac{4a^3}{3}\\left(\\frac{\\pi}{2} - \\frac{2}{3}\\right) = \\mathbf{\\frac{2}{9}a^3(3\\pi - 4)}$$"
+          }
+        ]
+      },
+      {
+        id: "u5-q4",
+        unit: "Unit 5",
+        marks: "5 Marks",
+        title: "Triple Integral Over Tetrahedron",
+        problem: "Evaluate $\\iiint (x+y+z)\\,dx\\,dy\\,dz$ over the tetrahedron bounded by $x=0, y=0, z=0$, and $x+y+z=1$.",
+        intuition: "Peel off one variable at a time from the plane $x+y+z=1$: $z$ goes up to $1-x-y$, then $y$ goes up to $1-x$, and finally $x$ goes from $0$ to $1$.",
+        steps: [
+          {
+            label: "Step 1: Set Triple Integral Limits",
+            math: "$$I = \\int_{0}^{1} \\int_{0}^{1-x} \\int_{0}^{1-x-y} (x+y+z)\\,dz\\,dy\\,dx$$"
+          },
+          {
+            label: "Step 2: Integrate w.r.t. z",
+            math: "$$\\int_{0}^{1-x-y} (x+y+z)\\,dz = (x+y)(1-x-y) + \\frac{(1-x-y)^2}{2} = \\frac{1}{2}[1 - (x+y)^2]$$"
+          },
+          {
+            label: "Step 3: Integrate w.r.t. y",
+            math: "$$\\frac{1}{2}\\int_{0}^{1-x} [1 - (x+y)^2]\\,dy = \\frac{1}{2}\\left[y - \\frac{(x+y)^3}{3}\\right]_{0}^{1-x} = \\frac{1}{2}\\left(\\frac{2}{3} - x + \\frac{x^3}{3}\\right)$$"
+          },
+          {
+            label: "Step 4: Integrate w.r.t. x",
+            math: "$$I = \\frac{1}{2}\\left[\\frac{2}{3}x - \\frac{x^2}{2} + \\frac{x^4}{12}\\right]_{0}^{1} = \\frac{1}{2}\\left(\\frac{2}{3} - \\frac{1}{2} + \\frac{1}{12}\\right) = \\mathbf{\\frac{1}{8}}$$"
+          }
+        ]
+      }
+    ];
+
+    // App State
+    let selectedUnit = "All";
+    let currentQuestionId = QUESTIONS_DB[0].id;
+    let revealedCount = 1;
+    let masteredIds = new Set(JSON.parse(localStorage.getItem('btam101_mastered') || '[]'));
+
+    const UNITS = ["All", "Unit 1", "Unit 2", "Unit 3", "Unit 4", "Unit 5"];
+
+    // Initialize Application
+    function init() {
+      renderUnitTabs();
+      renderQuestionList();
+      loadSlide(currentQuestionId);
+      buildPrintableCheatSheet();
+      lucide.createIcons();
+    }
+
+    // Theme Toggle
+    function toggleTheme() {
+      document.documentElement.classList.toggle('dark');
+    }
+
+    // Render Unit Tabs
+    function renderUnitTabs() {
+      const container = document.getElementById('unit-tabs');
+      container.innerHTML = UNITS.map(unit => {
+        const active = selectedUnit === unit;
+        return `
+          <button onclick="selectUnit('${unit}')"
+            class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
+              active
+                ? 'bg-indigo-600 text-white shadow-sm'
+                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+            }">
+            ${unit}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectUnit(unit) {
+      selectedUnit = unit;
+      renderUnitTabs();
+      renderQuestionList();
+      const filtered = getFilteredQuestions();
+      if (filtered.length > 0 && !filtered.some(q => q.id === currentQuestionId)) {
+        loadSlide(filtered[0].id);
+      }
+    }
+
+    function getFilteredQuestions() {
+      const query = document.getElementById('search-input').value.toLowerCase().trim();
+      return QUESTIONS_DB.filter(q => {
+        const matchesUnit = selectedUnit === "All" || q.unit === selectedUnit;
+        const matchesSearch = !query || 
+          q.title.toLowerCase().includes(query) || 
+          q.problem.toLowerCase().includes(query) ||
+          q.unit.toLowerCase().includes(query);
+        return matchesUnit && matchesSearch;
+      });
+    }
+
+    // Render Left Question Cards
+    function renderQuestionList() {
+      const listEl = document.getElementById('question-list');
+      const filtered = getFilteredQuestions();
+
+      document.getElementById('question-count-label').textContent = `${filtered.length} Topics Available`;
+      document.getElementById('progress-badge').textContent = `${masteredIds.size} / ${QUESTIONS_DB.length} Revised`;
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = `<div class="p-6 text-center text-sm text-slate-400">No matching questions found.</div>`;
+        return;
+      }
+
+      listEl.innerHTML = filtered.map(q => {
+        const isSelected = q.id === currentQuestionId;
+        const isMastered = masteredIds.has(q.id);
+        return `
+          <button onclick="loadSlide('${q.id}')"
+            class="text-left p-3.5 rounded-xl border transition-all ${
+              isSelected
+                ? 'bg-indigo-50/90 dark:bg-indigo-950/50 border-indigo-500 shadow-sm'
+                : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700'
+            }">
+            <div class="flex items-center justify-between gap-2 mb-1">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">${q.unit} • ${q.marks}</span>
+              ${isMastered ? '<span class="text-xs text-emerald-500 font-semibold flex items-center gap-1">✓ Revised</span>' : ''}
+            </div>
+            <div class="text-sm font-semibold text-slate-800 dark:text-slate-100 line-clamp-2">${q.title}</div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // Load Question onto Whiteboard
+    function loadSlide(id) {
+      currentQuestionId = id;
+      revealedCount = 1; // Start with Step 1 visible
+      const q = QUESTIONS_DB.find(item => item.id === id);
+      if (!q) return;
+
+      document.getElementById('slide-unit-badge').textContent = q.unit;
+      document.getElementById('slide-marks-badge').textContent = q.marks;
+      document.getElementById('slide-title').textContent = q.title;
+      document.getElementById('slide-problem').innerHTML = q.problem;
+      document.getElementById('intuition-text').innerHTML = q.intuition;
+
+      updateMasteredButton();
+      renderSteps();
+      renderQuestionList();
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false }
+        ],
+        throwOnError: false
+      });
+    }
+
+    // Render Revealed Derivation Steps
+    function renderSteps() {
+      const q = QUESTIONS_DB.find(item => item.id === currentQuestionId);
+      const container = document.getElementById('steps-container');
+      const total = q.steps.length;
+
+      document.getElementById('step-counter').textContent = `Step ${Math.min(revealedCount, total)} of ${total}`;
+
+      const nextBtn = document.getElementById('next-step-btn');
+      if (revealedCount >= total) {
+        nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+
+      container.innerHTML = q.steps.slice(0, revealedCount).map((step, idx) => `
+        <div class="step-animate p-4 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800">
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center">
+              ${idx + 1}
+            </span>
+            <h3 class="text-xs sm:text-sm font-bold text-indigo-700 dark:text-indigo-400 uppercase tracking-wide">
+              ${step.label}
+            </h3>
+          </div>
+          <div class="text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed pl-8">
+            ${step.math}
+          </div>
+        </div>
+      `).join('');
+
+      renderMathInElement(container, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false }
+        ],
+        throwOnError: false
+      });
+
+      // Smooth scroll to bottom of steps
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function revealNextStep() {
+      const q = QUESTIONS_DB.find(item => item.id === currentQuestionId);
+      if (revealedCount < q.steps.length) {
+        revealedCount++;
+        renderSteps();
+      }
+    }
+
+    function revealAllSteps() {
+      const q = QUESTIONS_DB.find(item => item.id === currentQuestionId);
+      revealedCount = q.steps.length;
+      renderSteps();
+    }
+
+    function resetSteps() {
+      revealedCount = 1;
+      renderSteps();
+    }
+
+    function nextQuestion() {
+      const filtered = getFilteredQuestions();
+      const idx = filtered.findIndex(q => q.id === currentQuestionId);
+      if (idx >= 0 && idx < filtered.length - 1) {
+        loadSlide(filtered[idx + 1].id);
+      }
+    }
+
+    function prevQuestion() {
+      const filtered = getFilteredQuestions();
+      const idx = filtered.findIndex(q => q.id === currentQuestionId);
+      if (idx > 0) {
+        loadSlide(filtered[idx - 1].id);
+      }
+    }
+
+    // Revision Progress Tracking
+    function toggleMastered() {
+      if (masteredIds.has(currentQuestionId)) {
+        masteredIds.delete(currentQuestionId);
+      } else {
+        masteredIds.add(currentQuestionId);
+      }
+      localStorage.setItem('btam101_mastered', JSON.stringify([...masteredIds]));
+      updateMasteredButton();
+      renderQuestionList();
+    }
+
+    function updateMasteredButton() {
+      const btn = document.getElementById('mastered-btn');
+      const isMastered = masteredIds.has(currentQuestionId);
+      if (isMastered) {
+        btn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition";
+        btn.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i><span>Revised ✓</span>`;
+      } else {
+        btn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
+        btn.innerHTML = `<i data-lucide="circle" class="w-4 h-4"></i><span>Mark as Revised</span>`;
+      }
+      lucide.createIcons();
+    }
+
+    // Build Complete Printable Cheat-Sheet for PDF Export
+    function buildPrintableCheatSheet() {
+      const printContent = document.getElementById('print-content');
+      printContent.innerHTML = QUESTIONS_DB.map((q, index) => `
+        <div class="print-card">
+          <div class="text-xs font-bold uppercase text-indigo-700">${q.unit} • ${q.marks}</div>
+          <h3 class="text-base font-bold mt-0.5">${index + 1}. ${q.title}</h3>
+          <div class="text-sm font-medium my-2 p-2 bg-slate-100 rounded">${q.problem}</div>
+          <div class="text-xs italic text-slate-600 mb-2"><b>Exam Tip:</b> ${q.intuition}</div>
+          <div class="space-y-2 text-sm">
+            ${q.steps.map(s => `<div><b>${s.label}:</b> ${s.math}</div>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openCheatSheetPrint() {
+      const printContainer = document.getElementById('print-container');
+      renderMathInElement(printContainer, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false }
+        ],
+        throwOnError: false
+      });
+      window.print();
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
