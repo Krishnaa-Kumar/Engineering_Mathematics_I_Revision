@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 3: Beta & Gamma Functions & Improper Integrals | CalcVault M-1</title>
+  <meta name="description" content="Master all high-yield derivations, step-by-step proofs, and formulas for Unit 3: Beta & Gamma Functions & Improper Integrals for IKG-PTU BTAM101-18." />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- KaTeX for fast, crisp mathematical typesetting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-100 text-slate-900 dark:bg-[#0b1120] dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
+
+  <!-- Universal Top Navigation Bar -->
+  <header class="no-print sticky top-0 z-30 bg-white/95 dark:bg-[#151e32]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      
+      <!-- Brand Logo & Title -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-md shadow-cyan-500/20 shrink-0 logo-glow">
+          <svg viewBox="0 0 64 64" class="w-7 h-7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="shieldGradunit3" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4f46e5"/>
+                <stop offset="50%" stop-color="#06b6d4"/>
+                <stop offset="100%" stop-color="#f59e0b"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 4L54 13V30C54 45.2 44.6 56.8 32 60C19.4 56.8 10 45.2 10 30V13L32 4Z" fill="#0f172a" stroke="url(#shieldGradunit3)" stroke-width="3.2"/>
+            <path d="M36 16C33.5 16 32.2 18.2 31.8 22L29.2 42C28.8 45.8 27.5 48 25 48" stroke="#22d3ee" stroke-width="3.6" stroke-linecap="round"/>
+            <circle cx="38" cy="16" r="2.3" fill="#f59e0b"/>
+            <circle cx="23" cy="48" r="2.3" fill="#f59e0b"/>
+            <path d="M18 26H27M21 26V35M25 26V35" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-indigo-500 via-cyan-500 to-amber-500 dark:from-indigo-400 dark:via-cyan-400 dark:to-amber-400 bg-clip-text text-transparent">
+              CalcVault M-1
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+              100% Free
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">IKG-PTU BTAM101-18 • Revision Website</p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-1 text-xs font-semibold">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Whiteboard</a>
+        <a href="unit1.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 1</a>
+        <a href="unit2.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 2</a>
+        <a href="unit3.html" class="px-3 py-1.5 rounded-lg text-amber-600 dark:text-amber-400 font-bold bg-amber-500/10">Unit 3</a>
+        <a href="unit4.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 4</a>
+        <a href="unit5.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 5</a>
+        <a href="cheatsheet.html" class="px-3 py-1.5 rounded-lg text-amber-600 dark:text-amber-400 font-bold hover:bg-amber-500/10 transition">Cheat-Sheet</a>
+        <a href="syllabus.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Syllabus</a>
+        <a href="about.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">About</a>
+      </nav>
+
+      <!-- Action Toolbar (PDF Print & Theme Toggle) -->
+      <div class="flex items-center gap-2">
+        <a href="cheatsheet.html" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm transition active:scale-95" title="Print Complete Cheat-Sheet">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          <span>Print / PDF</span>
+        </a>
+
+        <button type="button" onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun" class="w-4 h-4 theme-icon-sun"></i>
+          <i data-lucide="moon" class="w-4 h-4 theme-icon-moon" style="display:none;"></i>
+        </button>
+
+        <button type="button" onclick="toggleMobileMenu()" class="p-2 rounded-xl md:hidden bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
+          <i data-lucide="menu" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-nav-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#151e32] px-4 py-3 space-y-2 text-sm font-semibold">
+      <div class="grid grid-cols-2 gap-2">
+        <a href="index.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Whiteboard</a>
+        <a href="cheatsheet.html" class="p-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold">Cheat-Sheet</a>
+        <a href="unit1.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 1: Sequences</a>
+        <a href="unit2.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 2: Calculus Apps</a>
+        <a href="unit3.html" class="p-2 rounded-lg bg-amber-500/10 text-amber-600">Unit 3: Beta-Gamma</a>
+        <a href="unit4.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 4: Multivariable</a>
+        <a href="unit5.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 5: Integrals</a>
+        <a href="syllabus.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Syllabus Guide</a>
+      </div>
+      <div class="pt-2 border-t border-slate-200 dark:border-slate-800">
+        <a href="about.html" class="block p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white">About &amp; Author Credits</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Main Content -->
+  <main class="max-w-7xl w-full mx-auto p-4 sm:p-6 flex-1 space-y-6">
+
+    <!-- Unit Hero Header -->
+    <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-2">
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold uppercase bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+            Unit 3 • Exam Weightage: 12-18 Marks
+          </span>
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300" id="unit-topics-count">
+            Loading topics...
+          </span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+          Unit 3: Beta & Gamma Functions & Improper Integrals
+        </h1>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2 max-w-2xl leading-relaxed">
+          Complete high-yield derivations, standard question solutions, evaluator traps, and formulas covering 100% of the IKG-PTU syllabus for Unit 3.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="index.html?unit=Unit 3" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-cyan-600 hover:bg-cyan-500 text-white shadow-sm transition active:scale-95">
+          <i data-lucide="play" class="w-4 h-4"></i>
+          <span>Practice on Whiteboard</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Core Formulas Summary Card -->
+    <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 shadow-sm">
+      <h2 class="text-base font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+        <i data-lucide="book-marked" class="w-4 h-4 text-amber-500"></i>
+        <span>Unit 3 Key Formulas &amp; Definitions Summary</span>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs text-amber-600 dark:text-amber-400 mb-1">Gamma Function Definition</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">$\Gamma(n) = \int_0^\infty e^{-x} x^{n-1}\,dx$ ($n>0$). Recurrence: $\Gamma(n+1) = n\Gamma(n) = n!$</div></div>
+<div class="p-3.5 rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs text-amber-600 dark:text-amber-400 mb-1">Beta Function Definition</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">$B(m,n) = \int_0^1 x^{m-1}(1-x)^{n-1}\,dx = 2\int_0^{\pi/2} \sin^{2m-1}\theta \cos^{2n-1}\theta\,d\theta$</div></div>
+<div class="p-3.5 rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs text-amber-600 dark:text-amber-400 mb-1">Beta-Gamma Core Relation</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">$B(m,n) = \frac{\Gamma(m)\Gamma(n)}{\Gamma(m+n)}$</div></div>
+<div class="p-3.5 rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs text-amber-600 dark:text-amber-400 mb-1">Standard Value of $\Gamma(1/2)$</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">$\Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}$</div></div>
+<div class="p-3.5 rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs text-amber-600 dark:text-amber-400 mb-1">Legendre's Duplication Formula</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">$\Gamma(m)\Gamma\left(m + \frac{1}{2}\right) = \frac{\sqrt{\pi}}{2^{2m-1}} \Gamma(2m)$</div></div>
+<div class="p-3.5 rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs text-amber-600 dark:text-amber-400 mb-1">Euler's Reflection Formula</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200">$\Gamma(p)\Gamma(1-p) = \frac{\pi}{\sin(p\pi)}$ ($0 < p < 1$)</div></div>
+      </div>
+    </div>
+
+    <!-- Questions List Container -->
+    <div class="space-y-4" id="unit-questions-container">
+      <!-- Rendered dynamically via JS from QUESTIONS_DB -->
+    </div>
+
+    <!-- Bottom Unit Navigation Links -->
+    <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
+      <a href="unit2.html" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition"><i data-lucide="chevron-left" class="w-4 h-4"></i><span>Unit 2: Calculus Applications</span></a>
+      <a href="index.html?unit=Unit 3" class="text-xs font-bold text-cyan-600 dark:text-cyan-400 hover:underline">
+        Practice All Unit 3 on Whiteboard →
+      </a>
+      <a href="unit4.html" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition"><span>Unit 4: Multivariable Calculus</span><i data-lucide="chevron-right" class="w-4 h-4"></i></a>
+    </div>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="no-print border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#151e32]/80 px-4 py-5 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-slate-800 dark:text-slate-200">CalcVault M-1</span>
+        <span>•</span>
+        <span>Curated by <strong class="text-slate-800 dark:text-slate-200">Krishna Kumar</strong> (B.Tech Cybersecurity, CGC CEC Landran)</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:text-cyan-500 transition">Interactive Whiteboard</a>
+        <a href="cheatsheet.html" class="hover:text-cyan-500 transition">Cheat-Sheet</a>
+        <a href="syllabus.html" class="hover:text-cyan-500 transition">Syllabus</a>
+        <span class="text-emerald-500 font-bold">100% Free &amp; Open Access</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    function renderUnitQuestions() {
+      const container = document.getElementById('unit-questions-container');
+      const filtered = QUESTIONS_DB.filter(q => q.unit === "Unit 3");
+      
+      const countEl = document.getElementById('unit-topics-count');
+      if (countEl) countEl.textContent = `${filtered.length} Topics Total`;
+
+      container.innerHTML = filtered.map((q, idx) => {
+        const isMastered = masteredIds.has(q.id);
+        return `
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+            
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded-md text-[11px] font-extrabold uppercase bg-amber-500/15 text-amber-700 dark:text-amber-300">
+                  Unit 3
+                </span>
+                <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300">
+                  ${q.marks}
+                </span>
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="index.html?topic=${q.id}" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-cyan-500/20 text-slate-700 dark:text-slate-300 transition flex items-center gap-1">
+                  <i data-lucide="play" class="w-3 h-3 text-cyan-500"></i>
+                  <span>Practice on Board</span>
+                </a>
+                <button type="button" onclick="toggleMasteredFromUnit('${q.id}')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1 ${
+                  isMastered ? 'bg-emerald-500/15 text-emerald-600' : 'bg-slate-100 dark:bg-slate-800 text-slate-500'
+                }">
+                  <i data-lucide="${isMastered ? 'check-circle-2' : 'circle'}" class="w-3.5 h-3.5"></i>
+                  <span>${isMastered ? 'Mastered' : 'Mark'}</span>
+                </button>
+              </div>
+            </div>
+
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white mt-3">
+              ${idx + 1}. ${q.title}
+            </h3>
+
+            <div class="mt-2.5 p-3.5 rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800 text-xs sm:text-sm font-medium">
+              ${q.problem}
+            </div>
+
+            <div class="mt-3 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex items-start gap-2">
+              <i data-lucide="lightbulb" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+              <div><b>PTU Evaluator Tip:</b> ${q.intuition}</div>
+            </div>
+
+            <div class="mt-4 space-y-3">
+              ${q.steps.map((s, sIdx) => `
+                <div class="p-3.5 rounded-xl bg-slate-50/70 dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800">
+                  <div class="text-xs font-bold uppercase text-amber-600 dark:text-amber-400 mb-1">
+                    Step ${sIdx + 1}: ${s.label}
+                  </div>
+                  <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">
+                    ${s.math}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+
+          </div>
+        `;
+      }).join('');
+
+      renderMath(container);
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    function toggleMasteredFromUnit(id) {
+      toggleMastered(id);
+      renderUnitQuestions();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderUnitQuestions();
+    });
+  </script>
+</body>
+</html>

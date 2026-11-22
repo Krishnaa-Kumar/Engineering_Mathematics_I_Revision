@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About CalcVault M-1 & Author Credits | Krishna Kumar</title>
+  <meta name="description" content="About CalcVault M-1, curated by Krishna Kumar (B.Tech Cybersecurity, CGC CEC Landran) for IKG-PTU BTAM101-18 Engineering Mathematics-I." />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-100 text-slate-900 dark:bg-[#0b1120] dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
+
+  <!-- Universal Top Navigation Bar -->
+  <header class="no-print sticky top-0 z-30 bg-white/95 dark:bg-[#151e32]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      
+      <!-- Brand Logo & Title -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-md shadow-cyan-500/20 shrink-0 logo-glow">
+          <svg viewBox="0 0 64 64" class="w-7 h-7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="shieldGrad" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4f46e5"/>
+                <stop offset="50%" stop-color="#06b6d4"/>
+                <stop offset="100%" stop-color="#f59e0b"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 4L54 13V30C54 45.2 44.6 56.8 32 60C19.4 56.8 10 45.2 10 30V13L32 4Z" fill="#0f172a" stroke="url(#shieldGrad)" stroke-width="3.2"/>
+            <path d="M36 16C33.5 16 32.2 18.2 31.8 22L29.2 42C28.8 45.8 27.5 48 25 48" stroke="#22d3ee" stroke-width="3.6" stroke-linecap="round"/>
+            <circle cx="38" cy="16" r="2.3" fill="#f59e0b"/>
+            <circle cx="23" cy="48" r="2.3" fill="#f59e0b"/>
+            <path d="M18 26H27M21 26V35M25 26V35" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-indigo-500 via-cyan-500 to-amber-500 dark:from-indigo-400 dark:via-cyan-400 dark:to-amber-400 bg-clip-text text-transparent">
+              CalcVault M-1
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+              100% Free
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">IKG-PTU BTAM101-18 • Revision Website</p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-1 text-xs font-semibold">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Whiteboard</a>
+        <a href="unit1.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 1</a>
+        <a href="unit2.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 2</a>
+        <a href="unit3.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 3</a>
+        <a href="unit4.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 4</a>
+        <a href="unit5.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 5</a>
+        <a href="cheatsheet.html" class="px-3 py-1.5 rounded-lg text-amber-600 dark:text-amber-400 font-bold hover:bg-amber-500/10 transition">Cheat-Sheet</a>
+        <a href="syllabus.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Syllabus</a>
+        <a href="about.html" class="px-3 py-1.5 rounded-lg text-cyan-600 dark:text-cyan-400 font-bold bg-cyan-500/10">About</a>
+      </nav>
+
+      <!-- Action Toolbar (PDF Print & Theme Toggle) -->
+      <div class="flex items-center gap-2">
+        <a href="cheatsheet.html" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm transition active:scale-95" title="Print Complete Cheat-Sheet">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          <span>Print / PDF</span>
+        </a>
+
+        <button type="button" onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun" class="w-4 h-4 theme-icon-sun"></i>
+          <i data-lucide="moon" class="w-4 h-4 theme-icon-moon" style="display:none;"></i>
+        </button>
+
+        <button type="button" onclick="toggleMobileMenu()" class="p-2 rounded-xl md:hidden bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
+          <i data-lucide="menu" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-nav-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#151e32] px-4 py-3 space-y-2 text-sm font-semibold">
+      <div class="grid grid-cols-2 gap-2">
+        <a href="index.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Whiteboard</a>
+        <a href="cheatsheet.html" class="p-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold">Cheat-Sheet</a>
+        <a href="unit1.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 1: Sequences</a>
+        <a href="unit2.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 2: Calculus Apps</a>
+        <a href="unit3.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 3: Beta-Gamma</a>
+        <a href="unit4.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 4: Multivariable</a>
+        <a href="unit5.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 5: Integrals</a>
+        <a href="syllabus.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Syllabus Guide</a>
+      </div>
+      <div class="pt-2 border-t border-slate-200 dark:border-slate-800">
+        <a href="about.html" class="block p-2 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold">About &amp; Author Credits</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Main Content -->
+  <main class="max-w-4xl w-full mx-auto p-4 sm:p-6 flex-1 space-y-6">
+
+    <!-- About CalcVault Card -->
+    <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-2xl bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 flex items-center justify-center font-extrabold text-xl">
+          CV
+        </div>
+        <div>
+          <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">About CalcVault M-1</h1>
+          <p class="text-xs sm:text-sm text-cyan-600 dark:text-cyan-400 font-semibold">IKG-PTU BTAM101-18 Engineering Mathematics-I Revision Hub</p>
+        </div>
+      </div>
+
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+        <strong>CalcVault M-1</strong> was designed and compiled specifically for first-year engineering students preparing for the IKG Punjab Technical University semester examinations. It covers <strong>100% of the standard university question bank</strong>, including all 2, 5, and 10-mark derivations across all 5 syllabus units.
+      </p>
+
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        Unlike static PDFs or text-heavy notes, CalcVault provides an <strong>animated interactive whiteboard</strong> that reveals derivations step-by-step so you can practice solving them in real-time, understand the mathematical intuition, and spot evaluator traps before entering the examination hall.
+      </p>
+    </div>
+
+    <!-- Author Profile -->
+    <div class="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-5">
+      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-600 via-cyan-500 to-amber-500 text-white font-extrabold text-2xl flex items-center justify-center shadow-lg shrink-0">
+        KK
+      </div>
+      <div class="flex-1 text-center sm:text-left">
+        <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Krishna Kumar</h2>
+        <p class="text-xs text-cyan-600 dark:text-cyan-400 font-semibold mb-3">
+          B.Tech Cybersecurity • CGC College of Engineering, Landran (Mohali)
+        </p>
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          Created this interactive study platform to help fellow peers revise all complex mathematical proofs, Jacobians, Beta-Gamma relations, and multivariable calculus derivations faster and with complete clarity.
+        </p>
+      </div>
+    </div>
+
+    <!-- Key Principles & Features -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      
+      <div class="p-5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-2.5">
+          <i data-lucide="unlock" class="w-4 h-4"></i>
+        </div>
+        <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">100% Free &amp; Open Access</h3>
+        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          Zero paywalls, no subscriptions, no locked features. Everything is accessible unconditionally for every student.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="w-8 h-8 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 flex items-center justify-center mb-2.5">
+          <i data-lucide="file-check-2" class="w-4 h-4"></i>
+        </div>
+        <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Crisp KaTeX Math Notation</h3>
+        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          High-performance mathematical typesetting rendered client-side with KaTeX for razor-sharp equations on mobile and desktop.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-2.5">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+        </div>
+        <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Instant 1-Click PDF Export</h3>
+        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          Dedicated print layout allowing students to save the complete 26-topic exam guide as a clean, high-resolution PDF with one click.
+        </p>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-2.5">
+          <i data-lucide="check-circle" class="w-4 h-4"></i>
+        </div>
+        <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Offline Mastery Tracker</h3>
+        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+          Tracks revision progress privately in your browser's local storage so you can mark mastered topics and pick up right where you left off.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Quick Links Navigation -->
+    <div class="p-6 rounded-3xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800 text-center">
+      <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-3">Jump Straight into Revision</h3>
+      <div class="flex flex-wrap items-center justify-center gap-2">
+        <a href="index.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white transition">
+          Open Whiteboard
+        </a>
+        <a href="cheatsheet.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 transition">
+          Print Cheat-Sheet
+        </a>
+        <a href="syllabus.html" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition">
+          View Syllabus Blueprint
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Universal Footer -->
+  <footer class="no-print border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#151e32]/80 px-4 py-5 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+      <div class="flex items-center gap-2">
+        <span class="font-semibold text-slate-800 dark:text-slate-200">CalcVault M-1</span>
+        <span>•</span>
+        <span>Curated by <strong class="text-slate-800 dark:text-slate-200">Krishna Kumar</strong> (B.Tech Cybersecurity, CGC CEC Landran)</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:text-cyan-500 transition">Interactive Whiteboard</a>
+        <a href="cheatsheet.html" class="hover:text-cyan-500 transition">Cheat-Sheet</a>
+        <a href="syllabus.html" class="hover:text-cyan-500 transition">Syllabus</a>
+        <span class="text-emerald-500 font-bold">100% Free &amp; Open Access</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

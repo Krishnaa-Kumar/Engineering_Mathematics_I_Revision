@@ -1,0 +1,700 @@
+/**
+ * CalcVault M-1 Knowledge Base
+ * Author: Krishna Kumar (B.Tech Cybersecurity, CGC CEC Landran)
+ * IKG-PTU BTAM101-18 Engineering Mathematics-I
+ */
+
+const QUESTIONS_DB = [
+      // ==================== UNIT 1 (4 Cards) ====================
+      {
+        id: "u1-q1",
+        unit: "Unit 1",
+        marks: "2 & 5 Marks",
+        title: "U1-Q1: All Basic Definitions, Convergence Tests & Taylor Expansions",
+        problem: "Define Ratio Test, Cauchy Integral Test, Leibnitz Test, p-Test, Comparison Test; Monotonic, Bounded, Convergent, Divergent, Oscillatory sequences; Convergent, Divergent, Alternating series; and Maclaurin/Taylor expansions about $x=0$ for $\\sin x, \\cos x, e^x, \\tan x$.",
+        intuition: "In 2-mark questions, always state exact boundary behavior ('fails at $l=1$'). When Ratio Test fails at $l=1$, switch immediately to Raabe's Test.",
+        steps: [
+          {
+            label: "1. Convergence Tests (Ratio, Cauchy Integral, Leibnitz, p-Test, Comparison)",
+            math: "• <b>D'Alembert's Ratio Test:</b> For $\\sum u_n$ ($u_n>0$), let $\\lim_{n\\to\\infty} \\frac{u_n}{u_{n+1}} = l$. Converges if $l > 1$, diverges if $l < 1$, fails if $l = 1$.<br>• <b>Cauchy Integral Test:</b> If $f(x)$ is positive, continuous, and decreasing for $x \\ge 1$ with $f(n)=u_n$, then $\\sum_{n=1}^{\\infty} u_n$ and $\\int_{1}^{\\infty} f(x)\\,dx$ converge or diverge together.<br>• <b>Leibnitz Test:</b> Alternating series $\\sum (-1)^{n-1} u_n$ ($u_n>0$) converges if (i) $u_{n+1} \\le u_n \\; \\forall n$ and (ii) $\\lim_{n\\to\\infty} u_n = 0$.<br>• <b>p-Series Test:</b> $\\sum \\frac{1}{n^p}$ converges if $p > 1$ and diverges if $p \\le 1$.<br>• <b>Comparison Test:</b> If $\\lim_{n\\to\\infty} \\frac{u_n}{v_n} = k$ (finite, non-zero), $\\sum u_n$ and $\\sum v_n$ behave identically."
+          },
+          {
+            label: "2. Sequence Definitions (Monotonic, Bounded, Convergent, Divergent, Oscillatory)",
+            math: "• <b>Monotonic Sequence:</b> Either increasing ($a_{n+1} \\ge a_n$) or decreasing ($a_{n+1} \\le a_n$) for all $n$.<br>• <b>Bounded Sequence:</b> Exists $k, K \\in \\mathbb{R}$ such that $k \\le a_n \\le K \\; \\forall n$.<br>• <b>Convergent Sequence:</b> $\\lim_{n\\to\\infty} a_n = L$ (finite & unique).<br>• <b>Divergent Sequence:</b> $\\lim_{n\\to\\infty} a_n = +\\infty$ or $-\\infty$.<br>• <b>Oscillatory Sequence:</b> Neither approaches a finite limit nor $\\pm\\infty$ (e.g., $a_n = (-1)^n$)."
+          },
+          {
+            label: "3. Series Definitions (Convergent, Divergent, Alternating)",
+            math: "Let $S_n = \\sum_{k=1}^{n} u_k$ be the $n$-th partial sum.<br>• <b>Convergent Series:</b> $\\lim_{n\\to\\infty} S_n = S$ (finite).<br>• <b>Divergent Series:</b> $\\lim_{n\\to\\infty} S_n = \\pm\\infty$.<br>• <b>Alternating Series:</b> Terms alternate in sign: $u_1 - u_2 + u_3 - u_4 + \\cdots$ ($u_n > 0$)."
+          },
+          {
+            label: "4. Taylor's / Maclaurin's Series Expansions (about x = 0)",
+            math: "$$\\sin x = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\frac{x^7}{7!} + \\cdots \\qquad \\cos x = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\frac{x^6}{6!} + \\cdots$$ $$e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots \\qquad \\tan x = x + \\frac{x^3}{3} + \\frac{2}{15}x^5 + \\cdots$$"
+          }
+        ]
+      },
+      {
+        id: "u1-q2",
+        unit: "Unit 1",
+        marks: "2 Marks Each",
+        title: "U1-Q2: Check Convergence of Sequences Using Limits (Exponential, Polynomial, Rational, Oscillatory & Trig)",
+        problem: "Test the convergence of the sequences: (i) $\\{a_n\\} = \\left\\{\\frac{2^n}{n+1}\\right\\}$, (ii) $\\{a_n\\} = \\{n^2 + 3n\\}$, (iii) $\\{a_n\\} = \\left\\{\\frac{n+1}{n}\\right\\}$, (iv) $\\{a_n\\} = \\{(-1)^n\\}$, and (v) standard trigonometric variants $\\left\\{\\cos\\left(\\frac{1}{n}\\right)\\right\\}$ & $\\left\\{\\cos\\left(\\frac{n\\pi}{2}\\right)\\right\\}$.",
+        intuition: "Always show the L'Hôpital or binomial comparison step for $\\frac{2^n}{n+1}$ and the even/odd subsequence split for $(-1)^n$—writing just 'Divergent' or 'Oscillatory' without the limit step costs 1 out of 2 marks.",
+        steps: [
+          {
+            label: "(i) Sequence a_n = 2ⁿ / (n + 1) — Indeterminate Form ∞/∞",
+            math: "Applying L'Hôpital's Rule (treating $n$ as continuous variable $x$):<br>$$\\lim_{n\\to\\infty} a_n = \\lim_{n\\to\\infty} \\frac{2^n}{n+1} = \\lim_{n\\to\\infty} \\frac{2^n \\ln 2}{1} = \\infty$$<br>*(By binomial lower bound: $2^n > 1 + n + \\frac{n(n-1)}{2} \\implies \\frac{2^n}{n+1} > \\frac{n(n-1)}{2(n+1)} \\to \\infty$.)* $\\implies$ <b>Divergent</b>."
+          },
+          {
+            label: "(ii) Sequence a_n = n² + 3n",
+            math: "$$\\lim_{n\\to\\infty} a_n = \\lim_{n\\to\\infty} (n^2 + 3n) = \\infty \\implies \\mathbf{\\text{Divergent}}$$"
+          },
+          {
+            label: "(iii) Sequence a_n = (n + 1) / n",
+            math: "Divide numerator and denominator by $n$:<br>$$\\lim_{n\\to\\infty} a_n = \\lim_{n\\to\\infty} \\frac{n+1}{n} = \\lim_{n\\to\\infty} \\frac{\\frac{n}{n} + \\frac{1}{n}}{\\frac{n}{n}} = \\lim_{n\\to\\infty} \\frac{1 + \\frac{1}{n}}{1} = \\frac{1 + 0}{1} = 1 \\quad (\\text{Finite \\& unique} \\implies \\mathbf{\\text{Convergent, converges to } 1})$$"
+          },
+          {
+            label: "(iv) Sequence a_n = (-1)ⁿ — Even & Odd Subsequence Split",
+            math: "• For even $n = 2k$: $\\lim_{k\\to\\infty} a_{2k} = \\lim_{k\\to\\infty} (-1)^{2k} = +1$<br>• For odd $n = 2k+1$: $\\lim_{k\\to\\infty} a_{2k+1} = \\lim_{k\\to\\infty} (-1)^{2k+1} = -1$<br>Since even and odd subsequences approach two distinct finite limits, the sequence is <b>Finitely Oscillatory</b> (hence <b>Not Convergent</b>)."
+          },
+          {
+            label: "(v) Trigonometric Sequence Variants",
+            math: "• For $a_n = \\cos\\left(\\frac{1}{n}\\right)$: $\\lim_{n\\to\\infty} \\cos\\left(\\frac{1}{n}\\right) = \\cos(0) = 1 \\implies$ <b>Convergent</b>.<br>• For $a_n = \\cos\\left(\\frac{n\\pi}{2}\\right)$: terms cycle through $\\{0, -1, 0, 1, \\dots\\} \\implies$ <b>Finitely Oscillatory</b>."
+          }
+        ]
+      },
+      {
+        id: "u1-q3",
+        unit: "Unit 1",
+        marks: "5 & 10 Marks",
+        title: "U1-Q3: Convergence / Divergence of All 5 Series Problems",
+        problem: "Test the convergence of all 5 series:<br>(I) $\\sum \\frac{(n!)^2}{(2n)!} x^n$, (II) $\\sum \\frac{5^n}{4^n + 3}$, (III) $\\sum \\frac{3\\cdot 6\\cdot 9\\cdots(3n)}{4\\cdot 7\\cdot 10\\cdots(3n+1)} x^n$, (IV) $\\sum \\frac{1\\cdot 4\\cdot 7\\cdots(3n-2)}{2\\cdot 5\\cdot 8\\cdots(3n-1)}$, (V) $\\sum \\left(\\sqrt[3]{n^3+1} - n\\right)$.",
+        intuition: "In factorial/product series (I, III, IV), cancel common terms in $u_n / u_{n+1}$. Whenever Ratio Test gives $l=1$ (as in III at $x=1$, and IV), apply Raabe's Test $\\lim n(u_n/u_{n+1} - 1)$.",
+        steps: [
+          {
+            label: "(I) ∑ [(n!)² / (2n)!] xⁿ (Ratio Test + Boundary x = 4)",
+            math: "$$\\frac{u_n}{u_{n+1}} = \\frac{(n!)^2}{(2n)!} \\cdot \\frac{(2n+2)(2n+1)(2n)!}{(n+1)^2(n!)^2 x} = \\frac{2(2n+1)}{(n+1)x} \\xrightarrow{n\\to\\infty} \\frac{4}{x}$$<br>Converges for $x < 4$, diverges for $x > 4$. At $x = 4$: $\\frac{u_n}{u_{n+1}} = \\frac{4n+2}{4n+4} < 1 \\implies u_{n+1} > u_n$, so $\\lim u_n \\ne 0 \\implies$ <b>Diverges at x = 4</b>."
+          },
+          {
+            label: "(II) ∑ 5ⁿ / (4ⁿ + 3) (Comparison Test)",
+            math: "$$u_n = \\left(\\frac{5}{4}\\right)^n \\frac{1}{1 + 3/4^n}, \\quad \\text{take } v_n = \\left(\\frac{5}{4}\\right)^n \\implies \\lim_{n\\to\\infty} \\frac{u_n}{v_n} = 1 \\ne 0$$<br>Since $\\sum v_n$ is a geometric series with $r = \\frac{5}{4} > 1$, it diverges. Thus $\\sum u_n$ <b>Diverges</b>."
+          },
+          {
+            label: "(III) ∑ [3·6···(3n) / 4·7···(3n+1)] xⁿ (Ratio + Raabe's Test)",
+            math: "$$\\lim_{n\\to\\infty} \\frac{u_n}{u_{n+1}} = \\lim_{n\\to\\infty} \\frac{3n+4}{(3n+3)x} = \\frac{1}{x}$$<br>Converges if $x < 1$, diverges if $x > 1$. At $x = 1$, apply Raabe's Test:<br>$$\\lim_{n\\to\\infty} n\\left(\\frac{3n+4}{3n+3} - 1\\right) = \\lim_{n\\to\\infty} \\frac{n}{3n+3} = \\frac{1}{3} < 1 \\implies \\mathbf{\\text{Diverges at } x = 1}$$"
+          },
+          {
+            label: "(IV) ∑ [1·4·7···(3n-2) / 2·5·8···(3n-1)] (Raabe's Test)",
+            math: "$$\\lim_{n\\to\\infty} \\frac{u_n}{u_{n+1}} = \\lim_{n\\to\\infty} \\frac{3n+2}{3n+1} = 1 \\quad (\\text{Ratio Test fails})$$<br>By Raabe's Test: $\\lim_{n\\to\\infty} n\\left(\\frac{3n+2}{3n+1} - 1\\right) = \\lim_{n\\to\\infty} \\frac{n}{3n+1} = \\frac{1}{3} < 1 \\implies$ <b>Divergent</b>."
+          },
+          {
+            label: "(V) ∑ (∛(n³ + 1) - n) (Binomial Expansion + Comparison Test)",
+            math: "$$u_n = n\\left(1 + \\frac{1}{n^3}\\right)^{1/3} - n = n\\left(1 + \\frac{1}{3n^3} - \\frac{1}{9n^6} + \\cdots\\right) - n = \\frac{1}{3n^2} - \\frac{1}{9n^5} + \\cdots$$<br>Comparing with $v_n = \\frac{1}{n^2}$ ($p = 2 > 1$), $\\lim \\frac{u_n}{v_n} = \\frac{1}{3} \\ne 0 \\implies$ <b>Convergent</b>."
+          }
+        ]
+      },
+      {
+        id: "u1-q4",
+        unit: "Unit 1",
+        marks: "5 Marks",
+        title: "U1-Q4: Proofs of p-Series Test & Geometric Series Test",
+        problem: "Prove the Geometric Series Test for $\\sum_{n=0}^{\\infty} ar^n$ ($a \\ne 0$) and the $p$-Series Test for $\\sum_{n=1}^{\\infty} \\frac{1}{n^p}$.",
+        intuition: "For the $p$-series proof, group terms into dyadic blocks of length $1, 2, 4, 8, \\dots, 2^k$. That immediately turns the bound into a geometric series with ratio $1/2^{p-1}$.",
+        steps: [
+          {
+            label: "Part A: Proof of Geometric Series Test ∑ arⁿ (a ≠ 0)",
+            math: "Partial sum $S_n = a + ar + ar^2 + \\cdots + ar^{n-1}$.<br>• <b>$|r| < 1$:</b> $S_n = \\frac{a(1-r^n)}{1-r} \\xrightarrow{n\\to\\infty} \\frac{a}{1-r}$ (finite) $\\implies$ <b>Convergent</b>.<br>• <b>$r \\ge 1$:</b> For $r > 1$, $r^n \\to \\infty \\implies S_n \\to \\infty$; for $r = 1$, $S_n = na \\to \\infty \\implies$ <b>Divergent</b>.<br>• <b>$r \\le -1$:</b> Terms alternate without a unique limit $\\implies$ <b>Oscillatory</b>."
+          },
+          {
+            label: "Part B: Proof of p-Series Test — Case 1 (p > 1)",
+            math: "$$S = 1 + \\left(\\frac{1}{2^p} + \\frac{1}{3^p}\\right) + \\left(\\frac{1}{4^p} + \\frac{1}{5^p} + \\frac{1}{6^p} + \\frac{1}{7^p}\\right) + \\cdots < 1 + \\frac{2}{2^p} + \\frac{4}{4^p} + \\frac{8}{8^p} + \\cdots$$ $$= 1 + \\frac{1}{2^{p-1}} + \\left(\\frac{1}{2^{p-1}}\\right)^2 + \\cdots$$<br>Geometric series with common ratio $r = \\frac{1}{2^{p-1}} < 1$ (since $p > 1$). Hence bounded & monotonic $\\implies$ <b>Convergent</b>."
+          },
+          {
+            label: "Case 2 (p = 1, Harmonic Series) & Case 3 (p < 1)",
+            math: "• <b>$p = 1$:</b> $S = 1 + \\frac{1}{2} + \\left(\\frac{1}{3}+\\frac{1}{4}\\right) + \\left(\\frac{1}{5}+\\cdots+\\frac{1}{8}\\right) + \\cdots > 1 + \\frac{1}{2} + \\frac{2}{4} + \\frac{4}{8} + \\cdots \\to \\infty$ (<b>Divergent</b>).<br>• <b>$p < 1$:</b> $n^p < n \\implies \\frac{1}{n^p} > \\frac{1}{n}$. By Comparison Test with $\\sum \\frac{1}{n}$, it <b>Diverges</b>."
+          }
+        ]
+      },
+
+      // ==================== UNIT 2 (7 Cards) ====================
+      {
+        id: "u2-q1",
+        unit: "Unit 2",
+        marks: "2 Marks Each",
+        title: "U2-Q1 & Q2: All Formulas of Arc Length, Volume & Surface Area",
+        problem: "Write all formulas for Length of Curve (Cartesian, Parametric, Polar), Volume of Solid of Revolution, and Surface Area of Solid of Revolution.",
+        intuition: "Notice the pattern: $ds$ stays identical in both Arc Length ($\\int ds$) and Surface Area ($\\int 2\\pi y\\,ds$), whereas Volume uses $\\pi y^2\\,dx$ without a square root.",
+        steps: [
+          {
+            label: "1. Length of Curve Formulas (s)",
+            math: "• <b>Cartesian:</b> $s = \\int_{a}^{b} \\sqrt{1 + \\left(\\frac{dy}{dx}\\right)^2}\\,dx$ &nbsp;or&nbsp; $s = \\int_{c}^{d} \\sqrt{1 + \\left(\\frac{dx}{dy}\\right)^2}\\,dy$<br>• <b>Parametric:</b> $s = \\int_{t_1}^{t_2} \\sqrt{\\left(\\frac{dx}{dt}\\right)^2 + \\left(\\frac{dy}{dt}\\right)^2}\\,dt$<br>• <b>Polar:</b> $s = \\int_{\\theta_1}^{\\theta_2} \\sqrt{r^2 + \\left(\\frac{dr}{d\\theta}\\right)^2}\\,d\\theta$"
+          },
+          {
+            label: "2. Volume of Solid of Revolution (V)",
+            math: "• <b>About x-axis:</b> $V = \\int_{a}^{b} \\pi y^2\\,dx$<br>• <b>About y-axis:</b> $V = \\int_{c}^{d} \\pi x^2\\,dy$<br>• <b>Polar about initial line (θ = 0):</b> $V = \\int_{\\theta_1}^{\\theta_2} \\frac{2}{3}\\pi r^3 \\sin\\theta\\,d\\theta$"
+          },
+          {
+            label: "3. Surface Area of Solid of Revolution (S)",
+            math: "• <b>About x-axis:</b> $S = \\int 2\\pi y\\,ds$<br>• <b>About y-axis:</b> $S = \\int 2\\pi x\\,ds$<br>• <b>Polar about initial line (θ = 0):</b> $S = \\int_{\\theta_1}^{\\theta_2} 2\\pi (r\\sin\\theta)\\sqrt{r^2 + \\left(\\frac{dr}{d\\theta}\\right)^2}\\,d\\theta$"
+          }
+        ]
+      },
+      {
+        id: "u2-q3",
+        unit: "Unit 2",
+        marks: "5 Marks Each",
+        title: "U2-Q3: Length of Curves — All 5 Standard Problems",
+        problem: "Find arc length of:<br>(I) Parabola $x^2 = 4ay$ from vertex $(0,0)$ to $(2a,a)$;<br>(II) $y = \\frac{1}{2}x^2 + 1$ from $x=0$ to $x=2$;<br>(III) $y^2 = 4ax$ cut off by latus rectum;<br>(IV) $x^2 = 16y$ cut off by latus rectum;<br>(V) $y^2 = 4x$ cut off by line $y = x$.",
+        intuition: "Check whether the question asks for 'vertex to ONE end of latus rectum' (single integral) or 'cut off by latus rectum' (both symmetric halves $\\implies$ multiply by $2$!).",
+        steps: [
+          {
+            label: "(I) Parabola x² = 4ay from vertex (0,0) to (2a, a)",
+            math: "$\\frac{dy}{dx} = \\frac{x}{2a} \\implies s = \\int_{0}^{2a} \\sqrt{1 + \\frac{x^2}{4a^2}}\\,dx = \\frac{1}{2a}\\left[\\frac{x}{2}\\sqrt{4a^2+x^2} + 2a^2\\log(x+\\sqrt{4a^2+x^2})\\right]_{0}^{2a}$<br>$$s = \\mathbf{a\\left[\\sqrt{2} + \\log(\\sqrt{2} + 1)\\right]}$$"
+          },
+          {
+            label: "(II) Curve y = (1/2)x² + 1 from x = 0 to x = 2",
+            math: "$\\frac{dy}{dx} = x \\implies s = \\int_{0}^{2} \\sqrt{1+x^2}\\,dx = \\left[\\frac{x}{2}\\sqrt{1+x^2} + \\frac{1}{2}\\log(x+\\sqrt{1+x^2})\\right]_{0}^{2} = \\mathbf{\\sqrt{5} + \\frac{1}{2}\\log(2 + \\sqrt{5})}$"
+          },
+          {
+            label: "(III) Parabola y² = 4ax cut off by latus rectum (x = 0 to a, both halves)",
+            math: "$\\frac{dy}{dx} = \\sqrt{\\frac{a}{x}} \\implies s = 2\\int_{0}^{a} \\sqrt{1 + \\frac{a}{x}}\\,dx$. Put $x = a\\tan^2\\theta$:<br>$$s = 4a\\int_{0}^{\\pi/4} \\sec^3\\theta\\,d\\theta = \\mathbf{2a\\left[\\sqrt{2} + \\log(\\sqrt{2} + 1)\\right]}$$"
+          },
+          {
+            label: "(IV) Parabola x² = 16y cut off by latus rectum",
+            math: "Comparing with $x^2 = 4ay \\implies 4a = 16 \\implies a = 4$.<br>For both symmetric halves from $(-8, 4)$ to $(8, 4)$: $s = 2 \\times 4[\\sqrt{2} + \\log(\\sqrt{2}+1)] = \\mathbf{8\\left[\\sqrt{2} + \\log(\\sqrt{2} + 1)\\right]}$."
+          },
+          {
+            label: "(V) Parabola y² = 4x cut off by line y = x",
+            math: "Intersection: $x^2 = 4x \\implies x = 0, 4$. Here $\\frac{dy}{dx} = \\frac{1}{\\sqrt{x}}$.<br>$$s = \\int_{0}^{4} \\sqrt{1 + \\frac{1}{x}}\\,dx = \\left[\\sqrt{x(x+1)} + \\log(\\sqrt{x} + \\sqrt{x+1})\\right]_{0}^{4} = \\mathbf{2\\sqrt{5} + \\log(2 + \\sqrt{5})}$$"
+          }
+        ]
+      },
+      {
+        id: "u2-q4",
+        unit: "Unit 2",
+        marks: "5 Marks",
+        title: "U2-Q4: Perimeter (Length) of Circle & Ellipse",
+        problem: "Find the total perimeter of (i) Circle $x^2 + y^2 = a^2$ and (ii) Ellipse $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$.",
+        intuition: "Use parametric form $x = a\\cos\\theta, y = b\\sin\\theta$ with limits $\\theta \\in [0, \\pi/2]$ and multiply by $4$ for all four quadrants.",
+        steps: [
+          {
+            label: "(i) Perimeter of Circle x² + y² = a²",
+            math: "Put $x = a\\cos\\theta, \\; y = a\\sin\\theta$. By symmetry across 4 quadrants:<br>$$s = 4\\int_{0}^{\\pi/2} \\sqrt{(-a\\sin\\theta)^2 + (a\\cos\\theta)^2}\\,d\\theta = 4\\int_{0}^{\\pi/2} a\\,d\\theta = 4a\\left(\\frac{\\pi}{2}\\right) = \\mathbf{2\\pi a}$$"
+          },
+          {
+            label: "(ii) Perimeter of Ellipse x²/a² + y²/b² = 1 (a > b)",
+            math: "Put $x = a\\cos\\theta, \\; y = b\\sin\\theta$. Using $b^2 = a^2(1 - e^2)$:<br>$$s = 4\\int_{0}^{\\pi/2} \\sqrt{a^2\\sin^2\\theta + b^2\\cos^2\\theta}\\,d\\theta = 4a\\int_{0}^{\\pi/2} \\sqrt{1 - e^2\\cos^2\\theta}\\,d\\theta$$"
+          },
+          {
+            label: "Expand Binomially & Integrate Using Wallis' Formula",
+            math: "$$s = 4a\\int_{0}^{\\pi/2} \\left(1 - \\frac{1}{2}e^2\\cos^2\\theta - \\frac{1}{8}e^4\\cos^4\\theta - \\cdots\\right)d\\theta = \\mathbf{2\\pi a\\left[1 - \\left(\\frac{1}{2}\\right)^2 e^2 - \\left(\\frac{1\\cdot 3}{2\\cdot 4}\\right)^2 \\frac{e^4}{3} - \\cdots\\right]}$$"
+          }
+        ]
+      },
+      {
+        id: "u2-q5",
+        unit: "Unit 2",
+        marks: "10 Marks",
+        title: "U2-Q5: Surface Area of All Cycloid Variants About x-axis",
+        problem: "Find the surface area generated by revolving one arch about the $x$-axis for:<br>(I) $x = a(\\theta - \\sin\\theta), \\; y = a(1 - \\cos\\theta)$;<br>(II) $x = a(\\theta + \\sin\\theta), \\; y = a(1 + \\cos\\theta)$;<br>(III) $x = a(\\theta + \\sin\\theta), \\; y = a(1 - \\cos\\theta)$ (from handwritten notes).",
+        intuition: "Watch the signs carefully! When the signs inside $x$ and $y$ match ($-$ and $-$, or $+$ and $+$), $S = \\frac{64}{3}\\pi a^2$. When the signs are opposite ($+$ and $-$), $S = \\frac{32}{3}\\pi a^2$.",
+        steps: [
+          {
+            label: "(I) Standard Cycloid x = a(θ - sin θ), y = a(1 - cos θ) [θ: 0 to 2π]",
+            math: "$$\\frac{ds}{d\\theta} = \\sqrt{a^2(1-\\cos\\theta)^2 + a^2\\sin^2\\theta} = 2a\\sin\\left(\\frac{\\theta}{2}\\right)$$<br>$$S = \\int_{0}^{2\\pi} 2\\pi a(1-\\cos\\theta)\\cdot 2a\\sin\\left(\\frac{\\theta}{2}\\right)d\\theta = 8\\pi a^2 \\int_{0}^{2\\pi} \\sin^3\\left(\\frac{\\theta}{2}\\right)d\\theta$$<br>Put $\\frac{\\theta}{2} = t$: $S = 16\\pi a^2 \\cdot 2\\int_{0}^{\\pi/2} \\sin^3 t\\,dt = 32\\pi a^2\\left(\\frac{2}{3}\\right) = \\mathbf{\\frac{64}{3}\\pi a^2}$."
+          },
+          {
+            label: "(II) Cycloid x = a(θ + sin θ), y = a(1 + cos θ) [θ: -π to π]",
+            math: "$$\\frac{ds}{d\\theta} = \\sqrt{a^2(1+\\cos\\theta)^2 + a^2\\sin^2\\theta} = 2a\\cos\\left(\\frac{\\theta}{2}\\right)$$<br>$$S = 2\\int_{0}^{\\pi} 2\\pi a(1+\\cos\\theta)\\cdot 2a\\cos\\left(\\frac{\\theta}{2}\\right)d\\theta = 16\\pi a^2 \\int_{0}^{\\pi} \\cos^3\\left(\\frac{\\theta}{2}\\right)d\\theta = \\mathbf{\\frac{64}{3}\\pi a^2}$$"
+          },
+          {
+            label: "(III) Handwritten Notes Variant: x = a(θ + sin θ), y = a(1 - cos θ) [θ: 0 to 2π]",
+            math: "Here $\\frac{ds}{d\\theta} = 2a\\cos(\\theta/2)$ and $y = 2a\\sin^2(\\theta/2)$:<br>$$S = 2\\int_{0}^{\\pi} 2\\pi \\cdot 2a\\sin^2\\left(\\frac{\\theta}{2}\\right) \\cdot 2a\\cos\\left(\\frac{\\theta}{2}\\right)d\\theta = 16\\pi a^2 \\left[2\\cdot\\frac{\\sin^3(\\theta/2)}{3}\\right]_{0}^{\\pi} = \\mathbf{\\frac{32}{3}\\pi a^2}$$"
+          }
+        ]
+      },
+      {
+        id: "u2-q6",
+        unit: "Unit 2",
+        marks: "10 Marks",
+        title: "U2-Q6: Surface Area of Ellipses About x-axis (General & Specific)",
+        problem: "Find the surface area of the solid generated by revolving about the $x$-axis:<br>(I) General ellipse $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$ ($a > b$);<br>(II) Specific ellipse $x^2 + 4y^2 = 16$.",
+        intuition: "Solve the general ellipse using eccentricity $e^2 = 1 - b^2/a^2$. For $x^2 + 4y^2 = 16$, divide by $16$ first to get $a = 4, b = 2$, then substitute into the general formula.",
+        steps: [
+          {
+            label: "(I) General Ellipse x²/a² + y²/b² = 1: Find ds/dx",
+            math: "$\\frac{dy}{dx} = -\\frac{b^2 x}{a^2 y} \\implies y\\sqrt{1 + (y')^2} = \\frac{b}{a^2}\\sqrt{a^4 - (a^2 - b^2)x^2} = \\frac{be}{a}\\sqrt{\\left(\\frac{a}{e}\\right)^2 - x^2}$."
+          },
+          {
+            label: "Integrate from x = 0 to a (Multiply by 2 for symmetry)",
+            math: "$$S = \\frac{4\\pi be}{a}\\int_{0}^{a} \\sqrt{\\frac{a^2}{e^2} - x^2}\\,dx = \\frac{4\\pi be}{a}\\left[\\frac{a}{2}\\cdot\\frac{b}{e} + \\frac{a^2}{2e^2}\\sin^{-1}(e)\\right] = \\mathbf{2\\pi b^2 + \\frac{2\\pi ab}{e}\\sin^{-1}(e)}$$"
+          },
+          {
+            label: "(II) Specific Ellipse x² + 4y² = 16",
+            math: "Divide by $16$: $\\frac{x^2}{16} + \\frac{y^2}{4} = 1 \\implies a = 4, \\; b = 2, \\; e = \\sqrt{1 - \\frac{4}{16}} = \\frac{\\sqrt{3}}{2}$.<br>$$S = 2\\pi(2)^2 + \\frac{2\\pi(4)(2)}{\\sqrt{3}/2}\\sin^{-1}\\left(\\frac{\\sqrt{3}}{2}\\right) = 8\\pi + \\frac{32\\pi}{\\sqrt{3}}\\left(\\frac{\\pi}{3}\\right) = \\mathbf{8\\pi + \\frac{32\\pi^2}{3\\sqrt{3}}}$$ "
+          }
+        ]
+      },
+      {
+        id: "u2-q7",
+        unit: "Unit 2",
+        marks: "10 Marks",
+        title: "U2-Q7: Volume & Surface Area of Both Cardioids About θ = 0",
+        problem: "Find the volume and surface area generated by revolving about the initial line ($\\theta = 0$) for:<br>(I) $r = a(1 - \\cos\\theta)$;<br>(II) $r = a(1 + \\cos\\theta)$.",
+        intuition: "Limits of $\\theta$ for cardioid revolution about $\\theta = 0$ are ALWAYS $0$ to $\\pi$ (upper half generates the entire 3D solid). Both cardioids yield the exact same Volume ($\\frac{8}{3}\\pi a^3$) and Surface Area ($\\frac{32}{5}\\pi a^2$).",
+        steps: [
+          {
+            label: "(I) Cardioid r = a(1 - cos θ) — Volume",
+            math: "$$V = \\int_{0}^{\\pi} \\frac{2}{3}\\pi r^3 \\sin\\theta\\,d\\theta = \\frac{2}{3}\\pi a^3 \\int_{0}^{\\pi} (1 - \\cos\\theta)^3 \\sin\\theta\\,d\\theta$$<br>Put $1 - \\cos\\theta = t \\implies \\sin\\theta\\,d\\theta = dt$ ($t: 0 \\to 2$):<br>$$V = \\frac{2}{3}\\pi a^3 \\left[\\frac{t^4}{4}\\right]_{0}^{2} = \\mathbf{\\frac{8}{3}\\pi a^3}$$"
+          },
+          {
+            label: "(I) Cardioid r = a(1 - cos θ) — Surface Area",
+            math: "$\\frac{ds}{d\\theta} = \\sqrt{r^2 + (r')^2} = 2a\\sin(\\theta/2)$.<br>$$S = \\int_{0}^{\\pi} 2\\pi a(1-\\cos\\theta)\\sin\\theta \\cdot 2a\\sin\\left(\\frac{\\theta}{2}\\right)d\\theta = 16\\pi a^2 \\int_{0}^{\\pi} \\sin^4\\left(\\frac{\\theta}{2}\\right)\\cos\\left(\\frac{\\theta}{2}\\right)d\\theta = \\mathbf{\\frac{32}{5}\\pi a^2}$$"
+          },
+          {
+            label: "(II) Cardioid r = a(1 + cos θ) — Volume & Surface Area",
+            math: "• <b>Volume:</b> $V = \\frac{2}{3}\\pi a^3 \\int_{0}^{\\pi} (1 + \\cos\\theta)^3 \\sin\\theta\\,d\\theta = \\frac{2}{3}\\pi a^3 \\left[-\\frac{(1+\\cos\\theta)^4}{4}\\right]_{0}^{\\pi} = \\mathbf{\\frac{8}{3}\\pi a^3}$.<br>• <b>Surface Area:</b> $\\frac{ds}{d\\theta} = 2a\\cos(\\theta/2) \\implies S = 16\\pi a^2 \\int_{0}^{\\pi} \\cos^4(\\theta/2)\\sin(\\theta/2)\\,d\\theta = \\mathbf{\\frac{32}{5}\\pi a^2}$."
+          }
+        ]
+      },
+      {
+        id: "u2-q8",
+        unit: "Unit 2",
+        marks: "5 Marks Each",
+        title: "U2-Q8: Volume & Surface Area of All 5 Circles (Cartesian & Polar)",
+        problem: "Find Volume and Surface Area of revolution for:<br>(I) $x^2 + y^2 = a^2$ about $x$-axis;<br>(II) $x^2 + y^2 = 4$ about $x$-axis;<br>(III) $x^2 + y^2 = 9$ about $x$-axis;<br>(IV) $r = 2a\\sin\\theta$ about $\\theta = \\pi/2$;<br>(V) $r = 2a\\cos\\theta$ about $\\theta = 0$.",
+        intuition: "Every circle revolved about a diameter generates a sphere of radius $R$ with $V = \\frac{4}{3}\\pi R^3$ and $S = 4\\pi R^2$. In polar form, $r = 2a\\sin\\theta$ and $r = 2a\\cos\\theta$ are circles of diameter $2a$ (so radius $R = a$!) with $\\theta \\in [0, \\pi/2]$.",
+        steps: [
+          {
+            label: "(I), (II), (III) Cartesian Circles x² + y² = R² about x-axis",
+            math: "$V = 2\\int_{0}^{R} \\pi(R^2 - x^2)\\,dx = \\frac{4}{3}\\pi R^3$, &nbsp; $S = 2\\int_{0}^{R} 2\\pi y\\sqrt{1 + x^2/y^2}\\,dx = 4\\pi R^2$.<br>• <b>(I) $x^2 + y^2 = a^2$ ($R=a$):</b> $V = \\mathbf{\\frac{4}{3}\\pi a^3}, \\; S = \\mathbf{4\\pi a^2}$.<br>• <b>(II) $x^2 + y^2 = 4$ ($R=2$):</b> $V = \\mathbf{\\frac{32}{3}\\pi}, \\; S = \\mathbf{16\\pi}$.<br>• <b>(III) $x^2 + y^2 = 9$ ($R=3$):</b> $V = \\mathbf{36\\pi}, \\; S = \\mathbf{36\\pi}$."
+          },
+          {
+            label: "(IV) Polar Circle r = 2a sin θ revolved about θ = π/2 (y-axis)",
+            math: "Limits $\\theta: 0 \\to \\frac{\\pi}{2}$. Here $\\frac{ds}{d\\theta} = \\sqrt{4a^2\\sin^2\\theta + 4a^2\\cos^2\\theta} = 2a$.<br>• <b>Surface Area:</b> $S = \\int_{0}^{\\pi/2} 2\\pi (r\\cos\\theta) \\frac{ds}{d\\theta}\\,d\\theta = \\int_{0}^{\\pi/2} 2\\pi (2a\\sin\\theta\\cos\\theta)(2a)\\,d\\theta = 8\\pi a^2 \\left[\\frac{\\sin^2\\theta}{2}\\right]_{0}^{\\pi/2} = \\mathbf{4\\pi a^2}$.<br>• <b>Volume:</b> $V = \\int_{0}^{\\pi/2} \\frac{2}{3}\\pi r^3 \\cos\\theta\\,d\\theta = \\frac{16}{3}\\pi a^3 \\int_{0}^{\\pi/2} \\sin^3\\theta\\cos\\theta\\,d\\theta = \\mathbf{\\frac{4}{3}\\pi a^3}$."
+          },
+          {
+            label: "(V) Polar Circle r = 2a cos θ revolved about θ = 0 (x-axis)",
+            math: "Limits $\\theta: 0 \\to \\frac{\\pi}{2}$, $\\frac{ds}{d\\theta} = 2a$.<br>• <b>Surface Area:</b> $S = \\int_{0}^{\\pi/2} 2\\pi (r\\sin\\theta)(2a)\\,d\\theta = 8\\pi a^2 \\int_{0}^{\\pi/2} \\cos\\theta\\sin\\theta\\,d\\theta = \\mathbf{4\\pi a^2}$.<br>• <b>Volume:</b> $V = \\int_{0}^{\\pi/2} \\frac{2}{3}\\pi (8a^3\\cos^3\\theta)\\sin\\theta\\,d\\theta = \\frac{16}{3}\\pi a^3 \\left[-\\frac{\\cos^4\\theta}{4}\\right]_{0}^{\\pi/2} = \\mathbf{\\frac{4}{3}\\pi a^3}$."
+          }
+        ]
+      },
+
+      // ==================== UNIT 3 (4 Cards) ====================
+      {
+        id: "u3-q1",
+        unit: "Unit 3",
+        marks: "2 & 5 Marks",
+        title: "U3-Q1 & Q2: Definitions & Basic Beta-Gamma Evaluations",
+        problem: "Define Beta function, Gamma function, 1st & 2nd kind improper integrals with examples, and evaluate $\\Gamma(5)$, $\\Gamma(7/2)$, and $B(5, 7)$.",
+        intuition: "Remember: $\\Gamma(n) = (n-1)!$ for positive integers, and for half-integers peel off $(n-1)$ down to $\\Gamma(1/2) = \\sqrt{\\pi}$.",
+        steps: [
+          {
+            label: "1. Definitions of Beta, Gamma & Improper Integrals",
+            math: "• <b>Beta Function:</b> $B(m, n) = \\int_{0}^{1} x^{m-1}(1-x)^{n-1}\\,dx \\quad (m>0, n>0)$.<br>• <b>Gamma Function:</b> $\\Gamma(n) = \\int_{0}^{\\infty} e^{-x} x^{n-1}\\,dx \\quad (n>0)$.<br>• <b>1st Kind Improper Integral:</b> Infinite limit(s), e.g., $\\int_{1}^{\\infty} \\frac{dx}{x^2} = 1$.<br>• <b>2nd Kind Improper Integral:</b> Unbounded integrand on $[a,b]$, e.g., $\\int_{0}^{1} \\frac{dx}{\\sqrt{x}} = 2$."
+          },
+          {
+            label: "2. Evaluate Γ(5) and Γ(7/2)",
+            math: "• $\\Gamma(5) = 4! = 4 \\times 3 \\times 2 \\times 1 = \\mathbf{24}$.<br>• $\\Gamma\\left(\\frac{7}{2}\\right) = \\frac{5}{2} \\cdot \\frac{3}{2} \\cdot \\frac{1}{2}\\Gamma\\left(\\frac{1}{2}\\right) = \\mathbf{\\frac{15}{8}\\sqrt{\\pi}}$."
+          },
+          {
+            label: "3. Evaluate B(5, 7)",
+            math: "$$B(5, 7) = \\frac{\\Gamma(5)\\Gamma(7)}{\\Gamma(5+7)} = \\frac{4! \\cdot 6!}{11!} = \\frac{24 \\times 720}{11 \\times 10 \\times 9 \\times 8 \\times 7 \\times 720} = \\frac{24}{55440} = \\mathbf{\\frac{1}{2310}}$$"
+          }
+        ]
+      },
+      {
+        id: "u3-q3",
+        unit: "Unit 3",
+        marks: "5 Marks",
+        title: "U3-Q3: All 7 Beta-Gamma Reduction Integrals",
+        problem: "Evaluate:<br>(1) $\\int_{0}^{\\pi/2} \\sin^3 x \\cos^5 x\\,dx$; (2) $\\int_{0}^{\\pi/2} \\sin^5 x\\,dx$; (3) $\\int_{0}^{\\pi/2} \\cos^4 x\\,dx$;<br>(4) $\\int_{0}^{1} x^4(1-x)^3\\,dx$; (5) $\\int_{0}^{1} \\frac{x^2}{\\sqrt{1-x^5}}\\,dx$; (6) $\\int_{0}^{\\pi/2} \\sqrt{\\tan x}\\,dx$; (7) $\\int_{0}^{1} x^3(1-x)^5\\,dx$.",
+        intuition: "Use the golden trig formula $\\int_0^{\\pi/2} \\sin^p x \\cos^q x\\,dx = \\frac{\\Gamma(\\frac{p+1}{2})\\Gamma(\\frac{q+1}{2})}{2\\Gamma(\\frac{p+q+2}{2})}$ for (1), (2), (3), and (6).",
+        steps: [
+          {
+            label: "Integrals (1), (2), and (3) — Trigonometric Forms",
+            math: "• <b>(1)</b> $\\int_{0}^{\\pi/2} \\sin^3 x \\cos^5 x\\,dx = \\frac{\\Gamma(2)\\Gamma(3)}{2\\Gamma(5)} = \\frac{1! \\cdot 2!}{2 \\cdot 4!} = \\frac{2}{48} = \\mathbf{\\frac{1}{24}}$.<br>• <b>(2)</b> $\\int_{0}^{\\pi/2} \\sin^5 x \\cos^0 x\\,dx = \\frac{\\Gamma(3)\\Gamma(1/2)}{2\\Gamma(7/2)} = \\frac{2\\sqrt{\\pi}}{2 \\cdot \\frac{15}{8}\\sqrt{\\pi}} = \\mathbf{\\frac{8}{15}}$.<br>• <b>(3)</b> $\\int_{0}^{\\pi/2} \\sin^0 x \\cos^4 x\\,dx = \\frac{\\Gamma(1/2)\\Gamma(5/2)}{2\\Gamma(3)} = \\frac{\\sqrt{\\pi} \\cdot \\frac{3}{4}\\sqrt{\\pi}}{2 \\cdot 2!} = \\mathbf{\\frac{3\\pi}{16}}$."
+          },
+          {
+            label: "Integrals (4) and (7) — Direct Beta Function Forms",
+            math: "• <b>(4)</b> $\\int_{0}^{1} x^{5-1}(1-x)^{4-1}\\,dx = B(5,4) = \\frac{4! \\cdot 3!}{8!} = \\frac{24 \\times 6}{40320} = \\mathbf{\\frac{1}{280}}$.<br>• <b>(7)</b> $\\int_{0}^{1} x^{4-1}(1-x)^{6-1}\\,dx = B(4,6) = \\frac{3! \\cdot 5!}{9!} = \\frac{6}{9 \\times 8 \\times 7 \\times 6} = \\mathbf{\\frac{1}{504}}$."
+          },
+          {
+            label: "Integral (5) — Substitution x⁵ = t",
+            math: "Put $x^5 = t \\implies x = t^{1/5}, \\; dx = \\frac{1}{5}t^{-4/5}\\,dt$:<br>$$\\int_{0}^{1} \\frac{x^2}{\\sqrt{1-x^5}}\\,dx = \\frac{1}{5}\\int_{0}^{1} t^{2/5}(1-t)^{-1/2}t^{-4/5}\\,dt = \\frac{1}{5}\\int_{0}^{1} t^{-2/5}(1-t)^{-1/2}\\,dt = \\mathbf{\\frac{1}{5}B\\left(\\frac{3}{5}, \\frac{1}{2}\\right)}$$"
+          },
+          {
+            label: "Integral (6) — √(tan x) via Euler Reflection Formula",
+            math: "$$\\int_{0}^{\\pi/2} \\sin^{1/2}x \\cos^{-1/2}x\\,dx = \\frac{\\Gamma(3/4)\\Gamma(1/4)}{2\\Gamma(1)} = \\frac{1}{2}\\Gamma\\left(\\frac{1}{4}\\right)\\Gamma\\left(1-\\frac{1}{4}\\right) = \\frac{\\pi}{2\\sin(\\pi/4)} = \\mathbf{\\frac{\\pi}{\\sqrt{2}}}$$ "
+          }
+        ]
+      },
+      {
+        id: "u3-q4",
+        unit: "Unit 3",
+        marks: "10 Marks",
+        title: "U3-Q4: All Properties & Proofs of Beta-Gamma Relations",
+        problem: "Prove:<br>(I) $B(m, n) = B(n, m)$;<br>(II) $B(m, n) = 2\\int_{0}^{\\pi/2} \\sin^{2m-1}\\theta \\cos^{2n-1}\\theta\\,d\\theta$ & $\\int_{0}^{\\pi/2} \\sin^p\\theta\\cos^q\\theta\\,d\\theta$;<br>(III) $\\Gamma(n) = (n-1)\\Gamma(n-1)$;<br>(IV) $B(m, n) = \\frac{\\Gamma(m)\\Gamma(n)}{\\Gamma(m+n)}$.",
+        intuition: "These 4 proofs together form the single most frequently asked 10-mark theory block in Unit-3 of IKG-PTU papers.",
+        steps: [
+          {
+            label: "(I) Symmetry B(m, n) = B(n, m)",
+            math: "In $B(m,n) = \\int_{0}^{1} x^{m-1}(1-x)^{n-1}\\,dx$, apply $\\int_{0}^{a} f(x)\\,dx = \\int_{0}^{a} f(a-x)\\,dx$:<br>$$B(m,n) = \\int_{0}^{1} (1-x)^{m-1}[1-(1-x)]^{n-1}\\,dx = \\int_{0}^{1} x^{n-1}(1-x)^{m-1}\\,dx = B(n,m)$$"
+          },
+          {
+            label: "(II) Trigonometric Form of Beta Function",
+            math: "Put $x = \\sin^2\\theta \\implies dx = 2\\sin\\theta\\cos\\theta\\,d\\theta$ ($\\theta: 0 \\to \\frac{\\pi}{2}$):<br>$$B(m,n) = 2\\int_{0}^{\\pi/2} \\sin^{2m-1}\\theta\\cos^{2n-1}\\theta\\,d\\theta$$<br>Setting $2m-1=p, 2n-1=q$ gives $\\int_{0}^{\\pi/2} \\sin^p\\theta\\cos^q\\theta\\,d\\theta = \\frac{1}{2}B\\left(\\frac{p+1}{2}, \\frac{q+1}{2}\\right)$."
+          },
+          {
+            label: "(III) Recurrence Relation Γ(n) = (n - 1)Γ(n - 1)",
+            math: "Integrate $\\Gamma(n) = \\int_{0}^{\\infty} x^{n-1} e^{-x}\\,dx$ by parts ($u = x^{n-1}, dv = e^{-x}dx$):<br>$$\\Gamma(n) = \\left[-x^{n-1}e^{-x}\\right]_{0}^{\\infty} + (n-1)\\int_{0}^{\\infty} x^{n-2}e^{-x}\\,dx = 0 + (n-1)\\Gamma(n-1)$$"
+          },
+          {
+            label: "(IV) Fundamental Relation B(m, n) = Γ(m)Γ(n) / Γ(m + n)",
+            math: "$$\\Gamma(m)\\Gamma(n) = \\int_{0}^{\\infty}\\int_{0}^{\\infty} e^{-(x+y)} x^{m-1} y^{n-1}\\,dx\\,dy$$<br>Put $x = u^2, y = v^2$, then convert to polar coordinates ($u = r\\cos\\theta, v = r\\sin\\theta$):<br>$$\\Gamma(m)\\Gamma(n) = \\left(2\\int_{0}^{\\infty} e^{-r^2}r^{2(m+n)-1}\\,dr\\right)\\left(2\\int_{0}^{\\pi/2} \\cos^{2m-1}\\theta\\sin^{2n-1}\\theta\\,d\\theta\\right) = \\Gamma(m+n)B(m,n)$$"
+          }
+        ]
+      },
+      {
+        id: "u3-q5",
+        unit: "Unit 3",
+        marks: "5 Marks",
+        title: "U3-Q5: Convergence of All Improper Integrals",
+        problem: "Test convergence of:<br>(1) $\\int_{0}^{1} \\frac{dx}{\\sqrt{x - x^2}}$;<br>(2) $\\int_{0}^{\\infty} \\frac{\\sqrt{x}}{(1+x)^2}\\,dx$;<br>(3) $\\int_{0}^{\\pi/2} \\frac{\\tan x}{x}\\,dx$ and $\\int_{0}^{\\infty} \\frac{\\tan^{-1}x}{x^2+1}\\,dx$.",
+        intuition: "Split integrals that have discontinuities at BOTH endpoints (like $x=0$ and $x=1$ in problem 1) at the midpoint $x = 1/2$ and test each half separately.",
+        steps: [
+          {
+            label: "(1) ∫₀¹ dx / √(x - x²) — Discontinuous at both x = 0 and x = 1",
+            math: "Split at $x = \\frac{1}{2}$: $I = \\int_{0}^{1/2} \\frac{dx}{\\sqrt{x}\\sqrt{1-x}} + \\int_{1/2}^{1} \\frac{dx}{\\sqrt{x}\\sqrt{1-x}} = I_1 + I_2$.<br>• Near $x=0$: $\\frac{1}{\\sqrt{x}\\sqrt{1-x}} \\sim \\frac{1}{x^{1/2}}$ ($p = \\frac{1}{2} < 1 \\implies I_1$ converges).<br>• Near $x=1$: $\\sim \\frac{1}{(1-x)^{1/2}}$ ($p = \\frac{1}{2} < 1 \\implies I_2$ converges).<br>Hence $I$ <b>Converges</b> (value $= B(1/2, 1/2) = \\pi$)."
+          },
+          {
+            label: "(2) ∫₀^∞ √x / (1 + x)² dx — 1st Kind Improper Integral",
+            math: "Continuous at $x = 0$. As $x \\to \\infty$, $\\frac{x^{1/2}}{(1+x)^2} \\sim \\frac{x^{1/2}}{x^2} = \\frac{1}{x^{3/2}}$.<br>Since $p = \\frac{3}{2} > 1$, the integral <b>Converges</b>."
+          },
+          {
+            label: "(3) ∫₀^(π/2) (tan x / x) dx vs ∫₀^∞ [tan⁻¹ x / (x² + 1)] dx",
+            math: "• For $\\int_{0}^{\\pi/2} \\frac{\\tan x}{x}\\,dx$: Singular at $x = \\frac{\\pi}{2}$. Near $x = \\frac{\\pi}{2}$, $\\tan x = \\frac{\\sin x}{\\sin(\\frac{\\pi}{2}-x)} \\sim \\frac{1}{\\frac{\\pi}{2}-x}$ ($p = 1 \\implies$ <b>Divergent</b>).<br>• For $\\int_{0}^{\\infty} \\frac{\\tan^{-1}x}{x^2+1}\\,dx = \\left[\\frac{(\\tan^{-1}x)^2}{2}\\right]_{0}^{\\infty} = \\mathbf{\\frac{\\pi^2}{8}}$ (<b>Convergent</b>)."
+          }
+        ]
+      },
+
+      // ==================== UNIT 4 (5 Cards) ====================
+      {
+        id: "u4-q1",
+        unit: "Unit 4",
+        marks: "2 & 5 Marks",
+        title: "U4-Q1: Basic Definitions & Maxima/Minima Working Conditions",
+        problem: "Define Partial Derivative, Homogeneous Function, Chain Rule, Composite Function, Total Derivative, and state the conditions for Maxima & Minima of $f(x, y)$.",
+        intuition: "Writing the 4-point $rt - s^2$ working rule cleanly at the top of any 10-mark Maxima/Minima question guarantees 3 marks before you even touch the numbers.",
+        steps: [
+          {
+            label: "1. Definitions (Partial Derivative, Homogeneous, Composite, Total Derivative)",
+            math: "• <b>Partial Derivative:</b> $f_x = \\lim_{h\\to 0} \\frac{f(x+h, y) - f(x, y)}{h}$ (treating $y$ as constant).<br>• <b>Homogeneous Function:</b> $f(x,y)$ has degree $n$ if $f(tx, ty) = t^n f(x,y)$.<br>• <b>Composite Function & Chain Rule:</b> If $z = f(x,y)$ where $x = \\phi(u,v), y = \\psi(u,v)$, then $\\frac{\\partial z}{\\partial u} = \\frac{\\partial z}{\\partial x}\\frac{\\partial x}{\\partial u} + \\frac{\\partial z}{\\partial y}\\frac{\\partial y}{\\partial u}$.<br>• <b>Total Derivative:</b> If $x = x(t), y = y(t)$, then $\\frac{dz}{dt} = \\frac{\\partial z}{\\partial x}\\frac{dx}{dt} + \\frac{\\partial z}{\\partial y}\\frac{dy}{dt}$."
+          },
+          {
+            label: "2. Necessary & Sufficient Conditions for Maxima/Minima of f(x, y)",
+            math: "1. Find stationary points where $p = f_x = 0$ and $q = f_y = 0$.<br>2. Compute $r = f_{xx}, \\; s = f_{xy}, \\; t = f_{yy}$ at $(a, b)$.<br>• <b>Maximum:</b> $rt - s^2 > 0$ and $r < 0$.<br>• <b>Minimum:</b> $rt - s^2 > 0$ and $r > 0$.<br>• <b>Saddle Point:</b> $rt - s^2 < 0$. (If $rt - s^2 = 0$, case is doubtful)."
+          }
+        ]
+      },
+      {
+        id: "u4-q2",
+        unit: "Unit 4",
+        marks: "5 Marks Each",
+        title: "U4-Q2: All 6 Chain Rule & Euler 1st-Order Problems",
+        problem: "Solve all 6 problems:<br>(I) Find $\\frac{dz}{dt}$ for $z = xy^2 + x^2y$, $x = at^2$, $y = 2at$ (and $y = -2at$);<br>(II) Find $z_x, z_y$ for $\\log z = \\log(u^2+v)$, $u = e^{x^2+y^2}$, $v = x^2+y$;<br>(III) Find $w_r, w_s$ for $w = x^2+y^2$, $x = r-s$, $y = r+s$;<br>(IV) Prove $x u_x + y u_y + z u_z = 0$ for $u = f(x/y, y/z, z/x)$;<br>(V) Prove $x z_x + y z_y = \\sin 2z$ for $z = \\tan^{-1}\\left(\\frac{x^3+y^3}{x-y}\\right)$;<br>(VI) Prove $(u_x+u_y+u_z)^2 = \\frac{9}{(x+y+z)^2}$ for $u = \\log(x^3+y^3+z^3-3xyz)$.",
+        intuition: "For (V), apply Euler's theorem to $f = \\tan z$ (degree $3-1=2$) instead of differentiating $\\tan^{-1}$ directly. For (VI), factor the denominator using $(x+y+z)(x^2+y^2+z^2-xy-yz-zx)$.",
+        steps: [
+          {
+            label: "(I) Total Derivative dz/dt for z = xy² + x²y",
+            math: "$$\\frac{dz}{dt} = (y^2 + 2xy)\\frac{dx}{dt} + (2xy + x^2)\\frac{dy}{dt}$$<br>• For $x = at^2, y = 2at$: $= (4a^2t^2 + 4a^2t^3)(2at) + (4a^2t^3 + a^2t^4)(2a) = \\mathbf{16a^3t^3 + 10a^3t^4}$.<br>• For $x = at^2, y = -2at$: $= (4a^2t^2 - 4a^2t^3)(2at) + (-4a^2t^3 + a^2t^4)(-2a) = \\mathbf{16a^3t^3 - 10a^3t^4}$."
+          },
+          {
+            label: "(II) Chain Rule for log z = log(u² + v) and (III) w = x² + y²",
+            math: "• <b>(II)</b> $z = u^2 + v \\implies z_x = 2u\\cdot u_x + v_x = \\mathbf{4xe^{2(x^2+y^2)} + 2x}$; &nbsp; $z_y = \\mathbf{4ye^{2(x^2+y^2)} + 1}$.<br>• <b>(III)</b> $w_r = 2x(1) + 2y(1) = 2(r-s+r+s) = \\mathbf{4r}$; &nbsp; $w_s = 2x(-1) + 2y(1) = \\mathbf{4s}$."
+          },
+          {
+            label: "(IV) u = f(x/y, y/z, z/x) and (V) z = tan⁻¹((x³ + y³)/(x - y))",
+            math: "• <b>(IV)</b> Let $p=x/y, q=y/z, r=z/x$. Computing $x u_x + y u_y + z u_z$ gives $\\left(\\frac{x}{y}f_p - \\frac{z}{x}f_r\\right) + \\left(-\\frac{x}{y}f_p + \\frac{y}{z}f_q\\right) + \\left(-\\frac{y}{z}f_q + \\frac{z}{x}f_r\\right) = \\mathbf{0}$.<br>• <b>(V)</b> $f = \\tan z = \\frac{x^3+y^3}{x-y}$ has degree $n=2 \\implies x\\sec^2 z\\,z_x + y\\sec^2 z\\,z_y = 2\\tan z \\implies x z_x + y z_y = \\mathbf{\\sin 2z}$."
+          },
+          {
+            label: "(VI) u = log(x³ + y³ + z³ - 3xyz)",
+            math: "$$u_x + u_y + u_z = \\frac{3(x^2+y^2+z^2-xy-yz-zx)}{(x+y+z)(x^2+y^2+z^2-xy-yz-zx)} = \\frac{3}{x+y+z} \\implies (u_x+u_y+u_z)^2 = \\mathbf{\\frac{9}{(x+y+z)^2}}$$"
+          }
+        ]
+      },
+      {
+        id: "u4-q3",
+        unit: "Unit 4",
+        marks: "10 Marks",
+        title: "U4-Q3: Euler's 2nd-Order Theorem Proof & Both Deductions",
+        problem: "Prove Euler's 2nd-Order Theorem $x^2 z_{xx} + 2xy z_{xy} + y^2 z_{yy} = n(n-1)z$, and deduce:<br>(1) $x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = -\\frac{\\sin u \\cos 2u}{4\\cos^3 u}$ for $u = \\sin^{-1}\\left(\\frac{x+y}{\\sqrt{x}+\\sqrt{y}}\\right)$;<br>(2) $x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = -\\sin 2u \\sin^2 u$ for $u = \\tan^{-1}\\left(\\frac{y^2}{x}\\right)$.",
+        intuition: "Memorize the master corollary: if $F(u)$ is homogeneous of degree $n$, then $x u_x + y u_y = n\\frac{F(u)}{F'(u)} = \\phi(u)$ and $x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = \\phi(u)[\\phi'(u) - 1]$.",
+        steps: [
+          {
+            label: "Step 1: Proof of Euler's 2nd-Order Theorem",
+            math: "Start with $x z_x + y z_y = nz$. Differentiate w.r.t. $x$ and $y$:<br>$$x z_{xx} + y z_{xy} = (n-1)z_x \\quad (1), \\qquad x z_{xy} + y z_{yy} = (n-1)z_y \\quad (2)$$<br>Multiply (1) by $x$, (2) by $y$, and add: $x^2 z_{xx} + 2xy z_{xy} + y^2 z_{yy} = (n-1)(x z_x + y z_y) = \\mathbf{n(n-1)z}$."
+          },
+          {
+            label: "Step 2: Deduction 1 — u = sin⁻¹((x + y) / (√x + √y))",
+            math: "$z = \\sin u = \\frac{x+y}{\\sqrt{x}+\\sqrt{y}}$ has degree $n = 1 - \\frac{1}{2} = \\frac{1}{2}$.<br>$$\\phi(u) = \\frac{1}{2}\\frac{\\sin u}{\\cos u} = \\frac{1}{2}\\tan u \\implies \\phi(u)[\\phi'(u)-1] = \\frac{1}{2}\\tan u\\left(\\frac{1}{2}\\sec^2 u - 1\\right) = \\mathbf{-\\frac{\\sin u \\cos 2u}{4\\cos^3 u}}$$"
+          },
+          {
+            label: "Step 3: Deduction 2 — u = tan⁻¹(y² / x)",
+            math: "$z = \\tan u = \\frac{y^2}{x}$ has degree $n = 2 - 1 = 1$.<br>$$\\phi(u) = 1 \\cdot \\frac{\\tan u}{\\sec^2 u} = \\sin u\\cos u = \\frac{1}{2}\\sin 2u$$<br>$$x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = \\frac{1}{2}\\sin 2u (\\cos 2u - 1) = \\frac{1}{2}\\sin 2u (-2\\sin^2 u) = \\mathbf{-\\sin 2u \\sin^2 u}$$"
+          }
+        ]
+      },
+      {
+        id: "u4-q4",
+        unit: "Unit 4",
+        marks: "10 Marks Each",
+        title: "U4-Q4: All 4 Maxima & Minima Problems (Algebraic & Word Problems)",
+        problem: "Solve all 4 Maxima/Minima problems:<br>(I) $f(x,y) = x^4 + y^4 - 2x^2 + 4xy - 2y^2$;<br>(II) $f(x,y) = x^3 + y^3 - 63(x+y) + 12xy$;<br>(III) Sum of 3 positive numbers is constant ($x+y+z=c$), prove product $xyz$ is max when $x=y=z$;<br>(IV) Open-top rectangular box of volume $32\\text{ m}^3$, find dimensions for least material.",
+        intuition: "In (I) and (II), subtract or add $f_x = 0$ and $f_y = 0$ to factor $(x-y)$ or $(x+y)$ immediately. In (IV), 'open at the top' means Surface Area $S = xy + 2yz + 2zx$ (only one base!).",
+        steps: [
+          {
+            label: "(I) f(x, y) = x⁴ + y⁴ - 2x² + 4xy - 2y²",
+            math: "$f_x = 4x^3 - 4x + 4y = 0$ and $f_y = 4y^3 + 4x - 4y = 0$. Adding gives $x^3 + y^3 = 0 \\implies y = -x$.<br>Points: $(0,0)$ [Saddle], $(\\sqrt{2}, -\\sqrt{2})$ and $(-\\sqrt{2}, \\sqrt{2})$ where $r = 20 > 0, rt-s^2 = 384 > 0 \\implies$ <b>Minima = -8</b>."
+          },
+          {
+            label: "(II) f(x, y) = x³ + y³ - 63(x + y) + 12xy",
+            math: "$x^2 + 4y - 21 = 0$ and $y^2 + 4x - 21 = 0$. Subtracting gives $(x-y)(x+y-4)=0$.<br>• <b>At $(-7,-7)$:</b> $r = -42 < 0, rt-s^2 > 0 \\implies$ <b>Maximum = 784</b>.<br>• <b>At $(3,3)$:</b> $r = 18 > 0, rt-s^2 > 0 \\implies$ <b>Minimum = -216</b>. (Points $(5,-1), (-1,5)$ are saddles)."
+          },
+          {
+            label: "(III) Maximum Product P = xyz Given x + y + z = c",
+            math: "$P = xy(c - x - y) \\implies P_x = y(c - 2x - y) = 0, \\; P_y = x(c - x - 2y) = 0 \\implies x = y = z = \\frac{c}{3}$.<br>At $(\\frac{c}{3}, \\frac{c}{3})$: $r = -\\frac{2c}{3} < 0, \\; rt-s^2 = \\frac{c^2}{3} > 0 \\implies$ <b>Maximum when x = y = z</b>."
+          },
+          {
+            label: "(IV) Open-Top Rectangular Box (Volume = 32 m³)",
+            math: "$z = \\frac{32}{xy} \\implies S = xy + \\frac{64}{x} + \\frac{64}{y}$. Setting $S_x = 0, S_y = 0 \\implies x^2 y = 64, x y^2 = 64 \\implies x = y = 4, z = 2$.<br>At $(4,4)$: $r = 2 > 0, rt-s^2 = 3 > 0 \\implies$ <b>Dimensions: 4 m × 4 m × 2 m</b>."
+          }
+        ]
+      },
+      {
+        id: "u4-q5",
+        unit: "Unit 4",
+        marks: "5 & 10 Marks",
+        title: "U4-Q5, Q6, Q7: All 3 Partial Differential Equation Identities",
+        problem: "Solve:<br><b>Q5:</b> Find $n$ if $\\theta = t^n e^{-r^2/(4t)}$ satisfies $\\frac{1}{r^2}\\frac{\\partial}{\\partial r}\\left(r^2\\frac{\\partial\\theta}{\\partial r}\\right) = \\frac{\\partial\\theta}{\\partial t}$;<br><b>Q6:</b> If $r^2 = x^2+y^2+z^2$, prove $\\nabla^2(r^m) = m(m+1)r^{m-2}$;<br><b>Q7:</b> If $u = \\sin^{-1}\\left(\\frac{x^2+y^2}{x+y}\\right)$, prove $x u_x + y u_y = \\tan u$ and $x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = \\tan^3 u$.",
+        intuition: "In Q6, always differentiate $r$ implicitly via $r^2 = x^2 + y^2 + z^2 \\implies \\frac{\\partial r}{\\partial x} = \\frac{x}{r}$ rather than expanding square roots.",
+        steps: [
+          {
+            label: "Q5: Heat Equation Similarity Solution θ = tⁿ e^(-r² / 4t)",
+            math: "$$\\frac{1}{r^2}\\frac{\\partial}{\\partial r}\\left(r^2\\frac{\\partial\\theta}{\\partial r}\\right) = \\left(-\\frac{3}{2}t^{n-1} + \\frac{r^2}{4}t^{n-2}\\right)e^{-r^2/(4t)}, \\quad \\frac{\\partial\\theta}{\\partial t} = \\left(n t^{n-1} + \\frac{r^2}{4}t^{n-2}\\right)e^{-r^2/(4t)}$$<br>Equating coefficients of $t^{n-1}$ gives $n = \\mathbf{-\\frac{3}{2}}$."
+          },
+          {
+            label: "Q6: 3D Laplacian of r^m where r² = x² + y² + z²",
+            math: "$\\frac{\\partial(r^m)}{\\partial x} = m r^{m-2} x \\implies \\frac{\\partial^2(r^m)}{\\partial x^2} = m r^{m-2} + m(m-2)r^{m-4}x^2$.<br>Summing over $x, y, z$: $\\nabla^2(r^m) = 3m r^{m-2} + m(m-2)r^{m-4}(x^2+y^2+z^2) = \\mathbf{m(m+1)r^{m-2}}$."
+          },
+          {
+            label: "Q7: u = sin⁻¹((x² + y²) / (x + y))",
+            math: "$z = \\sin u$ has degree $n = 2 - 1 = 1 \\implies x u_x + y u_y = \\frac{\\sin u}{\\cos u} = \\mathbf{\\tan u}$.<br>2nd order: $\\phi(u)[\\phi'(u)-1] = \\tan u(\\sec^2 u - 1) = \\mathbf{\\tan^3 u}$."
+          }
+        ]
+      },
+
+      // ==================== UNIT 5 (6 Cards) ====================
+      {
+        id: "u5-q1",
+        unit: "Unit 5",
+        marks: "2 & 5 Marks",
+        title: "U5-Q1: Simple Double/Triple Integrals & Jacobians",
+        problem: "Evaluate:<br>(I) Jacobian $J = \\frac{\\partial(x,y)}{\\partial(r,\\theta)}$ for $x = r\\cos\\theta, y = r\\sin\\theta$;<br>(II) Jacobian $J = \\frac{\\partial(x,y)}{\\partial(u,v)}$ for $x = u+v, y = uv$;<br>(III) Triple integral $\\int_{0}^{1}\\int_{0}^{1}\\int_{0}^{1} xyz\\,dz\\,dy\\,dx$ and $\\int_{0}^{1}\\int_{0}^{2} xy^2\\,dx\\,dy$.",
+        intuition: "When limits of a multiple integral are all constants and the integrand factors into $f(x)g(y)h(z)$, split it into a product of single integrals immediately.",
+        steps: [
+          {
+            label: "(I) Polar Jacobian J(x, y / r, θ)",
+            math: "$$J = \\frac{\\partial(x,y)}{\\partial(r,\\theta)} = \\begin{vmatrix} x_r & x_\\theta \\\\ y_r & y_\\theta \\end{vmatrix} = \\begin{vmatrix} \\cos\\theta & -r\\sin\\theta \\\\ \\sin\\theta & r\\cos\\theta \\end{vmatrix} = r(\\cos^2\\theta + \\sin^2\\theta) = \\mathbf{r}$$"
+          },
+          {
+            label: "(II) Algebraic Jacobian J(x, y / u, v) for x = u + v, y = uv",
+            math: "$$J = \\frac{\\partial(x,y)}{\\partial(u,v)} = \\begin{vmatrix} 1 & 1 \\\\ v & u \\end{vmatrix} = \\mathbf{u - v}$$"
+          },
+          {
+            label: "(III) Constant-Limit Double & Triple Integrals",
+            math: "• $\\int_{0}^{1}\\int_{0}^{1}\\int_{0}^{1} xyz\\,dz\\,dy\\,dx = \\left(\\int_{0}^{1} x\\,dx\\right)\\left(\\int_{0}^{1} y\\,dy\\right)\\left(\\int_{0}^{1} z\\,dz\\right) = \\frac{1}{2}\\cdot\\frac{1}{2}\\cdot\\frac{1}{2} = \\mathbf{\\frac{1}{8}}$.<br>• $\\int_{0}^{1}\\int_{0}^{2} xy^2\\,dx\\,dy = \\left(\\int_{0}^{2} x\\,dx\\right)\\left(\\int_{0}^{1} y^2\\,dy\\right) = (2)\\left(\\frac{1}{3}\\right) = \\mathbf{\\frac{2}{3}}$ (or $\\mathbf{\\frac{4}{3}}$ if $x:0\\to 1, y:0\\to 2$)."
+          }
+        ]
+      },
+      {
+        id: "u5-q2",
+        unit: "Unit 5",
+        marks: "5 & 10 Marks",
+        title: "U5-Q2: All 5 Double & Triple Integrals by Finding Limits",
+        problem: "Evaluate:<br>(I) $\\iint xy\\,dx\\,dy$ over 1st quadrant of circle $x^2+y^2=1$;<br>(II) $\\iint xy(x+y)\\,dx\\,dy$ between $y=x^2$ and $y=x$;<br>(III) $\\iiint (x+y+z)\\,dx\\,dy\\,dz$ over $x=0, y=0, z=0, x+y+z=1$;<br>(IV) $\\iint xy\\,dx\\,dy$ over 1st quadrant of ellipse $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$;<br>(V) $\\iint e^{2x+3y}\\,dx\\,dy$ over $x=0, y=0, x+y=1$.",
+        intuition: "Always integrate the variable whose limit contains the other variable FIRST ($z$ before $y$, and $y$ before $x$), leaving constant limits for the outermost integral.",
+        steps: [
+          {
+            label: "(I) ∬ xy dx dy over 1st Quadrant of x² + y² = 1",
+            math: "$$I = \\int_{0}^{1}\\int_{0}^{\\sqrt{1-x^2}} xy\\,dy\\,dx = \\frac{1}{2}\\int_{0}^{1} x(1-x^2)\\,dx = \\frac{1}{2}\\left(\\frac{1}{2} - \\frac{1}{4}\\right) = \\mathbf{\\frac{1}{8}}$$"
+          },
+          {
+            label: "(II) ∬ xy(x + y) dx dy between y = x² and y = x",
+            math: "Intersection at $(0,0)$ and $(1,1)$ with $x^2 \\le y \\le x$:<br>$$I = \\int_{0}^{1}\\int_{x^2}^{x} (x^2 y + xy^2)\\,dy\\,dx = \\int_{0}^{1} \\left(\\frac{5}{6}x^4 - \\frac{1}{2}x^6 - \\frac{1}{3}x^7\\right)dx = \\frac{1}{6} - \\frac{1}{14} - \\frac{1}{24} = \\mathbf{\\frac{3}{56}}$$"
+          },
+          {
+            label: "(III) ∭ (x + y + z) dx dy dz over Tetrahedron x+y+z ≤ 1",
+            math: "$$I = \\int_{0}^{1}\\int_{0}^{1-x}\\int_{0}^{1-x-y} (x+y+z)\\,dz\\,dy\\,dx = \\frac{1}{2}\\int_{0}^{1}\\int_{0}^{1-x} [1-(x+y)^2]\\,dy\\,dx = \\mathbf{\\frac{1}{8}}$$"
+          },
+          {
+            label: "(IV) ∬ xy dx dy over 1st Quadrant of Ellipse x²/a² + y²/b² = 1",
+            math: "$$I = \\int_{0}^{a}\\int_{0}^{\\frac{b}{a}\\sqrt{a^2-x^2}} xy\\,dy\\,dx = \\frac{b^2}{2a^2}\\int_{0}^{a} x(a^2-x^2)\\,dx = \\frac{b^2}{2a^2}\\left(\\frac{a^4}{2} - \\frac{a^4}{4}\\right) = \\mathbf{\\frac{a^2 b^2}{8}}$$"
+          },
+          {
+            label: "(V) ∬ e^(2x + 3y) dx dy over Triangle x ≥ 0, y ≥ 0, x + y ≤ 1",
+            math: "$$I = \\int_{0}^{1}\\int_{0}^{1-x} e^{2x}e^{3y}\\,dy\\,dx = \\frac{1}{3}\\int_{0}^{1} (e^{3-x} - e^{2x})\\,dx = \\frac{1}{3}\\left[-e^{3-x} - \\frac{e^{2x}}{2}\\right]_{0}^{1} = \\mathbf{\\frac{2e^3 - 3e^2 + 1}{6}}$$"
+          }
+        ]
+      },
+      {
+        id: "u5-q3",
+        unit: "Unit 5",
+        marks: "10 Marks Each",
+        title: "U5-Q3: All 4 Change of Order of Integration Problems",
+        problem: "Evaluate by changing the order of integration:<br>(I) $\\int_{0}^{1}\\int_{x^2}^{2-x} xy\\,dy\\,dx$;<br>(II) $\\int_{0}^{\\infty}\\int_{x}^{\\infty} \\frac{e^{-y}}{y}\\,dy\\,dx$;<br>(III) $\\int_{0}^{4a}\\int_{x^2/(4a)}^{2\\sqrt{ax}} dy\\,dx$;<br>(IV) $\\int_{0}^{1}\\int_{y}^{1} e^{-x^2}\\,dx\\,dy$.",
+        intuition: "Draw a 10-second sketch of the limits! If the inner limits are $y = f(x)$, draw vertical strips; to change order to $dx\\,dy$, draw horizontal strips from left curve to right curve.",
+        steps: [
+          {
+            label: "(I) ∫₀¹ ∫_(x²)^(2-x) xy dy dx (Splits into 2 horizontal regions at y = 1)",
+            math: "Curves $y = x^2$ and $y = 2-x$ meet at $(1,1)$. Switching to horizontal strips:<br>$$I = \\int_{0}^{1}\\int_{0}^{\\sqrt{y}} xy\\,dx\\,dy + \\int_{1}^{2}\\int_{0}^{2-y} xy\\,dx\\,dy = \\frac{1}{2}\\int_{0}^{1} y^2\\,dy + \\frac{1}{2}\\int_{1}^{2} y(2-y)^2\\,dy = \\frac{1}{6} + \\frac{5}{24} = \\mathbf{\\frac{3}{8}}$$"
+          },
+          {
+            label: "(II) ∫₀^∞ ∫_x^∞ (e^(-y) / y) dy dx",
+            math: "Region $0 \\le x \\le y < \\infty \\implies 0 \\le x \\le y$ with $y: 0 \\to \\infty$:<br>$$I = \\int_{0}^{\\infty}\\int_{0}^{y} \\frac{e^{-y}}{y}\\,dx\\,dy = \\int_{0}^{\\infty} \\frac{e^{-y}}{y}(y)\\,dy = \\int_{0}^{\\infty} e^{-y}\\,dy = \\mathbf{1}$$"
+          },
+          {
+            label: "(III) ∫₀^(4a) ∫_(x²/4a)^(2√(ax)) dy dx",
+            math: "Region between $x^2 = 4ay$ and $y^2 = 4ax$. Changing order to $dx\\,dy$:<br>$$I = \\int_{0}^{4a}\\int_{y^2/(4a)}^{2\\sqrt{ay}} dx\\,dy = \\int_{0}^{4a} \\left(2\\sqrt{ay} - \\frac{y^2}{4a}\\right)dy = \\frac{32a^2}{3} - \\frac{16a^2}{3} = \\mathbf{\\frac{16}{3}a^2}$$"
+          },
+          {
+            label: "(IV) ∫₀¹ ∫_y¹ e^(-x²) dx dy",
+            math: "Region $0 \\le y \\le x \\le 1$:<br>$$I = \\int_{0}^{1}\\int_{0}^{x} e^{-x^2}\\,dy\\,dx = \\int_{0}^{1} x e^{-x^2}\\,dx = \\left[-\\frac{1}{2}e^{-x^2}\\right]_{0}^{1} = \\mathbf{\\frac{1 - e^{-1}}{2}}$$"
+          }
+        ]
+      },
+      {
+        id: "u5-q4",
+        unit: "Unit 5",
+        marks: "5 & 10 Marks",
+        title: "U5-Q4: Polar Coordinate Transformations (Both Problems)",
+        problem: "Evaluate by changing to polar coordinates:<br>(I) $\\int_{0}^{a}\\int_{0}^{\\sqrt{a^2-x^2}} e^{-(x^2+y^2)}\\,dy\\,dx$;<br>(II) $\\iint (x^2+y^2)\\,dx\\,dy$ over the disk $x^2+y^2 \\le a^2$.",
+        intuition: "Never forget the Jacobian factor $r$ when replacing $dy\\,dx = r\\,dr\\,d\\theta$! Check whether the domain is the 1st quadrant ($\\theta: 0 \\to \\pi/2$) or full circle ($\\theta: 0 \\to 2\\pi$).",
+        steps: [
+          {
+            label: "(I) ∫₀ᵃ ∫₀^√(a²-x²) e^-(x²+y²) dy dx (1st Quadrant of Circle)",
+            math: "Limits: $r \\in [0, a]$, $\\theta \\in [0, \\pi/2]$, and $dy\\,dx = r\\,dr\\,d\\theta$:<br>$$I = \\int_{0}^{\\pi/2}\\int_{0}^{a} e^{-r^2} r\\,dr\\,d\\theta = \\frac{\\pi}{2}\\left[-\\frac{1}{2}e^{-r^2}\\right]_{0}^{a} = \\mathbf{\\frac{\\pi}{4}(1 - e^{-a^2})}$$ "
+          },
+          {
+            label: "(II) ∬ (x² + y²) dx dy over Full Disk x² + y² ≤ a²",
+            math: "Limits: $r \\in [0, a]$, $\\theta \\in [0, 2\\pi]$:<br>$$I = \\int_{0}^{2\\pi}\\int_{0}^{a} r^2 \\cdot r\\,dr\\,d\\theta = 2\\pi \\left[\\frac{r^4}{4}\\right]_{0}^{a} = \\mathbf{\\frac{\\pi a^4}{2}}$$"
+          }
+        ]
+      },
+      {
+        id: "u5-q5",
+        unit: "Unit 5",
+        marks: "5 & 10 Marks",
+        title: "U5-Q5: All 4 Area by Double Integration Problems",
+        problem: "Find area using double integration:<br>(I) Between parabolas $y^2 = 4ax$ and $x^2 = 4ay$;<br>(II) Circle $x^2 + y^2 = 4$;<br>(III) Ellipse $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$;<br>(IV) Between parabola $x^2 = 4ay$ and line $y = 2x$ (also $x = 2y$).",
+        intuition: "In double integration, $\\text{Area} = \\iint dy\\,dx$ with integrand $1$. Always find intersection points first to set the outer $x$-limits.",
+        steps: [
+          {
+            label: "(I) Area Between Parabolas y² = 4ax and x² = 4ay",
+            math: "Intersect at $(0,0)$ and $(4a,4a)$:<br>$$A = \\int_{0}^{4a}\\int_{x^2/(4a)}^{2\\sqrt{ax}} dy\\,dx = \\int_{0}^{4a} \\left(2\\sqrt{ax} - \\frac{x^2}{4a}\\right)dx = \\frac{32a^2}{3} - \\frac{16a^2}{3} = \\mathbf{\\frac{16}{3}a^2}$$"
+          },
+          {
+            label: "(II) Area of Circle x² + y² = 4 (R = 2) & (III) Ellipse x²/a² + y²/b² = 1",
+            math: "• <b>Circle:</b> $A = 4\\int_{0}^{2}\\int_{0}^{\\sqrt{4-x^2}} dy\\,dx = 4\\left[\\frac{x}{2}\\sqrt{4-x^2} + 2\\sin^{-1}\\frac{x}{2}\\right]_{0}^{2} = \\mathbf{4\\pi}$.<br>• <b>Ellipse:</b> $A = 4\\int_{0}^{a}\\int_{0}^{\\frac{b}{a}\\sqrt{a^2-x^2}} dy\\,dx = \\frac{4b}{a}\\left(\\frac{\\pi a^2}{4}\\right) = \\mathbf{\\pi ab}$."
+          },
+          {
+            label: "(IV) Area Between Parabola x² = 4ay and Line y = 2x (and x = 2y)",
+            math: "• <b>For line $y = 2x$:</b> Intersect at $(0,0)$ and $(8a, 16a)$:<br>$$A = \\int_{0}^{8a}\\int_{x^2/(4a)}^{2x} dy\\,dx = \\int_{0}^{8a} \\left(2x - \\frac{x^2}{4a}\\right)dx = 64a^2 - \\frac{128a^2}{3} = \\mathbf{\\frac{64}{3}a^2}$$<br>• <b>For line $x = 2y$:</b> Intersect at $(0,0)$ and $(4a, 2a) \\implies A = \\int_{0}^{4a} \\left(\\frac{x}{2} - \\frac{x^2}{4a}\\right)dx = \\mathbf{\\frac{4}{3}a^2}$."
+          }
+        ]
+      },
+      {
+        id: "u5-q6",
+        unit: "Unit 5",
+        marks: "10 Marks Each",
+        title: "U5-Q6: All 5 Volume by Double/Triple Integration Problems",
+        problem: "Find volume using double/triple integration:<br>(I) Spheres $x^2+y^2+z^2 = a^2$, $= 4$, $= 9$;<br>(II) Ellipsoid $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} + \\frac{z^2}{c^2} = 1$;<br>(III) Common to sphere $x^2+y^2+z^2=a^2$ and cylinder $x^2+y^2=ay$;<br>(IV) Tetrahedron bounded by coordinate planes and $\\frac{x}{a} + \\frac{y}{b} + \\frac{z}{c} = 1$;<br>(V) Bounded by cylinder $x^2+y^2=4$ and planes $y+z=4, z=0$.",
+        intuition: "In (III), convert $x^2 + y^2 = ay$ to polar form $r = a\\sin\\theta$ ($\\theta: 0 \\to \\pi$). In (V), integrate $z = 4 - y$ over the circular disk $x^2 + y^2 \\le 4$ using polar coordinates.",
+        steps: [
+          {
+            label: "(I) Volumes of Spheres x² + y² + z² = R²",
+            math: "$V = 8\\int_{0}^{R}\\int_{0}^{\\sqrt{R^2-x^2}} \\sqrt{R^2-x^2-y^2}\\,dy\\,dx = \\frac{4}{3}\\pi R^3$.<br>• For $R = a$: $\\mathbf{\\frac{4}{3}\\pi a^3}$; &nbsp; For $R = 2$ ($=4$): $\\mathbf{\\frac{32}{3}\\pi}$; &nbsp; For $R = 3$ ($=9$): $\\mathbf{36\\pi}$."
+          },
+          {
+            label: "(II) Volume of Ellipsoid x²/a² + y²/b² + z²/c² = 1",
+            math: "$$V = 8\\int_{0}^{a}\\int_{0}^{\\frac{b}{a}\\sqrt{a^2-x^2}} c\\sqrt{1 - \\frac{x^2}{a^2} - \\frac{y^2}{b^2}}\\,dy\\,dx = \\frac{2\\pi bc}{a^2}\\int_{0}^{a} (a^2-x^2)\\,dx = \\mathbf{\\frac{4}{3}\\pi abc}$$"
+          },
+          {
+            label: "(III) Volume Common to Sphere x²+y²+z² = a² and Cylinder x²+y² = ay",
+            math: "In polar form, cylinder is $r = a\\sin\\theta$ ($0 \\le \\theta \\le \\pi$). Multiply by $2$ for $z \\ge 0$ and $z \\le 0$:<br>$$V = 2\\int_{0}^{\\pi}\\int_{0}^{a\\sin\\theta} \\sqrt{a^2-r^2}\\,r\\,dr\\,d\\theta = \\frac{4a^3}{3}\\int_{0}^{\\pi/2} (1 - \\cos^3\\theta)\\,d\\theta = \\mathbf{\\frac{2}{9}a^3(3\\pi - 4)}$$"
+          },
+          {
+            label: "(IV) Volume of Tetrahedron x/a + y/b + z/c = 1",
+            math: "$$V = \\int_{0}^{a}\\int_{0}^{b(1-x/a)}\\int_{0}^{c(1-x/a-y/b)} dz\\,dy\\,dx = \\frac{bc}{2}\\int_{0}^{a} \\left(1 - \\frac{x}{a}\\right)^2 dx = \\mathbf{\\frac{1}{6}abc}$$"
+          },
+          {
+            label: "(V) Volume Bounded by Cylinder x² + y² = 4 and Planes y + z = 4, z = 0",
+            math: "Height $z = 4 - y = 4 - r\\sin\\theta$ over disk $r \\in [0, 2], \\theta \\in [0, 2\\pi]$:<br>$$V = \\int_{0}^{2\\pi}\\int_{0}^{2} (4 - r\\sin\\theta)r\\,dr\\,d\\theta = \\int_{0}^{2\\pi} \\left(8 - \\frac{8}{3}\\sin\\theta\\right)d\\theta = 8(2\\pi) - 0 = \\mathbf{16\\pi}$$"
+          }
+        ]
+      }
+    ];
+
+// Unit Metadata and Syllabus Information
+const UNIT_META = {
+  "Unit 1": {
+    title: "Sequences & Infinite Series",
+    code: "UNIT 1",
+    marks: "15-20 Marks",
+    topicsCount: 4,
+    description: "Convergence & divergence of sequences and series, standard tests (Ratio, Cauchy Integral, Leibnitz, p-Test, Comparison, Raabe's), Taylor & Maclaurin series expansions.",
+    icon: "sigma",
+    file: "unit1.html"
+  },
+  "Unit 2": {
+    title: "Applications of Definite Integrals",
+    code: "UNIT 2",
+    marks: "15-20 Marks",
+    topicsCount: 8,
+    description: "Length of plane curves (arc length), volume and surface area of solids of revolution for Cartesian, parametric and polar curves (Cycloids, Ellipses, Cardioids, Circles).",
+    icon: "shapes",
+    file: "unit2.html"
+  },
+  "Unit 3": {
+    title: "Beta & Gamma Functions & Improper Integrals",
+    code: "UNIT 3",
+    marks: "12-18 Marks",
+    topicsCount: 5,
+    description: "Properties of Beta and Gamma functions, relation between Beta & Gamma, duplication formula, reduction integrals, and convergence of improper integrals.",
+    icon: "function-square",
+    file: "unit3.html"
+  },
+  "Unit 4": {
+    title: "Multivariable Calculus (Partial Differentiation)",
+    code: "UNIT 4",
+    marks: "15-20 Marks",
+    topicsCount: 5,
+    description: "Partial derivatives, Euler's Theorem on homogeneous functions (1st & 2nd order with deductions), total derivative, composite functions, maxima & minima of two variables.",
+    icon: "layers",
+    file: "unit4.html"
+  },
+  "Unit 5": {
+    title: "Multiple Integrals & Vector Calculus Basics",
+    code: "UNIT 5",
+    marks: "15-20 Marks",
+    topicsCount: 6,
+    description: "Double and triple integrals, evaluation by finding limits, change of order of integration, transformation to polar coordinates, applications to areas and volumes.",
+    icon: "box",
+    file: "unit5.html"
+  }
+};
+
+const UNITS = ["All", "Unit 1", "Unit 2", "Unit 3", "Unit 4", "Unit 5"];
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { QUESTIONS_DB, UNIT_META, UNITS };
+}

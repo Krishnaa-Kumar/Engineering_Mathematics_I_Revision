@@ -1,0 +1,111 @@
+/* CalcVault M-1 Unified Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --brand-primary: #06b6d4;
+  --brand-secondary: #4f46e5;
+  --brand-accent: #f59e0b;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Step Reveal Animations */
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-animate {
+  animation: slideFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* KaTeX Formatting */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.4rem 0;
+  margin: 0.5rem 0 !important;
+}
+
+.katex {
+  font-size: 1.05em;
+}
+
+/* Emblem Pulse Animation */
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(6, 182, 212, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.5));
+  }
+}
+
+.logo-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Active Nav Links */
+.nav-link.active {
+  color: #06b6d4 !important;
+  font-weight: 700;
+  border-bottom: 2px solid #06b6d4;
+}
+
+/* Print Styles for Direct 1-Click Cheat-Sheet & PDF Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  #print-container {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+  }
+  .print-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid #cbd5e1 !important;
+    margin-bottom: 1rem !important;
+    padding: 1rem !important;
+    border-radius: 0.5rem !important;
+    background: #ffffff !important;
+  }
+  .print-title {
+    color: #0e7490 !important;
+  }
+  .print-header {
+    border-bottom: 2px solid #0f172a !important;
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+}

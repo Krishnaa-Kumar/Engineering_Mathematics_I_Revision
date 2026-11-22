@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CalcVault M-1 | IKG-PTU BTAM101-18 Interactive Exam Vault by Krishna Kumar</title>
+  <title>CalcVault M-1 | Engineering Mathematics-I Revision Hub • IKG-PTU BTAM101-18</title>
+  <meta name="description" content="100% Free interactive revision vault for IKG-PTU BTAM101-18 Engineering Mathematics-I. 26 high-yield exam derivations, step-by-step solutions, and printable PDF cheat-sheet." />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,7 +33,7 @@
   </script>
 
   <!-- Google Fonts: Inter & JetBrains Mono -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- KaTeX for fast, crisp mathematical typesetting -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -42,255 +43,192 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <style>
-    /* Custom scrollbar and smooth animations */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.3); border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.5); }
-
-    @keyframes slideFadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .step-animate {
-      animation: slideFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .katex-display {
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding: 0.4rem 0;
-      margin: 0.4rem 0 !important;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { filter: drop-shadow(0 0 6px rgba(6, 182, 212, 0.4)); }
-      50% { filter: drop-shadow(0 0 14px rgba(245, 158, 11, 0.5)); }
-    }
-
-    .logo-glow {
-      animation: pulseGlow 3s ease-in-out infinite;
-    }
-
-    /* Print / Cheat-Sheet PDF Export Styles */
-    @media print {
-      body { background: white !important; color: black !important; }
-      .no-print { display: none !important; }
-      #print-container { display: block !important; }
-      .print-card { break-inside: avoid; border: 1px solid #cbd5e1; margin-bottom: 1rem; padding: 1rem; border-radius: 0.5rem; }
-    }
-  </style>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-slate-100 text-slate-900 dark:bg-[#0b1120] dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
 
-  <!-- UPI Contribution & Timed Access Gate Overlay -->
-  <div id="upi-gate-overlay" class="no-print fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-xl flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
-    <div class="relative w-full max-w-2xl rounded-3xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-cyan-500/30 shadow-2xl shadow-cyan-950/60 p-5 sm:p-7 my-auto step-animate">
-
-      <!-- Top Compact Brand Header -->
-      <div class="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-700/80">
-        <div class="flex items-center gap-3 text-center sm:text-left">
-          <div class="w-12 h-12 rounded-2xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-md logo-glow shrink-0">
-            <svg viewBox="0 0 64 64" class="w-9 h-9" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="shieldGradGate" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#4f46e5"/>
-                  <stop offset="50%" stop-color="#06b6d4"/>
-                  <stop offset="100%" stop-color="#f59e0b"/>
-                </linearGradient>
-              </defs>
-              <path d="M32 4L54 13V30C54 45.2 44.6 56.8 32 60C19.4 56.8 10 45.2 10 30V13L32 4Z" fill="#0f172a" stroke="url(#shieldGradGate)" stroke-width="3"/>
-              <path d="M36 16C33.5 16 32.2 18.2 31.8 22L29.2 42C28.8 45.8 27.5 48 25 48" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round"/>
-              <circle cx="38" cy="16" r="2.2" fill="#f59e0b"/>
-              <circle cx="23" cy="48" r="2.2" fill="#f59e0b"/>
-              <path d="M18 26H27M21 26V35M25 26V35" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div>
-            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-              <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-400 via-cyan-400 to-amber-400 bg-clip-text text-transparent">
-                CalcVault M-1
-              </h2>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">
-                CGC CEC Landran
-              </span>
-            </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              IKG-PTU BTAM101-18 • 26-Topic Exam Vault by <strong class="text-slate-800 dark:text-slate-200">Krishna Kumar</strong>
-            </p>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-1.5 text-[11px] font-semibold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/20 shrink-0">
-          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
-          <span>Timed Study Passes</span>
-        </div>
-      </div>
-
-      <!-- Timed Access Tiers Selector -->
-      <div class="mt-4">
-        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
-          1. Choose Timed Access Pass (Includes +5 Min Final Warning)
-        </label>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          <button type="button" onclick="selectAmount(9)" id="amt-chip-9" class="amt-chip py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition flex flex-col items-center">
-            <span class="text-sm font-extrabold">₹9</span>
-            <span class="text-[10px] text-slate-500 dark:text-slate-400">30m + 5m warn</span>
-          </button>
-          <button type="button" onclick="selectAmount(19)" id="amt-chip-19" class="amt-chip py-2 px-2 rounded-xl text-xs font-bold border-2 border-cyan-500 bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 transition flex flex-col items-center">
-            <span class="text-sm font-extrabold">₹19 ★</span>
-            <span class="text-[10px] opacity-85">55m + 5m warn</span>
-          </button>
-          <button type="button" onclick="selectAmount(29)" id="amt-chip-29" class="amt-chip py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition flex flex-col items-center">
-            <span class="text-sm font-extrabold">₹29</span>
-            <span class="text-[10px] text-slate-500 dark:text-slate-400">115m + 5m warn</span>
-          </button>
-          <div class="relative flex flex-col justify-center">
-            <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">₹</span>
-            <input type="number" id="custom-amount-input" min="1" placeholder="Custom" oninput="selectCustomAmount(this.value)"
-              class="w-full h-full pl-6 pr-2 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 focus:outline-none focus:border-cyan-500" />
-          </div>
-        </div>
-        <div id="tier-duration-hint" class="mt-2 text-[11px] font-semibold text-cyan-700 dark:text-cyan-300 flex items-center gap-1.5">
-          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
-          <span>Selected Pass: <strong>55 mins access + 5 mins warning (60 mins total)</strong></span>
-        </div>
-      </div>
-
-      <!-- Two-Column QR & UPI Payment Action Box -->
-      <div class="mt-4 p-4 rounded-2xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-700/80 grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-        <!-- Left QR Column -->
-        <div class="sm:col-span-5 flex flex-col items-center justify-center border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-800 pb-3 sm:pb-0 sm:pr-4">
-          <div class="p-2 bg-white rounded-2xl shadow-md border border-slate-200 flex items-center justify-center">
-            <img id="gate-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=4&data=upi%3A%2F%2Fpay%3Fpa%3D7888690390%40upi%26pn%3DKrishna%2520Kumar%26am%3D19%26cu%3DINR%26tn%3DCalcVault%2520M1%2520Study%2520Guide" alt="Scan UPI QR Code" class="w-32 h-32 rounded-lg object-contain bg-white" />
-          </div>
-          <span class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 mt-1.5 text-center">Scan with GPay / PhonePe / Paytm</span>
-          <button type="button" onclick="markPaymentInitiated('qr')" class="mt-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 hover:bg-cyan-500/25 transition">
-            I've Scanned &amp; Paid via QR
-          </button>
-        </div>
-
-        <!-- Right UPI Details & Verification Column -->
-        <div class="sm:col-span-7 flex flex-col gap-2.5">
-          <div class="p-2.5 rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2">
-            <div class="min-w-0">
-              <div class="text-[10px] font-bold uppercase text-slate-400">UPI ID (Krishna Kumar)</div>
-              <div class="text-xs sm:text-sm font-mono font-bold text-cyan-600 dark:text-cyan-400 truncate" id="gate-upi-text">7888690390@upi</div>
-            </div>
-            <button type="button" onclick="copyUpiId('gate-copy-badge')" class="shrink-0 flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-cyan-500/20 text-slate-700 dark:text-slate-200 transition">
-              <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-              <span id="gate-copy-badge">Copy UPI</span>
-            </button>
-          </div>
-
-          <a id="upi-deeplink-btn" href="upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=19&cu=INR&tn=CalcVault%20M1%20Study%20Guide"
-             onclick="markPaymentInitiated('app')"
-             class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-500/25 transition active:scale-95">
-            <i data-lucide="smartphone" class="w-4 h-4"></i>
-            <span id="upi-deeplink-label">Pay ₹19 via UPI App</span>
-          </a>
-
-          <input type="text" id="utr-input" maxlength="20" placeholder="Optional: 12-digit UPI UTR / Ref ID"
-                 class="w-full px-3 py-2 text-xs font-mono rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500" />
-        </div>
-      </div>
-
-      <!-- Locked Until Payment Action Unlock Button -->
-      <div class="mt-4">
-        <button type="button" id="unlock-vault-btn" onclick="unlockVault()" disabled
-                class="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed transition">
-          <i data-lucide="lock" id="unlock-btn-icon" class="w-4 h-4"></i>
-          <span id="unlock-btn-label">Click "Pay via UPI App" or "Scanned QR" First</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5-Minute Final Warning Banner -->
-  <div id="time-warning-banner" class="no-print hidden sticky top-0 z-40 bg-amber-500 text-slate-950 px-4 py-2 text-xs sm:text-sm font-bold shadow-md">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
-        <i data-lucide="alert-triangle" class="w-4 h-4 shrink-0"></i>
-        <span>Final 5-Minute Warning: Your CalcVault M-1 study pass expires in <span id="warning-countdown-text" class="font-mono underline">05:00</span>!</span>
-      </div>
-      <button type="button" onclick="openExtendSessionGate()" class="px-3 py-1 rounded-lg bg-slate-950 text-amber-400 hover:bg-slate-800 text-xs font-extrabold transition">
-        Extend Session Time (+UPI)
-      </button>
-    </div>
-  </div>
-
-  <!-- Top Navigation Header -->
-  <header class="no-print sticky top-0 z-30 bg-white/95 dark:bg-[#151e32]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 py-3">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-3">
-        <!-- Custom CalcVault M-1 Geometric Shield + Integral SVG Emblem -->
-        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-md shadow-cyan-500/20 shrink-0">
-          <svg viewBox="0 0 64 64" class="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Universal Top Navigation Bar -->
+  <header class="no-print sticky top-0 z-30 bg-white/95 dark:bg-[#151e32]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      
+      <!-- Brand Logo & Title -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-md shadow-cyan-500/20 shrink-0 logo-glow">
+          <svg viewBox="0 0 64 64" class="w-7 h-7" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <linearGradient id="shieldGradHeader" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+              <linearGradient id="shieldGrad" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stop-color="#4f46e5"/>
                 <stop offset="50%" stop-color="#06b6d4"/>
                 <stop offset="100%" stop-color="#f59e0b"/>
               </linearGradient>
             </defs>
-            <path d="M32 4L54 13V30C54 45.2 44.6 56.8 32 60C19.4 56.8 10 45.2 10 30V13L32 4Z" fill="#0f172a" stroke="url(#shieldGradHeader)" stroke-width="3.2"/>
+            <path d="M32 4L54 13V30C54 45.2 44.6 56.8 32 60C19.4 56.8 10 45.2 10 30V13L32 4Z" fill="#0f172a" stroke="url(#shieldGrad)" stroke-width="3.2"/>
             <path d="M36 16C33.5 16 32.2 18.2 31.8 22L29.2 42C28.8 45.8 27.5 48 25 48" stroke="#22d3ee" stroke-width="3.6" stroke-linecap="round"/>
             <circle cx="38" cy="16" r="2.3" fill="#f59e0b"/>
             <circle cx="23" cy="48" r="2.3" fill="#f59e0b"/>
             <path d="M18 26H27M21 26V35M25 26V35" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
-
         <div>
-          <div class="flex flex-wrap items-center gap-2">
-            <h1 class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-indigo-500 via-cyan-500 to-amber-500 dark:from-indigo-400 dark:via-cyan-400 dark:to-amber-400 bg-clip-text text-transparent">
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-indigo-500 via-cyan-500 to-amber-500 dark:from-indigo-400 dark:via-cyan-400 dark:to-amber-400 bg-clip-text text-transparent">
               CalcVault M-1
-            </h1>
-            <span id="verified-access-badge" class="hidden inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
-              <i data-lucide="shield-check" class="w-3 h-3"></i>
-              <span>Active Pass</span>
             </span>
-            <span id="session-timer-badge" class="hidden inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30" title="Remaining Study Pass Time">
-              <i data-lucide="timer" class="w-3 h-3"></i>
-              <span id="session-timer-text">--:--</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+              100% Free
             </span>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400">IKG-PTU BTAM101-18 • Interactive Exam Vault by Krishna Kumar</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">IKG-PTU BTAM101-18 • Revision Website</p>
         </div>
-      </div>
+      </a>
 
-      <!-- Action Toolbar -->
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-1 text-xs font-semibold">
+        <a href="index.html" class="px-3 py-1.5 rounded-lg text-cyan-600 dark:text-cyan-400 font-bold bg-cyan-500/10">Whiteboard</a>
+        <a href="unit1.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 1</a>
+        <a href="unit2.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 2</a>
+        <a href="unit3.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 3</a>
+        <a href="unit4.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 4</a>
+        <a href="unit5.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 5</a>
+        <a href="cheatsheet.html" class="px-3 py-1.5 rounded-lg text-amber-600 dark:text-amber-400 font-bold hover:bg-amber-500/10 transition">Cheat-Sheet</a>
+        <a href="syllabus.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Syllabus</a>
+        <a href="about.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">About</a>
+      </nav>
+
+      <!-- Action Toolbar (PDF Print & Theme Toggle) -->
       <div class="flex items-center gap-2">
-        <button type="button" onclick="openCreditsModal()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition" title="Author Credits & UPI Support">
-          <i data-lucide="heart" class="w-3.5 h-3.5 text-rose-500"></i>
-          <span>Credits</span>
+        <button type="button" onclick="triggerCheatSheetPrint()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm transition active:scale-95" title="Print or Save Complete 26-Topic Cheat-Sheet as PDF (Free)">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Print / PDF</span>
         </button>
 
-        <button type="button" onclick="openCheatSheetPrint()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm transition active:scale-95" title="Unlock & Export Complete 26-Topic PDF Cheat-Sheet">
-          <i data-lucide="printer" class="w-4 h-4"></i>
-          <span class="hidden sm:inline">Print / PDF Cheat-Sheet</span>
-          <span class="sm:hidden">PDF</span>
+        <button type="button" onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition" title="Toggle Dark/Light Mode">
+          <i data-lucide="sun" class="w-4 h-4 theme-icon-sun"></i>
+          <i data-lucide="moon" class="w-4 h-4 theme-icon-moon" style="display:none;"></i>
         </button>
 
-        <button type="button" onclick="toggleTheme()" id="theme-btn" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition" title="Toggle Dark/Light Mode">
-          <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
-          <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+        <button type="button" onclick="toggleMobileMenu()" class="p-2 rounded-xl md:hidden bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
+          <i data-lucide="menu" class="w-4 h-4"></i>
         </button>
       </div>
     </div>
 
-    <!-- Unit Filter Tabs -->
-    <div class="max-w-7xl mx-auto mt-3 flex items-center gap-2 overflow-x-auto pb-1" id="unit-tabs">
-      <!-- Populated dynamically via JS -->
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-nav-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#151e32] px-4 py-3 space-y-2 text-sm font-semibold">
+      <div class="grid grid-cols-2 gap-2">
+        <a href="index.html" class="p-2 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold">Whiteboard</a>
+        <a href="cheatsheet.html" class="p-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold">Cheat-Sheet</a>
+        <a href="unit1.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 1: Sequences</a>
+        <a href="unit2.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 2: Calculus Apps</a>
+        <a href="unit3.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 3: Beta-Gamma</a>
+        <a href="unit4.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 4: Multivariable</a>
+        <a href="unit5.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 5: Integrals</a>
+        <a href="syllabus.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Syllabus Guide</a>
+      </div>
+      <div class="pt-2 border-t border-slate-200 dark:border-slate-800">
+        <a href="about.html" class="block p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white">About &amp; Author Credits</a>
+      </div>
     </div>
   </header>
 
-  <!-- Main Workspace -->
+  <!-- Hero & Unit Quick-Access Cards -->
+  <section class="no-print bg-gradient-to-b from-white to-slate-100 dark:from-[#151e32] dark:to-[#0b1120] border-b border-slate-200 dark:border-slate-800 px-4 py-6">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Top Hero Banner -->
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">
+              IKG-PTU BTAM101-18 Exam Revision
+            </span>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+              Zero Paywalls • Free Forever
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            Engineering Mathematics-I Revision Website
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 max-w-2xl">
+            Complete exam-oriented revision platform for CGC CEC Landran students. Master all 26 high-yield derivation topics across all 5 syllabus units with step-by-step whiteboard explanations and instant PDF export.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <a href="cheatsheet.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm transition active:scale-95">
+            <i data-lucide="file-text" class="w-4 h-4"></i>
+            <span>Full Cheat-Sheet</span>
+          </a>
+          <a href="syllabus.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition">
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+            <span>Syllabus &amp; Tips</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 5-Unit Quick Navigation Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <a href="unit1.html" class="group p-3.5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-md">Unit 1</span>
+            <span class="text-[10px] text-slate-400">4 Topics</span>
+          </div>
+          <div class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-cyan-500 transition line-clamp-1">Sequences &amp; Series</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">Ratio, Leibnitz, p-Test, Taylor</div>
+        </a>
+
+        <a href="unit2.html" class="group p-3.5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-md">Unit 2</span>
+            <span class="text-[10px] text-slate-400">8 Topics</span>
+          </div>
+          <div class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-indigo-500 transition line-clamp-1">Definite Integral Apps</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">Arc Length, Volume, Cycloid, Cardioid</div>
+        </a>
+
+        <a href="unit3.html" class="group p-3.5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md">Unit 3</span>
+            <span class="text-[10px] text-slate-400">5 Topics</span>
+          </div>
+          <div class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-amber-500 transition line-clamp-1">Beta &amp; Gamma Functions</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">Reduction, Proofs, Improper Integrals</div>
+        </a>
+
+        <a href="unit4.html" class="group p-3.5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">Unit 4</span>
+            <span class="text-[10px] text-slate-400">5 Topics</span>
+          </div>
+          <div class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-emerald-500 transition line-clamp-1">Multivariable Calculus</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">Euler's Theorem, Maxima &amp; Minima</div>
+        </a>
+
+        <a href="unit5.html" class="group p-3.5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-md">Unit 5</span>
+            <span class="text-[10px] text-slate-400">6 Topics</span>
+          </div>
+          <div class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-rose-500 transition line-clamp-1">Multiple Integrals</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">Double/Triple, Jacobians, Polar Area</div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Unit Filter Tabs -->
+  <div class="no-print max-w-7xl w-full mx-auto px-4 pt-4">
+    <div class="flex items-center gap-2 overflow-x-auto pb-1" id="unit-tabs">
+      <!-- Populated dynamically via js/app.js -->
+    </div>
+  </div>
+
+  <!-- Main Interactive Whiteboard Workspace -->
   <main class="no-print flex-1 max-w-7xl w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-5">
 
-    <!-- Left Sidebar: Question Selector Cards -->
+    <!-- Left Sidebar: Question Selector Cards & Instant Search -->
     <aside class="lg:col-span-4 flex flex-col gap-3">
       <div class="flex items-center justify-between px-1">
         <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400" id="question-count-label">
@@ -304,14 +242,14 @@
       <!-- Search Input -->
       <div class="relative">
         <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-        <input type="text" id="search-input" placeholder="Search all 26 topics (e.g., Raabe, Cardioid, Jacobian)..."
+        <input type="text" id="search-input" placeholder="Search 26 topics (e.g., Raabe, Cardioid, Jacobian)..."
                oninput="renderQuestionList()"
                class="w-full pl-9 pr-3 py-2 text-sm rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
       </div>
 
       <!-- Question Cards Container -->
-      <div id="question-list" class="flex flex-col gap-2 max-h-[calc(100vh-235px)] overflow-y-auto pr-1">
-        <!-- Populated dynamically -->
+      <div id="question-list" class="flex flex-col gap-2 max-h-[calc(100vh-280px)] overflow-y-auto pr-1">
+        <!-- Populated dynamically via js/app.js -->
       </div>
     </aside>
 
@@ -349,7 +287,7 @@
       </div>
 
       <!-- Step-by-Step Animated Whiteboard Area -->
-      <div class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-3" id="steps-container">
+      <div class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-3 min-h-[300px]" id="steps-container">
         <!-- Steps revealed here -->
       </div>
 
@@ -383,1454 +321,36 @@
     </section>
   </main>
 
-  <!-- Dedicated Author Credits & Demo Lock Footer -->
-  <footer class="no-print border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#151e32]/80 px-4 py-3 mt-auto">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400">
-      <div class="flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
-        <span>Crafted with ❤️ for CGC CEC Landran peers by</span>
-        <strong class="text-slate-800 dark:text-slate-200">Krishna Kumar</strong>
-        <span>(B.Tech Cybersecurity • IKG-PTU BTAM101-18)</span>
+  <!-- Universal Footer -->
+  <footer class="no-print border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#151e32]/80 px-4 py-5 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+      
+      <div class="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
+        <span class="font-semibold text-slate-800 dark:text-slate-200">CalcVault M-1</span>
+        <span>•</span>
+        <span>Curated with ❤️ for CGC CEC Landran engineering peers by <strong class="text-slate-800 dark:text-slate-200">Krishna Kumar</strong></span>
       </div>
-      <div class="flex items-center gap-3">
-        <button type="button" onclick="openCreditsModal()" class="font-semibold text-cyan-600 dark:text-cyan-400 hover:underline">
-          Support via UPI (7888690390@upi)
-        </button>
-        <span class="text-slate-300 dark:text-slate-700">|</span>
-        <button type="button" onclick="lockGateForDemo()" class="inline-flex items-center gap-1 font-semibold text-amber-600 dark:text-amber-400 hover:underline" title="Re-open Payment Gate for Testing/Demo">
-          <i data-lucide="lock" class="w-3 h-3"></i>
-          <span>Lock / View Gate</span>
-        </button>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="cheatsheet.html" class="hover:text-cyan-500 transition">Print Cheat-Sheet</a>
+        <a href="syllabus.html" class="hover:text-cyan-500 transition">Syllabus Breakdown</a>
+        <a href="about.html" class="hover:text-cyan-500 transition">About Project</a>
+        <span class="text-emerald-500 font-bold">100% Free &amp; Open Source</span>
       </div>
     </div>
   </footer>
 
-  <!-- Credits & Support Modal -->
-  <div id="credits-modal" class="no-print hidden fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700 shadow-2xl p-6 step-animate">
-      <button type="button" onclick="closeCreditsModal()" class="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition">
-        <i data-lucide="x" class="w-4 h-4"></i>
-      </button>
-
-      <div class="flex items-center gap-3 mb-3">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-600 via-cyan-500 to-amber-500 text-white font-extrabold flex items-center justify-center shadow-md">
-          KK
-        </div>
-        <div>
-          <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">Credits &amp; Student Support</h3>
-          <p class="text-xs text-cyan-600 dark:text-cyan-400 font-semibold">Author: Krishna Kumar • B.Tech Cybersecurity</p>
-        </div>
-      </div>
-
-      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-        <strong>CalcVault M-1</strong> was designed and compiled by <strong>Krishna Kumar</strong> (CGC CEC Landran) to help 1st-semester engineering students master every 2, 5, and 10-mark derivation for the IKG-PTU BTAM101-18 exam. If these step-by-step notes helped you revise faster tonight, feel free to support future semester vaults!
-      </p>
-
-      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-700 flex flex-col items-center text-center">
-        <div class="p-2.5 bg-white rounded-2xl shadow-sm border border-slate-200 mb-2 flex items-center justify-center">
-          <img id="modal-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=4&data=upi%3A%2F%2Fpay%3Fpa%3D7888690390%40upi%26pn%3DKrishna%2520Kumar%26cu%3DINR%26tn%3DCalcVault%2520M1%2520Support" alt="Scan UPI QR Code" class="w-36 h-36 rounded-xl object-contain bg-white" />
-        </div>
-        <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Scan via GPay / PhonePe / Paytm</div>
-        <div class="mt-2 flex items-center gap-2 bg-white dark:bg-[#151e32] px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
-          <span class="font-mono font-bold text-xs text-cyan-600 dark:text-cyan-400">7888690390@upi</span>
-          <button type="button" onclick="copyUpiId('modal-copy-badge')" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline">
-            <span id="modal-copy-badge">Copy</span>
-          </button>
-        </div>
-      </div>
-
-      <button type="button" onclick="closeCreditsModal()" class="mt-5 w-full py-2.5 rounded-xl text-xs font-bold bg-cyan-600 hover:bg-cyan-500 text-white transition">
-        Back to Revision Whiteboard
-      </button>
-    </div>
-  </div>
-
-  <!-- UPI PDF Print Payment Modal -->
-  <div id="pdf-print-modal" class="no-print hidden fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
-    <div class="relative w-full max-w-md rounded-3xl bg-white dark:bg-[#151e32] border border-amber-500/40 shadow-2xl p-6 my-auto step-animate">
-      <button type="button" onclick="closePdfPrintModal()" class="absolute top-4 right-4 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition">
-        <i data-lucide="x" class="w-4 h-4"></i>
-      </button>
-
-      <div class="flex items-center gap-3 mb-3">
-        <div class="w-11 h-11 rounded-xl bg-amber-500 text-slate-950 font-extrabold flex items-center justify-center shadow-md shrink-0">
-          <i data-lucide="file-down" class="w-6 h-6"></i>
-        </div>
-        <div>
-          <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">PDF Cheat-Sheet Export</span>
-          <h3 class="text-lg font-extrabold text-slate-900 dark:text-white leading-tight">Unlock Complete 26-Topic PDF</h3>
-        </div>
-      </div>
-
-      <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-4 bg-slate-100 dark:bg-[#0b1120] p-3 rounded-xl border border-slate-200 dark:border-slate-700">
-        Support author <strong>Krishna Kumar</strong> (CGC CEC Landran) with a quick UPI contribution to export &amp; print the complete <strong>BTAM101-18 26-Topic Exam Cheat-Sheet</strong> as PDF.
-      </p>
-
-      <!-- Amount Selector Chips for PDF -->
-      <div class="mb-4">
-        <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
-          Select PDF Contribution (INR)
-        </label>
-        <div class="grid grid-cols-4 gap-2">
-          <button type="button" onclick="selectPdfAmount(9)" id="pdf-amt-chip-9" class="pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-amber-500 transition">₹9</button>
-          <button type="button" onclick="selectPdfAmount(19)" id="pdf-amt-chip-19" class="pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border-2 border-amber-500 bg-amber-500/15 text-amber-700 dark:text-amber-300 transition">₹19 ★</button>
-          <button type="button" onclick="selectPdfAmount(29)" id="pdf-amt-chip-29" class="pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-amber-500 transition">₹29</button>
-          <div class="relative">
-            <span class="absolute left-2 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">₹</span>
-            <input type="number" id="pdf-custom-amount" min="1" placeholder="Other" oninput="selectPdfCustomAmount(this.value)"
-              class="w-full h-full pl-5 pr-1.5 py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 focus:outline-none focus:border-amber-500" />
-          </div>
-        </div>
-      </div>
-
-      <!-- QR + UPI Box -->
-      <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row items-center gap-3.5 mb-4">
-        <div class="shrink-0 flex flex-col items-center">
-          <div class="p-2 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center justify-center">
-            <img id="pdf-qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=4&data=upi%3A%2F%2Fpay%3Fpa%3D7888690390%40upi%26pn%3DKrishna%2520Kumar%26am%3D19%26cu%3DINR%26tn%3DCalcVault%2520M1%2520PDF%2520CheatSheet" alt="Scan UPI QR Code" class="w-28 h-28 rounded-lg object-contain bg-white" />
-          </div>
-          <button type="button" onclick="markPdfPaymentInitiated('qr')" class="mt-1.5 text-[11px] font-bold text-amber-600 dark:text-amber-400 hover:underline">
-            I've Scanned &amp; Paid via QR
-          </button>
-        </div>
-
-        <div class="flex-1 w-full flex flex-col gap-2">
-          <div class="p-2 rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2">
-            <div class="min-w-0">
-              <div class="text-[10px] font-bold uppercase text-slate-400">UPI ID</div>
-              <div class="text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 truncate">7888690390@upi</div>
-            </div>
-            <button type="button" onclick="copyUpiId('pdf-copy-badge')" class="shrink-0 flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold bg-slate-100 dark:bg-slate-800 hover:bg-cyan-500/20 transition">
-              <i data-lucide="copy" class="w-3 h-3"></i>
-              <span id="pdf-copy-badge">Copy</span>
-            </button>
-          </div>
-
-          <a id="pdf-upi-deeplink" href="upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=19&cu=INR&tn=CalcVault%20M1%20PDF%20CheatSheet"
-             onclick="markPdfPaymentInitiated('app')"
-             class="w-full flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white shadow-sm transition active:scale-95">
-            <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
-            <span id="pdf-upi-label">Pay ₹19 via UPI App</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Optional UTR + Locked Print Button -->
-      <div class="space-y-2.5">
-        <input type="text" id="pdf-utr-input" maxlength="20" placeholder="Optional: Enter 12-Digit UPI UTR / Ref ID"
-               class="w-full px-3 py-2 text-xs font-mono rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-amber-500" />
-
-        <button type="button" id="confirm-pdf-print-btn" onclick="executePaidPdfPrint()" disabled
-                class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed transition">
-          <i data-lucide="lock" id="pdf-print-btn-icon" class="w-4 h-4"></i>
-          <span id="pdf-print-btn-label">Click "Pay via UPI App" or Scan QR First</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Hidden Printable Cheat-Sheet Container (Visible only when printing / exporting PDF) -->
+  <!-- Hidden Printable Cheat-Sheet Container (Visible only when window.print() is executed) -->
   <div id="print-container" class="hidden p-6 max-w-4xl mx-auto">
     <div class="border-b-2 border-slate-800 pb-4 mb-6">
-      <h1 class="text-2xl font-bold">CalcVault M-1 • BTAM101-18 Complete 26-Topic Exam Cheat-Sheet</h1>
-      <p class="text-sm text-slate-600">Author: Krishna Kumar (B.Tech Cybersecurity, CGC CEC Landran • IKG-PTU Syllabus) — 100% Coverage</p>
+      <h1 class="text-2xl font-bold">CalcVault M-1 • Complete 26-Topic Engineering Mathematics-I Cheat-Sheet</h1>
+      <p class="text-sm text-slate-600">Author: Krishna Kumar (B.Tech Cybersecurity, CGC CEC Landran • IKG-PTU Syllabus BTAM101-18)</p>
     </div>
     <div id="print-content" class="space-y-4"></div>
-    <div class="mt-6 pt-4 border-t border-slate-300 text-xs text-slate-600 flex items-center justify-between">
-      <span>Compiled by <strong>Krishna Kumar</strong> • CGC CEC Landran</span>
-      <span>Support UPI: <strong>7888690390@upi</strong></span>
-    </div>
   </div>
 
-  <script>
-    // Safe Storage Wrapper (prevents SecurityError in sandboxed preview iframes)
-    const memStore = {};
-    const safeStorage = {
-      get(key) {
-        try { return window.localStorage.getItem(key); } catch (e) { return memStore[key] || null; }
-      },
-      set(key, val) {
-        memStore[key] = String(val);
-        try { window.localStorage.setItem(key, String(val)); } catch (e) {}
-      },
-      remove(key) {
-        delete memStore[key];
-        try { window.localStorage.removeItem(key); } catch (e) {}
-      }
-    };
-
-    // Complete 26-Topic Structured Knowledge Base covering 100% of Important Questions M-1.pdf & IMG-20261117-WA0010.jpg
-    const QUESTIONS_DB = [
-      // ==================== UNIT 1 (4 Cards) ====================
-      {
-        id: "u1-q1",
-        unit: "Unit 1",
-        marks: "2 & 5 Marks",
-        title: "U1-Q1: All Basic Definitions, Convergence Tests & Taylor Expansions",
-        problem: "Define Ratio Test, Cauchy Integral Test, Leibnitz Test, p-Test, Comparison Test; Monotonic, Bounded, Convergent, Divergent, Oscillatory sequences; Convergent, Divergent, Alternating series; and Maclaurin/Taylor expansions about $x=0$ for $\\sin x, \\cos x, e^x, \\tan x$.",
-        intuition: "In 2-mark questions, always state exact boundary behavior ('fails at $l=1$'). When Ratio Test fails at $l=1$, switch immediately to Raabe's Test.",
-        steps: [
-          {
-            label: "1. Convergence Tests (Ratio, Cauchy Integral, Leibnitz, p-Test, Comparison)",
-            math: "• <b>D'Alembert's Ratio Test:</b> For $\\sum u_n$ ($u_n>0$), let $\\lim_{n\\to\\infty} \\frac{u_n}{u_{n+1}} = l$. Converges if $l > 1$, diverges if $l < 1$, fails if $l = 1$.<br>• <b>Cauchy Integral Test:</b> If $f(x)$ is positive, continuous, and decreasing for $x \\ge 1$ with $f(n)=u_n$, then $\\sum_{n=1}^{\\infty} u_n$ and $\\int_{1}^{\\infty} f(x)\\,dx$ converge or diverge together.<br>• <b>Leibnitz Test:</b> Alternating series $\\sum (-1)^{n-1} u_n$ ($u_n>0$) converges if (i) $u_{n+1} \\le u_n \\; \\forall n$ and (ii) $\\lim_{n\\to\\infty} u_n = 0$.<br>• <b>p-Series Test:</b> $\\sum \\frac{1}{n^p}$ converges if $p > 1$ and diverges if $p \\le 1$.<br>• <b>Comparison Test:</b> If $\\lim_{n\\to\\infty} \\frac{u_n}{v_n} = k$ (finite, non-zero), $\\sum u_n$ and $\\sum v_n$ behave identically."
-          },
-          {
-            label: "2. Sequence Definitions (Monotonic, Bounded, Convergent, Divergent, Oscillatory)",
-            math: "• <b>Monotonic Sequence:</b> Either increasing ($a_{n+1} \\ge a_n$) or decreasing ($a_{n+1} \\le a_n$) for all $n$.<br>• <b>Bounded Sequence:</b> Exists $k, K \\in \\mathbb{R}$ such that $k \\le a_n \\le K \\; \\forall n$.<br>• <b>Convergent Sequence:</b> $\\lim_{n\\to\\infty} a_n = L$ (finite & unique).<br>• <b>Divergent Sequence:</b> $\\lim_{n\\to\\infty} a_n = +\\infty$ or $-\\infty$.<br>• <b>Oscillatory Sequence:</b> Neither approaches a finite limit nor $\\pm\\infty$ (e.g., $a_n = (-1)^n$)."
-          },
-          {
-            label: "3. Series Definitions (Convergent, Divergent, Alternating)",
-            math: "Let $S_n = \\sum_{k=1}^{n} u_k$ be the $n$-th partial sum.<br>• <b>Convergent Series:</b> $\\lim_{n\\to\\infty} S_n = S$ (finite).<br>• <b>Divergent Series:</b> $\\lim_{n\\to\\infty} S_n = \\pm\\infty$.<br>• <b>Alternating Series:</b> Terms alternate in sign: $u_1 - u_2 + u_3 - u_4 + \\cdots$ ($u_n > 0$)."
-          },
-          {
-            label: "4. Taylor's / Maclaurin's Series Expansions (about x = 0)",
-            math: "$$\\sin x = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\frac{x^7}{7!} + \\cdots \\qquad \\cos x = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\frac{x^6}{6!} + \\cdots$$ $$e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots \\qquad \\tan x = x + \\frac{x^3}{3} + \\frac{2}{15}x^5 + \\cdots$$"
-          }
-        ]
-      },
-      {
-        id: "u1-q2",
-        unit: "Unit 1",
-        marks: "2 Marks Each",
-        title: "U1-Q2: Check Convergence of Sequences Using Limits (Exponential, Polynomial, Rational, Oscillatory & Trig)",
-        problem: "Test the convergence of the sequences: (i) $\\{a_n\\} = \\left\\{\\frac{2^n}{n+1}\\right\\}$, (ii) $\\{a_n\\} = \\{n^2 + 3n\\}$, (iii) $\\{a_n\\} = \\left\\{\\frac{n+1}{n}\\right\\}$, (iv) $\\{a_n\\} = \\{(-1)^n\\}$, and (v) standard trigonometric variants $\\left\\{\\cos\\left(\\frac{1}{n}\\right)\\right\\}$ & $\\left\\{\\cos\\left(\\frac{n\\pi}{2}\\right)\\right\\}$.",
-        intuition: "Always show the L'Hôpital or binomial comparison step for $\\frac{2^n}{n+1}$ and the even/odd subsequence split for $(-1)^n$—writing just 'Divergent' or 'Oscillatory' without the limit step costs 1 out of 2 marks.",
-        steps: [
-          {
-            label: "(i) Sequence a_n = 2ⁿ / (n + 1) — Indeterminate Form ∞/∞",
-            math: "Applying L'Hôpital's Rule (treating $n$ as continuous variable $x$):<br>$$\\lim_{n\\to\\infty} a_n = \\lim_{n\\to\\infty} \\frac{2^n}{n+1} = \\lim_{n\\to\\infty} \\frac{2^n \\ln 2}{1} = \\infty$$<br>*(By binomial lower bound: $2^n > 1 + n + \\frac{n(n-1)}{2} \\implies \\frac{2^n}{n+1} > \\frac{n(n-1)}{2(n+1)} \\to \\infty$.)* $\\implies$ <b>Divergent</b>."
-          },
-          {
-            label: "(ii) Sequence a_n = n² + 3n",
-            math: "$$\\lim_{n\\to\\infty} a_n = \\lim_{n\\to\\infty} (n^2 + 3n) = \\infty \\implies \\mathbf{\\text{Divergent}}$$"
-          },
-          {
-            label: "(iii) Sequence a_n = (n + 1) / n",
-            math: "Divide numerator and denominator by $n$:<br>$$\\lim_{n\\to\\infty} a_n = \\lim_{n\\to\\infty} \\frac{n+1}{n} = \\lim_{n\\to\\infty} \\frac{\\frac{n}{n} + \\frac{1}{n}}{\\frac{n}{n}} = \\lim_{n\\to\\infty} \\frac{1 + \\frac{1}{n}}{1} = \\frac{1 + 0}{1} = 1 \\quad (\\text{Finite \\& unique} \\implies \\mathbf{\\text{Convergent, converges to } 1})$$"
-          },
-          {
-            label: "(iv) Sequence a_n = (-1)ⁿ — Even & Odd Subsequence Split",
-            math: "• For even $n = 2k$: $\\lim_{k\\to\\infty} a_{2k} = \\lim_{k\\to\\infty} (-1)^{2k} = +1$<br>• For odd $n = 2k+1$: $\\lim_{k\\to\\infty} a_{2k+1} = \\lim_{k\\to\\infty} (-1)^{2k+1} = -1$<br>Since even and odd subsequences approach two distinct finite limits, the sequence is <b>Finitely Oscillatory</b> (hence <b>Not Convergent</b>)."
-          },
-          {
-            label: "(v) Trigonometric Sequence Variants",
-            math: "• For $a_n = \\cos\\left(\\frac{1}{n}\\right)$: $\\lim_{n\\to\\infty} \\cos\\left(\\frac{1}{n}\\right) = \\cos(0) = 1 \\implies$ <b>Convergent</b>.<br>• For $a_n = \\cos\\left(\\frac{n\\pi}{2}\\right)$: terms cycle through $\\{0, -1, 0, 1, \\dots\\} \\implies$ <b>Finitely Oscillatory</b>."
-          }
-        ]
-      },
-      {
-        id: "u1-q3",
-        unit: "Unit 1",
-        marks: "5 & 10 Marks",
-        title: "U1-Q3: Convergence / Divergence of All 5 Series Problems",
-        problem: "Test the convergence of all 5 series:<br>(I) $\\sum \\frac{(n!)^2}{(2n)!} x^n$, (II) $\\sum \\frac{5^n}{4^n + 3}$, (III) $\\sum \\frac{3\\cdot 6\\cdot 9\\cdots(3n)}{4\\cdot 7\\cdot 10\\cdots(3n+1)} x^n$, (IV) $\\sum \\frac{1\\cdot 4\\cdot 7\\cdots(3n-2)}{2\\cdot 5\\cdot 8\\cdots(3n-1)}$, (V) $\\sum \\left(\\sqrt[3]{n^3+1} - n\\right)$.",
-        intuition: "In factorial/product series (I, III, IV), cancel common terms in $u_n / u_{n+1}$. Whenever Ratio Test gives $l=1$ (as in III at $x=1$, and IV), apply Raabe's Test $\\lim n(u_n/u_{n+1} - 1)$.",
-        steps: [
-          {
-            label: "(I) ∑ [(n!)² / (2n)!] xⁿ (Ratio Test + Boundary x = 4)",
-            math: "$$\\frac{u_n}{u_{n+1}} = \\frac{(n!)^2}{(2n)!} \\cdot \\frac{(2n+2)(2n+1)(2n)!}{(n+1)^2(n!)^2 x} = \\frac{2(2n+1)}{(n+1)x} \\xrightarrow{n\\to\\infty} \\frac{4}{x}$$<br>Converges for $x < 4$, diverges for $x > 4$. At $x = 4$: $\\frac{u_n}{u_{n+1}} = \\frac{4n+2}{4n+4} < 1 \\implies u_{n+1} > u_n$, so $\\lim u_n \\ne 0 \\implies$ <b>Diverges at x = 4</b>."
-          },
-          {
-            label: "(II) ∑ 5ⁿ / (4ⁿ + 3) (Comparison Test)",
-            math: "$$u_n = \\left(\\frac{5}{4}\\right)^n \\frac{1}{1 + 3/4^n}, \\quad \\text{take } v_n = \\left(\\frac{5}{4}\\right)^n \\implies \\lim_{n\\to\\infty} \\frac{u_n}{v_n} = 1 \\ne 0$$<br>Since $\\sum v_n$ is a geometric series with $r = \\frac{5}{4} > 1$, it diverges. Thus $\\sum u_n$ <b>Diverges</b>."
-          },
-          {
-            label: "(III) ∑ [3·6···(3n) / 4·7···(3n+1)] xⁿ (Ratio + Raabe's Test)",
-            math: "$$\\lim_{n\\to\\infty} \\frac{u_n}{u_{n+1}} = \\lim_{n\\to\\infty} \\frac{3n+4}{(3n+3)x} = \\frac{1}{x}$$<br>Converges if $x < 1$, diverges if $x > 1$. At $x = 1$, apply Raabe's Test:<br>$$\\lim_{n\\to\\infty} n\\left(\\frac{3n+4}{3n+3} - 1\\right) = \\lim_{n\\to\\infty} \\frac{n}{3n+3} = \\frac{1}{3} < 1 \\implies \\mathbf{\\text{Diverges at } x = 1}$$"
-          },
-          {
-            label: "(IV) ∑ [1·4·7···(3n-2) / 2·5·8···(3n-1)] (Raabe's Test)",
-            math: "$$\\lim_{n\\to\\infty} \\frac{u_n}{u_{n+1}} = \\lim_{n\\to\\infty} \\frac{3n+2}{3n+1} = 1 \\quad (\\text{Ratio Test fails})$$<br>By Raabe's Test: $\\lim_{n\\to\\infty} n\\left(\\frac{3n+2}{3n+1} - 1\\right) = \\lim_{n\\to\\infty} \\frac{n}{3n+1} = \\frac{1}{3} < 1 \\implies$ <b>Divergent</b>."
-          },
-          {
-            label: "(V) ∑ (∛(n³ + 1) - n) (Binomial Expansion + Comparison Test)",
-            math: "$$u_n = n\\left(1 + \\frac{1}{n^3}\\right)^{1/3} - n = n\\left(1 + \\frac{1}{3n^3} - \\frac{1}{9n^6} + \\cdots\\right) - n = \\frac{1}{3n^2} - \\frac{1}{9n^5} + \\cdots$$<br>Comparing with $v_n = \\frac{1}{n^2}$ ($p = 2 > 1$), $\\lim \\frac{u_n}{v_n} = \\frac{1}{3} \\ne 0 \\implies$ <b>Convergent</b>."
-          }
-        ]
-      },
-      {
-        id: "u1-q4",
-        unit: "Unit 1",
-        marks: "5 Marks",
-        title: "U1-Q4: Proofs of p-Series Test & Geometric Series Test",
-        problem: "Prove the Geometric Series Test for $\\sum_{n=0}^{\\infty} ar^n$ ($a \\ne 0$) and the $p$-Series Test for $\\sum_{n=1}^{\\infty} \\frac{1}{n^p}$.",
-        intuition: "For the $p$-series proof, group terms into dyadic blocks of length $1, 2, 4, 8, \\dots, 2^k$. That immediately turns the bound into a geometric series with ratio $1/2^{p-1}$.",
-        steps: [
-          {
-            label: "Part A: Proof of Geometric Series Test ∑ arⁿ (a ≠ 0)",
-            math: "Partial sum $S_n = a + ar + ar^2 + \\cdots + ar^{n-1}$.<br>• <b>$|r| < 1$:</b> $S_n = \\frac{a(1-r^n)}{1-r} \\xrightarrow{n\\to\\infty} \\frac{a}{1-r}$ (finite) $\\implies$ <b>Convergent</b>.<br>• <b>$r \\ge 1$:</b> For $r > 1$, $r^n \\to \\infty \\implies S_n \\to \\infty$; for $r = 1$, $S_n = na \\to \\infty \\implies$ <b>Divergent</b>.<br>• <b>$r \\le -1$:</b> Terms alternate without a unique limit $\\implies$ <b>Oscillatory</b>."
-          },
-          {
-            label: "Part B: Proof of p-Series Test — Case 1 (p > 1)",
-            math: "$$S = 1 + \\left(\\frac{1}{2^p} + \\frac{1}{3^p}\\right) + \\left(\\frac{1}{4^p} + \\frac{1}{5^p} + \\frac{1}{6^p} + \\frac{1}{7^p}\\right) + \\cdots < 1 + \\frac{2}{2^p} + \\frac{4}{4^p} + \\frac{8}{8^p} + \\cdots$$ $$= 1 + \\frac{1}{2^{p-1}} + \\left(\\frac{1}{2^{p-1}}\\right)^2 + \\cdots$$<br>Geometric series with common ratio $r = \\frac{1}{2^{p-1}} < 1$ (since $p > 1$). Hence bounded & monotonic $\\implies$ <b>Convergent</b>."
-          },
-          {
-            label: "Case 2 (p = 1, Harmonic Series) & Case 3 (p < 1)",
-            math: "• <b>$p = 1$:</b> $S = 1 + \\frac{1}{2} + \\left(\\frac{1}{3}+\\frac{1}{4}\\right) + \\left(\\frac{1}{5}+\\cdots+\\frac{1}{8}\\right) + \\cdots > 1 + \\frac{1}{2} + \\frac{2}{4} + \\frac{4}{8} + \\cdots \\to \\infty$ (<b>Divergent</b>).<br>• <b>$p < 1$:</b> $n^p < n \\implies \\frac{1}{n^p} > \\frac{1}{n}$. By Comparison Test with $\\sum \\frac{1}{n}$, it <b>Diverges</b>."
-          }
-        ]
-      },
-
-      // ==================== UNIT 2 (7 Cards) ====================
-      {
-        id: "u2-q1",
-        unit: "Unit 2",
-        marks: "2 Marks Each",
-        title: "U2-Q1 & Q2: All Formulas of Arc Length, Volume & Surface Area",
-        problem: "Write all formulas for Length of Curve (Cartesian, Parametric, Polar), Volume of Solid of Revolution, and Surface Area of Solid of Revolution.",
-        intuition: "Notice the pattern: $ds$ stays identical in both Arc Length ($\\int ds$) and Surface Area ($\\int 2\\pi y\\,ds$), whereas Volume uses $\\pi y^2\\,dx$ without a square root.",
-        steps: [
-          {
-            label: "1. Length of Curve Formulas (s)",
-            math: "• <b>Cartesian:</b> $s = \\int_{a}^{b} \\sqrt{1 + \\left(\\frac{dy}{dx}\\right)^2}\\,dx$ &nbsp;or&nbsp; $s = \\int_{c}^{d} \\sqrt{1 + \\left(\\frac{dx}{dy}\\right)^2}\\,dy$<br>• <b>Parametric:</b> $s = \\int_{t_1}^{t_2} \\sqrt{\\left(\\frac{dx}{dt}\\right)^2 + \\left(\\frac{dy}{dt}\\right)^2}\\,dt$<br>• <b>Polar:</b> $s = \\int_{\\theta_1}^{\\theta_2} \\sqrt{r^2 + \\left(\\frac{dr}{d\\theta}\\right)^2}\\,d\\theta$"
-          },
-          {
-            label: "2. Volume of Solid of Revolution (V)",
-            math: "• <b>About x-axis:</b> $V = \\int_{a}^{b} \\pi y^2\\,dx$<br>• <b>About y-axis:</b> $V = \\int_{c}^{d} \\pi x^2\\,dy$<br>• <b>Polar about initial line (θ = 0):</b> $V = \\int_{\\theta_1}^{\\theta_2} \\frac{2}{3}\\pi r^3 \\sin\\theta\\,d\\theta$"
-          },
-          {
-            label: "3. Surface Area of Solid of Revolution (S)",
-            math: "• <b>About x-axis:</b> $S = \\int 2\\pi y\\,ds$<br>• <b>About y-axis:</b> $S = \\int 2\\pi x\\,ds$<br>• <b>Polar about initial line (θ = 0):</b> $S = \\int_{\\theta_1}^{\\theta_2} 2\\pi (r\\sin\\theta)\\sqrt{r^2 + \\left(\\frac{dr}{d\\theta}\\right)^2}\\,d\\theta$"
-          }
-        ]
-      },
-      {
-        id: "u2-q3",
-        unit: "Unit 2",
-        marks: "5 Marks Each",
-        title: "U2-Q3: Length of Curves — All 5 Standard Problems",
-        problem: "Find arc length of:<br>(I) Parabola $x^2 = 4ay$ from vertex $(0,0)$ to $(2a,a)$;<br>(II) $y = \\frac{1}{2}x^2 + 1$ from $x=0$ to $x=2$;<br>(III) $y^2 = 4ax$ cut off by latus rectum;<br>(IV) $x^2 = 16y$ cut off by latus rectum;<br>(V) $y^2 = 4x$ cut off by line $y = x$.",
-        intuition: "Check whether the question asks for 'vertex to ONE end of latus rectum' (single integral) or 'cut off by latus rectum' (both symmetric halves $\\implies$ multiply by $2$!).",
-        steps: [
-          {
-            label: "(I) Parabola x² = 4ay from vertex (0,0) to (2a, a)",
-            math: "$\\frac{dy}{dx} = \\frac{x}{2a} \\implies s = \\int_{0}^{2a} \\sqrt{1 + \\frac{x^2}{4a^2}}\\,dx = \\frac{1}{2a}\\left[\\frac{x}{2}\\sqrt{4a^2+x^2} + 2a^2\\log(x+\\sqrt{4a^2+x^2})\\right]_{0}^{2a}$<br>$$s = \\mathbf{a\\left[\\sqrt{2} + \\log(\\sqrt{2} + 1)\\right]}$$"
-          },
-          {
-            label: "(II) Curve y = (1/2)x² + 1 from x = 0 to x = 2",
-            math: "$\\frac{dy}{dx} = x \\implies s = \\int_{0}^{2} \\sqrt{1+x^2}\\,dx = \\left[\\frac{x}{2}\\sqrt{1+x^2} + \\frac{1}{2}\\log(x+\\sqrt{1+x^2})\\right]_{0}^{2} = \\mathbf{\\sqrt{5} + \\frac{1}{2}\\log(2 + \\sqrt{5})}$"
-          },
-          {
-            label: "(III) Parabola y² = 4ax cut off by latus rectum (x = 0 to a, both halves)",
-            math: "$\\frac{dy}{dx} = \\sqrt{\\frac{a}{x}} \\implies s = 2\\int_{0}^{a} \\sqrt{1 + \\frac{a}{x}}\\,dx$. Put $x = a\\tan^2\\theta$:<br>$$s = 4a\\int_{0}^{\\pi/4} \\sec^3\\theta\\,d\\theta = \\mathbf{2a\\left[\\sqrt{2} + \\log(\\sqrt{2} + 1)\\right]}$$"
-          },
-          {
-            label: "(IV) Parabola x² = 16y cut off by latus rectum",
-            math: "Comparing with $x^2 = 4ay \\implies 4a = 16 \\implies a = 4$.<br>For both symmetric halves from $(-8, 4)$ to $(8, 4)$: $s = 2 \\times 4[\\sqrt{2} + \\log(\\sqrt{2}+1)] = \\mathbf{8\\left[\\sqrt{2} + \\log(\\sqrt{2} + 1)\\right]}$."
-          },
-          {
-            label: "(V) Parabola y² = 4x cut off by line y = x",
-            math: "Intersection: $x^2 = 4x \\implies x = 0, 4$. Here $\\frac{dy}{dx} = \\frac{1}{\\sqrt{x}}$.<br>$$s = \\int_{0}^{4} \\sqrt{1 + \\frac{1}{x}}\\,dx = \\left[\\sqrt{x(x+1)} + \\log(\\sqrt{x} + \\sqrt{x+1})\\right]_{0}^{4} = \\mathbf{2\\sqrt{5} + \\log(2 + \\sqrt{5})}$$"
-          }
-        ]
-      },
-      {
-        id: "u2-q4",
-        unit: "Unit 2",
-        marks: "5 Marks",
-        title: "U2-Q4: Perimeter (Length) of Circle & Ellipse",
-        problem: "Find the total perimeter of (i) Circle $x^2 + y^2 = a^2$ and (ii) Ellipse $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$.",
-        intuition: "Use parametric form $x = a\\cos\\theta, y = b\\sin\\theta$ with limits $\\theta \\in [0, \\pi/2]$ and multiply by $4$ for all four quadrants.",
-        steps: [
-          {
-            label: "(i) Perimeter of Circle x² + y² = a²",
-            math: "Put $x = a\\cos\\theta, \\; y = a\\sin\\theta$. By symmetry across 4 quadrants:<br>$$s = 4\\int_{0}^{\\pi/2} \\sqrt{(-a\\sin\\theta)^2 + (a\\cos\\theta)^2}\\,d\\theta = 4\\int_{0}^{\\pi/2} a\\,d\\theta = 4a\\left(\\frac{\\pi}{2}\\right) = \\mathbf{2\\pi a}$$"
-          },
-          {
-            label: "(ii) Perimeter of Ellipse x²/a² + y²/b² = 1 (a > b)",
-            math: "Put $x = a\\cos\\theta, \\; y = b\\sin\\theta$. Using $b^2 = a^2(1 - e^2)$:<br>$$s = 4\\int_{0}^{\\pi/2} \\sqrt{a^2\\sin^2\\theta + b^2\\cos^2\\theta}\\,d\\theta = 4a\\int_{0}^{\\pi/2} \\sqrt{1 - e^2\\cos^2\\theta}\\,d\\theta$$"
-          },
-          {
-            label: "Expand Binomially & Integrate Using Wallis' Formula",
-            math: "$$s = 4a\\int_{0}^{\\pi/2} \\left(1 - \\frac{1}{2}e^2\\cos^2\\theta - \\frac{1}{8}e^4\\cos^4\\theta - \\cdots\\right)d\\theta = \\mathbf{2\\pi a\\left[1 - \\left(\\frac{1}{2}\\right)^2 e^2 - \\left(\\frac{1\\cdot 3}{2\\cdot 4}\\right)^2 \\frac{e^4}{3} - \\cdots\\right]}$$"
-          }
-        ]
-      },
-      {
-        id: "u2-q5",
-        unit: "Unit 2",
-        marks: "10 Marks",
-        title: "U2-Q5: Surface Area of All Cycloid Variants About x-axis",
-        problem: "Find the surface area generated by revolving one arch about the $x$-axis for:<br>(I) $x = a(\\theta - \\sin\\theta), \\; y = a(1 - \\cos\\theta)$;<br>(II) $x = a(\\theta + \\sin\\theta), \\; y = a(1 + \\cos\\theta)$;<br>(III) $x = a(\\theta + \\sin\\theta), \\; y = a(1 - \\cos\\theta)$ (from handwritten notes).",
-        intuition: "Watch the signs carefully! When the signs inside $x$ and $y$ match ($-$ and $-$, or $+$ and $+$), $S = \\frac{64}{3}\\pi a^2$. When the signs are opposite ($+$ and $-$), $S = \\frac{32}{3}\\pi a^2$.",
-        steps: [
-          {
-            label: "(I) Standard Cycloid x = a(θ - sin θ), y = a(1 - cos θ) [θ: 0 to 2π]",
-            math: "$$\\frac{ds}{d\\theta} = \\sqrt{a^2(1-\\cos\\theta)^2 + a^2\\sin^2\\theta} = 2a\\sin\\left(\\frac{\\theta}{2}\\right)$$<br>$$S = \\int_{0}^{2\\pi} 2\\pi a(1-\\cos\\theta)\\cdot 2a\\sin\\left(\\frac{\\theta}{2}\\right)d\\theta = 8\\pi a^2 \\int_{0}^{2\\pi} \\sin^3\\left(\\frac{\\theta}{2}\\right)d\\theta$$<br>Put $\\frac{\\theta}{2} = t$: $S = 16\\pi a^2 \\cdot 2\\int_{0}^{\\pi/2} \\sin^3 t\\,dt = 32\\pi a^2\\left(\\frac{2}{3}\\right) = \\mathbf{\\frac{64}{3}\\pi a^2}$."
-          },
-          {
-            label: "(II) Cycloid x = a(θ + sin θ), y = a(1 + cos θ) [θ: -π to π]",
-            math: "$$\\frac{ds}{d\\theta} = \\sqrt{a^2(1+\\cos\\theta)^2 + a^2\\sin^2\\theta} = 2a\\cos\\left(\\frac{\\theta}{2}\\right)$$<br>$$S = 2\\int_{0}^{\\pi} 2\\pi a(1+\\cos\\theta)\\cdot 2a\\cos\\left(\\frac{\\theta}{2}\\right)d\\theta = 16\\pi a^2 \\int_{0}^{\\pi} \\cos^3\\left(\\frac{\\theta}{2}\\right)d\\theta = \\mathbf{\\frac{64}{3}\\pi a^2}$$"
-          },
-          {
-            label: "(III) Handwritten Notes Variant: x = a(θ + sin θ), y = a(1 - cos θ) [θ: 0 to 2π]",
-            math: "Here $\\frac{ds}{d\\theta} = 2a\\cos(\\theta/2)$ and $y = 2a\\sin^2(\\theta/2)$:<br>$$S = 2\\int_{0}^{\\pi} 2\\pi \\cdot 2a\\sin^2\\left(\\frac{\\theta}{2}\\right) \\cdot 2a\\cos\\left(\\frac{\\theta}{2}\\right)d\\theta = 16\\pi a^2 \\left[2\\cdot\\frac{\\sin^3(\\theta/2)}{3}\\right]_{0}^{\\pi} = \\mathbf{\\frac{32}{3}\\pi a^2}$$"
-          }
-        ]
-      },
-      {
-        id: "u2-q6",
-        unit: "Unit 2",
-        marks: "10 Marks",
-        title: "U2-Q6: Surface Area of Ellipses About x-axis (General & Specific)",
-        problem: "Find the surface area of the solid generated by revolving about the $x$-axis:<br>(I) General ellipse $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$ ($a > b$);<br>(II) Specific ellipse $x^2 + 4y^2 = 16$.",
-        intuition: "Solve the general ellipse using eccentricity $e^2 = 1 - b^2/a^2$. For $x^2 + 4y^2 = 16$, divide by $16$ first to get $a = 4, b = 2$, then substitute into the general formula.",
-        steps: [
-          {
-            label: "(I) General Ellipse x²/a² + y²/b² = 1: Find ds/dx",
-            math: "$\\frac{dy}{dx} = -\\frac{b^2 x}{a^2 y} \\implies y\\sqrt{1 + (y')^2} = \\frac{b}{a^2}\\sqrt{a^4 - (a^2 - b^2)x^2} = \\frac{be}{a}\\sqrt{\\left(\\frac{a}{e}\\right)^2 - x^2}$."
-          },
-          {
-            label: "Integrate from x = 0 to a (Multiply by 2 for symmetry)",
-            math: "$$S = \\frac{4\\pi be}{a}\\int_{0}^{a} \\sqrt{\\frac{a^2}{e^2} - x^2}\\,dx = \\frac{4\\pi be}{a}\\left[\\frac{a}{2}\\cdot\\frac{b}{e} + \\frac{a^2}{2e^2}\\sin^{-1}(e)\\right] = \\mathbf{2\\pi b^2 + \\frac{2\\pi ab}{e}\\sin^{-1}(e)}$$"
-          },
-          {
-            label: "(II) Specific Ellipse x² + 4y² = 16",
-            math: "Divide by $16$: $\\frac{x^2}{16} + \\frac{y^2}{4} = 1 \\implies a = 4, \\; b = 2, \\; e = \\sqrt{1 - \\frac{4}{16}} = \\frac{\\sqrt{3}}{2}$.<br>$$S = 2\\pi(2)^2 + \\frac{2\\pi(4)(2)}{\\sqrt{3}/2}\\sin^{-1}\\left(\\frac{\\sqrt{3}}{2}\\right) = 8\\pi + \\frac{32\\pi}{\\sqrt{3}}\\left(\\frac{\\pi}{3}\\right) = \\mathbf{8\\pi + \\frac{32\\pi^2}{3\\sqrt{3}}}$$ "
-          }
-        ]
-      },
-      {
-        id: "u2-q7",
-        unit: "Unit 2",
-        marks: "10 Marks",
-        title: "U2-Q7: Volume & Surface Area of Both Cardioids About θ = 0",
-        problem: "Find the volume and surface area generated by revolving about the initial line ($\\theta = 0$) for:<br>(I) $r = a(1 - \\cos\\theta)$;<br>(II) $r = a(1 + \\cos\\theta)$.",
-        intuition: "Limits of $\\theta$ for cardioid revolution about $\\theta = 0$ are ALWAYS $0$ to $\\pi$ (upper half generates the entire 3D solid). Both cardioids yield the exact same Volume ($\\frac{8}{3}\\pi a^3$) and Surface Area ($\\frac{32}{5}\\pi a^2$).",
-        steps: [
-          {
-            label: "(I) Cardioid r = a(1 - cos θ) — Volume",
-            math: "$$V = \\int_{0}^{\\pi} \\frac{2}{3}\\pi r^3 \\sin\\theta\\,d\\theta = \\frac{2}{3}\\pi a^3 \\int_{0}^{\\pi} (1 - \\cos\\theta)^3 \\sin\\theta\\,d\\theta$$<br>Put $1 - \\cos\\theta = t \\implies \\sin\\theta\\,d\\theta = dt$ ($t: 0 \\to 2$):<br>$$V = \\frac{2}{3}\\pi a^3 \\left[\\frac{t^4}{4}\\right]_{0}^{2} = \\mathbf{\\frac{8}{3}\\pi a^3}$$"
-          },
-          {
-            label: "(I) Cardioid r = a(1 - cos θ) — Surface Area",
-            math: "$\\frac{ds}{d\\theta} = \\sqrt{r^2 + (r')^2} = 2a\\sin(\\theta/2)$.<br>$$S = \\int_{0}^{\\pi} 2\\pi a(1-\\cos\\theta)\\sin\\theta \\cdot 2a\\sin\\left(\\frac{\\theta}{2}\\right)d\\theta = 16\\pi a^2 \\int_{0}^{\\pi} \\sin^4\\left(\\frac{\\theta}{2}\\right)\\cos\\left(\\frac{\\theta}{2}\\right)d\\theta = \\mathbf{\\frac{32}{5}\\pi a^2}$$"
-          },
-          {
-            label: "(II) Cardioid r = a(1 + cos θ) — Volume & Surface Area",
-            math: "• <b>Volume:</b> $V = \\frac{2}{3}\\pi a^3 \\int_{0}^{\\pi} (1 + \\cos\\theta)^3 \\sin\\theta\\,d\\theta = \\frac{2}{3}\\pi a^3 \\left[-\\frac{(1+\\cos\\theta)^4}{4}\\right]_{0}^{\\pi} = \\mathbf{\\frac{8}{3}\\pi a^3}$.<br>• <b>Surface Area:</b> $\\frac{ds}{d\\theta} = 2a\\cos(\\theta/2) \\implies S = 16\\pi a^2 \\int_{0}^{\\pi} \\cos^4(\\theta/2)\\sin(\\theta/2)\\,d\\theta = \\mathbf{\\frac{32}{5}\\pi a^2}$."
-          }
-        ]
-      },
-      {
-        id: "u2-q8",
-        unit: "Unit 2",
-        marks: "5 Marks Each",
-        title: "U2-Q8: Volume & Surface Area of All 5 Circles (Cartesian & Polar)",
-        problem: "Find Volume and Surface Area of revolution for:<br>(I) $x^2 + y^2 = a^2$ about $x$-axis;<br>(II) $x^2 + y^2 = 4$ about $x$-axis;<br>(III) $x^2 + y^2 = 9$ about $x$-axis;<br>(IV) $r = 2a\\sin\\theta$ about $\\theta = \\pi/2$;<br>(V) $r = 2a\\cos\\theta$ about $\\theta = 0$.",
-        intuition: "Every circle revolved about a diameter generates a sphere of radius $R$ with $V = \\frac{4}{3}\\pi R^3$ and $S = 4\\pi R^2$. In polar form, $r = 2a\\sin\\theta$ and $r = 2a\\cos\\theta$ are circles of diameter $2a$ (so radius $R = a$!) with $\\theta \\in [0, \\pi/2]$.",
-        steps: [
-          {
-            label: "(I), (II), (III) Cartesian Circles x² + y² = R² about x-axis",
-            math: "$V = 2\\int_{0}^{R} \\pi(R^2 - x^2)\\,dx = \\frac{4}{3}\\pi R^3$, &nbsp; $S = 2\\int_{0}^{R} 2\\pi y\\sqrt{1 + x^2/y^2}\\,dx = 4\\pi R^2$.<br>• <b>(I) $x^2 + y^2 = a^2$ ($R=a$):</b> $V = \\mathbf{\\frac{4}{3}\\pi a^3}, \\; S = \\mathbf{4\\pi a^2}$.<br>• <b>(II) $x^2 + y^2 = 4$ ($R=2$):</b> $V = \\mathbf{\\frac{32}{3}\\pi}, \\; S = \\mathbf{16\\pi}$.<br>• <b>(III) $x^2 + y^2 = 9$ ($R=3$):</b> $V = \\mathbf{36\\pi}, \\; S = \\mathbf{36\\pi}$."
-          },
-          {
-            label: "(IV) Polar Circle r = 2a sin θ revolved about θ = π/2 (y-axis)",
-            math: "Limits $\\theta: 0 \\to \\frac{\\pi}{2}$. Here $\\frac{ds}{d\\theta} = \\sqrt{4a^2\\sin^2\\theta + 4a^2\\cos^2\\theta} = 2a$.<br>• <b>Surface Area:</b> $S = \\int_{0}^{\\pi/2} 2\\pi (r\\cos\\theta) \\frac{ds}{d\\theta}\\,d\\theta = \\int_{0}^{\\pi/2} 2\\pi (2a\\sin\\theta\\cos\\theta)(2a)\\,d\\theta = 8\\pi a^2 \\left[\\frac{\\sin^2\\theta}{2}\\right]_{0}^{\\pi/2} = \\mathbf{4\\pi a^2}$.<br>• <b>Volume:</b> $V = \\int_{0}^{\\pi/2} \\frac{2}{3}\\pi r^3 \\cos\\theta\\,d\\theta = \\frac{16}{3}\\pi a^3 \\int_{0}^{\\pi/2} \\sin^3\\theta\\cos\\theta\\,d\\theta = \\mathbf{\\frac{4}{3}\\pi a^3}$."
-          },
-          {
-            label: "(V) Polar Circle r = 2a cos θ revolved about θ = 0 (x-axis)",
-            math: "Limits $\\theta: 0 \\to \\frac{\\pi}{2}$, $\\frac{ds}{d\\theta} = 2a$.<br>• <b>Surface Area:</b> $S = \\int_{0}^{\\pi/2} 2\\pi (r\\sin\\theta)(2a)\\,d\\theta = 8\\pi a^2 \\int_{0}^{\\pi/2} \\cos\\theta\\sin\\theta\\,d\\theta = \\mathbf{4\\pi a^2}$.<br>• <b>Volume:</b> $V = \\int_{0}^{\\pi/2} \\frac{2}{3}\\pi (8a^3\\cos^3\\theta)\\sin\\theta\\,d\\theta = \\frac{16}{3}\\pi a^3 \\left[-\\frac{\\cos^4\\theta}{4}\\right]_{0}^{\\pi/2} = \\mathbf{\\frac{4}{3}\\pi a^3}$."
-          }
-        ]
-      },
-
-      // ==================== UNIT 3 (4 Cards) ====================
-      {
-        id: "u3-q1",
-        unit: "Unit 3",
-        marks: "2 & 5 Marks",
-        title: "U3-Q1 & Q2: Definitions & Basic Beta-Gamma Evaluations",
-        problem: "Define Beta function, Gamma function, 1st & 2nd kind improper integrals with examples, and evaluate $\\Gamma(5)$, $\\Gamma(7/2)$, and $B(5, 7)$.",
-        intuition: "Remember: $\\Gamma(n) = (n-1)!$ for positive integers, and for half-integers peel off $(n-1)$ down to $\\Gamma(1/2) = \\sqrt{\\pi}$.",
-        steps: [
-          {
-            label: "1. Definitions of Beta, Gamma & Improper Integrals",
-            math: "• <b>Beta Function:</b> $B(m, n) = \\int_{0}^{1} x^{m-1}(1-x)^{n-1}\\,dx \\quad (m>0, n>0)$.<br>• <b>Gamma Function:</b> $\\Gamma(n) = \\int_{0}^{\\infty} e^{-x} x^{n-1}\\,dx \\quad (n>0)$.<br>• <b>1st Kind Improper Integral:</b> Infinite limit(s), e.g., $\\int_{1}^{\\infty} \\frac{dx}{x^2} = 1$.<br>• <b>2nd Kind Improper Integral:</b> Unbounded integrand on $[a,b]$, e.g., $\\int_{0}^{1} \\frac{dx}{\\sqrt{x}} = 2$."
-          },
-          {
-            label: "2. Evaluate Γ(5) and Γ(7/2)",
-            math: "• $\\Gamma(5) = 4! = 4 \\times 3 \\times 2 \\times 1 = \\mathbf{24}$.<br>• $\\Gamma\\left(\\frac{7}{2}\\right) = \\frac{5}{2} \\cdot \\frac{3}{2} \\cdot \\frac{1}{2}\\Gamma\\left(\\frac{1}{2}\\right) = \\mathbf{\\frac{15}{8}\\sqrt{\\pi}}$."
-          },
-          {
-            label: "3. Evaluate B(5, 7)",
-            math: "$$B(5, 7) = \\frac{\\Gamma(5)\\Gamma(7)}{\\Gamma(5+7)} = \\frac{4! \\cdot 6!}{11!} = \\frac{24 \\times 720}{11 \\times 10 \\times 9 \\times 8 \\times 7 \\times 720} = \\frac{24}{55440} = \\mathbf{\\frac{1}{2310}}$$"
-          }
-        ]
-      },
-      {
-        id: "u3-q3",
-        unit: "Unit 3",
-        marks: "5 Marks",
-        title: "U3-Q3: All 7 Beta-Gamma Reduction Integrals",
-        problem: "Evaluate:<br>(1) $\\int_{0}^{\\pi/2} \\sin^3 x \\cos^5 x\\,dx$; (2) $\\int_{0}^{\\pi/2} \\sin^5 x\\,dx$; (3) $\\int_{0}^{\\pi/2} \\cos^4 x\\,dx$;<br>(4) $\\int_{0}^{1} x^4(1-x)^3\\,dx$; (5) $\\int_{0}^{1} \\frac{x^2}{\\sqrt{1-x^5}}\\,dx$; (6) $\\int_{0}^{\\pi/2} \\sqrt{\\tan x}\\,dx$; (7) $\\int_{0}^{1} x^3(1-x)^5\\,dx$.",
-        intuition: "Use the golden trig formula $\\int_0^{\\pi/2} \\sin^p x \\cos^q x\\,dx = \\frac{\\Gamma(\\frac{p+1}{2})\\Gamma(\\frac{q+1}{2})}{2\\Gamma(\\frac{p+q+2}{2})}$ for (1), (2), (3), and (6).",
-        steps: [
-          {
-            label: "Integrals (1), (2), and (3) — Trigonometric Forms",
-            math: "• <b>(1)</b> $\\int_{0}^{\\pi/2} \\sin^3 x \\cos^5 x\\,dx = \\frac{\\Gamma(2)\\Gamma(3)}{2\\Gamma(5)} = \\frac{1! \\cdot 2!}{2 \\cdot 4!} = \\frac{2}{48} = \\mathbf{\\frac{1}{24}}$.<br>• <b>(2)</b> $\\int_{0}^{\\pi/2} \\sin^5 x \\cos^0 x\\,dx = \\frac{\\Gamma(3)\\Gamma(1/2)}{2\\Gamma(7/2)} = \\frac{2\\sqrt{\\pi}}{2 \\cdot \\frac{15}{8}\\sqrt{\\pi}} = \\mathbf{\\frac{8}{15}}$.<br>• <b>(3)</b> $\\int_{0}^{\\pi/2} \\sin^0 x \\cos^4 x\\,dx = \\frac{\\Gamma(1/2)\\Gamma(5/2)}{2\\Gamma(3)} = \\frac{\\sqrt{\\pi} \\cdot \\frac{3}{4}\\sqrt{\\pi}}{2 \\cdot 2!} = \\mathbf{\\frac{3\\pi}{16}}$."
-          },
-          {
-            label: "Integrals (4) and (7) — Direct Beta Function Forms",
-            math: "• <b>(4)</b> $\\int_{0}^{1} x^{5-1}(1-x)^{4-1}\\,dx = B(5,4) = \\frac{4! \\cdot 3!}{8!} = \\frac{24 \\times 6}{40320} = \\mathbf{\\frac{1}{280}}$.<br>• <b>(7)</b> $\\int_{0}^{1} x^{4-1}(1-x)^{6-1}\\,dx = B(4,6) = \\frac{3! \\cdot 5!}{9!} = \\frac{6}{9 \\times 8 \\times 7 \\times 6} = \\mathbf{\\frac{1}{504}}$."
-          },
-          {
-            label: "Integral (5) — Substitution x⁵ = t",
-            math: "Put $x^5 = t \\implies x = t^{1/5}, \\; dx = \\frac{1}{5}t^{-4/5}\\,dt$:<br>$$\\int_{0}^{1} \\frac{x^2}{\\sqrt{1-x^5}}\\,dx = \\frac{1}{5}\\int_{0}^{1} t^{2/5}(1-t)^{-1/2}t^{-4/5}\\,dt = \\frac{1}{5}\\int_{0}^{1} t^{-2/5}(1-t)^{-1/2}\\,dt = \\mathbf{\\frac{1}{5}B\\left(\\frac{3}{5}, \\frac{1}{2}\\right)}$$"
-          },
-          {
-            label: "Integral (6) — √(tan x) via Euler Reflection Formula",
-            math: "$$\\int_{0}^{\\pi/2} \\sin^{1/2}x \\cos^{-1/2}x\\,dx = \\frac{\\Gamma(3/4)\\Gamma(1/4)}{2\\Gamma(1)} = \\frac{1}{2}\\Gamma\\left(\\frac{1}{4}\\right)\\Gamma\\left(1-\\frac{1}{4}\\right) = \\frac{\\pi}{2\\sin(\\pi/4)} = \\mathbf{\\frac{\\pi}{\\sqrt{2}}}$$ "
-          }
-        ]
-      },
-      {
-        id: "u3-q4",
-        unit: "Unit 3",
-        marks: "10 Marks",
-        title: "U3-Q4: All Properties & Proofs of Beta-Gamma Relations",
-        problem: "Prove:<br>(I) $B(m, n) = B(n, m)$;<br>(II) $B(m, n) = 2\\int_{0}^{\\pi/2} \\sin^{2m-1}\\theta \\cos^{2n-1}\\theta\\,d\\theta$ & $\\int_{0}^{\\pi/2} \\sin^p\\theta\\cos^q\\theta\\,d\\theta$;<br>(III) $\\Gamma(n) = (n-1)\\Gamma(n-1)$;<br>(IV) $B(m, n) = \\frac{\\Gamma(m)\\Gamma(n)}{\\Gamma(m+n)}$.",
-        intuition: "These 4 proofs together form the single most frequently asked 10-mark theory block in Unit-3 of IKG-PTU papers.",
-        steps: [
-          {
-            label: "(I) Symmetry B(m, n) = B(n, m)",
-            math: "In $B(m,n) = \\int_{0}^{1} x^{m-1}(1-x)^{n-1}\\,dx$, apply $\\int_{0}^{a} f(x)\\,dx = \\int_{0}^{a} f(a-x)\\,dx$:<br>$$B(m,n) = \\int_{0}^{1} (1-x)^{m-1}[1-(1-x)]^{n-1}\\,dx = \\int_{0}^{1} x^{n-1}(1-x)^{m-1}\\,dx = B(n,m)$$"
-          },
-          {
-            label: "(II) Trigonometric Form of Beta Function",
-            math: "Put $x = \\sin^2\\theta \\implies dx = 2\\sin\\theta\\cos\\theta\\,d\\theta$ ($\\theta: 0 \\to \\frac{\\pi}{2}$):<br>$$B(m,n) = 2\\int_{0}^{\\pi/2} \\sin^{2m-1}\\theta\\cos^{2n-1}\\theta\\,d\\theta$$<br>Setting $2m-1=p, 2n-1=q$ gives $\\int_{0}^{\\pi/2} \\sin^p\\theta\\cos^q\\theta\\,d\\theta = \\frac{1}{2}B\\left(\\frac{p+1}{2}, \\frac{q+1}{2}\\right)$."
-          },
-          {
-            label: "(III) Recurrence Relation Γ(n) = (n - 1)Γ(n - 1)",
-            math: "Integrate $\\Gamma(n) = \\int_{0}^{\\infty} x^{n-1} e^{-x}\\,dx$ by parts ($u = x^{n-1}, dv = e^{-x}dx$):<br>$$\\Gamma(n) = \\left[-x^{n-1}e^{-x}\\right]_{0}^{\\infty} + (n-1)\\int_{0}^{\\infty} x^{n-2}e^{-x}\\,dx = 0 + (n-1)\\Gamma(n-1)$$"
-          },
-          {
-            label: "(IV) Fundamental Relation B(m, n) = Γ(m)Γ(n) / Γ(m + n)",
-            math: "$$\\Gamma(m)\\Gamma(n) = \\int_{0}^{\\infty}\\int_{0}^{\\infty} e^{-(x+y)} x^{m-1} y^{n-1}\\,dx\\,dy$$<br>Put $x = u^2, y = v^2$, then convert to polar coordinates ($u = r\\cos\\theta, v = r\\sin\\theta$):<br>$$\\Gamma(m)\\Gamma(n) = \\left(2\\int_{0}^{\\infty} e^{-r^2}r^{2(m+n)-1}\\,dr\\right)\\left(2\\int_{0}^{\\pi/2} \\cos^{2m-1}\\theta\\sin^{2n-1}\\theta\\,d\\theta\\right) = \\Gamma(m+n)B(m,n)$$"
-          }
-        ]
-      },
-      {
-        id: "u3-q5",
-        unit: "Unit 3",
-        marks: "5 Marks",
-        title: "U3-Q5: Convergence of All Improper Integrals",
-        problem: "Test convergence of:<br>(1) $\\int_{0}^{1} \\frac{dx}{\\sqrt{x - x^2}}$;<br>(2) $\\int_{0}^{\\infty} \\frac{\\sqrt{x}}{(1+x)^2}\\,dx$;<br>(3) $\\int_{0}^{\\pi/2} \\frac{\\tan x}{x}\\,dx$ and $\\int_{0}^{\\infty} \\frac{\\tan^{-1}x}{x^2+1}\\,dx$.",
-        intuition: "Split integrals that have discontinuities at BOTH endpoints (like $x=0$ and $x=1$ in problem 1) at the midpoint $x = 1/2$ and test each half separately.",
-        steps: [
-          {
-            label: "(1) ∫₀¹ dx / √(x - x²) — Discontinuous at both x = 0 and x = 1",
-            math: "Split at $x = \\frac{1}{2}$: $I = \\int_{0}^{1/2} \\frac{dx}{\\sqrt{x}\\sqrt{1-x}} + \\int_{1/2}^{1} \\frac{dx}{\\sqrt{x}\\sqrt{1-x}} = I_1 + I_2$.<br>• Near $x=0$: $\\frac{1}{\\sqrt{x}\\sqrt{1-x}} \\sim \\frac{1}{x^{1/2}}$ ($p = \\frac{1}{2} < 1 \\implies I_1$ converges).<br>• Near $x=1$: $\\sim \\frac{1}{(1-x)^{1/2}}$ ($p = \\frac{1}{2} < 1 \\implies I_2$ converges).<br>Hence $I$ <b>Converges</b> (value $= B(1/2, 1/2) = \\pi$)."
-          },
-          {
-            label: "(2) ∫₀^∞ √x / (1 + x)² dx — 1st Kind Improper Integral",
-            math: "Continuous at $x = 0$. As $x \\to \\infty$, $\\frac{x^{1/2}}{(1+x)^2} \\sim \\frac{x^{1/2}}{x^2} = \\frac{1}{x^{3/2}}$.<br>Since $p = \\frac{3}{2} > 1$, the integral <b>Converges</b>."
-          },
-          {
-            label: "(3) ∫₀^(π/2) (tan x / x) dx vs ∫₀^∞ [tan⁻¹ x / (x² + 1)] dx",
-            math: "• For $\\int_{0}^{\\pi/2} \\frac{\\tan x}{x}\\,dx$: Singular at $x = \\frac{\\pi}{2}$. Near $x = \\frac{\\pi}{2}$, $\\tan x = \\frac{\\sin x}{\\sin(\\frac{\\pi}{2}-x)} \\sim \\frac{1}{\\frac{\\pi}{2}-x}$ ($p = 1 \\implies$ <b>Divergent</b>).<br>• For $\\int_{0}^{\\infty} \\frac{\\tan^{-1}x}{x^2+1}\\,dx = \\left[\\frac{(\\tan^{-1}x)^2}{2}\\right]_{0}^{\\infty} = \\mathbf{\\frac{\\pi^2}{8}}$ (<b>Convergent</b>)."
-          }
-        ]
-      },
-
-      // ==================== UNIT 4 (5 Cards) ====================
-      {
-        id: "u4-q1",
-        unit: "Unit 4",
-        marks: "2 & 5 Marks",
-        title: "U4-Q1: Basic Definitions & Maxima/Minima Working Conditions",
-        problem: "Define Partial Derivative, Homogeneous Function, Chain Rule, Composite Function, Total Derivative, and state the conditions for Maxima & Minima of $f(x, y)$.",
-        intuition: "Writing the 4-point $rt - s^2$ working rule cleanly at the top of any 10-mark Maxima/Minima question guarantees 3 marks before you even touch the numbers.",
-        steps: [
-          {
-            label: "1. Definitions (Partial Derivative, Homogeneous, Composite, Total Derivative)",
-            math: "• <b>Partial Derivative:</b> $f_x = \\lim_{h\\to 0} \\frac{f(x+h, y) - f(x, y)}{h}$ (treating $y$ as constant).<br>• <b>Homogeneous Function:</b> $f(x,y)$ has degree $n$ if $f(tx, ty) = t^n f(x,y)$.<br>• <b>Composite Function & Chain Rule:</b> If $z = f(x,y)$ where $x = \\phi(u,v), y = \\psi(u,v)$, then $\\frac{\\partial z}{\\partial u} = \\frac{\\partial z}{\\partial x}\\frac{\\partial x}{\\partial u} + \\frac{\\partial z}{\\partial y}\\frac{\\partial y}{\\partial u}$.<br>• <b>Total Derivative:</b> If $x = x(t), y = y(t)$, then $\\frac{dz}{dt} = \\frac{\\partial z}{\\partial x}\\frac{dx}{dt} + \\frac{\\partial z}{\\partial y}\\frac{dy}{dt}$."
-          },
-          {
-            label: "2. Necessary & Sufficient Conditions for Maxima/Minima of f(x, y)",
-            math: "1. Find stationary points where $p = f_x = 0$ and $q = f_y = 0$.<br>2. Compute $r = f_{xx}, \\; s = f_{xy}, \\; t = f_{yy}$ at $(a, b)$.<br>• <b>Maximum:</b> $rt - s^2 > 0$ and $r < 0$.<br>• <b>Minimum:</b> $rt - s^2 > 0$ and $r > 0$.<br>• <b>Saddle Point:</b> $rt - s^2 < 0$. (If $rt - s^2 = 0$, case is doubtful)."
-          }
-        ]
-      },
-      {
-        id: "u4-q2",
-        unit: "Unit 4",
-        marks: "5 Marks Each",
-        title: "U4-Q2: All 6 Chain Rule & Euler 1st-Order Problems",
-        problem: "Solve all 6 problems:<br>(I) Find $\\frac{dz}{dt}$ for $z = xy^2 + x^2y$, $x = at^2$, $y = 2at$ (and $y = -2at$);<br>(II) Find $z_x, z_y$ for $\\log z = \\log(u^2+v)$, $u = e^{x^2+y^2}$, $v = x^2+y$;<br>(III) Find $w_r, w_s$ for $w = x^2+y^2$, $x = r-s$, $y = r+s$;<br>(IV) Prove $x u_x + y u_y + z u_z = 0$ for $u = f(x/y, y/z, z/x)$;<br>(V) Prove $x z_x + y z_y = \\sin 2z$ for $z = \\tan^{-1}\\left(\\frac{x^3+y^3}{x-y}\\right)$;<br>(VI) Prove $(u_x+u_y+u_z)^2 = \\frac{9}{(x+y+z)^2}$ for $u = \\log(x^3+y^3+z^3-3xyz)$.",
-        intuition: "For (V), apply Euler's theorem to $f = \\tan z$ (degree $3-1=2$) instead of differentiating $\\tan^{-1}$ directly. For (VI), factor the denominator using $(x+y+z)(x^2+y^2+z^2-xy-yz-zx)$.",
-        steps: [
-          {
-            label: "(I) Total Derivative dz/dt for z = xy² + x²y",
-            math: "$$\\frac{dz}{dt} = (y^2 + 2xy)\\frac{dx}{dt} + (2xy + x^2)\\frac{dy}{dt}$$<br>• For $x = at^2, y = 2at$: $= (4a^2t^2 + 4a^2t^3)(2at) + (4a^2t^3 + a^2t^4)(2a) = \\mathbf{16a^3t^3 + 10a^3t^4}$.<br>• For $x = at^2, y = -2at$: $= (4a^2t^2 - 4a^2t^3)(2at) + (-4a^2t^3 + a^2t^4)(-2a) = \\mathbf{16a^3t^3 - 10a^3t^4}$."
-          },
-          {
-            label: "(II) Chain Rule for log z = log(u² + v) and (III) w = x² + y²",
-            math: "• <b>(II)</b> $z = u^2 + v \\implies z_x = 2u\\cdot u_x + v_x = \\mathbf{4xe^{2(x^2+y^2)} + 2x}$; &nbsp; $z_y = \\mathbf{4ye^{2(x^2+y^2)} + 1}$.<br>• <b>(III)</b> $w_r = 2x(1) + 2y(1) = 2(r-s+r+s) = \\mathbf{4r}$; &nbsp; $w_s = 2x(-1) + 2y(1) = \\mathbf{4s}$."
-          },
-          {
-            label: "(IV) u = f(x/y, y/z, z/x) and (V) z = tan⁻¹((x³ + y³)/(x - y))",
-            math: "• <b>(IV)</b> Let $p=x/y, q=y/z, r=z/x$. Computing $x u_x + y u_y + z u_z$ gives $\\left(\\frac{x}{y}f_p - \\frac{z}{x}f_r\\right) + \\left(-\\frac{x}{y}f_p + \\frac{y}{z}f_q\\right) + \\left(-\\frac{y}{z}f_q + \\frac{z}{x}f_r\\right) = \\mathbf{0}$.<br>• <b>(V)</b> $f = \\tan z = \\frac{x^3+y^3}{x-y}$ has degree $n=2 \\implies x\\sec^2 z\\,z_x + y\\sec^2 z\\,z_y = 2\\tan z \\implies x z_x + y z_y = \\mathbf{\\sin 2z}$."
-          },
-          {
-            label: "(VI) u = log(x³ + y³ + z³ - 3xyz)",
-            math: "$$u_x + u_y + u_z = \\frac{3(x^2+y^2+z^2-xy-yz-zx)}{(x+y+z)(x^2+y^2+z^2-xy-yz-zx)} = \\frac{3}{x+y+z} \\implies (u_x+u_y+u_z)^2 = \\mathbf{\\frac{9}{(x+y+z)^2}}$$"
-          }
-        ]
-      },
-      {
-        id: "u4-q3",
-        unit: "Unit 4",
-        marks: "10 Marks",
-        title: "U4-Q3: Euler's 2nd-Order Theorem Proof & Both Deductions",
-        problem: "Prove Euler's 2nd-Order Theorem $x^2 z_{xx} + 2xy z_{xy} + y^2 z_{yy} = n(n-1)z$, and deduce:<br>(1) $x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = -\\frac{\\sin u \\cos 2u}{4\\cos^3 u}$ for $u = \\sin^{-1}\\left(\\frac{x+y}{\\sqrt{x}+\\sqrt{y}}\\right)$;<br>(2) $x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = -\\sin 2u \\sin^2 u$ for $u = \\tan^{-1}\\left(\\frac{y^2}{x}\\right)$.",
-        intuition: "Memorize the master corollary: if $F(u)$ is homogeneous of degree $n$, then $x u_x + y u_y = n\\frac{F(u)}{F'(u)} = \\phi(u)$ and $x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = \\phi(u)[\\phi'(u) - 1]$.",
-        steps: [
-          {
-            label: "Step 1: Proof of Euler's 2nd-Order Theorem",
-            math: "Start with $x z_x + y z_y = nz$. Differentiate w.r.t. $x$ and $y$:<br>$$x z_{xx} + y z_{xy} = (n-1)z_x \\quad (1), \\qquad x z_{xy} + y z_{yy} = (n-1)z_y \\quad (2)$$<br>Multiply (1) by $x$, (2) by $y$, and add: $x^2 z_{xx} + 2xy z_{xy} + y^2 z_{yy} = (n-1)(x z_x + y z_y) = \\mathbf{n(n-1)z}$."
-          },
-          {
-            label: "Step 2: Deduction 1 — u = sin⁻¹((x + y) / (√x + √y))",
-            math: "$z = \\sin u = \\frac{x+y}{\\sqrt{x}+\\sqrt{y}}$ has degree $n = 1 - \\frac{1}{2} = \\frac{1}{2}$.<br>$$\\phi(u) = \\frac{1}{2}\\frac{\\sin u}{\\cos u} = \\frac{1}{2}\\tan u \\implies \\phi(u)[\\phi'(u)-1] = \\frac{1}{2}\\tan u\\left(\\frac{1}{2}\\sec^2 u - 1\\right) = \\mathbf{-\\frac{\\sin u \\cos 2u}{4\\cos^3 u}}$$"
-          },
-          {
-            label: "Step 3: Deduction 2 — u = tan⁻¹(y² / x)",
-            math: "$z = \\tan u = \\frac{y^2}{x}$ has degree $n = 2 - 1 = 1$.<br>$$\\phi(u) = 1 \\cdot \\frac{\\tan u}{\\sec^2 u} = \\sin u\\cos u = \\frac{1}{2}\\sin 2u$$<br>$$x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = \\frac{1}{2}\\sin 2u (\\cos 2u - 1) = \\frac{1}{2}\\sin 2u (-2\\sin^2 u) = \\mathbf{-\\sin 2u \\sin^2 u}$$"
-          }
-        ]
-      },
-      {
-        id: "u4-q4",
-        unit: "Unit 4",
-        marks: "10 Marks Each",
-        title: "U4-Q4: All 4 Maxima & Minima Problems (Algebraic & Word Problems)",
-        problem: "Solve all 4 Maxima/Minima problems:<br>(I) $f(x,y) = x^4 + y^4 - 2x^2 + 4xy - 2y^2$;<br>(II) $f(x,y) = x^3 + y^3 - 63(x+y) + 12xy$;<br>(III) Sum of 3 positive numbers is constant ($x+y+z=c$), prove product $xyz$ is max when $x=y=z$;<br>(IV) Open-top rectangular box of volume $32\\text{ m}^3$, find dimensions for least material.",
-        intuition: "In (I) and (II), subtract or add $f_x = 0$ and $f_y = 0$ to factor $(x-y)$ or $(x+y)$ immediately. In (IV), 'open at the top' means Surface Area $S = xy + 2yz + 2zx$ (only one base!).",
-        steps: [
-          {
-            label: "(I) f(x, y) = x⁴ + y⁴ - 2x² + 4xy - 2y²",
-            math: "$f_x = 4x^3 - 4x + 4y = 0$ and $f_y = 4y^3 + 4x - 4y = 0$. Adding gives $x^3 + y^3 = 0 \\implies y = -x$.<br>Points: $(0,0)$ [Saddle], $(\\sqrt{2}, -\\sqrt{2})$ and $(-\\sqrt{2}, \\sqrt{2})$ where $r = 20 > 0, rt-s^2 = 384 > 0 \\implies$ <b>Minima = -8</b>."
-          },
-          {
-            label: "(II) f(x, y) = x³ + y³ - 63(x + y) + 12xy",
-            math: "$x^2 + 4y - 21 = 0$ and $y^2 + 4x - 21 = 0$. Subtracting gives $(x-y)(x+y-4)=0$.<br>• <b>At $(-7,-7)$:</b> $r = -42 < 0, rt-s^2 > 0 \\implies$ <b>Maximum = 784</b>.<br>• <b>At $(3,3)$:</b> $r = 18 > 0, rt-s^2 > 0 \\implies$ <b>Minimum = -216</b>. (Points $(5,-1), (-1,5)$ are saddles)."
-          },
-          {
-            label: "(III) Maximum Product P = xyz Given x + y + z = c",
-            math: "$P = xy(c - x - y) \\implies P_x = y(c - 2x - y) = 0, \\; P_y = x(c - x - 2y) = 0 \\implies x = y = z = \\frac{c}{3}$.<br>At $(\\frac{c}{3}, \\frac{c}{3})$: $r = -\\frac{2c}{3} < 0, \\; rt-s^2 = \\frac{c^2}{3} > 0 \\implies$ <b>Maximum when x = y = z</b>."
-          },
-          {
-            label: "(IV) Open-Top Rectangular Box (Volume = 32 m³)",
-            math: "$z = \\frac{32}{xy} \\implies S = xy + \\frac{64}{x} + \\frac{64}{y}$. Setting $S_x = 0, S_y = 0 \\implies x^2 y = 64, x y^2 = 64 \\implies x = y = 4, z = 2$.<br>At $(4,4)$: $r = 2 > 0, rt-s^2 = 3 > 0 \\implies$ <b>Dimensions: 4 m × 4 m × 2 m</b>."
-          }
-        ]
-      },
-      {
-        id: "u4-q5",
-        unit: "Unit 4",
-        marks: "5 & 10 Marks",
-        title: "U4-Q5, Q6, Q7: All 3 Partial Differential Equation Identities",
-        problem: "Solve:<br><b>Q5:</b> Find $n$ if $\\theta = t^n e^{-r^2/(4t)}$ satisfies $\\frac{1}{r^2}\\frac{\\partial}{\\partial r}\\left(r^2\\frac{\\partial\\theta}{\\partial r}\\right) = \\frac{\\partial\\theta}{\\partial t}$;<br><b>Q6:</b> If $r^2 = x^2+y^2+z^2$, prove $\\nabla^2(r^m) = m(m+1)r^{m-2}$;<br><b>Q7:</b> If $u = \\sin^{-1}\\left(\\frac{x^2+y^2}{x+y}\\right)$, prove $x u_x + y u_y = \\tan u$ and $x^2 u_{xx} + 2xy u_{xy} + y^2 u_{yy} = \\tan^3 u$.",
-        intuition: "In Q6, always differentiate $r$ implicitly via $r^2 = x^2 + y^2 + z^2 \\implies \\frac{\\partial r}{\\partial x} = \\frac{x}{r}$ rather than expanding square roots.",
-        steps: [
-          {
-            label: "Q5: Heat Equation Similarity Solution θ = tⁿ e^(-r² / 4t)",
-            math: "$$\\frac{1}{r^2}\\frac{\\partial}{\\partial r}\\left(r^2\\frac{\\partial\\theta}{\\partial r}\\right) = \\left(-\\frac{3}{2}t^{n-1} + \\frac{r^2}{4}t^{n-2}\\right)e^{-r^2/(4t)}, \\quad \\frac{\\partial\\theta}{\\partial t} = \\left(n t^{n-1} + \\frac{r^2}{4}t^{n-2}\\right)e^{-r^2/(4t)}$$<br>Equating coefficients of $t^{n-1}$ gives $n = \\mathbf{-\\frac{3}{2}}$."
-          },
-          {
-            label: "Q6: 3D Laplacian of r^m where r² = x² + y² + z²",
-            math: "$\\frac{\\partial(r^m)}{\\partial x} = m r^{m-2} x \\implies \\frac{\\partial^2(r^m)}{\\partial x^2} = m r^{m-2} + m(m-2)r^{m-4}x^2$.<br>Summing over $x, y, z$: $\\nabla^2(r^m) = 3m r^{m-2} + m(m-2)r^{m-4}(x^2+y^2+z^2) = \\mathbf{m(m+1)r^{m-2}}$."
-          },
-          {
-            label: "Q7: u = sin⁻¹((x² + y²) / (x + y))",
-            math: "$z = \\sin u$ has degree $n = 2 - 1 = 1 \\implies x u_x + y u_y = \\frac{\\sin u}{\\cos u} = \\mathbf{\\tan u}$.<br>2nd order: $\\phi(u)[\\phi'(u)-1] = \\tan u(\\sec^2 u - 1) = \\mathbf{\\tan^3 u}$."
-          }
-        ]
-      },
-
-      // ==================== UNIT 5 (6 Cards) ====================
-      {
-        id: "u5-q1",
-        unit: "Unit 5",
-        marks: "2 & 5 Marks",
-        title: "U5-Q1: Simple Double/Triple Integrals & Jacobians",
-        problem: "Evaluate:<br>(I) Jacobian $J = \\frac{\\partial(x,y)}{\\partial(r,\\theta)}$ for $x = r\\cos\\theta, y = r\\sin\\theta$;<br>(II) Jacobian $J = \\frac{\\partial(x,y)}{\\partial(u,v)}$ for $x = u+v, y = uv$;<br>(III) Triple integral $\\int_{0}^{1}\\int_{0}^{1}\\int_{0}^{1} xyz\\,dz\\,dy\\,dx$ and $\\int_{0}^{1}\\int_{0}^{2} xy^2\\,dx\\,dy$.",
-        intuition: "When limits of a multiple integral are all constants and the integrand factors into $f(x)g(y)h(z)$, split it into a product of single integrals immediately.",
-        steps: [
-          {
-            label: "(I) Polar Jacobian J(x, y / r, θ)",
-            math: "$$J = \\frac{\\partial(x,y)}{\\partial(r,\\theta)} = \\begin{vmatrix} x_r & x_\\theta \\\\ y_r & y_\\theta \\end{vmatrix} = \\begin{vmatrix} \\cos\\theta & -r\\sin\\theta \\\\ \\sin\\theta & r\\cos\\theta \\end{vmatrix} = r(\\cos^2\\theta + \\sin^2\\theta) = \\mathbf{r}$$"
-          },
-          {
-            label: "(II) Algebraic Jacobian J(x, y / u, v) for x = u + v, y = uv",
-            math: "$$J = \\frac{\\partial(x,y)}{\\partial(u,v)} = \\begin{vmatrix} 1 & 1 \\\\ v & u \\end{vmatrix} = \\mathbf{u - v}$$"
-          },
-          {
-            label: "(III) Constant-Limit Double & Triple Integrals",
-            math: "• $\\int_{0}^{1}\\int_{0}^{1}\\int_{0}^{1} xyz\\,dz\\,dy\\,dx = \\left(\\int_{0}^{1} x\\,dx\\right)\\left(\\int_{0}^{1} y\\,dy\\right)\\left(\\int_{0}^{1} z\\,dz\\right) = \\frac{1}{2}\\cdot\\frac{1}{2}\\cdot\\frac{1}{2} = \\mathbf{\\frac{1}{8}}$.<br>• $\\int_{0}^{1}\\int_{0}^{2} xy^2\\,dx\\,dy = \\left(\\int_{0}^{2} x\\,dx\\right)\\left(\\int_{0}^{1} y^2\\,dy\\right) = (2)\\left(\\frac{1}{3}\\right) = \\mathbf{\\frac{2}{3}}$ (or $\\mathbf{\\frac{4}{3}}$ if $x:0\\to 1, y:0\\to 2$)."
-          }
-        ]
-      },
-      {
-        id: "u5-q2",
-        unit: "Unit 5",
-        marks: "5 & 10 Marks",
-        title: "U5-Q2: All 5 Double & Triple Integrals by Finding Limits",
-        problem: "Evaluate:<br>(I) $\\iint xy\\,dx\\,dy$ over 1st quadrant of circle $x^2+y^2=1$;<br>(II) $\\iint xy(x+y)\\,dx\\,dy$ between $y=x^2$ and $y=x$;<br>(III) $\\iiint (x+y+z)\\,dx\\,dy\\,dz$ over $x=0, y=0, z=0, x+y+z=1$;<br>(IV) $\\iint xy\\,dx\\,dy$ over 1st quadrant of ellipse $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$;<br>(V) $\\iint e^{2x+3y}\\,dx\\,dy$ over $x=0, y=0, x+y=1$.",
-        intuition: "Always integrate the variable whose limit contains the other variable FIRST ($z$ before $y$, and $y$ before $x$), leaving constant limits for the outermost integral.",
-        steps: [
-          {
-            label: "(I) ∬ xy dx dy over 1st Quadrant of x² + y² = 1",
-            math: "$$I = \\int_{0}^{1}\\int_{0}^{\\sqrt{1-x^2}} xy\\,dy\\,dx = \\frac{1}{2}\\int_{0}^{1} x(1-x^2)\\,dx = \\frac{1}{2}\\left(\\frac{1}{2} - \\frac{1}{4}\\right) = \\mathbf{\\frac{1}{8}}$$"
-          },
-          {
-            label: "(II) ∬ xy(x + y) dx dy between y = x² and y = x",
-            math: "Intersection at $(0,0)$ and $(1,1)$ with $x^2 \\le y \\le x$:<br>$$I = \\int_{0}^{1}\\int_{x^2}^{x} (x^2 y + xy^2)\\,dy\\,dx = \\int_{0}^{1} \\left(\\frac{5}{6}x^4 - \\frac{1}{2}x^6 - \\frac{1}{3}x^7\\right)dx = \\frac{1}{6} - \\frac{1}{14} - \\frac{1}{24} = \\mathbf{\\frac{3}{56}}$$"
-          },
-          {
-            label: "(III) ∭ (x + y + z) dx dy dz over Tetrahedron x+y+z ≤ 1",
-            math: "$$I = \\int_{0}^{1}\\int_{0}^{1-x}\\int_{0}^{1-x-y} (x+y+z)\\,dz\\,dy\\,dx = \\frac{1}{2}\\int_{0}^{1}\\int_{0}^{1-x} [1-(x+y)^2]\\,dy\\,dx = \\mathbf{\\frac{1}{8}}$$"
-          },
-          {
-            label: "(IV) ∬ xy dx dy over 1st Quadrant of Ellipse x²/a² + y²/b² = 1",
-            math: "$$I = \\int_{0}^{a}\\int_{0}^{\\frac{b}{a}\\sqrt{a^2-x^2}} xy\\,dy\\,dx = \\frac{b^2}{2a^2}\\int_{0}^{a} x(a^2-x^2)\\,dx = \\frac{b^2}{2a^2}\\left(\\frac{a^4}{2} - \\frac{a^4}{4}\\right) = \\mathbf{\\frac{a^2 b^2}{8}}$$"
-          },
-          {
-            label: "(V) ∬ e^(2x + 3y) dx dy over Triangle x ≥ 0, y ≥ 0, x + y ≤ 1",
-            math: "$$I = \\int_{0}^{1}\\int_{0}^{1-x} e^{2x}e^{3y}\\,dy\\,dx = \\frac{1}{3}\\int_{0}^{1} (e^{3-x} - e^{2x})\\,dx = \\frac{1}{3}\\left[-e^{3-x} - \\frac{e^{2x}}{2}\\right]_{0}^{1} = \\mathbf{\\frac{2e^3 - 3e^2 + 1}{6}}$$"
-          }
-        ]
-      },
-      {
-        id: "u5-q3",
-        unit: "Unit 5",
-        marks: "10 Marks Each",
-        title: "U5-Q3: All 4 Change of Order of Integration Problems",
-        problem: "Evaluate by changing the order of integration:<br>(I) $\\int_{0}^{1}\\int_{x^2}^{2-x} xy\\,dy\\,dx$;<br>(II) $\\int_{0}^{\\infty}\\int_{x}^{\\infty} \\frac{e^{-y}}{y}\\,dy\\,dx$;<br>(III) $\\int_{0}^{4a}\\int_{x^2/(4a)}^{2\\sqrt{ax}} dy\\,dx$;<br>(IV) $\\int_{0}^{1}\\int_{y}^{1} e^{-x^2}\\,dx\\,dy$.",
-        intuition: "Draw a 10-second sketch of the limits! If the inner limits are $y = f(x)$, draw vertical strips; to change order to $dx\\,dy$, draw horizontal strips from left curve to right curve.",
-        steps: [
-          {
-            label: "(I) ∫₀¹ ∫_(x²)^(2-x) xy dy dx (Splits into 2 horizontal regions at y = 1)",
-            math: "Curves $y = x^2$ and $y = 2-x$ meet at $(1,1)$. Switching to horizontal strips:<br>$$I = \\int_{0}^{1}\\int_{0}^{\\sqrt{y}} xy\\,dx\\,dy + \\int_{1}^{2}\\int_{0}^{2-y} xy\\,dx\\,dy = \\frac{1}{2}\\int_{0}^{1} y^2\\,dy + \\frac{1}{2}\\int_{1}^{2} y(2-y)^2\\,dy = \\frac{1}{6} + \\frac{5}{24} = \\mathbf{\\frac{3}{8}}$$"
-          },
-          {
-            label: "(II) ∫₀^∞ ∫_x^∞ (e^(-y) / y) dy dx",
-            math: "Region $0 \\le x \\le y < \\infty \\implies 0 \\le x \\le y$ with $y: 0 \\to \\infty$:<br>$$I = \\int_{0}^{\\infty}\\int_{0}^{y} \\frac{e^{-y}}{y}\\,dx\\,dy = \\int_{0}^{\\infty} \\frac{e^{-y}}{y}(y)\\,dy = \\int_{0}^{\\infty} e^{-y}\\,dy = \\mathbf{1}$$"
-          },
-          {
-            label: "(III) ∫₀^(4a) ∫_(x²/4a)^(2√(ax)) dy dx",
-            math: "Region between $x^2 = 4ay$ and $y^2 = 4ax$. Changing order to $dx\\,dy$:<br>$$I = \\int_{0}^{4a}\\int_{y^2/(4a)}^{2\\sqrt{ay}} dx\\,dy = \\int_{0}^{4a} \\left(2\\sqrt{ay} - \\frac{y^2}{4a}\\right)dy = \\frac{32a^2}{3} - \\frac{16a^2}{3} = \\mathbf{\\frac{16}{3}a^2}$$"
-          },
-          {
-            label: "(IV) ∫₀¹ ∫_y¹ e^(-x²) dx dy",
-            math: "Region $0 \\le y \\le x \\le 1$:<br>$$I = \\int_{0}^{1}\\int_{0}^{x} e^{-x^2}\\,dy\\,dx = \\int_{0}^{1} x e^{-x^2}\\,dx = \\left[-\\frac{1}{2}e^{-x^2}\\right]_{0}^{1} = \\mathbf{\\frac{1 - e^{-1}}{2}}$$"
-          }
-        ]
-      },
-      {
-        id: "u5-q4",
-        unit: "Unit 5",
-        marks: "5 & 10 Marks",
-        title: "U5-Q4: Polar Coordinate Transformations (Both Problems)",
-        problem: "Evaluate by changing to polar coordinates:<br>(I) $\\int_{0}^{a}\\int_{0}^{\\sqrt{a^2-x^2}} e^{-(x^2+y^2)}\\,dy\\,dx$;<br>(II) $\\iint (x^2+y^2)\\,dx\\,dy$ over the disk $x^2+y^2 \\le a^2$.",
-        intuition: "Never forget the Jacobian factor $r$ when replacing $dy\\,dx = r\\,dr\\,d\\theta$! Check whether the domain is the 1st quadrant ($\\theta: 0 \\to \\pi/2$) or full circle ($\\theta: 0 \\to 2\\pi$).",
-        steps: [
-          {
-            label: "(I) ∫₀ᵃ ∫₀^√(a²-x²) e^-(x²+y²) dy dx (1st Quadrant of Circle)",
-            math: "Limits: $r \\in [0, a]$, $\\theta \\in [0, \\pi/2]$, and $dy\\,dx = r\\,dr\\,d\\theta$:<br>$$I = \\int_{0}^{\\pi/2}\\int_{0}^{a} e^{-r^2} r\\,dr\\,d\\theta = \\frac{\\pi}{2}\\left[-\\frac{1}{2}e^{-r^2}\\right]_{0}^{a} = \\mathbf{\\frac{\\pi}{4}(1 - e^{-a^2})}$$ "
-          },
-          {
-            label: "(II) ∬ (x² + y²) dx dy over Full Disk x² + y² ≤ a²",
-            math: "Limits: $r \\in [0, a]$, $\\theta \\in [0, 2\\pi]$:<br>$$I = \\int_{0}^{2\\pi}\\int_{0}^{a} r^2 \\cdot r\\,dr\\,d\\theta = 2\\pi \\left[\\frac{r^4}{4}\\right]_{0}^{a} = \\mathbf{\\frac{\\pi a^4}{2}}$$"
-          }
-        ]
-      },
-      {
-        id: "u5-q5",
-        unit: "Unit 5",
-        marks: "5 & 10 Marks",
-        title: "U5-Q5: All 4 Area by Double Integration Problems",
-        problem: "Find area using double integration:<br>(I) Between parabolas $y^2 = 4ax$ and $x^2 = 4ay$;<br>(II) Circle $x^2 + y^2 = 4$;<br>(III) Ellipse $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1$;<br>(IV) Between parabola $x^2 = 4ay$ and line $y = 2x$ (also $x = 2y$).",
-        intuition: "In double integration, $\\text{Area} = \\iint dy\\,dx$ with integrand $1$. Always find intersection points first to set the outer $x$-limits.",
-        steps: [
-          {
-            label: "(I) Area Between Parabolas y² = 4ax and x² = 4ay",
-            math: "Intersect at $(0,0)$ and $(4a,4a)$:<br>$$A = \\int_{0}^{4a}\\int_{x^2/(4a)}^{2\\sqrt{ax}} dy\\,dx = \\int_{0}^{4a} \\left(2\\sqrt{ax} - \\frac{x^2}{4a}\\right)dx = \\frac{32a^2}{3} - \\frac{16a^2}{3} = \\mathbf{\\frac{16}{3}a^2}$$"
-          },
-          {
-            label: "(II) Area of Circle x² + y² = 4 (R = 2) & (III) Ellipse x²/a² + y²/b² = 1",
-            math: "• <b>Circle:</b> $A = 4\\int_{0}^{2}\\int_{0}^{\\sqrt{4-x^2}} dy\\,dx = 4\\left[\\frac{x}{2}\\sqrt{4-x^2} + 2\\sin^{-1}\\frac{x}{2}\\right]_{0}^{2} = \\mathbf{4\\pi}$.<br>• <b>Ellipse:</b> $A = 4\\int_{0}^{a}\\int_{0}^{\\frac{b}{a}\\sqrt{a^2-x^2}} dy\\,dx = \\frac{4b}{a}\\left(\\frac{\\pi a^2}{4}\\right) = \\mathbf{\\pi ab}$."
-          },
-          {
-            label: "(IV) Area Between Parabola x² = 4ay and Line y = 2x (and x = 2y)",
-            math: "• <b>For line $y = 2x$:</b> Intersect at $(0,0)$ and $(8a, 16a)$:<br>$$A = \\int_{0}^{8a}\\int_{x^2/(4a)}^{2x} dy\\,dx = \\int_{0}^{8a} \\left(2x - \\frac{x^2}{4a}\\right)dx = 64a^2 - \\frac{128a^2}{3} = \\mathbf{\\frac{64}{3}a^2}$$<br>• <b>For line $x = 2y$:</b> Intersect at $(0,0)$ and $(4a, 2a) \\implies A = \\int_{0}^{4a} \\left(\\frac{x}{2} - \\frac{x^2}{4a}\\right)dx = \\mathbf{\\frac{4}{3}a^2}$."
-          }
-        ]
-      },
-      {
-        id: "u5-q6",
-        unit: "Unit 5",
-        marks: "10 Marks Each",
-        title: "U5-Q6: All 5 Volume by Double/Triple Integration Problems",
-        problem: "Find volume using double/triple integration:<br>(I) Spheres $x^2+y^2+z^2 = a^2$, $= 4$, $= 9$;<br>(II) Ellipsoid $\\frac{x^2}{a^2} + \\frac{y^2}{b^2} + \\frac{z^2}{c^2} = 1$;<br>(III) Common to sphere $x^2+y^2+z^2=a^2$ and cylinder $x^2+y^2=ay$;<br>(IV) Tetrahedron bounded by coordinate planes and $\\frac{x}{a} + \\frac{y}{b} + \\frac{z}{c} = 1$;<br>(V) Bounded by cylinder $x^2+y^2=4$ and planes $y+z=4, z=0$.",
-        intuition: "In (III), convert $x^2 + y^2 = ay$ to polar form $r = a\\sin\\theta$ ($\\theta: 0 \\to \\pi$). In (V), integrate $z = 4 - y$ over the circular disk $x^2 + y^2 \\le 4$ using polar coordinates.",
-        steps: [
-          {
-            label: "(I) Volumes of Spheres x² + y² + z² = R²",
-            math: "$V = 8\\int_{0}^{R}\\int_{0}^{\\sqrt{R^2-x^2}} \\sqrt{R^2-x^2-y^2}\\,dy\\,dx = \\frac{4}{3}\\pi R^3$.<br>• For $R = a$: $\\mathbf{\\frac{4}{3}\\pi a^3}$; &nbsp; For $R = 2$ ($=4$): $\\mathbf{\\frac{32}{3}\\pi}$; &nbsp; For $R = 3$ ($=9$): $\\mathbf{36\\pi}$."
-          },
-          {
-            label: "(II) Volume of Ellipsoid x²/a² + y²/b² + z²/c² = 1",
-            math: "$$V = 8\\int_{0}^{a}\\int_{0}^{\\frac{b}{a}\\sqrt{a^2-x^2}} c\\sqrt{1 - \\frac{x^2}{a^2} - \\frac{y^2}{b^2}}\\,dy\\,dx = \\frac{2\\pi bc}{a^2}\\int_{0}^{a} (a^2-x^2)\\,dx = \\mathbf{\\frac{4}{3}\\pi abc}$$"
-          },
-          {
-            label: "(III) Volume Common to Sphere x²+y²+z² = a² and Cylinder x²+y² = ay",
-            math: "In polar form, cylinder is $r = a\\sin\\theta$ ($0 \\le \\theta \\le \\pi$). Multiply by $2$ for $z \\ge 0$ and $z \\le 0$:<br>$$V = 2\\int_{0}^{\\pi}\\int_{0}^{a\\sin\\theta} \\sqrt{a^2-r^2}\\,r\\,dr\\,d\\theta = \\frac{4a^3}{3}\\int_{0}^{\\pi/2} (1 - \\cos^3\\theta)\\,d\\theta = \\mathbf{\\frac{2}{9}a^3(3\\pi - 4)}$$"
-          },
-          {
-            label: "(IV) Volume of Tetrahedron x/a + y/b + z/c = 1",
-            math: "$$V = \\int_{0}^{a}\\int_{0}^{b(1-x/a)}\\int_{0}^{c(1-x/a-y/b)} dz\\,dy\\,dx = \\frac{bc}{2}\\int_{0}^{a} \\left(1 - \\frac{x}{a}\\right)^2 dx = \\mathbf{\\frac{1}{6}abc}$$"
-          },
-          {
-            label: "(V) Volume Bounded by Cylinder x² + y² = 4 and Planes y + z = 4, z = 0",
-            math: "Height $z = 4 - y = 4 - r\\sin\\theta$ over disk $r \\in [0, 2], \\theta \\in [0, 2\\pi]$:<br>$$V = \\int_{0}^{2\\pi}\\int_{0}^{2} (4 - r\\sin\\theta)r\\,dr\\,d\\theta = \\int_{0}^{2\\pi} \\left(8 - \\frac{8}{3}\\sin\\theta\\right)d\\theta = 8(2\\pi) - 0 = \\mathbf{16\\pi}$$"
-          }
-        ]
-      }
-    ];
-
-    // App State
-    let selectedUnit = "All";
-    let currentQuestionId = QUESTIONS_DB[0].id;
-    let revealedCount = 1;
-    let masteredIds = new Set(JSON.parse(safeStorage.get('btam101_mastered') || '[]'));
-    let selectedContribution = 19;
-    let selectedPdfContribution = 19;
-    let paymentInitiated = false;
-    let pdfPaymentInitiated = false;
-    let sessionTimerInterval = null;
-
-    const UNITS = ["All", "Unit 1", "Unit 2", "Unit 3", "Unit 4", "Unit 5"];
-
-    // Calculate Timed Pass Duration (Base Minutes + 5-Minute Final Warning)
-    function getPlanDetails(amount) {
-      if (amount >= 29) {
-        return { baseMins: 115, warnMins: 5, totalMins: 120 };
-      } else if (amount >= 19) {
-        return { baseMins: 55, warnMins: 5, totalMins: 60 };
-      } else {
-        return { baseMins: 30, warnMins: 5, totalMins: 35 };
-      }
-    }
-
-    function formatRemainingTime(totalSeconds) {
-      const hrs = Math.floor(totalSeconds / 3600);
-      const mins = Math.floor((totalSeconds % 3600) / 60);
-      const secs = totalSeconds % 60;
-      const mm = String(mins).padStart(2, '0');
-      const ss = String(secs).padStart(2, '0');
-      return hrs > 0 ? `${hrs}:${mm}:${ss}` : `${mm}:${ss}`;
-    }
-
-    // Render live scannable UPI QR codes on Gate, PDF Print Modal, and Credits modal
-    function getQrImageUrl(upiUri) {
-      return `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=4&data=${encodeURIComponent(upiUri)}`;
-    }
-
-    function renderUpiQrCodes(amount, pdfAmount = selectedPdfContribution) {
-      const upiUri = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${amount}&cu=INR&tn=CalcVault%20M1%20Study%20Guide`;
-      const pdfUpiUri = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${pdfAmount}&cu=INR&tn=CalcVault%20M1%20PDF%20CheatSheet`;
-      const supportUri = 'upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&cu=INR&tn=CalcVault%20M1%20Support';
-
-      const gateImg = document.getElementById('gate-qr-img');
-      if (gateImg) gateImg.src = getQrImageUrl(upiUri);
-
-      const pdfImg = document.getElementById('pdf-qr-img');
-      if (pdfImg) pdfImg.src = getQrImageUrl(pdfUpiUri);
-
-      const modalImg = document.getElementById('modal-qr-img');
-      if (modalImg) modalImg.src = getQrImageUrl(supportUri);
-    }
-
-    // Initialize Application
-    function init() {
-      try { renderUpiQrCodes(selectedContribution); } catch (e) {}
-      checkVaultAccess();
-      renderUnitTabs();
-      renderQuestionList();
-      loadSlide(currentQuestionId);
-      try { buildPrintableCheatSheet(); } catch (e) {}
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
-
-    // Enable the "I've Paid" button only after user presses Pay or confirms QR scan
-    function markPaymentInitiated(source) {
-      paymentInitiated = true;
-      const unlockBtn = document.getElementById('unlock-vault-btn');
-      const unlockLabel = document.getElementById('unlock-btn-label');
-      const unlockIcon = document.getElementById('unlock-btn-icon');
-      const plan = getPlanDetails(selectedContribution);
-
-      if (unlockBtn) {
-        unlockBtn.disabled = false;
-        unlockBtn.className = "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-400 hover:to-cyan-500 text-white shadow-lg shadow-emerald-500/25 transition active:scale-95 cursor-pointer";
-      }
-      if (unlockLabel) {
-        unlockLabel.textContent = source === 'qr'
-          ? `QR Scanned — Start ${plan.totalMins}-Min Timed Pass`
-          : `I've Paid — Start ${plan.totalMins}-Min Timed Pass`;
-      }
-      if (unlockIcon) {
-        unlockIcon.setAttribute('data-lucide', 'unlock');
-      }
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
-
-    function resetUnlockButtonState() {
-      paymentInitiated = false;
-      const unlockBtn = document.getElementById('unlock-vault-btn');
-      const unlockLabel = document.getElementById('unlock-btn-label');
-      const unlockIcon = document.getElementById('unlock-btn-icon');
-      if (unlockBtn) {
-        unlockBtn.disabled = true;
-        unlockBtn.className = "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed transition";
-      }
-      if (unlockLabel) {
-        unlockLabel.textContent = 'Click "Pay via UPI App" or "Scanned QR" First';
-      }
-      if (unlockIcon) {
-        unlockIcon.setAttribute('data-lucide', 'lock');
-      }
-    }
-
-    // Live countdown engine for timed access & 5-minute warning banner
-    function startSessionTimer() {
-      if (sessionTimerInterval) clearInterval(sessionTimerInterval);
-
-      const tick = () => {
-        const expiresAt = parseInt(safeStorage.get('calcvault_m1_expires_at') || '0', 10);
-        const now = Date.now();
-        const remainingSecs = Math.max(0, Math.floor((expiresAt - now) / 1000));
-
-        const timerBadge = document.getElementById('session-timer-badge');
-        const timerText = document.getElementById('session-timer-text');
-        const warningBanner = document.getElementById('time-warning-banner');
-        const warningText = document.getElementById('warning-countdown-text');
-
-        if (!expiresAt || remainingSecs <= 0) {
-          clearInterval(sessionTimerInterval);
-          safeStorage.remove('calcvault_m1_unlocked');
-          safeStorage.remove('calcvault_m1_expires_at');
-          if (warningBanner) warningBanner.classList.add('hidden');
-          if (timerBadge) timerBadge.classList.add('hidden');
-          checkVaultAccess();
-          return;
-        }
-
-        const formatted = formatRemainingTime(remainingSecs);
-        if (timerBadge && timerText) {
-          timerBadge.classList.remove('hidden');
-          timerText.textContent = formatted;
-
-          if (remainingSecs <= 300) {
-            // Final 5-minute warning state
-            timerBadge.className = "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/50 animate-pulse";
-            if (warningBanner && warningText) {
-              warningBanner.classList.remove('hidden');
-              warningText.textContent = formatted;
-            }
-          } else {
-            timerBadge.className = "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30";
-            if (warningBanner) warningBanner.classList.add('hidden');
-          }
-        }
-      };
-
-      tick();
-      sessionTimerInterval = setInterval(tick, 1000);
-    }
-
-    // UPI Payment Gate Controls
-    function checkVaultAccess() {
-      const isUnlocked = safeStorage.get('calcvault_m1_unlocked') === 'true';
-      const expiresAt = parseInt(safeStorage.get('calcvault_m1_expires_at') || '0', 10);
-      const overlay = document.getElementById('upi-gate-overlay');
-      const badge = document.getElementById('verified-access-badge');
-
-      if (isUnlocked && expiresAt > Date.now()) {
-        overlay.classList.add('hidden');
-        badge.classList.remove('hidden');
-        startSessionTimer();
-      } else {
-        safeStorage.remove('calcvault_m1_unlocked');
-        safeStorage.remove('calcvault_m1_expires_at');
-        resetUnlockButtonState();
-        overlay.classList.remove('hidden');
-        badge.classList.add('hidden');
-        const timerBadge = document.getElementById('session-timer-badge');
-        const warningBanner = document.getElementById('time-warning-banner');
-        if (timerBadge) timerBadge.classList.add('hidden');
-        if (warningBanner) warningBanner.classList.add('hidden');
-      }
-    }
-
-    function selectAmount(amount) {
-      selectedContribution = amount;
-      document.getElementById('custom-amount-input').value = '';
-      document.querySelectorAll('.amt-chip').forEach(btn => {
-        btn.className = "amt-chip py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition flex flex-col items-center";
-      });
-      const activeChip = document.getElementById(`amt-chip-${amount}`);
-      if (activeChip) {
-        activeChip.className = "amt-chip py-2 px-2 rounded-xl text-xs font-bold border-2 border-cyan-500 bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 transition flex flex-col items-center";
-      }
-      updateUpiDeepLink(amount);
-    }
-
-    function selectCustomAmount(val) {
-      const num = parseInt(val, 10);
-      if (!isNaN(num) && num > 0) {
-        selectedContribution = num;
-        document.querySelectorAll('.amt-chip').forEach(btn => {
-          btn.className = "amt-chip py-2 px-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-cyan-500 transition flex flex-col items-center";
-        });
-        updateUpiDeepLink(num);
-      }
-    }
-
-    function updateUpiDeepLink(amount) {
-      const linkEl = document.getElementById('upi-deeplink-btn');
-      const labelEl = document.getElementById('upi-deeplink-label');
-      const hintEl = document.getElementById('tier-duration-hint');
-      const plan = getPlanDetails(amount);
-
-      linkEl.href = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${amount}&cu=INR&tn=CalcVault%20M1%20Study%20Guide`;
-      labelEl.textContent = `Pay ₹${amount} via UPI App`;
-      if (hintEl) {
-        hintEl.innerHTML = `<i data-lucide="clock" class="w-3.5 h-3.5"></i><span>Selected Pass: <strong>${plan.baseMins} mins access + ${plan.warnMins} mins warning (${plan.totalMins} mins total)</strong></span>`;
-        if (typeof lucide !== 'undefined') lucide.createIcons();
-      }
-      renderUpiQrCodes(amount);
-      buildPrintableCheatSheet();
-    }
-
-    function unlockVault() {
-      if (!paymentInitiated) return;
-      const utr = document.getElementById('utr-input').value.trim();
-      const plan = getPlanDetails(selectedContribution);
-      const existingExpires = parseInt(safeStorage.get('calcvault_m1_expires_at') || '0', 10);
-      const baseTimestamp = existingExpires > Date.now() ? existingExpires : Date.now();
-      const newExpiresAt = baseTimestamp + plan.totalMins * 60 * 1000;
-
-      safeStorage.set('calcvault_m1_unlocked', 'true');
-      safeStorage.set('calcvault_m1_expires_at', String(newExpiresAt));
-      if (utr) {
-        safeStorage.set('calcvault_m1_utr', utr);
-      }
-      checkVaultAccess();
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
-
-    function openExtendSessionGate() {
-      resetUnlockButtonState();
-      renderUpiQrCodes(selectedContribution);
-      document.getElementById('upi-gate-overlay').classList.remove('hidden');
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
-
-    function lockGateForDemo() {
-      if (sessionTimerInterval) clearInterval(sessionTimerInterval);
-      safeStorage.remove('calcvault_m1_unlocked');
-      safeStorage.remove('calcvault_m1_expires_at');
-      checkVaultAccess();
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
-
-    // Copy UPI ID using execCommand fallback for iFrame compatibility
-    function copyUpiId(badgeId) {
-      const tempInput = document.createElement('input');
-      tempInput.value = '7888690390@upi';
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-
-      const badge = document.getElementById(badgeId);
-      if (badge) {
-        const originalText = badge.textContent;
-        badge.textContent = 'Copied!';
-        setTimeout(() => {
-          badge.textContent = originalText;
-        }, 2000);
-      }
-    }
-
-    // Credits Modal Controls
-    function openCreditsModal() {
-      document.getElementById('credits-modal').classList.remove('hidden');
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
-
-    function closeCreditsModal() {
-      document.getElementById('credits-modal').classList.add('hidden');
-    }
-
-    // PDF Print Payment Gate Controls
-    function selectPdfAmount(amount) {
-      selectedPdfContribution = amount;
-      const customInput = document.getElementById('pdf-custom-amount');
-      if (customInput) customInput.value = '';
-      document.querySelectorAll('.pdf-amt-chip').forEach(btn => {
-        btn.className = "pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-amber-500 transition";
-      });
-      const activeChip = document.getElementById(`pdf-amt-chip-${amount}`);
-      if (activeChip) {
-        activeChip.className = "pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border-2 border-amber-500 bg-amber-500/15 text-amber-700 dark:text-amber-300 transition";
-      }
-      updatePdfDeepLink(amount);
-    }
-
-    function selectPdfCustomAmount(val) {
-      const num = parseInt(val, 10);
-      if (!isNaN(num) && num > 0) {
-        selectedPdfContribution = num;
-        document.querySelectorAll('.pdf-amt-chip').forEach(btn => {
-          btn.className = "pdf-amt-chip py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:border-amber-500 transition";
-        });
-        updatePdfDeepLink(num);
-      }
-    }
-
-    function updatePdfDeepLink(amount) {
-      const linkEl = document.getElementById('pdf-upi-deeplink');
-      const labelEl = document.getElementById('pdf-upi-label');
-      if (linkEl) linkEl.href = `upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&am=${amount}&cu=INR&tn=CalcVault%20M1%20PDF%20CheatSheet`;
-      if (labelEl) labelEl.textContent = `Pay ₹${amount} via UPI App`;
-      renderUpiQrCodes(selectedContribution, amount);
-    }
-
-    function markPdfPaymentInitiated(source) {
-      pdfPaymentInitiated = true;
-      const btn = document.getElementById('confirm-pdf-print-btn');
-      const label = document.getElementById('pdf-print-btn-label');
-      const icon = document.getElementById('pdf-print-btn-icon');
-      if (btn) {
-        btn.disabled = false;
-        btn.className = "w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/25 transition active:scale-95 cursor-pointer";
-      }
-      if (label) {
-        label.textContent = source === 'qr'
-          ? "QR Scanned — Print / Save PDF Now"
-          : "I've Paid — Print / Save PDF Now";
-      }
-      if (icon) icon.setAttribute('data-lucide', 'printer');
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
-
-    function resetPdfPrintButtonState() {
-      pdfPaymentInitiated = false;
-      const btn = document.getElementById('confirm-pdf-print-btn');
-      const label = document.getElementById('pdf-print-btn-label');
-      const icon = document.getElementById('pdf-print-btn-icon');
-      if (btn) {
-        btn.disabled = true;
-        btn.className = "w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-extrabold bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed transition";
-      }
-      if (label) label.textContent = 'Click "Pay via UPI App" or Scan QR First';
-      if (icon) icon.setAttribute('data-lucide', 'lock');
-    }
-
-    function closePdfPrintModal() {
-      document.getElementById('pdf-print-modal').classList.add('hidden');
-    }
-
-    // Theme Toggle
-    function toggleTheme() {
-      document.documentElement.classList.toggle('dark');
-    }
-
-    // Render Unit Tabs
-    function renderUnitTabs() {
-      const container = document.getElementById('unit-tabs');
-      container.innerHTML = UNITS.map(unit => {
-        const active = selectedUnit === unit;
-        const label = unit === "All" ? "All Units (26)" : unit;
-        return `
-          <button type="button" onclick="selectUnit('${unit}')"
-            class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
-              active
-                ? 'bg-cyan-600 text-white shadow-sm'
-                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
-            }">
-            ${label}
-          </button>
-        `;
-      }).join('');
-    }
-
-    function selectUnit(unit) {
-      selectedUnit = unit;
-      renderUnitTabs();
-      renderQuestionList();
-      const filtered = getFilteredQuestions();
-      if (filtered.length > 0 && !filtered.some(q => q.id === currentQuestionId)) {
-        loadSlide(filtered[0].id);
-      }
-    }
-
-    function getFilteredQuestions() {
-      const query = document.getElementById('search-input').value.toLowerCase().trim();
-      return QUESTIONS_DB.filter(q => {
-        const matchesUnit = selectedUnit === "All" || q.unit === selectedUnit;
-        const matchesSearch = !query ||
-          q.title.toLowerCase().includes(query) ||
-          q.problem.toLowerCase().includes(query) ||
-          q.unit.toLowerCase().includes(query);
-        return matchesUnit && matchesSearch;
-      });
-    }
-
-    // Render Left Question Cards
-    function renderQuestionList() {
-      const listEl = document.getElementById('question-list');
-      const filtered = getFilteredQuestions();
-
-      document.getElementById('question-count-label').textContent = `${filtered.length} Topics Shown`;
-      document.getElementById('progress-badge').textContent = `${masteredIds.size} / ${QUESTIONS_DB.length} Mastered`;
-
-      if (filtered.length === 0) {
-        listEl.innerHTML = `<div class="p-6 text-center text-sm text-slate-400">No matching questions found.</div>`;
-        return;
-      }
-
-      listEl.innerHTML = filtered.map(q => {
-        const isSelected = q.id === currentQuestionId;
-        const isMastered = masteredIds.has(q.id);
-        return `
-          <button type="button" onclick="loadSlide('${q.id}')"
-            class="text-left p-3.5 rounded-xl border transition-all ${
-              isSelected
-                ? 'bg-cyan-500/10 border-cyan-500 shadow-sm'
-                : 'bg-white dark:bg-[#151e32] border-slate-200 dark:border-slate-800 hover:border-cyan-400 dark:hover:border-cyan-600'
-            }">
-            <div class="flex items-center justify-between gap-2 mb-1">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">${q.unit} • ${q.marks}</span>
-              ${isMastered ? '<span class="text-xs text-emerald-500 font-bold flex items-center gap-1">✓ Mastered</span>' : ''}
-            </div>
-            <div class="text-sm font-semibold text-slate-800 dark:text-slate-100 line-clamp-2">${q.title}</div>
-          </button>
-        `;
-      }).join('');
-    }
-
-    // Load Question onto Whiteboard
-    function loadSlide(id) {
-      currentQuestionId = id;
-      revealedCount = 1; // Start with Step 1 visible
-      const q = QUESTIONS_DB.find(item => item.id === id);
-      if (!q) return;
-
-      document.getElementById('slide-unit-badge').textContent = q.unit;
-      document.getElementById('slide-marks-badge').textContent = q.marks;
-      document.getElementById('slide-title').textContent = q.title;
-      document.getElementById('slide-problem').innerHTML = q.problem;
-      document.getElementById('intuition-text').innerHTML = q.intuition;
-
-      updateMasteredButton();
-      renderSteps();
-      renderQuestionList();
-      if (typeof renderMathInElement !== 'undefined') {
-        renderMathInElement(document.body, {
-          delimiters: [
-            { left: '$$', right: '$$', display: true },
-            { left: '$', right: '$', display: false }
-          ],
-          throwOnError: false
-        });
-      }
-    }
-
-    // Render Revealed Derivation Steps
-    function renderSteps() {
-      const q = QUESTIONS_DB.find(item => item.id === currentQuestionId);
-      const container = document.getElementById('steps-container');
-      const total = q.steps.length;
-
-      document.getElementById('step-counter').textContent = `Step ${Math.min(revealedCount, total)} of ${total}`;
-
-      const nextBtn = document.getElementById('next-step-btn');
-      if (revealedCount >= total) {
-        nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
-      } else {
-        nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-      }
-
-      container.innerHTML = q.steps.slice(0, revealedCount).map((step, idx) => `
-        <div class="step-animate p-4 rounded-xl bg-slate-50 dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800">
-          <div class="flex items-center gap-2 mb-1.5">
-            <span class="w-6 h-6 rounded-full bg-cyan-600 text-white text-xs font-bold flex items-center justify-center shrink-0">
-              ${idx + 1}
-            </span>
-            <h3 class="text-xs sm:text-sm font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-wide">
-              ${step.label}
-            </h3>
-          </div>
-          <div class="text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed pl-8">
-            ${step.math}
-          </div>
-        </div>
-      `).join('');
-
-      if (typeof renderMathInElement !== 'undefined') {
-        renderMathInElement(container, {
-          delimiters: [
-            { left: '$$', right: '$$', display: true },
-            { left: '$', right: '$', display: false }
-          ],
-          throwOnError: false
-        });
-      }
-
-      container.scrollTop = container.scrollHeight;
-    }
-
-    function revealNextStep() {
-      const q = QUESTIONS_DB.find(item => item.id === currentQuestionId);
-      if (revealedCount < q.steps.length) {
-        revealedCount++;
-        renderSteps();
-      }
-    }
-
-    function revealAllSteps() {
-      const q = QUESTIONS_DB.find(item => item.id === currentQuestionId);
-      revealedCount = q.steps.length;
-      renderSteps();
-    }
-
-    function resetSteps() {
-      revealedCount = 1;
-      renderSteps();
-    }
-
-    function nextQuestion() {
-      const filtered = getFilteredQuestions();
-      const idx = filtered.findIndex(q => q.id === currentQuestionId);
-      if (idx >= 0 && idx < filtered.length - 1) {
-        loadSlide(filtered[idx + 1].id);
-      }
-    }
-
-    function prevQuestion() {
-      const filtered = getFilteredQuestions();
-      const idx = filtered.findIndex(q => q.id === currentQuestionId);
-      if (idx > 0) {
-        loadSlide(filtered[idx - 1].id);
-      }
-    }
-
-    // Revision Progress Tracking
-    function toggleMastered() {
-      if (masteredIds.has(currentQuestionId)) {
-        masteredIds.delete(currentQuestionId);
-      } else {
-        masteredIds.add(currentQuestionId);
-      }
-      safeStorage.set('btam101_mastered', JSON.stringify([...masteredIds]));
-      updateMasteredButton();
-      renderQuestionList();
-    }
-
-    function updateMasteredButton() {
-      const btn = document.getElementById('mastered-btn');
-      const isMastered = masteredIds.has(currentQuestionId);
-      if (isMastered) {
-        btn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 text-white shadow-sm transition";
-        btn.innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i><span>Mastered ✓</span>`;
-      } else {
-        btn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
-        btn.innerHTML = `<i data-lucide="circle" class="w-4 h-4"></i><span>Mark as Mastered</span>`;
-      }
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
-
-    // Build Complete Printable Cheat-Sheet for PDF Export
-    function buildPrintableCheatSheet() {
-      const qrDataUrl = getQrImageUrl('upi://pay?pa=7888690390@upi&pn=Krishna%20Kumar&cu=INR&tn=CalcVault%20M1%20Support');
-      const printContent = document.getElementById('print-content');
-      const cardsHtml = QUESTIONS_DB.map((q, index) => `
-        <div class="print-card">
-          <div class="text-xs font-bold uppercase text-indigo-700">${q.unit} • ${q.marks}</div>
-          <h3 class="text-base font-bold mt-0.5">${index + 1}. ${q.title}</h3>
-          <div class="text-sm font-medium my-2 p-2 bg-slate-100 rounded">${q.problem}</div>
-          <div class="text-xs italic text-slate-600 mb-2"><b>Exam Tip:</b> ${q.intuition}</div>
-          <div class="space-y-2 text-sm">
-            ${q.steps.map(s => `<div><b>${s.label}:</b> ${s.math}</div>`).join('')}
-          </div>
-        </div>
-      `).join('');
-
-      const creditCardHtml = `
-        <div class="print-card bg-slate-50 border-2 border-slate-300 mt-6">
-          <div class="flex items-center justify-between gap-4">
-            <div>
-              <div class="text-xs font-bold uppercase text-cyan-800">Credits &amp; Peer Support</div>
-              <h3 class="text-base font-bold mt-0.5">Created &amp; Curated by Krishna Kumar</h3>
-              <p class="text-xs text-slate-600">B.Tech Cybersecurity, CGC College of Engineering, Landran — IKG-PTU 1st Semester</p>
-              <p class="text-xs text-slate-700 mt-2">
-                Thank you to all fellow students for studying together! For doubt-solving, peer collaboration, or voluntary support to keep open student study resources running, scan the QR code or use UPI ID: <b>7888690390@upi</b>.
-              </p>
-            </div>
-            ${qrDataUrl ? `<img src="${qrDataUrl}" alt="UPI QR Code" class="w-24 h-24 border border-slate-300 rounded-lg shrink-0" />` : ''}
-          </div>
-        </div>
-      `;
-
-      printContent.innerHTML = cardsHtml + creditCardHtml;
-    }
-
-    function openCheatSheetPrint() {
-      if (safeStorage.get('calcvault_m1_pdf_unlocked') === 'true') {
-        triggerCheatSheetPrint();
-        return;
-      }
-      resetPdfPrintButtonState();
-      renderUpiQrCodes(selectedContribution, selectedPdfContribution);
-      document.getElementById('pdf-print-modal').classList.remove('hidden');
-      if (typeof lucide !== 'undefined') lucide.createIcons();
-    }
-
-    function executePaidPdfPrint() {
-      if (!pdfPaymentInitiated) return;
-      const utr = document.getElementById('pdf-utr-input').value.trim();
-      safeStorage.set('calcvault_m1_pdf_unlocked', 'true');
-      if (utr) safeStorage.set('calcvault_m1_pdf_utr', utr);
-      closePdfPrintModal();
-      triggerCheatSheetPrint();
-    }
-
-    function triggerCheatSheetPrint() {
-      buildPrintableCheatSheet();
-      const printContainer = document.getElementById('print-container');
-      if (typeof renderMathInElement !== 'undefined') {
-        renderMathInElement(printContainer, {
-          delimiters: [
-            { left: '$$', right: '$$', display: true },
-            { left: '$', right: '$', display: false }
-          ],
-          throwOnError: false
-        });
-      }
-      setTimeout(() => {
-        window.print();
-      }, 150);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
-  </script>
+  <!-- Data and Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
