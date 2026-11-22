@@ -1,0 +1,583 @@
+
+  <!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 2 — Applications of Definite Integrals | CalcVault — Engineering Mathematics-I</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- KaTeX for fast, crisp mathematical typesetting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-200 min-h-screen flex flex-col">
+
+  <!-- Print Only Header -->
+  <div class="print-only-header hidden">
+    <div class="flex justify-between items-center border-b-2 border-slate-900 pb-3 mb-4">
+      <div>
+        <h1 class="text-xl font-extrabold text-slate-900">CalcVault — Engineering Mathematics-I Revision Notes</h1>
+        <p class="text-xs text-slate-600">Curated for CGC College of Engineering / IKG-PTU BTAM101-18 Syllabus • Krishna Kumar</p>
+      </div>
+      <div class="text-right text-xs text-slate-500">
+        <p>100% Free & Open Access</p>
+        <p>Revision Portal</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+  <!-- Mobile Backdrop -->
+  <div id="mobile-backdrop" onclick="toggleMobileMenu(true)" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-menu" class="fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-slate-900 z-50 transform -translate-x-full transition-transform duration-200 ease-in-out border-r border-slate-200 dark:border-slate-800 flex flex-col p-5 shadow-2xl lg:hidden">
+    <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-white shadow-sm">
+          <i data-lucide="function-square" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 class="font-extrabold text-sm text-slate-900 dark:text-white">CalcVault M-1</h2>
+          <p class="text-[10px] text-slate-500 dark:text-slate-400">Engineering Mathematics-I</p>
+        </div>
+      </div>
+      <button onclick="toggleMobileMenu(true)" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <div class="py-4 space-y-1">
+      <a href="index.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span>Home Portal</span>
+      </a>
+      <a href="formulas.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="calculator" class="w-4 h-4"></i>
+        <span>Formula & Theorems Sheet</span>
+      </a>
+      <a href="questions.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="help-circle" class="w-4 h-4"></i>
+        <span>Solved Question Bank</span>
+      </a>
+      <a href="whiteboard.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="presentation" class="w-4 h-4"></i>
+        <span>Interactive Whiteboard</span>
+      </a>
+    </div>
+
+    <div class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Syllabus Units</div>
+    <div class="flex-1 overflow-y-auto space-y-1 pr-1">
+      <a href="unit-1.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 1</span><span class="truncate">Sequences & Infinite Series</span></a><a href="unit-2.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400 font-semibold"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 2</span><span class="truncate">Applications of Definite Integrals</span></a><a href="unit-3.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 3</span><span class="truncate">Beta & Gamma Functions & Improper Integrals</span></a><a href="unit-4.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 4</span><span class="truncate">Multivariable Calculus (Partial Differentiation)</span></a><a href="unit-5.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 5</span><span class="truncate">Multiple Integrals & Vector Transformations</span></a>
+    </div>
+
+    <div class="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <span class="text-xs text-slate-500">Dark / Light Mode</span>
+      <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+        <i data-lucide="moon" class="w-4 h-4 theme-toggle-icon"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Global Navigation Header -->
+  <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 no-print transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <!-- Left: Logo & Brand -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleMobileMenu(false)" class="p-2 -ml-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+            <i data-lucide="function-square" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">CalcVault</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold border border-emerald-500/20">Free</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium hidden sm:block">Engineering Mathematics-I</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Center: Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1">
+        <a href="index.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Overview</a>
+        
+        <!-- Units Dropdown -->
+        <div class="relative group">
+          <button class="px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1 transition text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60">
+            <span>Units & Chapters</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition-transform"></i>
+          </button>
+          <div class="absolute left-0 mt-1 w-80 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 py-2 hidden group-hover:block transition-all z-50">
+            <a href="unit-1.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 1:</strong> Sequences & Infinite Series</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-2.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 2:</strong> Applications of Definite Integrals</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-3.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 3:</strong> Beta & Gamma Functions & Improper Integrals</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-4.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 4:</strong> Multivariable Calculus (Partial Differentiation)</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-5.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 5:</strong> Multiple Integrals & Vector Transformations</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a>
+          </div>
+        </div>
+
+        <a href="formulas.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Formula Sheet</a>
+        <a href="questions.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Question Bank</a>
+        <a href="whiteboard.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Whiteboard</a>
+      </nav>
+
+      <!-- Right: Action Tools -->
+      <div class="flex items-center gap-2">
+        <!-- Search Trigger -->
+        <button onclick="openSearchModal()" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-medium border border-slate-200 dark:border-slate-700/60 transition shadow-xs">
+          <i data-lucide="search" class="w-3.5 h-3.5"></i>
+          <span class="hidden md:inline">Quick Search...</span>
+          <kbd class="hidden md:inline-block px-1.5 py-0.5 rounded bg-white dark:bg-slate-700 text-[10px] font-mono text-slate-400 dark:text-slate-300 border border-slate-200 dark:border-slate-600">Ctrl K</kbd>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()" title="Toggle dark/light mode" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <i data-lucide="moon" class="w-4 h-4 theme-toggle-icon"></i>
+        </button>
+
+        <!-- Print Action -->
+        <button onclick="window.print()" title="Print this page (A4 PDF)" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-sm transition">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          <span>Print / PDF</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Search Modal -->
+  <div id="search-modal" class="fixed inset-0 z-50 hidden items-start justify-center pt-16 sm:pt-24 bg-slate-950/70 backdrop-blur-xs p-4 overflow-y-auto no-print" onclick="closeSearchModal()">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
+        <i data-lucide="search" class="w-5 h-5 text-indigo-500"></i>
+        <input id="search-input" oninput="handleSearchInput(this.value)" type="text" placeholder="Search topics, formulas, or derivations (e.g. Ratio, Raabe, Cardioid, Beta-Gamma, Euler, Maxima, Jacobian)..." class="w-full bg-transparent text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-hidden" />
+        <button onclick="closeSearchModal()" class="text-xs px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">ESC</button>
+      </div>
+      <div id="search-results" class="max-h-[60vh] overflow-y-auto p-3 space-y-1 divide-y divide-slate-100 dark:divide-slate-800/40">
+        <!-- Live search results inject here -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Unit Hero Header -->
+  <section class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 py-10 transition-colors">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs text-slate-500 mb-4 no-print">
+        <a href="index.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">Home</a>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <span>Syllabus Units</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <span class="text-indigo-600 dark:text-indigo-400 font-semibold">Unit 2</span>
+      </nav>
+
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-xs font-extrabold uppercase tracking-wider border border-indigo-100 dark:border-indigo-900/50">Unit 2</span>
+            <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 25 min read</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold">100% Free</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white leading-tight">Applications of Definite Integrals</h1>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2 max-w-2xl">Arc length of plane curves (rectification), surface areas and volumes of revolution for Cartesian, parametric, and polar curves (Cycloids, Ellipses, Cardioids, Circles).</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 no-print shrink-0">
+          <a href="#questions-section" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center gap-1.5">
+            <i data-lucide="help-circle" class="w-3.5 h-3.5 text-indigo-500"></i>
+            <span>Solved Q&As (7)</span>
+          </a>
+          <a href="formulas.html#unit-2" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center gap-1.5">
+            <i data-lucide="calculator" class="w-3.5 h-3.5 text-violet-500"></i>
+            <span>Formulas</span>
+          </a>
+          <a href="whiteboard.html" class="px-3.5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold shadow-xs transition flex items-center gap-1.5">
+            <i data-lucide="presentation" class="w-3.5 h-3.5"></i>
+            <span>Whiteboard</span>
+          </a>
+          <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-xs transition flex items-center gap-1.5">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Print Unit (PDF)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Section Jump Nav -->
+      <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2 overflow-x-auto pb-1 no-print">
+        <span class="text-[11px] font-bold text-slate-400 shrink-0 uppercase tracking-wider mr-1">Jump to:</span>
+        <a href="#sec-0" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-700 text-xs font-medium transition shrink-0">1. Length of Plane Curves (Arc L...</a><a href="#sec-1" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-700 text-xs font-medium transition shrink-0">2. Surface Area of Solids of Rev...</a><a href="#sec-2" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-700 text-xs font-medium transition shrink-0">3. Volume of Solids of Revolutio...</a><a href="#sec-3" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-700 text-xs font-medium transition shrink-0">4. Standard High-Yield Exam Curv...</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Body -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 w-full space-y-8">
+    <!-- Theory Sections -->
+    
+            <article id="sec-0" class="unit-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs scroll-mt-20">
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                <span class="w-2 h-6 rounded-full bg-indigo-600 shrink-0"></span>
+                <span>1. Length of Plane Curves (Arc Length Formulas)</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Arc length $s$ measures the distance along a curved line between two points.</p>
+              <ul class="space-y-2.5 my-4 bg-slate-50/70 dark:bg-slate-950/40 p-4 sm:p-5 rounded-2xl border border-slate-100 dark:border-slate-800/60"><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Cartesian Form:</b> $s = \int_a^b \sqrt{1 + \left(\frac{dy}{dx}\right)^2}\,dx$ or $s = \int_c^d \sqrt{1 + \left(\frac{dx}{dy}\right)^2}\,dy$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Parametric Form:</b> $s = \int_{t_1}^{t_2} \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2}\,dt$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Polar Form:</b> $s = \int_{\theta_1}^{\theta_2} \sqrt{r^2 + \left(\frac{dr}{d\theta}\right)^2}\,d\theta$.</span></li></ul>
+              
+                <div class="mt-4 formula-box p-4 rounded-2xl border border-indigo-200 dark:border-indigo-900/40 relative group">
+                  <div class="flex items-center justify-between pb-2 mb-2 border-b border-indigo-100 dark:border-indigo-950">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                      <i data-lucide="code" class="w-3.5 h-3.5"></i> Key Formula / Derivation Condition
+                    </span>
+                    <button onclick="copyFormula(`Cartesian:  ds = sqrt(1 + (dy/dx)^2) dx
+Parametric: ds = sqrt((dx/dt)^2 + (dy/dt)^2) dt
+Polar:      ds = sqrt(r^2 + (dr/dtheta)^2) dtheta`, this)" class="text-[11px] px-2.5 py-1 rounded-lg bg-indigo-100/60 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900 transition flex items-center gap-1 no-print">
+                      <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                    </button>
+                  </div>
+                  <pre class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 overflow-x-auto whitespace-pre-wrap leading-relaxed"><code>Cartesian:  ds = sqrt(1 + (dy/dx)^2) dx
+Parametric: ds = sqrt((dx/dt)^2 + (dy/dt)^2) dt
+Polar:      ds = sqrt(r^2 + (dr/dtheta)^2) dtheta</code></pre>
+                </div>
+                
+            </article>
+            
+            <article id="sec-1" class="unit-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs scroll-mt-20">
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                <span class="w-2 h-6 rounded-full bg-indigo-600 shrink-0"></span>
+                <span>2. Surface Area of Solids of Revolution</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">When a plane curve is revolved $360^\circ$ around an axis of symmetry, the area of the generated curved surface is computed via differential element $dS = 2\pi y\,ds$.</p>
+              <ul class="space-y-2.5 my-4 bg-slate-50/70 dark:bg-slate-950/40 p-4 sm:p-5 rounded-2xl border border-slate-100 dark:border-slate-800/60"><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>About x-axis (Cartesian):</b> $S = 2\pi \int_a^b y \sqrt{1 + (y')^2}\,dx$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>About x-axis (Parametric):</b> $S = 2\pi \int_{t_1}^{t_2} y(t) \sqrt{(x')^2 + (y')^2}\,dt$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>About Initial Line (Polar):</b> $S = 2\pi \int_{\theta_1}^{\theta_2} r\sin\theta \sqrt{r^2 + (r')^2}\,d\theta$.</span></li></ul>
+              
+                <div class="mt-4 formula-box p-4 rounded-2xl border border-indigo-200 dark:border-indigo-900/40 relative group">
+                  <div class="flex items-center justify-between pb-2 mb-2 border-b border-indigo-100 dark:border-indigo-950">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                      <i data-lucide="code" class="w-3.5 h-3.5"></i> Key Formula / Derivation Condition
+                    </span>
+                    <button onclick="copyFormula(`S_x = 2 * pi * int y * sqrt(1 + (dy/dx)^2) dx
+S_polar = 2 * pi * int r * sin(theta) * sqrt(r^2 + (dr/dtheta)^2) dtheta
+Cycloid Surface about x-axis: S = 64/3 * pi * a^2`, this)" class="text-[11px] px-2.5 py-1 rounded-lg bg-indigo-100/60 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900 transition flex items-center gap-1 no-print">
+                      <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                    </button>
+                  </div>
+                  <pre class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 overflow-x-auto whitespace-pre-wrap leading-relaxed"><code>S_x = 2 * pi * int y * sqrt(1 + (dy/dx)^2) dx
+S_polar = 2 * pi * int r * sin(theta) * sqrt(r^2 + (dr/dtheta)^2) dtheta
+Cycloid Surface about x-axis: S = 64/3 * pi * a^2</code></pre>
+                </div>
+                
+            </article>
+            
+            <article id="sec-2" class="unit-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs scroll-mt-20">
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                <span class="w-2 h-6 rounded-full bg-indigo-600 shrink-0"></span>
+                <span>3. Volume of Solids of Revolution</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">The volume of a solid generated by rotating a bounded region around an axis.</p>
+              <ul class="space-y-2.5 my-4 bg-slate-50/70 dark:bg-slate-950/40 p-4 sm:p-5 rounded-2xl border border-slate-100 dark:border-slate-800/60"><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>About x-axis:</b> $V = \pi \int_a^b y^2\,dx$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>About y-axis:</b> $V = \pi \int_c^d x^2\,dy$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Polar Form (About initial line $\theta=0$):</b> $V = \frac{2}{3}\pi \int_{\theta_1}^{\theta_2} r^3 \sin\theta\,d\theta$.</span></li></ul>
+              
+                <div class="mt-4 formula-box p-4 rounded-2xl border border-indigo-200 dark:border-indigo-900/40 relative group">
+                  <div class="flex items-center justify-between pb-2 mb-2 border-b border-indigo-100 dark:border-indigo-950">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                      <i data-lucide="code" class="w-3.5 h-3.5"></i> Key Formula / Derivation Condition
+                    </span>
+                    <button onclick="copyFormula(`V_x = pi * int_a^b y^2 dx
+V_polar = (2/3) * pi * int r^3 * sin(theta) dtheta
+Cardioid r = a(1+cos theta) Volume about initial line: V = (8/3) * pi * a^3`, this)" class="text-[11px] px-2.5 py-1 rounded-lg bg-indigo-100/60 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900 transition flex items-center gap-1 no-print">
+                      <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                    </button>
+                  </div>
+                  <pre class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 overflow-x-auto whitespace-pre-wrap leading-relaxed"><code>V_x = pi * int_a^b y^2 dx
+V_polar = (2/3) * pi * int r^3 * sin(theta) dtheta
+Cardioid r = a(1+cos theta) Volume about initial line: V = (8/3) * pi * a^3</code></pre>
+                </div>
+                
+            </article>
+            
+            <article id="sec-3" class="unit-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs scroll-mt-20">
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                <span class="w-2 h-6 rounded-full bg-indigo-600 shrink-0"></span>
+                <span>4. Standard High-Yield Exam Curves</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Frequently asked curves in IKG-PTU university examinations with standard geometric invariants.</p>
+              <ul class="space-y-2.5 my-4 bg-slate-50/70 dark:bg-slate-950/40 p-4 sm:p-5 rounded-2xl border border-slate-100 dark:border-slate-800/60"><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Cardioid $r = a(1+\cos\theta)$:</b> Total Perimeter = $8a$, Volume about initial line = $\frac{8}{3}\pi a^3$, Surface Area = $\frac{32}{5}\pi a^2$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Cycloid $x = a(\theta - \sin\theta), y = a(1 - \cos\theta)$:</b> One arch length = $8a$ ($\theta \in [0, 2\pi]$), Surface area about base = $\frac{64}{3}\pi a^2$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Astroid $x^{2/3} + y^{2/3} = a^{2/3}$:</b> Parametric $x = a\cos^3 t, y = a\sin^3 t$, Total Perimeter = $6a$.</span></li></ul>
+              
+                <div class="mt-4 formula-box p-4 rounded-2xl border border-indigo-200 dark:border-indigo-900/40 relative group">
+                  <div class="flex items-center justify-between pb-2 mb-2 border-b border-indigo-100 dark:border-indigo-950">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                      <i data-lucide="code" class="w-3.5 h-3.5"></i> Key Formula / Derivation Condition
+                    </span>
+                    <button onclick="copyFormula(`Cardioid: r = a(1 + cos theta) => Perimeter = 8a, Surface = (32/5)*pi*a^2
+Cycloid:  x = a(t - sin t), y = a(1 - cos t) => Arch Length = 8a
+Astroid:  x^(2/3) + y^(2/3) = a^(2/3) => Total Perimeter = 6a`, this)" class="text-[11px] px-2.5 py-1 rounded-lg bg-indigo-100/60 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900 transition flex items-center gap-1 no-print">
+                      <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                    </button>
+                  </div>
+                  <pre class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 overflow-x-auto whitespace-pre-wrap leading-relaxed"><code>Cardioid: r = a(1 + cos theta) =&gt; Perimeter = 8a, Surface = (32/5)*pi*a^2
+Cycloid:  x = a(t - sin t), y = a(1 - cos t) =&gt; Arch Length = 8a
+Astroid:  x^(2/3) + y^(2/3) = a^(2/3) =&gt; Total Perimeter = 6a</code></pre>
+                </div>
+                
+            </article>
+            
+
+    <!-- Solved University Questions Section -->
+    <section id="questions-section" class="pt-8 border-t-2 border-slate-200 dark:border-slate-800 scroll-mt-20">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Exam Preparation</span>
+          <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">Solved University Exam Questions &amp; Proofs</h3>
+          <p class="text-xs text-slate-500 mt-1">High-probability university exam questions with step-by-step model solutions.</p>
+        </div>
+        <div class="flex items-center gap-2 no-print">
+          <button onclick="document.querySelectorAll('#questions-section details').forEach(d => d.open = true)" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition">Expand All</button>
+          <button onclick="document.querySelectorAll('#questions-section details').forEach(d => d.open = false)" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition">Collapse All</button>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" open>
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">2 Marks Each</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 1</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U2-Q1 & Q2: All Formulas of Arc Length, Volume & Surface Area</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Write all formulas for Length of Curve (Cartesian, Parametric, Polar), Volume of Solid of Revolution, and Surface Area of Solid of Revolution.</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> Notice the pattern: $ds$ stays identical in both Arc Length ($\int ds$) and Surface Area ($\int 2\pi y\,ds$), whereas Volume uses $\pi y^2\,dx$ without a square root.</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">1. Length of Curve Formulas (s)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">• <b>Cartesian:</b> $s = \int_{a}^{b} \sqrt{1 + \left(\frac{dy}{dx}\right)^2}\,dx$ &nbsp;or&nbsp; $s = \int_{c}^{d} \sqrt{1 + \left(\frac{dx}{dy}\right)^2}\,dy$<br>• <b>Parametric:</b> $s = \int_{t_1}^{t_2} \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2}\,dt$<br>• <b>Polar:</b> $s = \int_{\theta_1}^{\theta_2} \sqrt{r^2 + \left(\frac{dr}{d\theta}\right)^2}\,d\theta$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">2. Volume of Solid of Revolution (V)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">• <b>About x-axis:</b> $V = \int_{a}^{b} \pi y^2\,dx$<br>• <b>About y-axis:</b> $V = \int_{c}^{d} \pi x^2\,dy$<br>• <b>Polar about initial line (θ = 0):</b> $V = \int_{\theta_1}^{\theta_2} \frac{2}{3}\pi r^3 \sin\theta\,d\theta$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">3. Surface Area of Solid of Revolution (S)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">• <b>About x-axis:</b> $S = \int 2\pi y\,ds$<br>• <b>About y-axis:</b> $S = \int 2\pi x\,ds$<br>• <b>Polar about initial line (θ = 0):</b> $S = \int_{\theta_1}^{\theta_2} 2\pi (r\sin\theta)\sqrt{r^2 + \left(\frac{dr}{d\theta}\right)^2}\,d\theta$</div></div></div>
+              </div>
+            </details>
+            
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" >
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">5 Marks Each</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 2</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U2-Q3: Length of Curves — All 5 Standard Problems</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Find arc length of:<br>(I) Parabola $x^2 = 4ay$ from vertex $(0,0)$ to $(2a,a)$;<br>(II) $y = \frac{1}{2}x^2 + 1$ from $x=0$ to $x=2$;<br>(III) $y^2 = 4ax$ cut off by latus rectum;<br>(IV) $x^2 = 16y$ cut off by latus rectum;<br>(V) $y^2 = 4x$ cut off by line $y = x$.</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> Check whether the question asks for 'vertex to ONE end of latus rectum' (single integral) or 'cut off by latus rectum' (both symmetric halves $\implies$ multiply by $2$!).</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(I) Parabola x² = 4ay from vertex (0,0) to (2a, a)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$\frac{dy}{dx} = \frac{x}{2a} \implies s = \int_{0}^{2a} \sqrt{1 + \frac{x^2}{4a^2}}\,dx = \frac{1}{2a}\left[\frac{x}{2}\sqrt{4a^2+x^2} + 2a^2\log(x+\sqrt{4a^2+x^2})\right]_{0}^{2a}$<br>$$s = \mathbf{a\left[\sqrt{2} + \log(\sqrt{2} + 1)\right]}$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(II) Curve y = (1/2)x² + 1 from x = 0 to x = 2</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$\frac{dy}{dx} = x \implies s = \int_{0}^{2} \sqrt{1+x^2}\,dx = \left[\frac{x}{2}\sqrt{1+x^2} + \frac{1}{2}\log(x+\sqrt{1+x^2})\right]_{0}^{2} = \mathbf{\sqrt{5} + \frac{1}{2}\log(2 + \sqrt{5})}$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(III) Parabola y² = 4ax cut off by latus rectum (x = 0 to a, both halves)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$\frac{dy}{dx} = \sqrt{\frac{a}{x}} \implies s = 2\int_{0}^{a} \sqrt{1 + \frac{a}{x}}\,dx$. Put $x = a\tan^2\theta$:<br>$$s = 4a\int_{0}^{\pi/4} \sec^3\theta\,d\theta = \mathbf{2a\left[\sqrt{2} + \log(\sqrt{2} + 1)\right]}$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(IV) Parabola x² = 16y cut off by latus rectum</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Comparing with $x^2 = 4ay \implies 4a = 16 \implies a = 4$.<br>For both symmetric halves from $(-8, 4)$ to $(8, 4)$: $s = 2 \times 4[\sqrt{2} + \log(\sqrt{2}+1)] = \mathbf{8\left[\sqrt{2} + \log(\sqrt{2} + 1)\right]}$.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(V) Parabola y² = 4x cut off by line y = x</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Intersection: $x^2 = 4x \implies x = 0, 4$. Here $\frac{dy}{dx} = \frac{1}{\sqrt{x}}$.<br>$$s = \int_{0}^{4} \sqrt{1 + \frac{1}{x}}\,dx = \left[\sqrt{x(x+1)} + \log(\sqrt{x} + \sqrt{x+1})\right]_{0}^{4} = \mathbf{2\sqrt{5} + \log(2 + \sqrt{5})}$$</div></div></div>
+              </div>
+            </details>
+            
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" >
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">5 Marks</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 3</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U2-Q4: Perimeter (Length) of Circle & Ellipse</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Find the total perimeter of (i) Circle $x^2 + y^2 = a^2$ and (ii) Ellipse $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$.</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> Use parametric form $x = a\cos\theta, y = b\sin\theta$ with limits $\theta \in [0, \pi/2]$ and multiply by $4$ for all four quadrants.</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(i) Perimeter of Circle x² + y² = a²</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Put $x = a\cos\theta, \; y = a\sin\theta$. By symmetry across 4 quadrants:<br>$$s = 4\int_{0}^{\pi/2} \sqrt{(-a\sin\theta)^2 + (a\cos\theta)^2}\,d\theta = 4\int_{0}^{\pi/2} a\,d\theta = 4a\left(\frac{\pi}{2}\right) = \mathbf{2\pi a}$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(ii) Perimeter of Ellipse x²/a² + y²/b² = 1 (a > b)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Put $x = a\cos\theta, \; y = b\sin\theta$. Using $b^2 = a^2(1 - e^2)$:<br>$$s = 4\int_{0}^{\pi/2} \sqrt{a^2\sin^2\theta + b^2\cos^2\theta}\,d\theta = 4a\int_{0}^{\pi/2} \sqrt{1 - e^2\cos^2\theta}\,d\theta$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">Expand Binomially & Integrate Using Wallis' Formula</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$$s = 4a\int_{0}^{\pi/2} \left(1 - \frac{1}{2}e^2\cos^2\theta - \frac{1}{8}e^4\cos^4\theta - \cdots\right)d\theta = \mathbf{2\pi a\left[1 - \left(\frac{1}{2}\right)^2 e^2 - \left(\frac{1\cdot 3}{2\cdot 4}\right)^2 \frac{e^4}{3} - \cdots\right]}$$</div></div></div>
+              </div>
+            </details>
+            
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" >
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">10 Marks</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 4</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U2-Q5: Surface Area of All Cycloid Variants About x-axis</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Find the surface area generated by revolving one arch about the $x$-axis for:<br>(I) $x = a(\theta - \sin\theta), \; y = a(1 - \cos\theta)$;<br>(II) $x = a(\theta + \sin\theta), \; y = a(1 + \cos\theta)$;<br>(III) $x = a(\theta + \sin\theta), \; y = a(1 - \cos\theta)$ (from handwritten notes).</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> Watch the signs carefully! When the signs inside $x$ and $y$ match ($-$ and $-$, or $+$ and $+$), $S = \frac{64}{3}\pi a^2$. When the signs are opposite ($+$ and $-$), $S = \frac{32}{3}\pi a^2$.</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(I) Standard Cycloid x = a(θ - sin θ), y = a(1 - cos θ) [θ: 0 to 2π]</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$$\frac{ds}{d\theta} = \sqrt{a^2(1-\cos\theta)^2 + a^2\sin^2\theta} = 2a\sin\left(\frac{\theta}{2}\right)$$<br>$$S = \int_{0}^{2\pi} 2\pi a(1-\cos\theta)\cdot 2a\sin\left(\frac{\theta}{2}\right)d\theta = 8\pi a^2 \int_{0}^{2\pi} \sin^3\left(\frac{\theta}{2}\right)d\theta$$<br>Put $\frac{\theta}{2} = t$: $S = 16\pi a^2 \cdot 2\int_{0}^{\pi/2} \sin^3 t\,dt = 32\pi a^2\left(\frac{2}{3}\right) = \mathbf{\frac{64}{3}\pi a^2}$.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(II) Cycloid x = a(θ + sin θ), y = a(1 + cos θ) [θ: -π to π]</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$$\frac{ds}{d\theta} = \sqrt{a^2(1+\cos\theta)^2 + a^2\sin^2\theta} = 2a\cos\left(\frac{\theta}{2}\right)$$<br>$$S = 2\int_{0}^{\pi} 2\pi a(1+\cos\theta)\cdot 2a\cos\left(\frac{\theta}{2}\right)d\theta = 16\pi a^2 \int_{0}^{\pi} \cos^3\left(\frac{\theta}{2}\right)d\theta = \mathbf{\frac{64}{3}\pi a^2}$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(III) Handwritten Notes Variant: x = a(θ + sin θ), y = a(1 - cos θ) [θ: 0 to 2π]</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Here $\frac{ds}{d\theta} = 2a\cos(\theta/2)$ and $y = 2a\sin^2(\theta/2)$:<br>$$S = 2\int_{0}^{\pi} 2\pi \cdot 2a\sin^2\left(\frac{\theta}{2}\right) \cdot 2a\cos\left(\frac{\theta}{2}\right)d\theta = 16\pi a^2 \left[2\cdot\frac{\sin^3(\theta/2)}{3}\right]_{0}^{\pi} = \mathbf{\frac{32}{3}\pi a^2}$$</div></div></div>
+              </div>
+            </details>
+            
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" >
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">10 Marks</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 5</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U2-Q6: Surface Area of Ellipses About x-axis (General & Specific)</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Find the surface area of the solid generated by revolving about the $x$-axis:<br>(I) General ellipse $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ ($a > b$);<br>(II) Specific ellipse $x^2 + 4y^2 = 16$.</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> Solve the general ellipse using eccentricity $e^2 = 1 - b^2/a^2$. For $x^2 + 4y^2 = 16$, divide by $16$ first to get $a = 4, b = 2$, then substitute into the general formula.</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(I) General Ellipse x²/a² + y²/b² = 1: Find ds/dx</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$\frac{dy}{dx} = -\frac{b^2 x}{a^2 y} \implies y\sqrt{1 + (y')^2} = \frac{b}{a^2}\sqrt{a^4 - (a^2 - b^2)x^2} = \frac{be}{a}\sqrt{\left(\frac{a}{e}\right)^2 - x^2}$.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">Integrate from x = 0 to a (Multiply by 2 for symmetry)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$$S = \frac{4\pi be}{a}\int_{0}^{a} \sqrt{\frac{a^2}{e^2} - x^2}\,dx = \frac{4\pi be}{a}\left[\frac{a}{2}\cdot\frac{b}{e} + \frac{a^2}{2e^2}\sin^{-1}(e)\right] = \mathbf{2\pi b^2 + \frac{2\pi ab}{e}\sin^{-1}(e)}$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(II) Specific Ellipse x² + 4y² = 16</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Divide by $16$: $\frac{x^2}{16} + \frac{y^2}{4} = 1 \implies a = 4, \; b = 2, \; e = \sqrt{1 - \frac{4}{16}} = \frac{\sqrt{3}}{2}$.<br>$$S = 2\pi(2)^2 + \frac{2\pi(4)(2)}{\sqrt{3}/2}\sin^{-1}\left(\frac{\sqrt{3}}{2}\right) = 8\pi + \frac{32\pi}{\sqrt{3}}\left(\frac{\pi}{3}\right) = \mathbf{8\pi + \frac{32\pi^2}{3\sqrt{3}}}$$ </div></div></div>
+              </div>
+            </details>
+            
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" >
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">10 Marks</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 6</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U2-Q7: Volume & Surface Area of Both Cardioids About θ = 0</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Find the volume and surface area generated by revolving about the initial line ($\theta = 0$) for:<br>(I) $r = a(1 - \cos\theta)$;<br>(II) $r = a(1 + \cos\theta)$.</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> Limits of $\theta$ for cardioid revolution about $\theta = 0$ are ALWAYS $0$ to $\pi$ (upper half generates the entire 3D solid). Both cardioids yield the exact same Volume ($\frac{8}{3}\pi a^3$) and Surface Area ($\frac{32}{5}\pi a^2$).</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(I) Cardioid r = a(1 - cos θ) — Volume</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$$V = \int_{0}^{\pi} \frac{2}{3}\pi r^3 \sin\theta\,d\theta = \frac{2}{3}\pi a^3 \int_{0}^{\pi} (1 - \cos\theta)^3 \sin\theta\,d\theta$$<br>Put $1 - \cos\theta = t \implies \sin\theta\,d\theta = dt$ ($t: 0 \to 2$):<br>$$V = \frac{2}{3}\pi a^3 \left[\frac{t^4}{4}\right]_{0}^{2} = \mathbf{\frac{8}{3}\pi a^3}$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(I) Cardioid r = a(1 - cos θ) — Surface Area</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$\frac{ds}{d\theta} = \sqrt{r^2 + (r')^2} = 2a\sin(\theta/2)$.<br>$$S = \int_{0}^{\pi} 2\pi a(1-\cos\theta)\sin\theta \cdot 2a\sin\left(\frac{\theta}{2}\right)d\theta = 16\pi a^2 \int_{0}^{\pi} \sin^4\left(\frac{\theta}{2}\right)\cos\left(\frac{\theta}{2}\right)d\theta = \mathbf{\frac{32}{5}\pi a^2}$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(II) Cardioid r = a(1 + cos θ) — Volume & Surface Area</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">• <b>Volume:</b> $V = \frac{2}{3}\pi a^3 \int_{0}^{\pi} (1 + \cos\theta)^3 \sin\theta\,d\theta = \frac{2}{3}\pi a^3 \left[-\frac{(1+\cos\theta)^4}{4}\right]_{0}^{\pi} = \mathbf{\frac{8}{3}\pi a^3}$.<br>• <b>Surface Area:</b> $\frac{ds}{d\theta} = 2a\cos(\theta/2) \implies S = 16\pi a^2 \int_{0}^{\pi} \cos^4(\theta/2)\sin(\theta/2)\,d\theta = \mathbf{\frac{32}{5}\pi a^2}$.</div></div></div>
+              </div>
+            </details>
+            
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" >
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">5 Marks Each</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 7</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U2-Q8: Volume & Surface Area of All 5 Circles (Cartesian & Polar)</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Find Volume and Surface Area of revolution for:<br>(I) $x^2 + y^2 = a^2$ about $x$-axis;<br>(II) $x^2 + y^2 = 4$ about $x$-axis;<br>(III) $x^2 + y^2 = 9$ about $x$-axis;<br>(IV) $r = 2a\sin\theta$ about $\theta = \pi/2$;<br>(V) $r = 2a\cos\theta$ about $\theta = 0$.</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> Every circle revolved about a diameter generates a sphere of radius $R$ with $V = \frac{4}{3}\pi R^3$ and $S = 4\pi R^2$. In polar form, $r = 2a\sin\theta$ and $r = 2a\cos\theta$ are circles of diameter $2a$ (so radius $R = a$!) with $\theta \in [0, \pi/2]$.</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(I), (II), (III) Cartesian Circles x² + y² = R² about x-axis</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$V = 2\int_{0}^{R} \pi(R^2 - x^2)\,dx = \frac{4}{3}\pi R^3$, &nbsp; $S = 2\int_{0}^{R} 2\pi y\sqrt{1 + x^2/y^2}\,dx = 4\pi R^2$.<br>• <b>(I) $x^2 + y^2 = a^2$ ($R=a$):</b> $V = \mathbf{\frac{4}{3}\pi a^3}, \; S = \mathbf{4\pi a^2}$.<br>• <b>(II) $x^2 + y^2 = 4$ ($R=2$):</b> $V = \mathbf{\frac{32}{3}\pi}, \; S = \mathbf{16\pi}$.<br>• <b>(III) $x^2 + y^2 = 9$ ($R=3$):</b> $V = \mathbf{36\pi}, \; S = \mathbf{36\pi}$.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(IV) Polar Circle r = 2a sin θ revolved about θ = π/2 (y-axis)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Limits $\theta: 0 \to \frac{\pi}{2}$. Here $\frac{ds}{d\theta} = \sqrt{4a^2\sin^2\theta + 4a^2\cos^2\theta} = 2a$.<br>• <b>Surface Area:</b> $S = \int_{0}^{\pi/2} 2\pi (r\cos\theta) \frac{ds}{d\theta}\,d\theta = \int_{0}^{\pi/2} 2\pi (2a\sin\theta\cos\theta)(2a)\,d\theta = 8\pi a^2 \left[\frac{\sin^2\theta}{2}\right]_{0}^{\pi/2} = \mathbf{4\pi a^2}$.<br>• <b>Volume:</b> $V = \int_{0}^{\pi/2} \frac{2}{3}\pi r^3 \cos\theta\,d\theta = \frac{16}{3}\pi a^3 \int_{0}^{\pi/2} \sin^3\theta\cos\theta\,d\theta = \mathbf{\frac{4}{3}\pi a^3}$.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(V) Polar Circle r = 2a cos θ revolved about θ = 0 (x-axis)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Limits $\theta: 0 \to \frac{\pi}{2}$, $\frac{ds}{d\theta} = 2a$.<br>• <b>Surface Area:</b> $S = \int_{0}^{\pi/2} 2\pi (r\sin\theta)(2a)\,d\theta = 8\pi a^2 \int_{0}^{\pi/2} \cos\theta\sin\theta\,d\theta = \mathbf{4\pi a^2}$.<br>• <b>Volume:</b> $V = \int_{0}^{\pi/2} \frac{2}{3}\pi (8a^3\cos^3\theta)\sin\theta\,d\theta = \frac{16}{3}\pi a^3 \left[-\frac{\cos^4\theta}{4}\right]_{0}^{\pi/2} = \mathbf{\frac{4}{3}\pi a^3}$.</div></div></div>
+              </div>
+            </details>
+            
+      </div>
+    </section>
+
+    <!-- Bottom Unit Navigation Pagination -->
+    <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4 no-print">
+      <a href="unit-1.html" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500 transition"><i data-lucide="arrow-left" class="w-4 h-4"></i> Previous: Unit 1</a>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-xs text-slate-500 hover:text-indigo-500 flex items-center gap-1 font-medium">
+        <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i> Back to Top
+      </button>
+      <a href="unit-3.html" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-500 transition shadow-xs">Next: Unit 3 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+    </div>
+  </main>
+
+  
+  <!-- Global Footer -->
+  <footer class="mt-auto bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-10 no-print transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <!-- Brand Info -->
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2.5 mb-3">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-white">
+              <i data-lucide="function-square" class="w-4 h-4"></i>
+            </div>
+            <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">CalcVault M-1</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-bold">100% Free Access</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-md">
+            CalcVault M-1 is a free, open-access engineering mathematics revision portal curated for CGC College of Engineering / IKG-PTU students. Complete syllabus notes, derivations, formulas, and verified exam solutions without any paywalls.
+          </p>
+          <div class="mt-4 flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500">
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i>
+            <span>Curated by Krishna Kumar (B.Tech Cybersecurity, CGC CEC Landran) • Free Academic Project</span>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-3">Syllabus Units</h4>
+          <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <li><a href="unit-1.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 1: Sequences & Series</a></li>
+            <li><a href="unit-2.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 2: Definite Integral Applications</a></li>
+            <li><a href="unit-3.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 3: Beta & Gamma Functions</a></li>
+            <li><a href="unit-4.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 4: Multivariable Calculus</a></li>
+            <li><a href="unit-5.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 5: Multiple Integrals</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & Tools -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-3">Study Resources</h4>
+          <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <li><a href="formulas.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Formula & Theorems Sheet</a></li>
+            <li><a href="questions.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Solved Exam Question Bank</a></li>
+            <li><a href="whiteboard.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Interactive Whiteboard Solver</a></li>
+            <li><button onclick="window.print()" class="text-left hover:text-indigo-600 dark:hover:text-indigo-400 transition">Print Current Notes (PDF)</button></li>
+            <li><button onclick="openSearchModal()" class="text-left hover:text-indigo-600 dark:hover:text-indigo-400 transition">Search All Topics (Ctrl+K)</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-slate-100 dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+        <p>© 2026 CalcVault Study Portal • IKG-PTU BTAM101-18. Built for engineering excellence.</p>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center gap-1 hover:text-indigo-500 transition">
+          <span>Back to top</span>
+          <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+        

@@ -1,356 +1,546 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
+
+  <!DOCTYPE html>
+<html lang="en" class="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CalcVault M-1 | Engineering Mathematics-I Revision Hub • IKG-PTU BTAM101-18</title>
-  <meta name="description" content="100% Free interactive revision vault for IKG-PTU BTAM101-18 Engineering Mathematics-I. 26 high-yield exam derivations, step-by-step solutions, and printable PDF cheat-sheet." />
-
-  <!-- Tailwind CSS -->
+  <title>CalcVault — Engineering Mathematics-I Revision Portal</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- KaTeX for fast, crisp mathematical typesetting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'sans-serif'],
             mono: ['JetBrains Mono', 'monospace'],
           },
-          colors: {
-            brand: {
-              50: '#ecfeff',
-              100: '#cffafe',
-              500: '#06b6d4',
-              600: '#0891b2',
-              700: '#0e7490',
-              900: '#164e63',
-            }
-          }
-        }
-      }
-    }
+        },
+      },
+    };
   </script>
-
-  <!-- Google Fonts: Inter & JetBrains Mono -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- KaTeX for fast, crisp mathematical typesetting -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-slate-100 text-slate-900 dark:bg-[#0b1120] dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-200 min-h-screen flex flex-col">
 
-  <!-- Universal Top Navigation Bar -->
-  <header class="no-print sticky top-0 z-30 bg-white/95 dark:bg-[#151e32]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-      
-      <!-- Brand Logo & Title -->
-      <a href="index.html" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-xl bg-slate-900 border border-cyan-500/40 flex items-center justify-center shadow-md shadow-cyan-500/20 shrink-0 logo-glow">
-          <svg viewBox="0 0 64 64" class="w-7 h-7" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="shieldGrad" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#4f46e5"/>
-                <stop offset="50%" stop-color="#06b6d4"/>
-                <stop offset="100%" stop-color="#f59e0b"/>
-              </linearGradient>
-            </defs>
-            <path d="M32 4L54 13V30C54 45.2 44.6 56.8 32 60C19.4 56.8 10 45.2 10 30V13L32 4Z" fill="#0f172a" stroke="url(#shieldGrad)" stroke-width="3.2"/>
-            <path d="M36 16C33.5 16 32.2 18.2 31.8 22L29.2 42C28.8 45.8 27.5 48 25 48" stroke="#22d3ee" stroke-width="3.6" stroke-linecap="round"/>
-            <circle cx="38" cy="16" r="2.3" fill="#f59e0b"/>
-            <circle cx="23" cy="48" r="2.3" fill="#f59e0b"/>
-            <path d="M18 26H27M21 26V35M25 26V35" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-indigo-500 via-cyan-500 to-amber-500 dark:from-indigo-400 dark:via-cyan-400 dark:to-amber-400 bg-clip-text text-transparent">
-              CalcVault M-1
-            </span>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
-              100% Free
-            </span>
-          </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">IKG-PTU BTAM101-18 • Revision Website</p>
-        </div>
-      </a>
-
-      <!-- Desktop Navigation Links -->
-      <nav class="hidden md:flex items-center gap-1 text-xs font-semibold">
-        <a href="index.html" class="px-3 py-1.5 rounded-lg text-cyan-600 dark:text-cyan-400 font-bold bg-cyan-500/10">Whiteboard</a>
-        <a href="unit1.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 1</a>
-        <a href="unit2.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 2</a>
-        <a href="unit3.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 3</a>
-        <a href="unit4.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 4</a>
-        <a href="unit5.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Unit 5</a>
-        <a href="cheatsheet.html" class="px-3 py-1.5 rounded-lg text-amber-600 dark:text-amber-400 font-bold hover:bg-amber-500/10 transition">Cheat-Sheet</a>
-        <a href="syllabus.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">Syllabus</a>
-        <a href="about.html" class="px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">About</a>
-      </nav>
-
-      <!-- Action Toolbar (PDF Print & Theme Toggle) -->
-      <div class="flex items-center gap-2">
-        <button type="button" onclick="triggerCheatSheetPrint()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm transition active:scale-95" title="Print or Save Complete 26-Topic Cheat-Sheet as PDF (Free)">
-          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline">Print / PDF</span>
-        </button>
-
-        <button type="button" onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition" title="Toggle Dark/Light Mode">
-          <i data-lucide="sun" class="w-4 h-4 theme-icon-sun"></i>
-          <i data-lucide="moon" class="w-4 h-4 theme-icon-moon" style="display:none;"></i>
-        </button>
-
-        <button type="button" onclick="toggleMobileMenu()" class="p-2 rounded-xl md:hidden bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
-          <i data-lucide="menu" class="w-4 h-4"></i>
-        </button>
+  <!-- Print Only Header -->
+  <div class="print-only-header hidden">
+    <div class="flex justify-between items-center border-b-2 border-slate-900 pb-3 mb-4">
+      <div>
+        <h1 class="text-xl font-extrabold text-slate-900">CalcVault — Engineering Mathematics-I Revision Notes</h1>
+        <p class="text-xs text-slate-600">Curated for CGC College of Engineering / IKG-PTU BTAM101-18 Syllabus • Krishna Kumar</p>
+      </div>
+      <div class="text-right text-xs text-slate-500">
+        <p>100% Free & Open Access</p>
+        <p>Revision Portal</p>
       </div>
     </div>
+  </div>
 
-    <!-- Mobile Drawer Menu -->
-    <div id="mobile-nav-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#151e32] px-4 py-3 space-y-2 text-sm font-semibold">
-      <div class="grid grid-cols-2 gap-2">
-        <a href="index.html" class="p-2 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 font-bold">Whiteboard</a>
-        <a href="cheatsheet.html" class="p-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 font-bold">Cheat-Sheet</a>
-        <a href="unit1.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 1: Sequences</a>
-        <a href="unit2.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 2: Calculus Apps</a>
-        <a href="unit3.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 3: Beta-Gamma</a>
-        <a href="unit4.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 4: Multivariable</a>
-        <a href="unit5.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Unit 5: Integrals</a>
-        <a href="syllabus.html" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Syllabus Guide</a>
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+  <!-- Mobile Backdrop -->
+  <div id="mobile-backdrop" onclick="toggleMobileMenu(true)" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-menu" class="fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-slate-900 z-50 transform -translate-x-full transition-transform duration-200 ease-in-out border-r border-slate-200 dark:border-slate-800 flex flex-col p-5 shadow-2xl lg:hidden">
+    <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-white shadow-sm">
+          <i data-lucide="function-square" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 class="font-extrabold text-sm text-slate-900 dark:text-white">CalcVault M-1</h2>
+          <p class="text-[10px] text-slate-500 dark:text-slate-400">Engineering Mathematics-I</p>
+        </div>
       </div>
-      <div class="pt-2 border-t border-slate-200 dark:border-slate-800">
-        <a href="about.html" class="block p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-white">About &amp; Author Credits</a>
+      <button onclick="toggleMobileMenu(true)" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <div class="py-4 space-y-1">
+      <a href="index.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span>Home Portal</span>
+      </a>
+      <a href="formulas.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="calculator" class="w-4 h-4"></i>
+        <span>Formula & Theorems Sheet</span>
+      </a>
+      <a href="questions.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="help-circle" class="w-4 h-4"></i>
+        <span>Solved Question Bank</span>
+      </a>
+      <a href="whiteboard.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="presentation" class="w-4 h-4"></i>
+        <span>Interactive Whiteboard</span>
+      </a>
+    </div>
+
+    <div class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Syllabus Units</div>
+    <div class="flex-1 overflow-y-auto space-y-1 pr-1">
+      <a href="unit-1.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 1</span><span class="truncate">Sequences & Infinite Series</span></a><a href="unit-2.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 2</span><span class="truncate">Applications of Definite Integrals</span></a><a href="unit-3.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 3</span><span class="truncate">Beta & Gamma Functions & Improper Integrals</span></a><a href="unit-4.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 4</span><span class="truncate">Multivariable Calculus (Partial Differentiation)</span></a><a href="unit-5.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 5</span><span class="truncate">Multiple Integrals & Vector Transformations</span></a>
+    </div>
+
+    <div class="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <span class="text-xs text-slate-500">Dark / Light Mode</span>
+      <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+        <i data-lucide="moon" class="w-4 h-4 theme-toggle-icon"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Global Navigation Header -->
+  <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 no-print transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <!-- Left: Logo & Brand -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleMobileMenu(false)" class="p-2 -ml-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+            <i data-lucide="function-square" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">CalcVault</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold border border-emerald-500/20">Free</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium hidden sm:block">Engineering Mathematics-I</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Center: Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1">
+        <a href="index.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60">Overview</a>
+        
+        <!-- Units Dropdown -->
+        <div class="relative group">
+          <button class="px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1 transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">
+            <span>Units & Chapters</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition-transform"></i>
+          </button>
+          <div class="absolute left-0 mt-1 w-80 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 py-2 hidden group-hover:block transition-all z-50">
+            <a href="unit-1.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 1:</strong> Sequences & Infinite Series</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-2.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 2:</strong> Applications of Definite Integrals</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-3.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 3:</strong> Beta & Gamma Functions & Improper Integrals</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-4.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 4:</strong> Multivariable Calculus (Partial Differentiation)</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-5.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 5:</strong> Multiple Integrals & Vector Transformations</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a>
+          </div>
+        </div>
+
+        <a href="formulas.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Formula Sheet</a>
+        <a href="questions.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Question Bank</a>
+        <a href="whiteboard.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Whiteboard</a>
+      </nav>
+
+      <!-- Right: Action Tools -->
+      <div class="flex items-center gap-2">
+        <!-- Search Trigger -->
+        <button onclick="openSearchModal()" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-medium border border-slate-200 dark:border-slate-700/60 transition shadow-xs">
+          <i data-lucide="search" class="w-3.5 h-3.5"></i>
+          <span class="hidden md:inline">Quick Search...</span>
+          <kbd class="hidden md:inline-block px-1.5 py-0.5 rounded bg-white dark:bg-slate-700 text-[10px] font-mono text-slate-400 dark:text-slate-300 border border-slate-200 dark:border-slate-600">Ctrl K</kbd>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()" title="Toggle dark/light mode" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <i data-lucide="moon" class="w-4 h-4 theme-toggle-icon"></i>
+        </button>
+
+        <!-- Print Action -->
+        <button onclick="window.print()" title="Print this page (A4 PDF)" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-sm transition">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          <span>Print / PDF</span>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Hero & Unit Quick-Access Cards -->
-  <section class="no-print bg-gradient-to-b from-white to-slate-100 dark:from-[#151e32] dark:to-[#0b1120] border-b border-slate-200 dark:border-slate-800 px-4 py-6">
-    <div class="max-w-7xl mx-auto">
-      
-      <!-- Top Hero Banner -->
-      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
-        <div>
-          <div class="flex items-center gap-2 mb-1">
-            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30">
-              IKG-PTU BTAM101-18 Exam Revision
-            </span>
-            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
-              Zero Paywalls • Free Forever
-            </span>
-          </div>
-          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            Engineering Mathematics-I Revision Website
-          </h1>
-          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1 max-w-2xl">
-            Complete exam-oriented revision platform for CGC CEC Landran students. Master all 26 high-yield derivation topics across all 5 syllabus units with step-by-step whiteboard explanations and instant PDF export.
-          </p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-2 shrink-0">
-          <a href="cheatsheet.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-sm transition active:scale-95">
-            <i data-lucide="file-text" class="w-4 h-4"></i>
-            <span>Full Cheat-Sheet</span>
-          </a>
-          <a href="syllabus.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 transition">
-            <i data-lucide="book-open" class="w-4 h-4"></i>
-            <span>Syllabus &amp; Tips</span>
-          </a>
-        </div>
+  <!-- Global Search Modal -->
+  <div id="search-modal" class="fixed inset-0 z-50 hidden items-start justify-center pt-16 sm:pt-24 bg-slate-950/70 backdrop-blur-xs p-4 overflow-y-auto no-print" onclick="closeSearchModal()">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
+        <i data-lucide="search" class="w-5 h-5 text-indigo-500"></i>
+        <input id="search-input" oninput="handleSearchInput(this.value)" type="text" placeholder="Search topics, formulas, or derivations (e.g. Ratio, Raabe, Cardioid, Beta-Gamma, Euler, Maxima, Jacobian)..." class="w-full bg-transparent text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-hidden" />
+        <button onclick="closeSearchModal()" class="text-xs px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">ESC</button>
       </div>
-
-      <!-- 5-Unit Quick Navigation Cards Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-        <a href="unit1.html" class="group p-3.5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-[10px] font-extrabold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-md">Unit 1</span>
-            <span class="text-[10px] text-slate-400">4 Topics</span>
-          </div>
-          <div class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-cyan-500 transition line-clamp-1">Sequences &amp; Series</div>
-          <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">Ratio, Leibnitz, p-Test, Taylor</div>
-        </a>
-
-        <a href="unit2.html" class="group p-3.5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-[10px] font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-md">Unit 2</span>
-            <span class="text-[10px] text-slate-400">8 Topics</span>
-          </div>
-          <div class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-indigo-500 transition line-clamp-1">Definite Integral Apps</div>
-          <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">Arc Length, Volume, Cycloid, Cardioid</div>
-        </a>
-
-        <a href="unit3.html" class="group p-3.5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md">Unit 3</span>
-            <span class="text-[10px] text-slate-400">5 Topics</span>
-          </div>
-          <div class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-amber-500 transition line-clamp-1">Beta &amp; Gamma Functions</div>
-          <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">Reduction, Proofs, Improper Integrals</div>
-        </a>
-
-        <a href="unit4.html" class="group p-3.5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">Unit 4</span>
-            <span class="text-[10px] text-slate-400">5 Topics</span>
-          </div>
-          <div class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-emerald-500 transition line-clamp-1">Multivariable Calculus</div>
-          <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">Euler's Theorem, Maxima &amp; Minima</div>
-        </a>
-
-        <a href="unit5.html" class="group p-3.5 rounded-2xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-800 hover:border-cyan-500 dark:hover:border-cyan-500 shadow-sm transition">
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-[10px] font-extrabold uppercase tracking-wider text-rose-600 dark:text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-md">Unit 5</span>
-            <span class="text-[10px] text-slate-400">6 Topics</span>
-          </div>
-          <div class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-rose-500 transition line-clamp-1">Multiple Integrals</div>
-          <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-1">Double/Triple, Jacobians, Polar Area</div>
-        </a>
+      <div id="search-results" class="max-h-[60vh] overflow-y-auto p-3 space-y-1 divide-y divide-slate-100 dark:divide-slate-800/40">
+        <!-- Live search results inject here -->
       </div>
-
-    </div>
-  </section>
-
-  <!-- Unit Filter Tabs -->
-  <div class="no-print max-w-7xl w-full mx-auto px-4 pt-4">
-    <div class="flex items-center gap-2 overflow-x-auto pb-1" id="unit-tabs">
-      <!-- Populated dynamically via js/app.js -->
     </div>
   </div>
 
-  <!-- Main Interactive Whiteboard Workspace -->
-  <main class="no-print flex-1 max-w-7xl w-full mx-auto p-4 grid grid-cols-1 lg:grid-cols-12 gap-5">
 
-    <!-- Left Sidebar: Question Selector Cards & Instant Search -->
-    <aside class="lg:col-span-4 flex flex-col gap-3">
-      <div class="flex items-center justify-between px-1">
-        <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400" id="question-count-label">
-          26 Topics Available
-        </span>
-        <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 px-2.5 py-0.5 rounded-full border border-cyan-500/20" id="progress-badge">
-          0 / 26 Mastered
-        </span>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden py-14 sm:py-20 bg-gradient-to-b from-indigo-50/50 via-white to-slate-50 dark:from-slate-900/50 dark:via-slate-950 dark:to-slate-950 border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100/70 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-bold mb-6">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+        <span>100% Free & Open Academic Portal • CGC / IKG-PTU BTAM101-18 Curriculum</span>
       </div>
 
-      <!-- Search Input -->
-      <div class="relative">
-        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
-        <input type="text" id="search-input" placeholder="Search 26 topics (e.g., Raabe, Cardioid, Jacobian)..."
-               oninput="renderQuestionList()"
-               class="w-full pl-9 pr-3 py-2 text-sm rounded-xl bg-white dark:bg-[#151e32] border border-slate-200 dark:border-slate-700/80 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight mb-6 max-w-4xl mx-auto leading-tight">
+        Engineering Mathematics-I, <br class="hidden sm:inline" />
+        <span class="bg-gradient-to-r from-indigo-600 via-cyan-500 to-violet-600 bg-clip-text text-transparent">Simplified & Mastered.</span>
+      </h1>
+
+      <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Comprehensive revision notes, step-by-step mathematical proofs with KaTeX, verified university question banks, and rapid formula cheat sheets — all completely free without restrictions.
+      </p>
+
+      <!-- Main Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-12">
+        <a href="unit-1.html" class="px-5 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-bold shadow-lg shadow-indigo-600/25 transition-all flex items-center gap-2">
+          <i data-lucide="book-open" class="w-4 h-4"></i>
+          <span>Start Revision (Unit 1)</span>
+        </a>
+        <a href="formulas.html" class="px-5 py-3 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-sm font-bold shadow-xs transition flex items-center gap-2">
+          <i data-lucide="calculator" class="w-4 h-4 text-indigo-500"></i>
+          <span>Formula Cheat Sheet</span>
+        </a>
+        <a href="questions.html" class="px-5 py-3 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-sm font-bold shadow-xs transition flex items-center gap-2">
+          <i data-lucide="help-circle" class="w-4 h-4 text-violet-500"></i>
+          <span>Solved Question Bank</span>
+        </a>
+        <a href="whiteboard.html" class="px-5 py-3 rounded-2xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white text-sm font-bold shadow-sm transition flex items-center gap-2">
+          <i data-lucide="presentation" class="w-4 h-4"></i>
+          <span>Interactive Whiteboard</span>
+        </a>
       </div>
 
-      <!-- Question Cards Container -->
-      <div id="question-list" class="flex flex-col gap-2 max-h-[calc(100vh-280px)] overflow-y-auto pr-1">
-        <!-- Populated dynamically via js/app.js -->
+      <!-- Live Search Box in Hero -->
+      <div class="max-w-xl mx-auto bg-white dark:bg-slate-900 rounded-2xl p-2 border border-slate-200 dark:border-slate-800 shadow-xl flex items-center gap-2 text-left cursor-pointer hover:border-indigo-500 transition" onclick="openSearchModal()">
+        <i data-lucide="search" class="w-5 h-5 text-indigo-500 ml-2"></i>
+        <span class="text-xs sm:text-sm text-slate-400 flex-1">Search any topic, formula, or exam proof (e.g. Ratio, Cardioid, Beta-Gamma, Euler, Jacobian)...</span>
+        <span class="px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-[10px] font-mono text-slate-500">Ctrl K</span>
       </div>
-    </aside>
 
-    <!-- Right Main Panel: Interactive Lecture Whiteboard -->
-    <section class="lg:col-span-8 flex flex-col bg-white dark:bg-[#151e32] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+      <!-- Quick Metrics Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 max-w-4xl mx-auto text-center">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl shadow-xs">
+          <div class="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">5</div>
+          <div class="text-xs text-slate-500 font-medium mt-1">Syllabus Units</div>
+        </div>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl shadow-xs">
+          <div class="text-2xl sm:text-3xl font-extrabold text-cyan-600 dark:text-cyan-400">20</div>
+          <div class="text-xs text-slate-500 font-medium mt-1">Theory Sections</div>
+        </div>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl shadow-xs">
+          <div class="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">26</div>
+          <div class="text-xs text-slate-500 font-medium mt-1">Solved Derivations & Q&As</div>
+        </div>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl shadow-xs">
+          <div class="text-2xl sm:text-3xl font-extrabold text-amber-600 dark:text-amber-400">0 ₹</div>
+          <div class="text-xs text-slate-500 font-medium mt-1">100% Free Access</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <!-- Slide Header -->
-      <div class="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-900/50">
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-          <div class="flex items-center gap-2">
-            <span id="slide-unit-badge" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-cyan-600 text-white">UNIT 1</span>
-            <span id="slide-marks-badge" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-500/20 text-amber-800 dark:text-amber-300 border border-amber-500/30">10 Marks</span>
+  <!-- Units Grid Section -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-10">
+      <div>
+        <div class="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider mb-2">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          <span>Curriculum Structure</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">Explore All 5 Units</h2>
+      </div>
+      <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 max-w-md">
+        Select a unit below to read comprehensive lecture notes, view equations, and study step-by-step solved university questions.
+      </p>
+    </div>
+
+    <!-- 5 Unit Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xs hover:shadow-xl hover:border-indigo-500/40 dark:hover:border-indigo-500/40 transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-xs font-bold tracking-wider uppercase border border-indigo-100 dark:border-indigo-900/50">Unit 1</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 20 min read</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <i data-lucide="sigma" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
+                <a href="unit-1.html">Sequences & Infinite Series</a>
+              </h3>
+            </div>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2 leading-relaxed">Convergence of sequences & series, D’Alembert’s ratio test, Raabe’s test, Cauchy integral test, Leibnitz alternating test, p-series, and Taylor/Maclaurin series expansions.</p>
+
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">Key Topics Covered:</span>
+              <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
+                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">1. Standard Series Convergence Tests</span></li><li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">2. Alternating Series & Leibnitz Test</span></li><li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">3. Sequence Limits & Classifications</span></li>
+              </ul>
+            </div>
           </div>
-          <button type="button" onclick="toggleMastered()" id="mastered-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
-            <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-            <span>Mark as Mastered</span>
-          </button>
-        </div>
 
-        <h2 id="slide-title" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">
-          Select a topic to begin
-        </h2>
-        <div id="slide-problem" class="mt-3 p-3.5 rounded-xl bg-white dark:bg-[#0b1120] border border-slate-200 dark:border-slate-800 text-sm sm:text-base font-medium">
-          <!-- Problem statement rendered here -->
+          <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
+            <span class="text-[11px] font-medium text-slate-400">4 Topics • 4 Solved Q&As</span>
+            <div class="flex items-center gap-2">
+              <a href="unit-1.html" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-xs transition flex items-center gap-1">
+                <span>Study Notes</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xs hover:shadow-xl hover:border-indigo-500/40 dark:hover:border-indigo-500/40 transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-xs font-bold tracking-wider uppercase border border-indigo-100 dark:border-indigo-900/50">Unit 2</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 25 min read</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <i data-lucide="shapes" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
+                <a href="unit-2.html">Applications of Definite Integrals</a>
+              </h3>
+            </div>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2 leading-relaxed">Arc length of plane curves (rectification), surface areas and volumes of revolution for Cartesian, parametric, and polar curves (Cycloids, Ellipses, Cardioids, Circles).</p>
+
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">Key Topics Covered:</span>
+              <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
+                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">1. Length of Plane Curves (Arc Length Formulas)</span></li><li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">2. Surface Area of Solids of Revolution</span></li><li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">3. Volume of Solids of Revolution</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
+            <span class="text-[11px] font-medium text-slate-400">4 Topics • 7 Solved Q&As</span>
+            <div class="flex items-center gap-2">
+              <a href="unit-2.html" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-xs transition flex items-center gap-1">
+                <span>Study Notes</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xs hover:shadow-xl hover:border-indigo-500/40 dark:hover:border-indigo-500/40 transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-xs font-bold tracking-wider uppercase border border-indigo-100 dark:border-indigo-900/50">Unit 3</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 20 min read</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <i data-lucide="function-square" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
+                <a href="unit-3.html">Beta & Gamma Functions & Improper Integrals</a>
+              </h3>
+            </div>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2 leading-relaxed">Eulerian integrals, relation between Beta and Gamma functions, duplication formula, 7 reduction integrals, and convergence of improper integrals.</p>
+
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">Key Topics Covered:</span>
+              <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
+                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">1. Gamma Function & Recurrence Relations</span></li><li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">2. Beta Function & Symmetry Property</span></li><li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">3. Beta-Gamma Core Relation & Duplication Formula</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
+            <span class="text-[11px] font-medium text-slate-400">4 Topics • 4 Solved Q&As</span>
+            <div class="flex items-center gap-2">
+              <a href="unit-3.html" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-xs transition flex items-center gap-1">
+                <span>Study Notes</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xs hover:shadow-xl hover:border-indigo-500/40 dark:hover:border-indigo-500/40 transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-xs font-bold tracking-wider uppercase border border-indigo-100 dark:border-indigo-900/50">Unit 4</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 22 min read</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <i data-lucide="layers" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
+                <a href="unit-4.html">Multivariable Calculus (Partial Differentiation)</a>
+              </h3>
+            </div>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2 leading-relaxed">Partial derivatives, Euler’s theorem on homogeneous functions (1st & 2nd order with both deductions), chain rule, total derivative, and 2-variable maxima and minima.</p>
+
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">Key Topics Covered:</span>
+              <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
+                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">1. Homogeneous Functions & Euler’s Theorem (1st Order)</span></li><li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">2. Euler’s 2nd-Order Theorem & Both Key Deductions</span></li><li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">3. Maxima & Minima for Functions of Two Variables</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
+            <span class="text-[11px] font-medium text-slate-400">4 Topics • 5 Solved Q&As</span>
+            <div class="flex items-center gap-2">
+              <a href="unit-4.html" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-xs transition flex items-center gap-1">
+                <span>Study Notes</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xs hover:shadow-xl hover:border-indigo-500/40 dark:hover:border-indigo-500/40 transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-xs font-bold tracking-wider uppercase border border-indigo-100 dark:border-indigo-900/50">Unit 5</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 25 min read</span>
+            </div>
+
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                <i data-lucide="box" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug">
+                <a href="unit-5.html">Multiple Integrals & Vector Transformations</a>
+              </h3>
+            </div>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2 leading-relaxed">Double and triple integrals, evaluation by finding limits, change of order of integration, transformation to polar coordinates via Jacobians, and applications to areas and volumes.</p>
+
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800/80 mb-5">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">Key Topics Covered:</span>
+              <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
+                <li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">1. Double & Triple Integrals (Finding Limits)</span></li><li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">2. Change of Order of Integration</span></li><li class="flex items-start gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-indigo-500 shrink-0 mt-0.5"></i><span class="line-clamp-1">3. Jacobians & Polar Coordinate Transformations</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
+            <span class="text-[11px] font-medium text-slate-400">4 Topics • 6 Solved Q&As</span>
+            <div class="flex items-center gap-2">
+              <a href="unit-5.html" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-xs transition flex items-center gap-1">
+                <span>Study Notes</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+
+    <!-- Quick Tools Banner -->
+    <div class="mt-16 bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-950 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+      <div class="max-w-2xl relative z-10">
+        <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold border border-indigo-500/30">Essential Exam Preparation</span>
+        <h3 class="text-2xl sm:text-3xl font-black mt-4 mb-3">Master Formulas, Derivations &amp; University Questions</h3>
+        <p class="text-xs sm:text-sm text-indigo-100/80 leading-relaxed mb-6">
+          Access the full mathematical formula sheet with standard test conditions, or practice the 26 recurring university exam questions with step-by-step proofs on the interactive whiteboard.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="formulas.html" class="px-4 py-2.5 rounded-xl bg-white text-slate-900 font-bold text-xs hover:bg-slate-100 transition shadow-sm">
+            Open Formula Sheet
+          </a>
+          <a href="questions.html" class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition shadow-sm">
+            Browse Question Bank
+          </a>
+          <a href="whiteboard.html" class="px-4 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs transition shadow-sm">
+            Interactive Whiteboard
+          </a>
+          <button onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 transition flex items-center gap-1.5">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Print Current Page</span>
+          </button>
         </div>
       </div>
-
-      <!-- Exam Intuition & Trap Callout -->
-      <div id="intuition-box" class="mx-4 sm:mx-6 mt-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
-        <i data-lucide="lightbulb" class="w-5 h-5 text-amber-500 shrink-0 mt-0.5"></i>
-        <div class="text-xs sm:text-sm text-amber-950 dark:text-amber-200">
-          <span class="font-bold block mb-0.5 text-amber-700 dark:text-amber-400">PTU Evaluator Tip &amp; Exam Trap:</span>
-          <span id="intuition-text">Loading tip...</span>
-        </div>
-      </div>
-
-      <!-- Step-by-Step Animated Whiteboard Area -->
-      <div class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-3 min-h-[300px]" id="steps-container">
-        <!-- Steps revealed here -->
-      </div>
-
-      <!-- Whiteboard Interactive Controls Footer -->
-      <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-2">
-          <button type="button" onclick="prevQuestion()" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Previous Topic">
-            <i data-lucide="chevron-left" class="w-4 h-4"></i>
-          </button>
-          <button type="button" onclick="nextQuestion()" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="Next Topic">
-            <i data-lucide="chevron-right" class="w-4 h-4"></i>
-          </button>
-          <span id="step-counter" class="text-xs font-semibold text-slate-500 dark:text-slate-400 ml-1">
-            Step 0 of 0
-          </span>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <button type="button" onclick="resetSteps()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition">
-            Reset Board
-          </button>
-          <button type="button" onclick="revealAllSteps()" id="reveal-all-btn" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 transition">
-            Reveal All
-          </button>
-          <button type="button" onclick="revealNextStep()" id="next-step-btn" class="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-cyan-600 hover:bg-cyan-500 text-white shadow-md shadow-cyan-500/25 transition active:scale-95">
-            <span>Next Step</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-      </div>
-    </section>
+      <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    </div>
   </main>
 
-  <!-- Universal Footer -->
-  <footer class="no-print border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#151e32]/80 px-4 py-5 mt-auto">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
-      
-      <div class="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
-        <span class="font-semibold text-slate-800 dark:text-slate-200">CalcVault M-1</span>
-        <span>•</span>
-        <span>Curated with ❤️ for CGC CEC Landran engineering peers by <strong class="text-slate-800 dark:text-slate-200">Krishna Kumar</strong></span>
+  
+  <!-- Global Footer -->
+  <footer class="mt-auto bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-10 no-print transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <!-- Brand Info -->
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2.5 mb-3">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-white">
+              <i data-lucide="function-square" class="w-4 h-4"></i>
+            </div>
+            <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">CalcVault M-1</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-bold">100% Free Access</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-md">
+            CalcVault M-1 is a free, open-access engineering mathematics revision portal curated for CGC College of Engineering / IKG-PTU students. Complete syllabus notes, derivations, formulas, and verified exam solutions without any paywalls.
+          </p>
+          <div class="mt-4 flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500">
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i>
+            <span>Curated by Krishna Kumar (B.Tech Cybersecurity, CGC CEC Landran) • Free Academic Project</span>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-3">Syllabus Units</h4>
+          <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <li><a href="unit-1.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 1: Sequences & Series</a></li>
+            <li><a href="unit-2.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 2: Definite Integral Applications</a></li>
+            <li><a href="unit-3.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 3: Beta & Gamma Functions</a></li>
+            <li><a href="unit-4.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 4: Multivariable Calculus</a></li>
+            <li><a href="unit-5.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 5: Multiple Integrals</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & Tools -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-3">Study Resources</h4>
+          <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <li><a href="formulas.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Formula & Theorems Sheet</a></li>
+            <li><a href="questions.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Solved Exam Question Bank</a></li>
+            <li><a href="whiteboard.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Interactive Whiteboard Solver</a></li>
+            <li><button onclick="window.print()" class="text-left hover:text-indigo-600 dark:hover:text-indigo-400 transition">Print Current Notes (PDF)</button></li>
+            <li><button onclick="openSearchModal()" class="text-left hover:text-indigo-600 dark:hover:text-indigo-400 transition">Search All Topics (Ctrl+K)</button></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-4">
-        <a href="cheatsheet.html" class="hover:text-cyan-500 transition">Print Cheat-Sheet</a>
-        <a href="syllabus.html" class="hover:text-cyan-500 transition">Syllabus Breakdown</a>
-        <a href="about.html" class="hover:text-cyan-500 transition">About Project</a>
-        <span class="text-emerald-500 font-bold">100% Free &amp; Open Source</span>
+      <div class="pt-6 border-t border-slate-100 dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+        <p>© 2026 CalcVault Study Portal • IKG-PTU BTAM101-18. Built for engineering excellence.</p>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center gap-1 hover:text-indigo-500 transition">
+          <span>Back to top</span>
+          <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+        </button>
       </div>
     </div>
   </footer>
 
-  <!-- Hidden Printable Cheat-Sheet Container (Visible only when window.print() is executed) -->
-  <div id="print-container" class="hidden p-6 max-w-4xl mx-auto">
-    <div class="border-b-2 border-slate-800 pb-4 mb-6">
-      <h1 class="text-2xl font-bold">CalcVault M-1 • Complete 26-Topic Engineering Mathematics-I Cheat-Sheet</h1>
-      <p class="text-sm text-slate-600">Author: Krishna Kumar (B.Tech Cybersecurity, CGC CEC Landran • IKG-PTU Syllabus BTAM101-18)</p>
-    </div>
-    <div id="print-content" class="space-y-4"></div>
-  </div>
-
-  <!-- Data and Application Scripts -->
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
+
+    

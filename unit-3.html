@@ -1,0 +1,520 @@
+
+  <!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit 3 — Beta & Gamma Functions & Improper Integrals | CalcVault — Engineering Mathematics-I</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- KaTeX for fast, crisp mathematical typesetting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white transition-colors duration-200 min-h-screen flex flex-col">
+
+  <!-- Print Only Header -->
+  <div class="print-only-header hidden">
+    <div class="flex justify-between items-center border-b-2 border-slate-900 pb-3 mb-4">
+      <div>
+        <h1 class="text-xl font-extrabold text-slate-900">CalcVault — Engineering Mathematics-I Revision Notes</h1>
+        <p class="text-xs text-slate-600">Curated for CGC College of Engineering / IKG-PTU BTAM101-18 Syllabus • Krishna Kumar</p>
+      </div>
+      <div class="text-right text-xs text-slate-500">
+        <p>100% Free & Open Access</p>
+        <p>Revision Portal</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+  <!-- Mobile Backdrop -->
+  <div id="mobile-backdrop" onclick="toggleMobileMenu(true)" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-menu" class="fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-white dark:bg-slate-900 z-50 transform -translate-x-full transition-transform duration-200 ease-in-out border-r border-slate-200 dark:border-slate-800 flex flex-col p-5 shadow-2xl lg:hidden">
+    <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-white shadow-sm">
+          <i data-lucide="function-square" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h2 class="font-extrabold text-sm text-slate-900 dark:text-white">CalcVault M-1</h2>
+          <p class="text-[10px] text-slate-500 dark:text-slate-400">Engineering Mathematics-I</p>
+        </div>
+      </div>
+      <button onclick="toggleMobileMenu(true)" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <div class="py-4 space-y-1">
+      <a href="index.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="home" class="w-4 h-4"></i>
+        <span>Home Portal</span>
+      </a>
+      <a href="formulas.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="calculator" class="w-4 h-4"></i>
+        <span>Formula & Theorems Sheet</span>
+      </a>
+      <a href="questions.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="help-circle" class="w-4 h-4"></i>
+        <span>Solved Question Bank</span>
+      </a>
+      <a href="whiteboard.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <i data-lucide="presentation" class="w-4 h-4"></i>
+        <span>Interactive Whiteboard</span>
+      </a>
+    </div>
+
+    <div class="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-3 mb-2">Syllabus Units</div>
+    <div class="flex-1 overflow-y-auto space-y-1 pr-1">
+      <a href="unit-1.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 1</span><span class="truncate">Sequences & Infinite Series</span></a><a href="unit-2.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 2</span><span class="truncate">Applications of Definite Integrals</span></a><a href="unit-3.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium bg-indigo-50 text-indigo-600 dark:bg-indigo-950/60 dark:text-indigo-400 font-semibold"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 3</span><span class="truncate">Beta & Gamma Functions & Improper Integrals</span></a><a href="unit-4.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 4</span><span class="truncate">Multivariable Calculus (Partial Differentiation)</span></a><a href="unit-5.html" onclick="toggleMobileMenu(true)" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-[10px] font-bold shrink-0">Unit 5</span><span class="truncate">Multiple Integrals & Vector Transformations</span></a>
+    </div>
+
+    <div class="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <span class="text-xs text-slate-500">Dark / Light Mode</span>
+      <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+        <i data-lucide="moon" class="w-4 h-4 theme-toggle-icon"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Global Navigation Header -->
+  <header class="sticky top-0 z-30 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 no-print transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <!-- Left: Logo & Brand -->
+      <div class="flex items-center gap-3">
+        <button onclick="toggleMobileMenu(false)" class="p-2 -ml-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform">
+            <i data-lucide="function-square" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">CalcVault</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold border border-emerald-500/20">Free</span>
+            </div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium hidden sm:block">Engineering Mathematics-I</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Center: Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1">
+        <a href="index.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Overview</a>
+        
+        <!-- Units Dropdown -->
+        <div class="relative group">
+          <button class="px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1 transition text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60">
+            <span>Units & Chapters</span>
+            <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition-transform"></i>
+          </button>
+          <div class="absolute left-0 mt-1 w-80 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 py-2 hidden group-hover:block transition-all z-50">
+            <a href="unit-1.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 1:</strong> Sequences & Infinite Series</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-2.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 2:</strong> Applications of Definite Integrals</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-3.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 3:</strong> Beta & Gamma Functions & Improper Integrals</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-4.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 4:</strong> Multivariable Calculus (Partial Differentiation)</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a><a href="unit-5.html" class="block px-4 py-2.5 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-600 dark:hover:text-indigo-400 transition flex items-center justify-between"><span><strong class="font-bold">Unit 5:</strong> Multiple Integrals & Vector Transformations</span><i data-lucide="chevron-right" class="w-3.5 h-3.5 opacity-40"></i></a>
+          </div>
+        </div>
+
+        <a href="formulas.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Formula Sheet</a>
+        <a href="questions.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Question Bank</a>
+        <a href="whiteboard.html" class="px-3 py-2 rounded-xl text-xs font-semibold transition text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800">Whiteboard</a>
+      </nav>
+
+      <!-- Right: Action Tools -->
+      <div class="flex items-center gap-2">
+        <!-- Search Trigger -->
+        <button onclick="openSearchModal()" class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-medium border border-slate-200 dark:border-slate-700/60 transition shadow-xs">
+          <i data-lucide="search" class="w-3.5 h-3.5"></i>
+          <span class="hidden md:inline">Quick Search...</span>
+          <kbd class="hidden md:inline-block px-1.5 py-0.5 rounded bg-white dark:bg-slate-700 text-[10px] font-mono text-slate-400 dark:text-slate-300 border border-slate-200 dark:border-slate-600">Ctrl K</kbd>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()" title="Toggle dark/light mode" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+          <i data-lucide="moon" class="w-4 h-4 theme-toggle-icon"></i>
+        </button>
+
+        <!-- Print Action -->
+        <button onclick="window.print()" title="Print this page (A4 PDF)" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-sm transition">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          <span>Print / PDF</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Search Modal -->
+  <div id="search-modal" class="fixed inset-0 z-50 hidden items-start justify-center pt-16 sm:pt-24 bg-slate-950/70 backdrop-blur-xs p-4 overflow-y-auto no-print" onclick="closeSearchModal()">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center gap-3">
+        <i data-lucide="search" class="w-5 h-5 text-indigo-500"></i>
+        <input id="search-input" oninput="handleSearchInput(this.value)" type="text" placeholder="Search topics, formulas, or derivations (e.g. Ratio, Raabe, Cardioid, Beta-Gamma, Euler, Maxima, Jacobian)..." class="w-full bg-transparent text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-hidden" />
+        <button onclick="closeSearchModal()" class="text-xs px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">ESC</button>
+      </div>
+      <div id="search-results" class="max-h-[60vh] overflow-y-auto p-3 space-y-1 divide-y divide-slate-100 dark:divide-slate-800/40">
+        <!-- Live search results inject here -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Unit Hero Header -->
+  <section class="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 py-10 transition-colors">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-2 text-xs text-slate-500 mb-4 no-print">
+        <a href="index.html" class="hover:text-indigo-600 dark:hover:text-indigo-400">Home</a>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <span>Syllabus Units</span>
+        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        <span class="text-indigo-600 dark:text-indigo-400 font-semibold">Unit 3</span>
+      </nav>
+
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-xs font-extrabold uppercase tracking-wider border border-indigo-100 dark:border-indigo-900/50">Unit 3</span>
+            <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 20 min read</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold">100% Free</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white leading-tight">Beta & Gamma Functions & Improper Integrals</h1>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-2 max-w-2xl">Eulerian integrals, relation between Beta and Gamma functions, duplication formula, 7 reduction integrals, and convergence of improper integrals.</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 no-print shrink-0">
+          <a href="#questions-section" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center gap-1.5">
+            <i data-lucide="help-circle" class="w-3.5 h-3.5 text-indigo-500"></i>
+            <span>Solved Q&As (4)</span>
+          </a>
+          <a href="formulas.html#unit-3" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center gap-1.5">
+            <i data-lucide="calculator" class="w-3.5 h-3.5 text-violet-500"></i>
+            <span>Formulas</span>
+          </a>
+          <a href="whiteboard.html" class="px-3.5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold shadow-xs transition flex items-center gap-1.5">
+            <i data-lucide="presentation" class="w-3.5 h-3.5"></i>
+            <span>Whiteboard</span>
+          </a>
+          <button onclick="window.print()" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold shadow-xs transition flex items-center gap-1.5">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Print Unit (PDF)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Section Jump Nav -->
+      <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-2 overflow-x-auto pb-1 no-print">
+        <span class="text-[11px] font-bold text-slate-400 shrink-0 uppercase tracking-wider mr-1">Jump to:</span>
+        <a href="#sec-0" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-700 text-xs font-medium transition shrink-0">1. Gamma Function & Recurrence R...</a><a href="#sec-1" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-700 text-xs font-medium transition shrink-0">2. Beta Function & Symmetry Prop...</a><a href="#sec-2" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-700 text-xs font-medium transition shrink-0">3. Beta-Gamma Core Relation & Du...</a><a href="#sec-3" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-300 dark:hover:border-indigo-700 text-xs font-medium transition shrink-0">4. Convergence of Improper Integ...</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Body -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 w-full space-y-8">
+    <!-- Theory Sections -->
+    
+            <article id="sec-0" class="unit-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs scroll-mt-20">
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                <span class="w-2 h-6 rounded-full bg-indigo-600 shrink-0"></span>
+                <span>1. Gamma Function & Recurrence Relations</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">The Gamma Function $\Gamma(n)$ (Euler’s integral of the second kind) generalizes factorials to positive real numbers.</p>
+              <ul class="space-y-2.5 my-4 bg-slate-50/70 dark:bg-slate-950/40 p-4 sm:p-5 rounded-2xl border border-slate-100 dark:border-slate-800/60"><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Definition:</b> $\Gamma(n) = \int_0^\infty e^{-x} x^{n-1}\,dx$ for $n > 0$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Recurrence Relation:</b> $\Gamma(n+1) = n\Gamma(n)$. For positive integers: $\Gamma(n+1) = n!$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Special Value:</b> $\Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Transformation:</b> $\int_0^\infty e^{-k x} x^{n-1}\,dx = \frac{\Gamma(n)}{k^n}$.</span></li></ul>
+              
+                <div class="mt-4 formula-box p-4 rounded-2xl border border-indigo-200 dark:border-indigo-900/40 relative group">
+                  <div class="flex items-center justify-between pb-2 mb-2 border-b border-indigo-100 dark:border-indigo-950">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                      <i data-lucide="code" class="w-3.5 h-3.5"></i> Key Formula / Derivation Condition
+                    </span>
+                    <button onclick="copyFormula(`Gamma(n) = int_0^inf e^(-x) * x^(n-1) dx (n > 0)
+Gamma(n+1) = n * Gamma(n) = n!
+Gamma(1/2) = sqrt(pi)
+int_0^inf e^(-kx) * x^(n-1) dx = Gamma(n) / k^n`, this)" class="text-[11px] px-2.5 py-1 rounded-lg bg-indigo-100/60 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900 transition flex items-center gap-1 no-print">
+                      <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                    </button>
+                  </div>
+                  <pre class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 overflow-x-auto whitespace-pre-wrap leading-relaxed"><code>Gamma(n) = int_0^inf e^(-x) * x^(n-1) dx (n &gt; 0)
+Gamma(n+1) = n * Gamma(n) = n!
+Gamma(1/2) = sqrt(pi)
+int_0^inf e^(-kx) * x^(n-1) dx = Gamma(n) / k^n</code></pre>
+                </div>
+                
+            </article>
+            
+            <article id="sec-1" class="unit-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs scroll-mt-20">
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                <span class="w-2 h-6 rounded-full bg-indigo-600 shrink-0"></span>
+                <span>2. Beta Function & Symmetry Property</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">The Beta Function $B(m,n)$ (Euler’s integral of the first kind) is defined for $m>0, n>0$.</p>
+              <ul class="space-y-2.5 my-4 bg-slate-50/70 dark:bg-slate-950/40 p-4 sm:p-5 rounded-2xl border border-slate-100 dark:border-slate-800/60"><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Standard Algebraic Form:</b> $B(m,n) = \int_0^1 x^{m-1} (1-x)^{n-1}\,dx$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Symmetric Property:</b> $B(m,n) = B(n,m)$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Trigonometric Form:</b> $B(m,n) = 2 \int_0^{\pi/2} \sin^{2m-1}\theta \cos^{2n-1}\theta\,d\theta$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Infinite Interval Form:</b> $B(m,n) = \int_0^\infty \frac{y^{m-1}}{(1+y)^{m+n}}\,dy$.</span></li></ul>
+              
+                <div class="mt-4 formula-box p-4 rounded-2xl border border-indigo-200 dark:border-indigo-900/40 relative group">
+                  <div class="flex items-center justify-between pb-2 mb-2 border-b border-indigo-100 dark:border-indigo-950">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                      <i data-lucide="code" class="w-3.5 h-3.5"></i> Key Formula / Derivation Condition
+                    </span>
+                    <button onclick="copyFormula(`B(m,n) = int_0^1 x^(m-1) * (1-x)^(n-1) dx
+B(m,n) = 2 * int_0^(pi/2) sin^(2m-1)(theta) * cos^(2n-1)(theta) dtheta
+B(m,n) = B(n,m)`, this)" class="text-[11px] px-2.5 py-1 rounded-lg bg-indigo-100/60 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900 transition flex items-center gap-1 no-print">
+                      <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                    </button>
+                  </div>
+                  <pre class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 overflow-x-auto whitespace-pre-wrap leading-relaxed"><code>B(m,n) = int_0^1 x^(m-1) * (1-x)^(n-1) dx
+B(m,n) = 2 * int_0^(pi/2) sin^(2m-1)(theta) * cos^(2n-1)(theta) dtheta
+B(m,n) = B(n,m)</code></pre>
+                </div>
+                
+            </article>
+            
+            <article id="sec-2" class="unit-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs scroll-mt-20">
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                <span class="w-2 h-6 rounded-full bg-indigo-600 shrink-0"></span>
+                <span>3. Beta-Gamma Core Relation & Duplication Formula</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">The fundamental bridge between Beta and Gamma functions enables fast evaluation of definite integrals.</p>
+              <ul class="space-y-2.5 my-4 bg-slate-50/70 dark:bg-slate-950/40 p-4 sm:p-5 rounded-2xl border border-slate-100 dark:border-slate-800/60"><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Fundamental Relation:</b> $B(m,n) = \frac{\Gamma(m)\Gamma(n)}{\Gamma(m+n)}$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Trigonometric Integral Formula:</b> $\int_0^{\pi/2} \sin^p\theta \cos^q\theta\,d\theta = \frac{\Gamma\left(\frac{p+1}{2}\right)\Gamma\left(\frac{q+1}{2}\right)}{2\Gamma\left(\frac{p+q+2}{2}\right)}$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Legendre’s Duplication Formula:</b> $\Gamma(m)\Gamma\left(m+\frac{1}{2}\right) = \frac{\sqrt{\pi}}{2^{2m-1}} \Gamma(2m)$.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Euler’s Reflection Formula:</b> $\Gamma(p)\Gamma(1-p) = \frac{\pi}{\sin(p\pi)}$ ($0 < p < 1$).</span></li></ul>
+              
+                <div class="mt-4 formula-box p-4 rounded-2xl border border-indigo-200 dark:border-indigo-900/40 relative group">
+                  <div class="flex items-center justify-between pb-2 mb-2 border-b border-indigo-100 dark:border-indigo-950">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                      <i data-lucide="code" class="w-3.5 h-3.5"></i> Key Formula / Derivation Condition
+                    </span>
+                    <button onclick="copyFormula(`B(m,n) = [Gamma(m) * Gamma(n)] / Gamma(m+n)
+int_0^(pi/2) sin^p(t) * cos^q(t) dt = [Gamma((p+1)/2) * Gamma((q+1)/2)] / [2 * Gamma((p+q+2)/2)]
+Gamma(m) * Gamma(m + 1/2) = (sqrt(pi) / 2^(2m-1)) * Gamma(2m)`, this)" class="text-[11px] px-2.5 py-1 rounded-lg bg-indigo-100/60 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900 transition flex items-center gap-1 no-print">
+                      <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                    </button>
+                  </div>
+                  <pre class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 overflow-x-auto whitespace-pre-wrap leading-relaxed"><code>B(m,n) = [Gamma(m) * Gamma(n)] / Gamma(m+n)
+int_0^(pi/2) sin^p(t) * cos^q(t) dt = [Gamma((p+1)/2) * Gamma((q+1)/2)] / [2 * Gamma((p+q+2)/2)]
+Gamma(m) * Gamma(m + 1/2) = (sqrt(pi) / 2^(2m-1)) * Gamma(2m)</code></pre>
+                </div>
+                
+            </article>
+            
+            <article id="sec-3" class="unit-card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 shadow-xs scroll-mt-20">
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                <span class="w-2 h-6 rounded-full bg-indigo-600 shrink-0"></span>
+                <span>4. Convergence of Improper Integrals</span>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">Improper integrals have unbounded intervals of integration or discontinuous integrands.</p>
+              <ul class="space-y-2.5 my-4 bg-slate-50/70 dark:bg-slate-950/40 p-4 sm:p-5 rounded-2xl border border-slate-100 dark:border-slate-800/60"><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>Comparison Test:</b> If $0 \le f(x) \le g(x)$, then $\int_a^\infty g(x)\,dx$ converges $\implies \int_a^\infty f(x)\,dx$ converges.</span></li><li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0 mt-2"></span><span><b>$\mu$-Test:</b> If $\lim_{x\to\infty} x^\mu f(x) = L$ (finite), then $\int_a^\infty f(x)\,dx$ converges if $\mu > 1$ and diverges if $\mu \le 1$ ($L \ne 0$).</span></li></ul>
+              
+                <div class="mt-4 formula-box p-4 rounded-2xl border border-indigo-200 dark:border-indigo-900/40 relative group">
+                  <div class="flex items-center justify-between pb-2 mb-2 border-b border-indigo-100 dark:border-indigo-950">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+                      <i data-lucide="code" class="w-3.5 h-3.5"></i> Key Formula / Derivation Condition
+                    </span>
+                    <button onclick="copyFormula(`int_a^inf (dx / x^p) converges for p > 1, diverges for p <= 1
+mu-Test: lim_{x -> inf} x^mu * f(x) = L (converges if mu > 1 and L is finite)`, this)" class="text-[11px] px-2.5 py-1 rounded-lg bg-indigo-100/60 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-200 dark:hover:bg-indigo-900 transition flex items-center gap-1 no-print">
+                      <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                    </button>
+                  </div>
+                  <pre class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 overflow-x-auto whitespace-pre-wrap leading-relaxed"><code>int_a^inf (dx / x^p) converges for p &gt; 1, diverges for p &lt;= 1
+mu-Test: lim_{x -&gt; inf} x^mu * f(x) = L (converges if mu &gt; 1 and L is finite)</code></pre>
+                </div>
+                
+            </article>
+            
+
+    <!-- Solved University Questions Section -->
+    <section id="questions-section" class="pt-8 border-t-2 border-slate-200 dark:border-slate-800 scroll-mt-20">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Exam Preparation</span>
+          <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">Solved University Exam Questions &amp; Proofs</h3>
+          <p class="text-xs text-slate-500 mt-1">High-probability university exam questions with step-by-step model solutions.</p>
+        </div>
+        <div class="flex items-center gap-2 no-print">
+          <button onclick="document.querySelectorAll('#questions-section details').forEach(d => d.open = true)" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition">Expand All</button>
+          <button onclick="document.querySelectorAll('#questions-section details').forEach(d => d.open = false)" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition">Collapse All</button>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" open>
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">2 & 5 Marks</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 1</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U3-Q1 & Q2: Definitions & Basic Beta-Gamma Evaluations</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Define Beta function, Gamma function, 1st & 2nd kind improper integrals with examples, and evaluate $\Gamma(5)$, $\Gamma(7/2)$, and $B(5, 7)$.</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> Remember: $\Gamma(n) = (n-1)!$ for positive integers, and for half-integers peel off $(n-1)$ down to $\Gamma(1/2) = \sqrt{\pi}$.</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">1. Definitions of Beta, Gamma & Improper Integrals</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">• <b>Beta Function:</b> $B(m, n) = \int_{0}^{1} x^{m-1}(1-x)^{n-1}\,dx \quad (m>0, n>0)$.<br>• <b>Gamma Function:</b> $\Gamma(n) = \int_{0}^{\infty} e^{-x} x^{n-1}\,dx \quad (n>0)$.<br>• <b>1st Kind Improper Integral:</b> Infinite limit(s), e.g., $\int_{1}^{\infty} \frac{dx}{x^2} = 1$.<br>• <b>2nd Kind Improper Integral:</b> Unbounded integrand on $[a,b]$, e.g., $\int_{0}^{1} \frac{dx}{\sqrt{x}} = 2$.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">2. Evaluate Γ(5) and Γ(7/2)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">• $\Gamma(5) = 4! = 4 \times 3 \times 2 \times 1 = \mathbf{24}$.<br>• $\Gamma\left(\frac{7}{2}\right) = \frac{5}{2} \cdot \frac{3}{2} \cdot \frac{1}{2}\Gamma\left(\frac{1}{2}\right) = \mathbf{\frac{15}{8}\sqrt{\pi}}$.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">3. Evaluate B(5, 7)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$$B(5, 7) = \frac{\Gamma(5)\Gamma(7)}{\Gamma(5+7)} = \frac{4! \cdot 6!}{11!} = \frac{24 \times 720}{11 \times 10 \times 9 \times 8 \times 7 \times 720} = \frac{24}{55440} = \mathbf{\frac{1}{2310}}$$</div></div></div>
+              </div>
+            </details>
+            
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" >
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">5 Marks</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 2</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U3-Q3: All 7 Beta-Gamma Reduction Integrals</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Evaluate:<br>(1) $\int_{0}^{\pi/2} \sin^3 x \cos^5 x\,dx$; (2) $\int_{0}^{\pi/2} \sin^5 x\,dx$; (3) $\int_{0}^{\pi/2} \cos^4 x\,dx$;<br>(4) $\int_{0}^{1} x^4(1-x)^3\,dx$; (5) $\int_{0}^{1} \frac{x^2}{\sqrt{1-x^5}}\,dx$; (6) $\int_{0}^{\pi/2} \sqrt{\tan x}\,dx$; (7) $\int_{0}^{1} x^3(1-x)^5\,dx$.</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> Use the golden trig formula $\int_0^{\pi/2} \sin^p x \cos^q x\,dx = \frac{\Gamma(\frac{p+1}{2})\Gamma(\frac{q+1}{2})}{2\Gamma(\frac{p+q+2}{2})}$ for (1), (2), (3), and (6).</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">Integrals (1), (2), and (3) — Trigonometric Forms</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">• <b>(1)</b> $\int_{0}^{\pi/2} \sin^3 x \cos^5 x\,dx = \frac{\Gamma(2)\Gamma(3)}{2\Gamma(5)} = \frac{1! \cdot 2!}{2 \cdot 4!} = \frac{2}{48} = \mathbf{\frac{1}{24}}$.<br>• <b>(2)</b> $\int_{0}^{\pi/2} \sin^5 x \cos^0 x\,dx = \frac{\Gamma(3)\Gamma(1/2)}{2\Gamma(7/2)} = \frac{2\sqrt{\pi}}{2 \cdot \frac{15}{8}\sqrt{\pi}} = \mathbf{\frac{8}{15}}$.<br>• <b>(3)</b> $\int_{0}^{\pi/2} \sin^0 x \cos^4 x\,dx = \frac{\Gamma(1/2)\Gamma(5/2)}{2\Gamma(3)} = \frac{\sqrt{\pi} \cdot \frac{3}{4}\sqrt{\pi}}{2 \cdot 2!} = \mathbf{\frac{3\pi}{16}}$.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">Integrals (4) and (7) — Direct Beta Function Forms</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">• <b>(4)</b> $\int_{0}^{1} x^{5-1}(1-x)^{4-1}\,dx = B(5,4) = \frac{4! \cdot 3!}{8!} = \frac{24 \times 6}{40320} = \mathbf{\frac{1}{280}}$.<br>• <b>(7)</b> $\int_{0}^{1} x^{4-1}(1-x)^{6-1}\,dx = B(4,6) = \frac{3! \cdot 5!}{9!} = \frac{6}{9 \times 8 \times 7 \times 6} = \mathbf{\frac{1}{504}}$.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">Integral (5) — Substitution x⁵ = t</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Put $x^5 = t \implies x = t^{1/5}, \; dx = \frac{1}{5}t^{-4/5}\,dt$:<br>$$\int_{0}^{1} \frac{x^2}{\sqrt{1-x^5}}\,dx = \frac{1}{5}\int_{0}^{1} t^{2/5}(1-t)^{-1/2}t^{-4/5}\,dt = \frac{1}{5}\int_{0}^{1} t^{-2/5}(1-t)^{-1/2}\,dt = \mathbf{\frac{1}{5}B\left(\frac{3}{5}, \frac{1}{2}\right)}$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">Integral (6) — √(tan x) via Euler Reflection Formula</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$$\int_{0}^{\pi/2} \sin^{1/2}x \cos^{-1/2}x\,dx = \frac{\Gamma(3/4)\Gamma(1/4)}{2\Gamma(1)} = \frac{1}{2}\Gamma\left(\frac{1}{4}\right)\Gamma\left(1-\frac{1}{4}\right) = \frac{\pi}{2\sin(\pi/4)} = \mathbf{\frac{\pi}{\sqrt{2}}}$$ </div></div></div>
+              </div>
+            </details>
+            
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" >
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">10 Marks</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 3</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U3-Q4: All Properties & Proofs of Beta-Gamma Relations</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Prove:<br>(I) $B(m, n) = B(n, m)$;<br>(II) $B(m, n) = 2\int_{0}^{\pi/2} \sin^{2m-1}\theta \cos^{2n-1}\theta\,d\theta$ & $\int_{0}^{\pi/2} \sin^p\theta\cos^q\theta\,d\theta$;<br>(III) $\Gamma(n) = (n-1)\Gamma(n-1)$;<br>(IV) $B(m, n) = \frac{\Gamma(m)\Gamma(n)}{\Gamma(m+n)}$.</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> These 4 proofs together form the single most frequently asked 10-mark theory block in Unit-3 of IKG-PTU papers.</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(I) Symmetry B(m, n) = B(n, m)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">In $B(m,n) = \int_{0}^{1} x^{m-1}(1-x)^{n-1}\,dx$, apply $\int_{0}^{a} f(x)\,dx = \int_{0}^{a} f(a-x)\,dx$:<br>$$B(m,n) = \int_{0}^{1} (1-x)^{m-1}[1-(1-x)]^{n-1}\,dx = \int_{0}^{1} x^{n-1}(1-x)^{m-1}\,dx = B(n,m)$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(II) Trigonometric Form of Beta Function</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Put $x = \sin^2\theta \implies dx = 2\sin\theta\cos\theta\,d\theta$ ($\theta: 0 \to \frac{\pi}{2}$):<br>$$B(m,n) = 2\int_{0}^{\pi/2} \sin^{2m-1}\theta\cos^{2n-1}\theta\,d\theta$$<br>Setting $2m-1=p, 2n-1=q$ gives $\int_{0}^{\pi/2} \sin^p\theta\cos^q\theta\,d\theta = \frac{1}{2}B\left(\frac{p+1}{2}, \frac{q+1}{2}\right)$.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(III) Recurrence Relation Γ(n) = (n - 1)Γ(n - 1)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Integrate $\Gamma(n) = \int_{0}^{\infty} x^{n-1} e^{-x}\,dx$ by parts ($u = x^{n-1}, dv = e^{-x}dx$):<br>$$\Gamma(n) = \left[-x^{n-1}e^{-x}\right]_{0}^{\infty} + (n-1)\int_{0}^{\infty} x^{n-2}e^{-x}\,dx = 0 + (n-1)\Gamma(n-1)$$</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(IV) Fundamental Relation B(m, n) = Γ(m)Γ(n) / Γ(m + n)</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">$$\Gamma(m)\Gamma(n) = \int_{0}^{\infty}\int_{0}^{\infty} e^{-(x+y)} x^{m-1} y^{n-1}\,dx\,dy$$<br>Put $x = u^2, y = v^2$, then convert to polar coordinates ($u = r\cos\theta, v = r\sin\theta$):<br>$$\Gamma(m)\Gamma(n) = \left(2\int_{0}^{\infty} e^{-r^2}r^{2(m+n)-1}\,dr\right)\left(2\int_{0}^{\pi/2} \cos^{2m-1}\theta\sin^{2n-1}\theta\,d\theta\right) = \Gamma(m+n)B(m,n)$$</div></div></div>
+              </div>
+            </details>
+            
+            <details class="qa-card group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xs overflow-hidden" >
+              <summary class="p-4 sm:p-5 cursor-pointer select-none flex items-start justify-between gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-1.5">
+                    <span class="px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold">5 Marks</span>
+                    <span class="text-[11px] text-slate-400">Exam Question 4</span>
+                  </div>
+                  <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100">U3-Q5: Convergence of All Improper Integrals</h4>
+                </div>
+                <div class="w-7 h-7 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 shrink-0 mt-0.5 no-print">
+                  <i data-lucide="chevron-down" class="w-4 h-4 accordion-chevron transition-transform duration-200"></i>
+                </div>
+              </summary>
+              <div class="qa-answer p-4 sm:p-6 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50/40 dark:bg-slate-950/20">
+                <div class="font-semibold text-indigo-600 dark:text-indigo-400 text-xs uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Verified Model Solution &amp; Derivation:
+                </div>
+                <div><div class="mb-3 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 p-3 bg-white dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800"><strong>Problem Statement:</strong> Test convergence of:<br>(1) $\int_{0}^{1} \frac{dx}{\sqrt{x - x^2}}$;<br>(2) $\int_{0}^{\infty} \frac{\sqrt{x}}{(1+x)^2}\,dx$;<br>(3) $\int_{0}^{\pi/2} \frac{\tan x}{x}\,dx$ and $\int_{0}^{\infty} \frac{\tan^{-1}x}{x^2+1}\,dx$.</div><div class="mb-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-900 dark:text-amber-200"><strong>PTU Evaluator Tip:</strong> Split integrals that have discontinuities at BOTH endpoints (like $x=0$ and $x=1$ in problem 1) at the midpoint $x = 1/2$ and test each half separately.</div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(1) ∫₀¹ dx / √(x - x²) — Discontinuous at both x = 0 and x = 1</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Split at $x = \frac{1}{2}$: $I = \int_{0}^{1/2} \frac{dx}{\sqrt{x}\sqrt{1-x}} + \int_{1/2}^{1} \frac{dx}{\sqrt{x}\sqrt{1-x}} = I_1 + I_2$.<br>• Near $x=0$: $\frac{1}{\sqrt{x}\sqrt{1-x}} \sim \frac{1}{x^{1/2}}$ ($p = \frac{1}{2} < 1 \implies I_1$ converges).<br>• Near $x=1$: $\sim \frac{1}{(1-x)^{1/2}}$ ($p = \frac{1}{2} < 1 \implies I_2$ converges).<br>Hence $I$ <b>Converges</b> (value $= B(1/2, 1/2) = \pi$).</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(2) ∫₀^∞ √x / (1 + x)² dx — 1st Kind Improper Integral</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">Continuous at $x = 0$. As $x \to \infty$, $\frac{x^{1/2}}{(1+x)^2} \sim \frac{x^{1/2}}{x^2} = \frac{1}{x^{3/2}}$.<br>Since $p = \frac{3}{2} > 1$, the integral <b>Converges</b>.</div></div><div class="mb-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800"><div class="font-bold text-xs uppercase text-indigo-600 dark:text-indigo-400 mb-1">(3) ∫₀^(π/2) (tan x / x) dx vs ∫₀^∞ [tan⁻¹ x / (x² + 1)] dx</div><div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">• For $\int_{0}^{\pi/2} \frac{\tan x}{x}\,dx$: Singular at $x = \frac{\pi}{2}$. Near $x = \frac{\pi}{2}$, $\tan x = \frac{\sin x}{\sin(\frac{\pi}{2}-x)} \sim \frac{1}{\frac{\pi}{2}-x}$ ($p = 1 \implies$ <b>Divergent</b>).<br>• For $\int_{0}^{\infty} \frac{\tan^{-1}x}{x^2+1}\,dx = \left[\frac{(\tan^{-1}x)^2}{2}\right]_{0}^{\infty} = \mathbf{\frac{\pi^2}{8}}$ (<b>Convergent</b>).</div></div></div>
+              </div>
+            </details>
+            
+      </div>
+    </section>
+
+    <!-- Bottom Unit Navigation Pagination -->
+    <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4 no-print">
+      <a href="unit-2.html" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 hover:border-indigo-500 transition"><i data-lucide="arrow-left" class="w-4 h-4"></i> Previous: Unit 2</a>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="text-xs text-slate-500 hover:text-indigo-500 flex items-center gap-1 font-medium">
+        <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i> Back to Top
+      </button>
+      <a href="unit-4.html" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-500 transition shadow-xs">Next: Unit 4 <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+    </div>
+  </main>
+
+  
+  <!-- Global Footer -->
+  <footer class="mt-auto bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-10 no-print transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <!-- Brand Info -->
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2.5 mb-3">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-cyan-600 flex items-center justify-center text-white">
+              <i data-lucide="function-square" class="w-4 h-4"></i>
+            </div>
+            <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">CalcVault M-1</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-bold">100% Free Access</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-md">
+            CalcVault M-1 is a free, open-access engineering mathematics revision portal curated for CGC College of Engineering / IKG-PTU students. Complete syllabus notes, derivations, formulas, and verified exam solutions without any paywalls.
+          </p>
+          <div class="mt-4 flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500">
+            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500"></i>
+            <span>Curated by Krishna Kumar (B.Tech Cybersecurity, CGC CEC Landran) • Free Academic Project</span>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-3">Syllabus Units</h4>
+          <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <li><a href="unit-1.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 1: Sequences & Series</a></li>
+            <li><a href="unit-2.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 2: Definite Integral Applications</a></li>
+            <li><a href="unit-3.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 3: Beta & Gamma Functions</a></li>
+            <li><a href="unit-4.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 4: Multivariable Calculus</a></li>
+            <li><a href="unit-5.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Unit 5: Multiple Integrals</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources & Tools -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-slate-200 mb-3">Study Resources</h4>
+          <ul class="space-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <li><a href="formulas.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Formula & Theorems Sheet</a></li>
+            <li><a href="questions.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Solved Exam Question Bank</a></li>
+            <li><a href="whiteboard.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition">Interactive Whiteboard Solver</a></li>
+            <li><button onclick="window.print()" class="text-left hover:text-indigo-600 dark:hover:text-indigo-400 transition">Print Current Notes (PDF)</button></li>
+            <li><button onclick="openSearchModal()" class="text-left hover:text-indigo-600 dark:hover:text-indigo-400 transition">Search All Topics (Ctrl+K)</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-slate-100 dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+        <p>© 2026 CalcVault Study Portal • IKG-PTU BTAM101-18. Built for engineering excellence.</p>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center gap-1 hover:text-indigo-500 transition">
+          <span>Back to top</span>
+          <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+        
